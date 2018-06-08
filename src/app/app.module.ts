@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { MenuComponent } from './component/menu/menu.component';
-import { SettingsComponent } from './component/settings/settings.component';
+
+// layer components
+import { HeaderComponent } from './layer/header/header.component';
+import { FooterComponent } from './layer/footer/footer.component';
+import { MenuComponent } from './layer/menu/menu.component';
+import { SettingsComponent } from './layer/settings/settings.component';
+
+// pages
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
