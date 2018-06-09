@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './_guard/auth.guard';
-import { PublicComponent } from './layouts/public.component';
+import { PublicComponent } from './layouts/public/public.component';
 import { PUBLIC_ROUTES } from './pages/public/public.routes';
-import { PrivateComponent } from './layouts/private.component';
+import { PrivateComponent } from './layouts/private/private.component';
 import { PRIVATE_ROUTES } from './pages/private/private.routes';
 
 const APP_ROUTES: Routes = [

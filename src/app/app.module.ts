@@ -6,15 +6,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// layer components && services
-import { HeaderComponent } from './layouts/header/header.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { MenuComponent } from './layouts/menu/menu.component';
-import { SettingsComponent } from './layouts/settings/settings.component';
-import { ContentHeaderComponent } from './layouts/content-header/content-header.component';
+// layout components && services
+import {
+  PrivateComponent,
+  HeaderComponent,
+  FooterComponent,
+  MenuComponent,
+  SettingsComponent,
+  ContentHeaderComponent,
+} from './layouts/private';
 
-import { PrivateComponent } from './layouts/private.component';
-import { PublicComponent } from './layouts/public.component';
+import {
+  PublicComponent,
+} from './layouts/public';
 
 // pages
 import { HomeComponent } from './pages/private/home/home.component';
