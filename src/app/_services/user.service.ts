@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿/*import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models/index';
@@ -26,4 +26,4 @@ export class UserService {
     delete(id: number) {
         return this.http.delete('/api/users/' + id);
     }
-}
+}*/
