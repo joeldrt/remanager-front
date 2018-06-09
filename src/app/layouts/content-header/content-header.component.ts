@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutContentHeaderService } from './layout_content-header.service';
 
 @Component({
   selector: 'app-content-header',
@@ -8,9 +7,7 @@ import { LayoutContentHeaderService } from './layout_content-header.service';
 })
 export class ContentHeaderComponent implements OnInit {
 
-  constructor(
-    public contentHeader: LayoutContentHeaderService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }

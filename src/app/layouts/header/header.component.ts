@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LayoutHeaderService } from './layout_header.service';
-
 import { AuthenticationService } from '../../_services';
 
 @Component({
@@ -13,7 +11,6 @@ import { AuthenticationService } from '../../_services';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    public header: LayoutHeaderService,
     private authenticationService: AuthenticationService,
     private router: Router,
   ) { }

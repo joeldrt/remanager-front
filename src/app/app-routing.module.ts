@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 
 import { AuthGuard } from './_guard/auth.guard';
-import { LoginComponent } from './pages/login/login.component';
+import { PublicComponent } from './layouts/public.component';
+import { PUBLIC_ROUTES } from './pages/public/public.routes';
+import { PrivateComponent } from './layouts/private.component';
+import { PRIVATE_ROUTES } from './pages/private/private.routes';
 
 const APP_ROUTES: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: PublicComponent, data: { title: 'Public Views' }, children: PUBLIC_ROUTES },
+  { path: '', component: PrivateComponent, canActivate: [AuthGuard], data: { title: 'Private Views' }, children: PRIVATE_ROUTES },
 ];
 
 @NgModule({
