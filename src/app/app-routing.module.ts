@@ -8,9 +8,9 @@ import { PrivateComponent } from './layouts/private/private.component';
 import { PRIVATE_ROUTES } from './pages/private/private.routes';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '', component: PublicComponent, data: { title: 'Public Views' }, children: PUBLIC_ROUTES },
-  { path: '', component: PrivateComponent, canActivate: [AuthGuard], data: { title: 'Private Views' }, children: PRIVATE_ROUTES },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', component: PublicComponent, data: { breadcrumb: 'not-bc-page' }, children: PUBLIC_ROUTES },
+  { path: '', component: PrivateComponent, canActivate: [AuthGuard], data: { breadcrumb: 'not-bc-page' }, children: PRIVATE_ROUTES },
 ];
 
 @NgModule({

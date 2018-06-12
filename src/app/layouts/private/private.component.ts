@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'app-private-component',
   templateUrl: './private.component.html',
 })
-export class PrivateComponent {
-  title = 'private.component';
-}
+export class PrivateComponent {}

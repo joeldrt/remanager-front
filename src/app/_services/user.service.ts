@@ -1,29 +1,46 @@
-﻿/*import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+﻿import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-import { User } from '../_models/index';
+import { environment } from '../../environments/environment';
+
+import { User } from '../_models';
+import { createRequestOption } from '../_helpers/request-util';
+
 
 @Injectable()
 export class UserService {
-    constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<User[]>('/api/users');
-    }
+  private resourceUrl;
 
-    getById(id: number) {
-        return this.http.get('/api/users/' + id);
-    }
+  constructor(
+    private http: HttpClient
+  ) {
+    this.resourceUrl = environment.API_URL + 'api/users';
+  }
 
-    create(user: User) {
-        return this.http.post('/api/users', user);
-    }
+  create(user: User): Observable<HttpResponse<User>> {
+    return this.http.post<User>(this.resourceUrl, user, { observe: 'response' });
+  }
 
-    update(user: User) {
-        return this.http.put('/api/users/' + user.id, user);
-    }
+  update(user: User): Observable<HttpResponse<User>> {
+    return this.http.put<User>(this.resourceUrl, user, { observe: 'response' });
+  }
 
-    delete(id: number) {
-        return this.http.delete('/api/users/' + id);
-    }
-}*/
+  find(login: string): Observable<HttpResponse<User>> {
+    return this.http.get<User>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+  }
+
+  query(req?: any): Observable<HttpResponse<User[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<User[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  delete(login: string): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.resourceUrl}/${login}`, { observe: 'response' });
+  }
+
+  authorities(): Observable<string[]> {
+    return this.http.get<string[]>(environment.API_URL + 'api/users/authorities');
+  }
+}

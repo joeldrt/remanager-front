@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../../../_services';
+import { User } from '../../../_models';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  user: User;
+  isNavbarCollapsed: boolean;
 
-  constructor() { }
+  constructor(
+    private accountService: AccountService,
+  ) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('account'));
+    if (!this.user) {
+      this.accountService.getAccount()
+        .subscribe(
+          user => {
+            this.user = user;
+          },
+          error => {
+            console.log(error);
+          });
+    }
+    this.isNavbarCollapsed = true;
   }
 
+  collapseNavbar() {
+    this.isNavbarCollapsed = true;
+  }
 }

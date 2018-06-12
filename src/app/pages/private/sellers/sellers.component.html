@@ -1,0 +1,47 @@
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <!-- header of the box -->
+        <div class="box-header">
+          <h3 class="box-title">List of sellers</h3>
+          <div class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- header of the table -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Active</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="sellers">
+              <tr *ngFor="let seller of sellers">
+                <td>{{seller.email}}</td>
+                <td>{{seller.firstName}}</td>
+                <td>{{seller.lastName}}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" *ngIf="!seller.activated">Deactivated</button>
+                  <button class="btn btn-success btn-sm" *ngIf="seller.activated"
+                          [disabled]="currentAccount.login === seller.login" >Activated</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'app-public-component',
   templateUrl: './public.component.html',
 })
-export class PublicComponent {
-  title = 'public.component';
-}
+export class PublicComponent {}
