@@ -1,0 +1,36 @@
+#dgContainerSvgTool{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+#dgContainerSvgTool .container{
+    width: 100%;
+}
+
+.dg-btn-play{
+    display: block;
+    margin: 0 auto;    
+}
+
+/* -- -- */
+.dg-cntUploadImage .dg-col-input{
+    margin-top: 3em;
+}
+
+.dg-cntUploadImage .dg-content-btnsload{
+    margin-bottom: 3em;
+    margin-top: 3em;
+
+}
+
+.dg-cntUploadImage{
+    padding-bottom: 3em;
+    padding-top: 3em;
+}
+.dg-cntUploadImage .dg-col-preview{
+}
+.dg-cntUploadImage .dg-col-preview img{
+    display: block;
+    max-width: 81%;
+}
