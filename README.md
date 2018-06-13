@@ -2,22 +2,19 @@
 
 To run app
 
-Download AdminLTE project from [https://github.com/almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE)
+1.- Download AdminLTE project from [https://github.com/almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE)
 
-Create Folder assets under src Folder
-/src/assets
-
-Copy next folders, from AdminLTE
+2.- Copy next folders located in root from AdminLTE downloaded project,
 - bower_components
 - dist
 - plugins
 
-And paste them under the new assets folder created
+3.- Paste them in remanager-front project under 'src/assets'
 
-in a termnial go to remanager-fron root and run
+4.- In a termnial go to remanager-front project root and run:
 
-yarn install
+yarn
 
-After finish, launch your app running:
+5.- After finish, launch your app running:
 
 yarn run start
