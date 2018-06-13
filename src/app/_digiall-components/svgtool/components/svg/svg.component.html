@@ -1,0 +1,103 @@
+
+<div
+    class="row dg-content-controls">
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        
+        <div style="height: 325px;">
+            <div 
+                class="dg-content-svgFrame">
+                <svg #svgTag 
+                    id="svgTag"                    
+                    [attr.width]="imageSvg.widthContent"
+                    [attr.height]="imageSvg.heightContent"                    
+                    [attr.fill]="'orange'"
+                    (drawElements)="drawElements()"
+                    (mousedown)="clickInSvg($event)" >
+
+                    <image x="0" y="0"
+                        [attr.width]="imageSvg.widthContent"
+                        [attr.height]="imageSvg.heightContent"
+                        [attr.xlink:href]="imageSvg.srcB64" />
+            
+                    <polygon #polygonTag
+                                [attr.points]="stringPoints"
+                                [attr.fill]="'rgba(0,0,255,0.6)'"
+                                [attr.stroke]="'black'" >
+                    </polygon>
+                </svg>
+            </div>
+        </div><!-- end  -->
+
+        <div class="digiall-barEstate">
+            <small class="label label-danger">
+                <i class="fa fa-clock-o"></i>
+                {{descriptionActions}}
+            </small>
+        </div>
+
+    </div><!-- end - col-md-6 -->
+
+    <div class="col-sm-6 col-md-6 col-lg-6"
+        *ngIf="isVisibleMenu">
+        <div class="dg-content-controls">
+            <div class="dg-content-btn">
+                <span>
+                    <a class="btn btn-app"
+                        (click)="beginDraw()">
+                        <i class="fa fa-paint-brush"></i> 
+                        Pintar
+                    </a>
+                </span>                
+            </div>
+            <div class="dg-content-btn">
+                <span>
+                    <a class="btn btn-app"
+                        (click)="undoLastPoint()">
+                        <i class="fa fa-undo"></i> 
+                        Deshacer <strong style="color:blue;">·</strong>
+                    </a>
+                </span>                
+            </div>
+            <div class="dg-content-btn">
+                <span>
+                    <a class="btn btn-app"
+                        (click)="addPolygon()">
+                        <i class="fa fa-check-square"></i> 
+                        Registrar
+                    </a>
+                </span>
+            </div>
+            <div class="dg-content-btn">
+                <span>
+                    <a class="btn btn-app"
+                        (click)="saveSvg()">
+                        <i class="fa fa-save"></i> 
+                        Guardar
+                    </a>
+                </span>
+            </div>
+        </div> <!-- End - content Btns-->
+
+        <!-- zoom - controls -->
+        <div>
+            <div>
+                <button id="zoom-in" 
+                    (click)="doZoomIn($event)" >
+                    Zoom in
+                </button>
+                <button id="zoom-out"
+                    (click)="doZoomOut($event)">
+                    Zoom out
+                </button>
+                <button id="reset"
+                    (click)="doZoomReset($event)">
+                    Reset
+                </button>
+            </div>
+        </div>
+        <!-- end - zoom - controls -->
+
+    </div><!-- end col-md-6 -->
+
+</div><!-- end - row -->

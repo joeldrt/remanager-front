@@ -40,6 +40,10 @@ import { SellersComponent } from './pages/private/sellers/sellers.component';
 import { ProjectsComponent } from './pages/private/projects/projects.component';
 import { LandsComponent } from './pages/private/lands/lands.component';
 
+// Digiall SVG Tool
+import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
+import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +58,9 @@ import { LandsComponent } from './pages/private/lands/lands.component';
     LoginComponent,
     SellersComponent,
     ProjectsComponent,
-    LandsComponent
+    LandsComponent,
+    SvgToolComponent,
+    SvgComponent,
   ],
   imports: [
     BrowserModule,
