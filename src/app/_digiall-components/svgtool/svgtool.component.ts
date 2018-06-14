@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-
 // Models
 import { Image } from './models/image.model';
 import { SvgToolService } from './services/svgtool.service';
