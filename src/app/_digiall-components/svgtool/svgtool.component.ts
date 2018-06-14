@@ -10,7 +10,7 @@ import { SVG } from './dataJson/svg-data';
 @Component({
   selector: 'app-svgtool',
   templateUrl: './svgtool.component.html',
-  styleUrls: ['./svgtool.component.css']
+  styleUrls: ['./svgtool.component.sass']
 })
 export class SvgToolComponent implements OnInit, AfterViewInit {
 
@@ -65,7 +65,7 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
   }// end - uploadImage(event)
 
   acceptImage() {
-    let newVals = this.getNewWidthHeight(this.image.originalWidth, this.image.originalHeight, (this.widthContainer/2), (this.widthContainer));
+    let newVals = this.getNewWidthHeight(this.image.originalWidth, this.image.originalHeight, (this.widthContainer / 2), (this.widthContainer));
     this.image.widthContent = newVals.width;
     this.image.heightContent = newVals.height;
     this.imageSvg = this.image;
@@ -103,13 +103,9 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
     }, 900);
   }
 
-  /**
-   *
+  /***
    * Generic's
-   *
-   **/
-
-  /* === */
+  ***/
   getNewWidthHeight(widthImage, heightImage, widthContent, heightContent): any {
     let newVals = {'width': 0, 'height': 0};
     if (widthImage > heightImage) {
@@ -123,11 +119,6 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
     return newVals;
   }
 
-  /* === */
-  decideValuesContainerSvg() {
-    console.log('width Container : ' + event);
-  }
-
   toAssignValuesToPV(oSvg) {
     if (oSvg != null) {
       this.imageSvg.srcB64 = oSvg.base64Image;
@@ -138,18 +129,21 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
       this.imageSvg.name = '';
       this.imageSvg.size = 0;
       this.imageSvg.type = ''; // Puede utilizarse para indicar opción
-      //asign values polygons
+      /*asign values polygons*/
       if (oSvg.polygons != null && oSvg.polygons.length > 0) {
-
-        for (let infoPol of oSvg.polygons) {
-          let arrayIdPoints: string[] = [infoPol.genUid.toString(),
+        for (const infoPol of oSvg.polygons) {
+          const arrayIdPoints: string[] = [infoPol.genUid.toString(),
             infoPol.points.toString()];
           this.svgToolService.sendPoints(arrayIdPoints);
         }
-
       }
     }
+  }/*end - toAssignValuesToPV*/
+
+  decideValuesContainerSvg() {
+    console.log('width Container : ' + event);
   }
-}
+
+}/*end - class*/
 
 
