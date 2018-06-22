@@ -16,27 +16,32 @@ import {Subscription} from 'rxjs';
 })
 export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('svgTag') private svgTag: ElementRef;
-  @ViewChild('polygonTag') private polygonTag: ElementRef;
   @Input('imageSvg') public imageSvg: Image;
 
   public subscriptionPolygons: Subscription;
-
   private objSvg: Svg;
   public objPolygon: Polygon;
   public isVisibleMenu: boolean;
-
   public stringPoints: string;
   public arrayPolygons: Map<number, Polygon>;
   public descriptionActions: string;
   public idSvgTag: any;
+  public isSaveSvg: boolean;
+  public elPolygon: any;
+  public subscriptionOption: Subscription;
+
+  public stringStatusControls : string;
+  public stringStatusZoom : string;
+  public stringStatusSections : string;
+
+  public tagPolySelected: any;
+
   private isDrawing: boolean;
   private pX: string;
   private pY: string;
   private idSvg: number;
   private isZoom: boolean;
   private countZoom: number;
-  public elPolygon: any;
-  public subscriptionOption: Subscription;
 
   constructor(
     private renderer: Renderer2,
@@ -52,7 +57,10 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isVisibleMenu = true;
     this.descriptionActions = '';
     this.isZoom = false;
-    this.countZoom = 0;
+    this.countZoom = 100;
+    this.isSaveSvg = false;
+
+    this.tagPolySelected = null;
 
     this.subscriptionPolygons = svgToolService.polygonPoints$.subscribe(
       points => {
@@ -67,6 +75,11 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
             (optionSelected);
         }
     );*/
+
+    //---Functions
+    this.resetMsgsEstatus();
+
+
   }// end constructor
 
   ngOnInit() {
@@ -96,10 +109,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isZoom = true;
     this.idSvgTag.zoomIn();
     this.countZoom++;
-    if(this.countZoom === 0){
-      alert(' - Tamaño Original - ');
-    }
-    console.log('Test - ZoomIn');
+    this.stringStatusZoom = (this.countZoom) + '%';
   }
 
   doZoomOut(event){
@@ -107,18 +117,15 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isZoom = true;
     this.idSvgTag.zoomOut();
     this.countZoom--;
-    if(this.countZoom === 0){
-      alert(' - Tamaño Original - ');
-    }
-    console.log('Test - ZoomOut');
+    this.stringStatusZoom = '' + (this.countZoom) + '%';
   }
 
   doZoomReset(event){
     event.preventDefault();
     this.isZoom = false;
     this.idSvgTag.resetZoom();
-    this.countZoom = 0;
-    console.log('Test - ZoomReset');
+    this.countZoom = 100;
+    this.stringStatusZoom = '100%';
   }
 
   /**/
@@ -132,12 +139,6 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
 
   clickInSvg(event) {
     if (this.isDrawing) {
-      // Se puede pintar
-      //let newPoint = this.idSvgTag.getEventPoint(event, this.idSvgTag);
-      //if(this.isZoom){
-      //}
-      //else{}
-
       const objG = this.svgTag.nativeElement.querySelector('g');
       const pt = this.svgTag.nativeElement.createSVGPoint();
       pt.x = event.clientX;
@@ -145,9 +146,6 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       const newPoint = pt.matrixTransform(objG.getScreenCTM().inverse());
       this.pX = newPoint.x;
       this.pY = newPoint.y;
-
-      //this.pX = event.offsetX;
-      //this.pY = event.offsetY;
       this.addPoint(this.pX, this.pY);
     }
     else {
@@ -204,22 +202,27 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addPolygon() {
     if (this.isDrawing) {
-      let pointsString = '';
-      let idPolygon = Date.now().toString();
-      this.isDrawing = false;
-      this.objPolygon.genUid = Date.now();
-      this.arrayPolygons.set(this.objPolygon.genUid, this.objPolygon);
-      pointsString = this.objPolygon.pointsArray.join(' ');
-      this.createPolygon(idPolygon, pointsString);
-      this.initializePolygon();
+      if(this.objPolygon.pointsArray.length >= 3){
+          let pointsString = '';
+          pointsString = this.objPolygon.pointsArray.join(' ');
+          if(pointsString != ''){
+            let idPolygon = Date.now().toString();
+            this.isDrawing = false;
+            this.objPolygon.genUid = Date.now();
+            this.arrayPolygons.set(this.objPolygon.genUid, this.objPolygon);
+            this.createPolygon(idPolygon, pointsString);
+            this.initializePolygon();
+          }
+      }
     }
   }
 
   createPolygon(idPolygon: string, stringPoints: string) {
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     poly.setAttribute('points', stringPoints);
-    poly.setAttribute('fill', 'rgba(0,0,255,0.6)');
+    poly.setAttribute('fill', 'rgba(2,134,222,0.72)');
     poly.setAttribute('stroke', 'black');
+    poly.setAttribute('stroke-width', '1px');
     poly.setAttribute('id', idPolygon);
     poly.addEventListener('click', this.onClickPolygon.bind(this));
     //this.renderer.appendChild(this.svgTag.nativeElement, poly);
@@ -230,9 +233,10 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     // validate if not is draw
     if (!this.isDrawing) {
       if (this.arrayPolygons.size > 0) {
-        console.log('Tenemos polygonos');
         let objSvg = this.createBodyRequestSave();
+        this.isSaveSvg = true;
         console.log(objSvg);
+        this.stringStatusControls = "Se ha guardado el Svg " + Date.now();
       }
     }
   }
@@ -248,7 +252,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       polyToSend.points = poly[1].pointsArray.join(' ');
       arrayPolygonsSend.push(polyToSend);
     }
-    console.log('Valor del array de polygonos :: ' + arrayPolygonsSend);
+
     this.objSvg = new Svg();
     this.objSvg.base64Image = this.imageSvg.srcB64;
     this.objSvg.width = this.imageSvg.widthContent;
@@ -258,7 +262,20 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onClickPolygon(event) {
-    console.log('El polygonundoLastPointo click :: ' + event);
+    let idPolygon = event.currentTarget.id.toString();
+    let listTagsPolygons = this.svgTag.nativeElement.querySelectorAll('polygon');
+
+    if(listTagsPolygons.length > 1){
+      for(let poly of listTagsPolygons){
+        poly.setAttribute('fill', 'rgba(2,134,222,0.72)');
+      }
+
+      this.svgTag.nativeElement.getElementById('polygonTagDraw').setAttribute('fill', 'rgba(33,144,2,0.72)');
+    }
+
+    this.tagPolySelected = this.svgTag.nativeElement.getElementById(idPolygon);
+    this.tagPolySelected.setAttribute('fill', 'rgba(222,2,24,0.72)');
+    this.stringStatusSections = "ID: " + idPolygon;
   }
 
   hiddenShowSection(optionSelected) {
@@ -271,6 +288,19 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       case 'show':
         this.isVisibleMenu = false;
         break;
+    }
+  }
+
+  /**/
+  resetMsgsEstatus(){
+    this.stringStatusControls = 'Puede iniciar el pintado, dando click en pintar';
+    this.stringStatusZoom = '100%';
+    this.stringStatusSections = 'Al seleccionar una de las secciones pintadas, puede agregar su información';
+  }
+
+  deletePolygon(event){
+    if(this.tagPolySelected != null){
+      alert("Desea eliminar el elemento : " + this.tagPolySelected.getAttribute('id'));
     }
   }
 
