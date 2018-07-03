@@ -13,4 +13,5 @@ export const PRIVATE_ROUTES: Routes = [
   { path: 'projects', component: ProjectsComponent, data: { title: 'Projects', breadcrumb: 'projects' } },
   { path: 'lands', component: LandsComponent, data: { title: 'Lands', breadcrumb: 'lands' } },
   { path: 'svgtool', component: SvgToolComponent, data: { title: 'Digiall SVGTool', breadcrumb: 'svgtool' } },
+  { path: 'svgtool/:id', component: SvgToolComponent, data: { title: 'Digiall SVGTool', breadcrumb: 'svgtool' } },
 ];

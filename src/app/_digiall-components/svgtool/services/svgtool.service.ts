@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Svg } from '../models/svg.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,21 +8,22 @@ import { Subject } from 'rxjs';
 export class SvgToolService {
 
   // Observable string sources
-  private polygonPointsSource = new Subject<string[]>();
+  private svgSource = new Subject<Svg[]>();
   private optionSelectedSource = new Subject<string>();
+
   // Observable string streams
-  polygonPoints$ = this.polygonPointsSource.asObservable();
+  svg$ = this.svgSource.asObservable();
   optionSelected$ = this.optionSelectedSource.asObservable();
 
   constructor() { }
 
   // Service message commands
-  sendOptionSelected(selection : string){
+  sendOptionSelected(selection: string) {
     this.optionSelectedSource.next(selection);
   }
 
-  sendPoints(points : string[]){
-    this.polygonPointsSource.next(points);
+  sendSvg(svg: any) {
+    this.svgSource.next(svg);
   }
 
 }

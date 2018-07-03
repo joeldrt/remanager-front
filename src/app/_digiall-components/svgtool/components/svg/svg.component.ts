@@ -21,7 +21,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('svgTag') private svgTag: ElementRef;
   @Input('imageSvg') public imageSvg: Image;
 
-  public subscriptionPolygons: Subscription;
+  public subscriptionSvg: Subscription;
   private objSvg: Svg;
   public objPolygon: Polygon;
   public isVisibleMenu: boolean;
@@ -31,7 +31,6 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   public idSvgTag: any;
   public isSaveSvg: boolean;
   public elPolygon: any;
-  public subscriptionOption: Subscription;
 
   public stringStatusControls: string;
   public stringStatusZoom: string;
@@ -69,19 +68,13 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showModalDelete = false;
     this.isSelectedPolygon = false;
 
-    this.subscriptionPolygons = svgToolService.polygonPoints$.subscribe(
-      points => {
-        const idPolygon = points[0].toString();
-        const stringPoints = points[1].toString();
-        this.createPolygon(idPolygon, stringPoints);
+    this.subscriptionSvg = this.svgToolService.svg$.subscribe(
+      svg => {
+        setTimeout(() => {
+          this.addPolygonGet(svg);
+        }, 900);
       }
     );
-    /*this.subscriptionOption = svgToolService.optionSelected$.subscribe(
-        optionSelected => {
-            this.hiddenShowSection
-            (optionSelected);
-        }
-    );*/
 
     // Functions
     this.resetMsgsEstatus();
@@ -89,15 +82,15 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.arrayPolygons = new Map();
+    this.addSettingsZoom();
   }// end - ngOnInit
 
   ngAfterViewInit() {
-    this.addSettingsZoom();
+    this.objSvg = new Svg();
   }
 
   ngOnDestroy() {
-    // this.subscriptionOption.unsubscribe();
-    this.subscriptionPolygons.unsubscribe();
+    this.subscriptionSvg.unsubscribe();
   }
 
   addSettingsZoom() {
@@ -109,7 +102,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  doZoomIn(event){
+  doZoomIn(event) {
     event.preventDefault();
     this.isZoom = true;
     this.idSvgTag.zoomIn();
@@ -117,7 +110,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.stringStatusZoom = (this.countZoom) + '%';
   }
 
-  doZoomOut(event){
+  doZoomOut(event) {
     event.preventDefault();
     this.isZoom = true;
     this.idSvgTag.zoomOut();
@@ -125,7 +118,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.stringStatusZoom = '' + (this.countZoom) + '%';
   }
 
-  doZoomReset(event){
+  doZoomReset(event) {
     event.preventDefault();
     this.isZoom = false;
     this.idSvgTag.resetZoom();
@@ -219,6 +212,27 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  addPolygonGet(svg) {
+    if (!this.isDrawing) {
+      this.objSvg.id = svg.id;
+      if (svg.poligonos.length !== 0) {
+        svg.poligonos.forEach(poligono => {
+          this.arrayPolygons.set(poligono.genUid, poligono);
+
+          const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          poly.setAttribute('points', poligono.puntos);
+          poly.setAttribute('fill', 'rgba(2,134,111,0.72)');
+          poly.setAttribute('stroke', 'black');
+          poly.setAttribute('stroke-width', '1px');
+          poly.setAttribute('id', poligono.genUid);
+          poly.addEventListener('click', this.onClickPolygon.bind(this));
+          // this.renderer.appendChild(this.svgTag.nativeElement, poly);
+          this.renderer.appendChild(this.svgTag.nativeElement.querySelector('g'), poly);
+        });
+      }
+    }
+  }
+
   createPolygon(idPolygon: string, stringPoints: string) {
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     poly.setAttribute('points', stringPoints);
@@ -237,20 +251,32 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       if (this.arrayPolygons.size > 0) {
         const objSvg = this.createBodyRequestSave();
         if (objSvg !== null) {
-          console.log(JSON.stringify(objSvg));
-          this._svgsService.create(objSvg)
-            .subscribe(
-              code => {
-                console.log('Test - ' + code);
-            }, error => {
-                console.log('Test - ' + error);
-              });
-        }
-        this.isSaveSvg = true;
-        this.stringStatusControls = 'Se ha guardado el Svg ' + Date.now();
-      }
+
+          switch (this.imageSvg.typeLoad) {
+            case 'new':
+              this._svgsService.create(objSvg)
+                .subscribe(
+                  code => {
+                    console.log('Test - ' + code);
+                    this.isSaveSvg = true;
+                    this.stringStatusControls = 'Se ha guardado el Svg ' + Date.now();
+                  }, error => {
+                    console.log('Test - ' + error);
+                  });
+              break;
+            case 'edit':
+              this._svgsService.update(objSvg)
+                .subscribe( response => {
+                  console.log('Edit : ' + response);
+                }, error => {
+                  console.log(error);
+                });
+              break;
+          } // end - switch
+        }// end - if
+      }// end -
     }
-  }
+  } // end - saveSvg
 
   createBodyRequestSave(): Svg {
     const arrayPolygonsSend: Polygon[] = new Array();
@@ -262,7 +288,11 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       polyToSend.puntos = this.createStringPoints(poly[1].arregloPuntos);
       arrayPolygonsSend.push(polyToSend);
     }
-    this.objSvg = new Svg();
+
+    if (this.imageSvg.typeLoad === 'new') {
+      this.objSvg = new Svg();
+    }
+
     this.objSvg.nombre = 'svg-test';
     this.objSvg.codigoContentType = 'image/svg';
     this.objSvg.imagen = this.imageSvg.srcB64.split(',')[1];
@@ -272,11 +302,12 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     this.objSvg.poligonos = arrayPolygonsSend;
     const ngcontentProp = this.svgTag.nativeElement.outerHTML.split(' ')[1];
     this.objSvg.codigo = btoa(this.svgTag.nativeElement.outerHTML.replace(ngcontentProp, ''));
+
     return this.objSvg;
   }
 
+  /* Click en uno de los polygonos creados
   /**
-   * Click en uno de los polygonos creados
    * @param event
    */
   onClickPolygon(event) {

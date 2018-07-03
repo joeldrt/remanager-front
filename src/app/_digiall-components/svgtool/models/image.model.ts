@@ -7,7 +7,8 @@ export class Image {
         public originalWidth?: number,
         public originalHeight?: number,
         public widthContent?: number,
-        public heightContent?: number
+        public heightContent?: number,
+        public typeLoad?: string,
     ) {
 
     }
