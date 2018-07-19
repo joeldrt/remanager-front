@@ -32,6 +32,7 @@ import {
   UserService,
   AccountService,
   SellersService,
+  SvgsService
 } from './_services';
 
 // helpers
@@ -44,6 +45,7 @@ import { LandsComponent } from './pages/private/lands/lands.component';
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
 import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
 import { AddSellerComponent } from './pages/private/sellers/add-seller/add-seller.component';
+
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { AddSellerComponent } from './pages/private/sellers/add-seller/add-selle
     UserService,
     AccountService,
     SellersService,
+    SvgsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

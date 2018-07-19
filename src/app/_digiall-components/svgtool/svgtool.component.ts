@@ -1,10 +1,16 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 // Models
 import { Image } from './models/image.model';
 import { SvgToolService } from './services/svgtool.service';
+import { DtoSvgModel } from '../../_models/dto.svg.model';
 
 // DataTest
 import { SVG } from './dataJson/svg-data';
+
+// Services
+import { SvgsService } from '../../_services';
 
 @Component({
   selector: 'app-svgtool',
@@ -12,22 +18,35 @@ import { SVG } from './dataJson/svg-data';
   styleUrls: ['./svgtool.component.sass']
 })
 export class SvgToolComponent implements OnInit, AfterViewInit {
-
-
   public image: Image;
   public imageSvg: Image;
   public sectionShow: string;
   public widthContainer: number;
   public infoContainer: any;
   public objSvg = SVG;
+  private idParam: number;
 
-  constructor(private svgToolService: SvgToolService) {
+  constructor(private svgToolService: SvgToolService,
+              private _svgsService: SvgsService,
+              private route: ActivatedRoute
+  ) {
     this.sectionShow = 'section-1';
-  }
+    this.route.params.subscribe(params => {
+      this.idParam = params.id;
+    });
+
+    if (!isNaN(this.idParam)) {
+      // section 3
+      this.getProject();
+    }
+    else {
+      console.log('no tiene parametros :: ');
+    }
+  }// end - constructor
 
   ngOnInit() {
-    this.image = new Image('', '', 0, '', 0, 0, 0, 0);
-    this.imageSvg = new Image('', '', 0, '', 0, 0, 0, 0);
+    this.image = new Image();
+    this.imageSvg = new Image();
     this.infoContainer = {
       width: 0,
       height: 0
@@ -39,11 +58,7 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
     this.widthContainer = document.getElementById('dgContainerSvgTool').clientWidth;
   }
 
-  /**
-   *
-   * Opción Cargar Imagen
-   *
-   **/
+  /* Opción Cargar Imagen*/
   openLoadingImage() {
     this.sectionShow = 'section-2';
   }
@@ -54,7 +69,6 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log('----' + reader.result);
         this.image.srcB64 = reader.result;
         this.image.name = file.name;
         this.image.size = file.size;
@@ -64,11 +78,13 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
   }// end - uploadImage(event)
 
   acceptImage() {
-    let newVals = this.getNewWidthHeight(this.image.originalWidth, this.image.originalHeight, (this.widthContainer / 2), (this.widthContainer));
+    const newVals =
+      this.getNewWidthHeight(this.image.originalWidth, this.image.originalHeight, (this.widthContainer / 2), (this.widthContainer));
     this.image.widthContent = newVals.width;
     this.image.heightContent = newVals.height;
     this.imageSvg = this.image;
     this.sectionShow = 'section-3';
+    this.imageSvg.typeLoad = 'new';
   }
 
   loadImagePreview(event) {
@@ -76,35 +92,27 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
     this.image.originalHeight = event.currentTarget.naturalHeight;
   }// end - loadImagePreview(event)
 
-  /**
-   *
-   * Opción Editar PV
-   *
-   **/
+  /* Opción Editar PV*/
   editPV() {
     this.sectionShow = 'section-3';
-    this.svgToolService.sendOptionSelected('edit');
+    this.imageSvg.typeLoad = 'edit';
     setTimeout(() => {
       this.toAssignValuesToPV(this.objSvg);
     }, 600);
   }
 
-  /**
-   *
-   * Opción Consultar PV
-   *
-   **/
+  /* Opción Consultar PV*/
   visualizePV() {
     this.sectionShow = 'section-3';
-    this.svgToolService.sendOptionSelected('show');
+    this.imageSvg.typeLoad = 'view';
     setTimeout(() => {
       this.toAssignValuesToPV(this.objSvg);
     }, 900);
   }
 
-  /***
+  /*
    * Generic's
-  ***/
+  */
   getNewWidthHeight(widthImage, heightImage, widthContent, heightContent): any {
     let newVals = {'width': 0, 'height': 0};
     if (widthImage > heightImage) {
@@ -120,27 +128,33 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
 
   toAssignValuesToPV(oSvg) {
     if (oSvg != null) {
-      this.imageSvg.srcB64 = oSvg.base64Image;
+      this.imageSvg.srcB64 = 'data:' + oSvg.imagenContentType + ';base64,' + oSvg.imagen;
       this.imageSvg.widthContent = oSvg.width;
       this.imageSvg.heightContent = oSvg.height;
       this.imageSvg.originalWidth = oSvg.width;
       this.imageSvg.originalHeight = oSvg.height;
       this.imageSvg.name = '';
       this.imageSvg.size = 0;
-      this.imageSvg.type = ''; // Puede utilizarse para indicar opción
-      /*asign values polygons*/
-      if (oSvg.polygons != null && oSvg.polygons.length > 0) {
-        for (const infoPol of oSvg.polygons) {
-          const arrayIdPoints: string[] = [infoPol.genUid.toString(),
-            infoPol.points.toString()];
-          this.svgToolService.sendPoints(arrayIdPoints);
-        }
-      }
+      this.imageSvg.type = oSvg.imagenContentType; // Puede utilizarse para indicar opción
+      this.svgToolService.sendSvg(oSvg);
     }
   }/*end - toAssignValuesToPV*/
 
   decideValuesContainerSvg() {
     console.log('width Container : ' + event);
+  }
+
+  // ---
+  getProject() {
+    debugger
+    this._svgsService.getProyecto('1').subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }/*end - class*/

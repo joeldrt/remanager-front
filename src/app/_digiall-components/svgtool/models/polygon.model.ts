@@ -1,10 +1,13 @@
-export class Polygon{
+import { Punto } from './punto.model';
+
+export class Polygon {
     constructor(
-        public id?:number,
-        public points?:string,
-        public pointsArray?: any[],
+        public arregloPuntos?: Punto[],
         public genUid?: number,
-        public status?:string,
-    ){
+        public id?: number,
+        public puntos?: string,
+        public status?: string,
+        public svgId?: number,
+    ) {
     }
 }

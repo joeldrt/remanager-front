@@ -10,7 +10,7 @@
              [attr.height]="imageSvg.heightContent"
              [attr.fill]="'orange'"
              (drawElements)="drawElements()"
-             (mousedown)="clickInSvg($event)" >
+             (mousedown)="clickInSvg($event)">
 
           <image x="0" y="0"
                  [attr.width]="imageSvg.widthContent"
@@ -28,33 +28,54 @@
     </div><!-- end  -->
 
     <div class="digiall-barEstate">
-      <small class="label label-danger">
+      <small class="label label-default">
         <i class="fa fa-clock-o"></i>
         {{descriptionActions}}
+
+         <span>
+           <i class="fa fa-square"
+              style="color: rgba(33, 144, 2, 0.72);"></i>
+           <label>Pintandose</label>
+         </span>
+          <span>
+           <i class="fa fa-square"
+              style="color: rgba(2, 134, 222, 0.72);"></i>
+           <label>Pintado</label>
+         </span>
+          <span>
+           <i class="fa fa-square"
+              style="color: rgba(222, 2, 24, 0.72);"></i>
+           <label>Seleccionado</label>
+         </span>
+
       </small>
     </div>
 
   </div><!-- end - col-md-6 -->
 
+  <div>
+
+  </div>
+
   <div class="col-sm-6 col-md-6 col-lg-6 dg-content-controls"
        *ngIf="isVisibleMenu">
 
-   <div class="dg-section">
-     <div class="dg-acotation">
+    <div class="dg-section">
+      <div class="dg-acotation">
        <span>
          <i class="fa fa-square text-green"></i>
-         <label for="">Activo</label>
+         <label>Activo</label>
        </span>
-       <span>
+        <span>
          <i class="fa fa-square text-yellow"></i>
-         <label for="">Opción</label>
+         <label>Opción</label>
        </span>
-       <span>
+        <span>
          <i class="fa fa-square text-red"></i>
-         <label for="">Desactivado</label>
+         <label>Desactivado</label>
        </span>
-     </div>
-   </div>
+      </div>
+    </div>
 
     <div class="dg-section dg-controls">
       <div>
@@ -71,7 +92,7 @@
                   'btn-option': isDrawing != true,
                   'btn': 1 == 1,
                   'btn-secondary': 1 == 1
-                }" >
+                }">
           <i class="fa fa-paint-brush"></i>
           Pintar
         </button>
@@ -79,11 +100,11 @@
                 data-widget="Aumentar" data-toggle="tooltip"
                 (click)="undoLastPoint()"
                 [ngClass]="{
-                  'btn-option': objPolygon.pointsArray.length > 0,
-                  'btn-inactive': objPolygon.pointsArray.length == 0,
+                  'btn-option': objPolygon.arregloPuntos.length > 0,
+                  'btn-inactive': objPolygon.arregloPuntos.length == 0,
                   'btn': 1 == 1,
                   'btn-secondary': 1 == 1
-                }" >
+                }">
           <i class="fa fa-undo"></i>
           Deshacer
         </button>
@@ -91,11 +112,11 @@
                 data-widget="Aumentar" data-toggle="tooltip"
                 (click)="addPolygon()"
                 [ngClass]="{
-                  'btn-option': objPolygon.pointsArray.length >= 3,
-                  'btn-inactive': objPolygon.pointsArray.length < 3,
+                  'btn-option': objPolygon.arregloPuntos.length >= 3,
+                  'btn-inactive': objPolygon.arregloPuntos.length < 3,
                   'btn': 1 == 1,
                   'btn-secondary': 1 == 1
-                }" >
+                }">
           <i class="fa fa-check-square"></i>
           Registrar
         </button>
@@ -108,7 +129,7 @@
                   'btn-inactive': arrayPolygons.size == 0,
                   'btn': 1 == 1,
                   'btn-secondary': 1 == 1
-                }" >
+                }">
           <i class="fa fa-save"></i>
           Guardar
         </button>
@@ -116,20 +137,55 @@
 
       <br/><br/>
 
+      <!-- Opción Borrar -->
       <div class="btn-group">
         <button type="button"
-                data-widget="Eliminar" data-toggle="tooltip"
-                (click)="deletePolygon($event)"
+                data-target="#modal-delete-polygon"
+                data-toggle="modal"
+                [disabled]="!isSelectedPolygon"
                 [ngClass]="{
                   'btn-option': tagPolySelected != null,
                   'btn-inactive': tagPolySelected == null,
                   'btn': 1 == 1,
                   'btn-secondary': 1 == 1
-                }" >
+                }">
           <i class="fa fa-eraser"></i>
           Borrar
         </button>
       </div><!-- end - btn-group -->
+
+      <!-- Modal - Borrar  -->
+      <div class="modal fade" id="modal-delete-polygon"
+           [style.display]="showModalDelete ? 'block' : 'none'">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Eliminar...</h4>
+            </div>
+            <div class="modal-body">
+              <p>¿Desea eliminar el área seleccionada?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button"
+                      class="btn btn-default pull-left"
+                      data-dismiss="modal">
+                Cancelar
+              </button>
+              <button type="button"
+                      class="btn btn-primary"
+                      (click)="deletePolygon($event)"
+                      data-dismiss="modal">
+                Aceptar
+              </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
       <br/>
 

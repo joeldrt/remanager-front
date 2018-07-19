@@ -2,12 +2,15 @@ import { Polygon } from './polygon.model';
 
 export class Svg {
     constructor(
-        public id?: number,
-        public base64Image?: string,
-        public width?: number,
+        public codigo?: any,
+        public codigoContentType?: string,
         public height?: number,
-        public version?: string,
-        public polygons?: Polygon[],
+        public id?: number,
+        public imagen?: string,
+        public imagenContentType?: string,
+        public nombre?: string,
+        public poligonos?: Polygon[],
+        public width?: number,
     ) {
     }
 }
