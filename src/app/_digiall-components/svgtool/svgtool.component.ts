@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 // Models
 import { Image } from './models/image.model';
 import { SvgToolService } from './services/svgtool.service';
@@ -16,20 +18,31 @@ import { SvgsService } from '../../_services';
   styleUrls: ['./svgtool.component.sass']
 })
 export class SvgToolComponent implements OnInit, AfterViewInit {
-
-
   public image: Image;
   public imageSvg: Image;
   public sectionShow: string;
   public widthContainer: number;
   public infoContainer: any;
   public objSvg = SVG;
+  private idParam: number;
 
   constructor(private svgToolService: SvgToolService,
-              private _svgsService: SvgsService
+              private _svgsService: SvgsService,
+              private route: ActivatedRoute
   ) {
     this.sectionShow = 'section-1';
-  }
+    this.route.params.subscribe(params => {
+      this.idParam = params.id;
+    });
+
+    if (!isNaN(this.idParam)) {
+      // section 3
+      this.getProject();
+    }
+    else {
+      console.log('no tiene parametros :: ');
+    }
+  }// end - constructor
 
   ngOnInit() {
     this.image = new Image();
@@ -129,6 +142,19 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
 
   decideValuesContainerSvg() {
     console.log('width Container : ' + event);
+  }
+
+  // ---
+  getProject() {
+    debugger
+    this._svgsService.getProyecto('1').subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }/*end - class*/

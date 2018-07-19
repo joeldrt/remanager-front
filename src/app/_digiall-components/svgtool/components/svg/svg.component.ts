@@ -72,7 +72,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       svg => {
         setTimeout(() => {
           this.addPolygonGet(svg);
-        }, 900);
+        }, 1500);
       }
     );
 
@@ -82,16 +82,18 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.arrayPolygons = new Map();
-    this.addSettingsZoom();
   }// end - ngOnInit
 
   ngAfterViewInit() {
     this.objSvg = new Svg();
-  }
+    setTimeout(() => {
+      this.addSettingsZoom();
+    }, 900);
+  }// end - ngAfterViewInit
 
   ngOnDestroy() {
     this.subscriptionSvg.unsubscribe();
-  }
+  }// end - ngOnDestroy
 
   addSettingsZoom() {
     this.idSvgTag = svgPanZoom('#svgTag', {
@@ -100,6 +102,9 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       dblClickZoomEnabled: false,
       center: true
     });
+    // 
+    this.svgTag.nativeElement.childNodes[0].setAttribute('transform', 'matrix(0 0 0 0 0 0)');
+    this.svgTag.nativeElement.childNodes[0].setAttribute('style', 'transform: matrix(0, 0, 0, 0, 0, 0)');
   }
 
   doZoomIn(event) {
@@ -307,9 +312,9 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /* Click en uno de los polygonos creados
-  /**
+  /*
    * @param event
-   */
+  */
   onClickPolygon(event) {
     if (!this.isDrawing) {
       let idPolygon = event.currentTarget.id.toString();
