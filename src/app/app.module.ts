@@ -44,6 +44,7 @@ import { LandsComponent } from './pages/private/lands/lands.component';
 // Digiall SVG Tool
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
 import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
+import { AddSellerComponent } from './pages/private/sellers/add-seller/add-seller.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.c
     LandsComponent,
     SvgToolComponent,
     SvgComponent,
+    AddSellerComponent,
   ],
   imports: [
     BrowserModule,
