@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../_services/index';
 import { AccountService } from '../../../_services';
 import { User } from '../../../_models';
 
@@ -12,6 +14,8 @@ export class MenuComponent implements OnInit {
   isNavbarCollapsed: boolean;
 
   constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
     private accountService: AccountService,
   ) { }
 
@@ -32,5 +36,10 @@ export class MenuComponent implements OnInit {
 
   collapseNavbar() {
     this.isNavbarCollapsed = true;
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

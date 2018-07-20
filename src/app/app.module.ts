@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// layout components && services
+// layout components
 import {
   PrivateComponent,
   HeaderComponent,
@@ -19,10 +19,6 @@ import {
 import {
   PublicComponent,
 } from './layouts/public';
-
-// pages
-import { DashboardComponent } from './pages/private/dashboard/dashboard.component';
-import { LoginComponent } from './pages/public/login/login.component';
 
 // services
 import { AuthGuard } from './_guard/auth.guard';
@@ -37,14 +33,17 @@ import {
 
 // helpers
 import { JwtInterceptor } from './_helpers';
-import { SellersComponent } from './pages/private/sellers/sellers.component';
-import { ProjectsComponent } from './pages/private/projects/projects.component';
-import { LandsComponent } from './pages/private/lands/lands.component';
 
 // Digiall SVG Tool
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
 import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
-import { AddSellerComponent } from './pages/private/sellers/add-seller/add-seller.component';
+
+// pages
+import { LoginComponent } from './pages/public/login/login.component';
+import { TerrenosComponent } from './pages/private/terrenos/terrenos.component';
+import { PerfilComponent } from './pages/private/perfil/perfil.component';
+import { ClientesComponent } from './pages/private/clientes/clientes.component';
+import { VentasComponent } from './pages/private/ventas/ventas.component';
 
 
 @NgModule({
@@ -57,14 +56,13 @@ import { AddSellerComponent } from './pages/private/sellers/add-seller/add-selle
     SettingsComponent,
     PrivateComponent,
     PublicComponent,
-    DashboardComponent,
     LoginComponent,
-    SellersComponent,
-    ProjectsComponent,
-    LandsComponent,
     SvgToolComponent,
     SvgComponent,
-    AddSellerComponent,
+    TerrenosComponent,
+    PerfilComponent,
+    ClientesComponent,
+    VentasComponent,
   ],
   imports: [
     BrowserModule,
