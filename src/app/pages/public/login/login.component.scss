@@ -1,4 +1,7 @@
 .dg-content-login{
+  background-color: green;
+  background-image: url('../../../../assets/img/img-background-green.png');
+  background-size: cover;
   min-height: 100vh;
   text-align: center;
 
@@ -9,7 +12,7 @@
     width: 80%;
 
     .dg-content-photo{
-      background-color: #ccc;
+      background-image: url('../../../../assets/img/img-backprofile.png');
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       padding-top: 21px;
@@ -37,6 +40,7 @@
             margin-right: 6px;
           }
           input.form-control{
+            background-color: transparent;
             border: none;
             width: 80%;
           }
@@ -54,7 +58,7 @@
             background-color: transparent;
             border: none;
             -webkit-text-fill-color: #506875;
-            //-webkit-box-shadow: 0 0 0px 1000px #000 inset;
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset;
             transition: background-color 5000s ease-in-out 0s;
           }
 
@@ -67,11 +71,14 @@
       margin-top: 6px;
       .form-group{
         .btn{
-          display: block;
+          background-color: transparent;
+          background-image: url('../../../../assets/img/img-backbutton-green.png');
+          border: none;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
           border-bottom-left-radius: 15px;
           border-bottom-right-radius: 15px;
+          display: block;
           text-transform: uppercase;
           padding-top: 21px;
           padding-bottom: 21px;
@@ -94,16 +101,6 @@
 .dg-content-page{
 
   &.dg-page-detailslote{
-    .dg-head-back{
-      padding: 1em;
-      span{
-        i{
-          color: #325DC0;
-          font-size: 2.1em;
-        }
-      }
-    }
-
     .dg-content-svg{
       background-color: orange;
       min-height: 250px;
@@ -154,9 +151,68 @@
           font-size: 1em;
         }
       }
+    }// end - .dg-content-infotext
+  }// end - &.dg-page-detailslote
+
+  &.dg-page-priceslote{
+    .dg-content-barclient{
     }
 
-  }// end - &.dg-page-detailslote
+    .dg-content-lineprice{
+      margin-top: 25%;
+    }
+
+    .dg-content-btnlink{
+      margin-top: 2.5em;
+      max-width: 50%;
+      text-align: right;
+
+      span{
+        display: inline-block;
+        margin-right: 2.7em;
+      }
+    }
+
+    .dg-content-btns{
+      margin-top: 1.5em;
+
+      .dg-content-button{
+        text-align: center;
+        .dg-btn{
+          display: inline-block;
+
+          &:nth-of-type(1){
+            margin-rigth: 0.81em;
+          }
+          &:nth-of-type(2){
+            margin-left: 0.81em;
+          }
+        }
+      }
+    }
+  }// end - dg-page-priceslote
+
+  &.dg-page-statuslotes{
+    margin-bottom: 15em;
+    .dg-content-listlotes{
+      .dg-col-lote{
+
+      }
+      .dg-col-status{
+
+      }
+    }
+  }// end - .dg-page-statuslotes
+
+  .dg-head-back{
+    padding: 1em;
+    span{
+      i{
+        color: #325DC0;
+        font-size: 2.1em;
+      }
+    }
+  }
 
   .dg-content-inputsearch{
     .dg-content{
@@ -237,22 +293,26 @@
     }// end - row
   }// end - dg-content-list
 
-  //
-  .dg-content-button{
-    .dg-btn-orange{
-      background-color:orange;
-      background-image:url('../../../../assets/img/line-back-buttonOrange.png');
-      background-repeat: repeat-x;
-      background-size: contain;
-      border-radius: 15px;
-      border: none;
-      color: #FFF;
-      font-size: 0.9em;
-      font-weight: bolder;
-      padding: 8px 6px;
-      width: 120px;
-      text-transform: uppercase;
-    }
+  // Botones
+  .dg-btn{
+    background-repeat: repeat-x;
+    background-size: contain;
+    border-radius: 15px;
+    border: none;
+    color: #FFF;
+    font-size: 0.9em;
+    font-weight: bolder;
+    padding: 8px 6px;
+    width: 120px;
+    text-transform: uppercase;
+  }
+  .dg-btn-orange{
+    background-color:orange;
+    background-image:url('../../../../assets/img/line-back-buttonOrange.png');
+  }
+  .dg-btn-green{
+    background-color:green;
+    background-image:url('../../../../assets/img/line-back-buttonGreen.png');
   }
 
   // bar - input search
@@ -264,26 +324,40 @@
 
   // bar - dg-content-bartitle
   .dg-content-bartitle{
+    backgrond-size:contain;
+    background-repeat: contain;
+    padding: 18px 0 30px 0;
 
     &.dg-bartitle-1{
       background-image:url('../../../../assets/img/line-bartitle-1.png');
-      backgrond-size:contain;
-      background-repeat: contain;
-      padding: 18px 0 30px 0;
-
       .dg-content-icon{
         span{
           background-image:url('../../../../assets/img/point-bartitle.png');
-          background-size: contain;
         }
       }
+    }
 
+    &.dg-bartitle-2{
+      background-image:url('../../../../assets/img/line-bartitle-2.png');
+      padding-bottom: 9px;
+      .dg-content-icon{
+        span{
+          background-image:url('../../../../assets/img/bandera-bartitle.png');
+        }
+      }
+      .dg-content-cuadro{
+        background-color: #EEEEEF;
+        display: inline-block;
+        min-height: 63px;
+        min-width: 63px;
+      }
     }
 
     .dg-content-icon{
       text-align: right;
       span{
-        background-color: red;
+        background-size: contain;
+        background-repeat: no-repeat;
         display: inline-block;
         height: 25px;
         width: 25px;
@@ -309,6 +383,38 @@
       }
     }
   }// end - .dg-content-bartitle
+
+  .dg-content-barclient{
+    margin: 2.4em 0;
+    padding: 0 1.5em;
+    .dg-datos-cliente{
+      span{
+        font-size: 1.23em;
+        color: #666666;
+      }
+    }
+    .dg-content-icons{
+      .dg-content-btn{
+        color: #666666;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1.26em;
+        margin: 0 0.42em;
+      }
+    }
+  }
+
+  .dg-content-lineprice{
+    background-color: #E2E2E2;
+    padding: 1em 0;
+    text-align: center;
+
+    span{
+      color: #222A85;
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
 
   .dg-text-link{
     color: #2A55BD;
