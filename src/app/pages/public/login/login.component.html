@@ -1,19 +1,908 @@
-<div class="col-md-7 col-md-offset-1">
-  <h2>Login</h2>
-  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-      <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-    </div>
-    <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Login</button>
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    </div>
+<div class="dg-content-login">
+  <form name="form"
+        (ngSubmit)="f.form.valid && login()"
+        #f="ngForm" novalidate>
+
+    <div class="dg-content-form">
+      <div class="dg-content-photo">
+
+        <div class="dg-photo">
+          <span>
+            <img src="../../../../assets/img/imgPhotoProfile.png"
+              alt="Foto perfil"/>
+          </span>
+        </div>
+
+        <div class="form-group"
+             [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+
+          <div class="dg-row-input">
+            <i class="fa fa-envelope"></i>
+            <input type="text" class="form-control"
+                   placeholder="Mail"
+                   name="username"
+                   [(ngModel)]="model.username"
+                   #username="ngModel" required />
+          </div>
+          <div *ngIf="f.submitted && !username.valid"
+               class="help-block">
+            Username is required
+          </div>
+
+        </div>
+
+        <div class="form-group"
+             [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+
+          <div class="dg-row-input">
+            <i class="fa fa-lock"></i>
+            <input type="password"
+                   class="form-control"
+                   placeholder="Contraseña"
+                   name="password"
+                   [(ngModel)]="model.password"
+                   #password="ngModel" required />
+          </div>
+
+          <div *ngIf="f.submitted && !password.valid"
+               class="help-block">
+            Password is required
+          </div>
+        </div>
+      </div><!-- -->
+
+      <div class="dg-content-button">
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            Entrar
+          </button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+      </div><!-- -->
+    </div><!-- dg-content-form -->
+
   </form>
-</div>
+</div> <!-- end - <div class="dg-content-login"> -->
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-listprojects">
+  <div class="dg-content-inputsearch">
+    <div class="dg-content">
+      <i class="fa fa-search"></i>
+      <input type="text"
+        placeholder="Buscar" />
+    </div>
+  </div>
+
+  <div class="dg-content-list dg-content-listprojects">
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            El Carmen
+          </p>
+          <span>
+            Atlixco, Puebla.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Soluna
+          </p>
+          <span>
+            Mérida, Yucatán.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            City Lomas
+          </p>
+          <span>
+            Lomas de Angelópolis, Puebla.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Cascatta
+          </p>
+          <span>
+            Lomas de Angelópolis, Puebla.
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end - dg-content-list -->
+
+  <div class="dg-content-button">
+    <button class="dg-btn dg-btn-orange">
+      Salir
+    </button>
+  </div>
+
+</div><!-- end - dg-page-listprojects -->
+
+<div class="dg-line-temp"></div>
+
+<!-- -->
+<div class="dg-content-page dg-page-project">
+  <div class="dg-content-inputsearch">
+    <div class="dg-content">
+      <i class="fa fa-search"></i>
+      <input type="text"
+             placeholder="Buscar" />
+    </div>
+  </div>
+
+  <div class="dg-content-bartitle dg-bartitle-1">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span></span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <p class="dg-row-text1">
+            El carmen
+          </p>
+          <p class="dg-row-text2">
+            Atlixco, Puebla.
+          </p>
+          <p class="dg-row-text3">
+            Superficie total: 25,000 m2
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dg-content-link">
+    <div class="row">
+      <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <span>
+          <a class="dg-text-link">
+            Ver ubicación
+          </a>
+        </span>        
+      </div>
+    </div>
+  </div>
+
+  <div class="dg-content-list dg-content-listlote">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Blvd. Diego Rivera
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Blvd. siqueiros
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Blvd. Tamayo
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Blvd. Los pintores
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+  </div><!-- end - dg-content-list -->
+
+  <div class="dg-content-button">
+    <button class="dg-btn dg-btn-orange">
+      Salir
+    </button>
+  </div>
+
+</div><!-- end - dg-page-listprojects -->
+
+<div class="dg-line-temp"></div>
+
+<!-- -->
+<div class="dg-content-page dg-page-detailslote">
+
+  <div class="dg-head-back">
+    <span>
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div class="dg-content-svg">
+
+  </div>
+  <div class="dg-info-detailslote">
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="dg-banderinlote">
+          <span >
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <div class="dg-title">
+          <label> Lote 2 </label>
+          <span>245 m2</span>
+        </div>
+      </div>
+    </div><!-- row -->
+
+    <div class="dg-content-infotext">
+
+      <div class="dg-text">
+        <strong>
+          Descripción
+        </strong>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer
+          adipiscing elit, sed diam nonummy nibh eu-
+          ismod tincidunt ut laoreet dolore magna
+          aliquam erat volutpat. Aliquip ex ea com-
+          modo consequat.
+        </p>
+      </div>
+
+      <div class="dg-text">
+        <strong>
+          Dimensiones
+        </strong>
+        <p>
+          245 m2
+        </p>
+      </div>
+
+      <div class="dg-text">
+        <strong>
+          Detalles
+        </strong>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer
+          adipiscing elit, sed diam nonummy nibh eu-
+          ismod tincidunt ut laoreet dolore magna
+        </p>
+      </div>
+
+    </div><!-- end - dg-content-infotext -->
+
+  </div>
+</div><!-- end - dg-page-listprojects -->
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-priceslote">
+  <div class="dg-head-back">
+    <span>
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div class="dg-content-bartitle dg-bartitle-2">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span></span>
+        </div>
+      </div>
+      <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+        <div class="dg-content-info">
+          <p class="dg-row-text1">
+            Lote 2
+          </p>
+          <p class="dg-row-text2">
+            245 m2
+          </p>
+          <p class="dg-row-text3">
+            20.00 x 37.50 = 750.00 m2
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
+        <div class="dg-content-cuadro" >
+          <span>
+
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- dg-content-bartitle -->
+
+  <div class="dg-content-barclient">
+    <div class="row">
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <div class="dg-datos-cliente">
+          <span>
+            Datos del cliente
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <div class="dg-content-icons" >
+          <span class="dg-content-btn">
+            <i class="fa fa-plus"></i>
+          </span>
+          <span class="dg-content-btn">
+            <i class="fa fa-minus"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end - dg-content-barclient -->
+
+  <div class="dg-content-lineprice">
+    <div>
+      <span>
+        $
+      </span>
+      <span>
+        4,756,230.00
+      </span>
+    </div>
+  </div><!-- end - .dg-content-lineprice -->
+
+  <div class="dg-content-btnlink">
+    <span>
+      <a class="dg-text-link">
+        Bloquear
+      </a>
+    </span>
+  </div>
+
+  <div class="dg-content-btns">
+    <div class="dg-content-button">
+      <button class="dg-btn dg-btn-orange">
+        Apartar
+      </button>
+      <button class="dg-btn dg-btn-green">
+        Vender
+      </button>
+    </div>
+  </div>
+
+</div><!-- end - dg-page-priceslote -->
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-statuslotes">
+  <div class="dg-head-back">
+    <span>
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div class="dg-content-bartitle dg-bartitle-2">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span></span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <p class="dg-row-text1">
+            Blvd. Diego Rivera
+          </p>
+          <p class="dg-row-text2">
+            Atlixco, Puebla
+          </p>
+          <p class="dg-row-text3">
+            Superfcie total: 25,000 m2
+          </p>
+        </div>
+      </div>
+    </div>
+  </div><!-- dg-content-bartitle -->
+
+  <div class="dg-content-listlotes">
+    <div class="row">
+      <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+        <div class="dg-col-lote">
+          <div>
+            <span>
+              <i class="fa fa-flag dg-flag-vendido"></i>
+            </span>
+          </div>
+          <div>
+            <strong class="dg-title" >Lote 2</strong>
+            <span class="dg-info">245 m2</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
+        <div class="dg-col-status">
+          <div>
+            <strong class="dg-title">Vendido</strong>
+            <span class="dg-info">$2,379,347.00</span>
+          </div>
+          <div>
+            <span class="dg-content-row">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+        <div class="dg-col-lote">
+          <div>
+            <span>
+              <i class="fa fa-flag dg-flag-disponible"></i>
+            </span>
+          </div>
+          <div>
+            <strong class="dg-title" >Lote 4</strong>
+            <span class="dg-info">575 m2</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
+        <div class="dg-col-status">
+          <div>
+            <strong class="dg-title">Disponible</strong>
+            <span class="dg-info">$6,903,888.66</span>
+          </div>
+          <div>
+            <span class="dg-content-row">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+        <div class="dg-col-lote">
+          <div>
+            <span>
+              <i class="fa fa-flag dg-flag-apartado"></i>
+            </span>
+          </div>
+          <div>
+            <strong class="dg-title" >Lote 11</strong>
+            <span class="dg-info">639 m2</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
+        <div class="dg-col-status">
+          <div>
+            <strong class="dg-title">Apartado</strong>
+            <span class="dg-info">$8,236,191.47</span>
+          </div>
+          <div>
+            <span class="dg-content-row">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end - dg-content-listlotes -->
+</div><!-- end - dg-page-statuslotes -->
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-form">
+
+  <div class="dg-head-back">
+    <span>
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div class="dg-content-btns">
+    <div class="dg-content-btnlink">
+      <span>
+        <a class="dg-text-link">
+          Cancelar
+        </a>
+      </span>
+    </div>
+    <div class="dg-content-btnlink">
+      <span>
+        <a class="dg-text-link">
+          Guardar
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <div class="dg-content-form">
+    <form action="">
+      <div class="dg-control">
+        <input type="text"
+               placeholder="Nombre" />
+      </div>
+      <div class="dg-control">
+        <input type="text"
+               placeholder="Apellidos" />
+      </div>
+      <div class="dg-control">
+        <input type="text"
+               placeholder="Dirección" />
+      </div>
+      <div class="dg-control">
+        <input type="number"
+               placeholder="Teléfono" />
+      </div>
+      <div class="dg-control">
+        <input type="email"
+               placeholder="Email" />
+      </div>
+      <div class="dg-control dg-control-date">
+        <label >
+          Fecha de nacimiento
+        </label>
+        <span>
+          <input type="date"
+                 placeholder="Nombre" />
+          <i class="fa fa-calendar">
+          </i>
+        </span>
+      </div>
+    </form>
+  </div>
+
+</div><!-- end - dg-page-form -->
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-listapersonas">
+  <div class="dg-head-back">
+    <span>
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div class="dg-content-inputsearch">
+    <div class="dg-content">
+      <i class="fa fa-search"></i>
+      <input type="text"
+             placeholder="Buscar" />
+    </div>
+  </div>
+
+  <div class="dg-content-list dg-content-listapersonas">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Abelardo Peña
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Andrea Gómez
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Bernardo Garcia
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            Carlos Cuéllar
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div><!-- end - dg-content-list -->
+
+</div><!-- end - dg-page-listapersonas -->
+
+
+<div class="dg-line-temp"></div>
+
+<div class="dg-content-page dg-page-menu">
+
+  <div class="dg-content-inputsearch">
+    <div class="dg-content">
+      <i class="fa fa-search"></i>
+      <input type="text"
+             placeholder="Buscar" />
+    </div>
+  </div>
+
+  <div class="dg-content-bartitle dg-bartitle-1">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <p class="dg-row-text1">
+            Alejandra Armora
+          </p>
+          <p class="dg-row-text2">
+            Ventas
+          </p>
+          <p class="dg-row-text3">
+            36900963
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dg-content-list dg-content-listmenu">
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <img src="../../../../assets/img/iconmenu-perfil.png"
+                 alt="Perfil" />
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Perfil
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <img src="../../../../assets/img/iconmenu-clientes.png"
+                 alt="Clientes" />
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Clientes
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <img src="../../../../assets/img/iconmenu-terrenos.png"
+                 alt="Terrenos" />
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Terrenos
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <img src="../../../../assets/img/iconmenu-ventas.png"
+                 alt="Ventas" />
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            Mis Ventas
+          </p>
+          <span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div>
+
+  </div><!-- end - dg-content-listmenu -->
+
+  <div class="dg-content-button">
+    <button class="dg-btn dg-btn-orange">
+      Salir
+    </button>
+  </div>
+
+</div><!-- end - dg-page-menu -->
