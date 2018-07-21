@@ -4,3 +4,6 @@ export * from './user.service';
 export * from './account.service';
 export * from './sellers.service';
 export * from './svgs.service';
+export * from './proyecto.service';
+export * from './producto.service';
+export * from './toaster.service';

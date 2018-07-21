@@ -11,17 +11,16 @@ import { filter, map } from 'rxjs/operators';
 export class ContentHeaderComponent implements OnInit {
   public pageTitle: '';
 
-  breadcrumbs$ = this.router.events.pipe(
-    filter(event => event instanceof NavigationEnd),
-    map(event => this.buildBreadCrumb(this.activatedRoute.root)),
-  );
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router) {
   }
 
   ngOnInit() {
+    this.buildBreadCrumb(this.activatedRoute);
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(event => this.buildBreadCrumb(this.activatedRoute.root));
   }
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',

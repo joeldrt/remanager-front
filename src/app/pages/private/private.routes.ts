@@ -2,14 +2,19 @@ import { Routes } from '@angular/router';
 
 import { SvgToolComponent } from '../../_digiall-components/svgtool/svgtool.component';
 
+import {ProyectosComponent} from './proyectos/proyectos.component';
 import {TerrenosComponent} from './terrenos/terrenos.component';
 import {ClientesComponent} from './clientes/clientes.component';
 import {PerfilComponent} from './perfil/perfil.component';
 import {VentasComponent} from './ventas/ventas.component';
 
 export const PRIVATE_ROUTES: Routes = [
-  // Terrenos - es la primera pantalla que le queremos mostrar al venddor
-  { path: '', redirectTo: 'terrenos', pathMatch: 'full'},
+  // Proyectos - es la primera pantalla que le queremos mostrar al venddor
+  { path: '', redirectTo: 'proyectos', pathMatch: 'full'},
+  { path: 'proyectos', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
+  { path: 'proyectos/:display', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
+
+  // Terrenos
   { path: 'terrenos', component: TerrenosComponent, data: { title: 'Terrenos', breadcrumb: 'terrenos' } },
 
   // Clientes
