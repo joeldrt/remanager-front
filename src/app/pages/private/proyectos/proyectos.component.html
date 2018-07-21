@@ -1,0 +1,45 @@
+<div>
+  <div class="dg-proyectos-navbar">
+    <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+    </button>
+    <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">
+      <li (click)="navegarAlInicio()" class="breadcrumb-item">
+        Inicio
+      </li>
+      <li *ngFor="let project of obtenerPiladeProyectos()"
+          class="breadcrumb-item">
+        <a (click)="navegarEspecifico(project)">
+          {{ project.nombre }}
+        </a>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="content">
+  <div class="row" *ngFor="let proyecto of proyectos" (click)="entrarAProyecto(proyecto)">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="info-box">
+        <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">{{proyecto.nombre}}</span>
+          <span class="info-box-number">{{proyecto.description}}</span>
+          <span class="info-box-more"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let producto of productos" (click)="detalleDeProducto(producto)">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="info-box">
+        <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">{{producto.nombre}}</span>
+          <span class="info-box-number">{{producto.descripcion}}</span>
+          <span class="info-box-more"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

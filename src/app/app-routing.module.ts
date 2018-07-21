@@ -8,7 +8,7 @@ import { PrivateComponent } from './layouts/private/private.component';
 import { PRIVATE_ROUTES } from './pages/private/private.routes';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/proyectos', pathMatch: 'full' },
   { path: '', component: PublicComponent, data: { breadcrumb: 'not-bc-page' }, children: PUBLIC_ROUTES },
   { path: '', component: PrivateComponent, canActivate: [AuthGuard], data: { breadcrumb: 'not-bc-page' }, children: PRIVATE_ROUTES },
 ];

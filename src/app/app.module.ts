@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// layout components && services
+// layout components
 import {
   PrivateComponent,
   HeaderComponent,
@@ -20,10 +20,6 @@ import {
   PublicComponent,
 } from './layouts/public';
 
-// pages
-import { DashboardComponent } from './pages/private/dashboard/dashboard.component';
-import { LoginComponent } from './pages/public/login/login.component';
-
 // services
 import { AuthGuard } from './_guard/auth.guard';
 import {
@@ -32,19 +28,26 @@ import {
   UserService,
   AccountService,
   SellersService,
-  SvgsService
+  SvgsService,
+  ToasterService,
+  ProyectoService,
+  ProductoService
 } from './_services';
 
 // helpers
-import { JwtInterceptor } from './_helpers';
-import { SellersComponent } from './pages/private/sellers/sellers.component';
-import { ProjectsComponent } from './pages/private/projects/projects.component';
-import { LandsComponent } from './pages/private/lands/lands.component';
+import { JwtInterceptor, ProyectoNavhelper } from './_helpers';
 
 // Digiall SVG Tool
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
 import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
-import { AddSellerComponent } from './pages/private/sellers/add-seller/add-seller.component';
+
+// pages
+import { LoginComponent } from './pages/public/login/login.component';
+import { TerrenosComponent } from './pages/private/terrenos/terrenos.component';
+import { PerfilComponent } from './pages/private/perfil/perfil.component';
+import { ClientesComponent } from './pages/private/clientes/clientes.component';
+import { VentasComponent } from './pages/private/ventas/ventas.component';
+import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 
 
 @NgModule({
@@ -57,14 +60,14 @@ import { AddSellerComponent } from './pages/private/sellers/add-seller/add-selle
     SettingsComponent,
     PrivateComponent,
     PublicComponent,
-    DashboardComponent,
     LoginComponent,
-    SellersComponent,
-    ProjectsComponent,
-    LandsComponent,
     SvgToolComponent,
     SvgComponent,
-    AddSellerComponent,
+    TerrenosComponent,
+    PerfilComponent,
+    ClientesComponent,
+    VentasComponent,
+    ProyectosComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,10 @@ import { AddSellerComponent } from './pages/private/sellers/add-seller/add-selle
     AccountService,
     SellersService,
     SvgsService,
+    ToasterService,
+    ProyectoService,
+    ProyectoNavhelper,
+    ProductoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
