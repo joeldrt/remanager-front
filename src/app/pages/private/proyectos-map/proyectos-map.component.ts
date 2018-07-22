@@ -7,11 +7,11 @@ import { ProyectoService, ProductoService, ToasterService } from '../../../_serv
 import { ProyectoNavhelper, FooterMenuhelper } from '../../../_helpers';
 
 @Component({
-  selector: 'app-proyectos',
-  templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.scss']
+  selector: 'app-proyectos-map',
+  templateUrl: './proyectos-map.component.html',
+  styleUrls: ['./proyectos-map.component.scss']
 })
-export class ProyectosComponent implements OnInit {
+export class ProyectosMapComponent implements OnInit {
 
   proyectos: Proyecto[];
   productos: Producto[];
@@ -32,11 +32,11 @@ export class ProyectosComponent implements OnInit {
   }
 
   private footerButtonSetup() {
-    if (this.footerMenuHelper.getMenu('/proyectos')) {
+    if (this.footerMenuHelper.getMenu('/proyectos/mapa')) {
       return;
     }
-    this.footerMenuHelper.addButtonFromValues('/proyectos', 'mapa', 'fa  fa-map-o', '/proyectos/mapa');
-    this.footerMenuHelper.addButtonFromValues('/proyectos', 'lista', 'fa  fa-list-ul', '/proyectos');
+    this.footerMenuHelper.addButtonFromValues('/proyectos/mapa', 'mapa', 'fa  fa-map-o', '/proyectos/mapa');
+    this.footerMenuHelper.addButtonFromValues('/proyectos/mapa', 'lista', 'fa  fa-list-ul', '/proyectos');
   }
 
   private doNavigationBaby() {

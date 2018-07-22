@@ -35,7 +35,11 @@ import {
 } from './_services';
 
 // helpers
-import { JwtInterceptor, ProyectoNavhelper } from './_helpers';
+import {
+  JwtInterceptor,
+  ProyectoNavhelper,
+  FooterMenuhelper,
+} from './_helpers';
 
 // Digiall SVG Tool
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
@@ -48,6 +52,7 @@ import { PerfilComponent } from './pages/private/perfil/perfil.component';
 import { ClientesComponent } from './pages/private/clientes/clientes.component';
 import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
+import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
 
 
 @NgModule({
@@ -68,6 +73,7 @@ import { ProyectosComponent } from './pages/private/proyectos/proyectos.componen
     ClientesComponent,
     VentasComponent,
     ProyectosComponent,
+    ProyectosMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +93,7 @@ import { ProyectosComponent } from './pages/private/proyectos/proyectos.componen
     ProyectoService,
     ProyectoNavhelper,
     ProductoService,
+    FooterMenuhelper,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

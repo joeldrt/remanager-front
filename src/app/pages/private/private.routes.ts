@@ -2,17 +2,18 @@ import { Routes } from '@angular/router';
 
 import { SvgToolComponent } from '../../_digiall-components/svgtool/svgtool.component';
 
-import {ProyectosComponent} from './proyectos/proyectos.component';
-import {TerrenosComponent} from './terrenos/terrenos.component';
-import {ClientesComponent} from './clientes/clientes.component';
-import {PerfilComponent} from './perfil/perfil.component';
-import {VentasComponent} from './ventas/ventas.component';
+import { ProyectosComponent } from './proyectos/proyectos.component';
+import { ProyectosMapComponent} from './proyectos-map/proyectos-map.component';
+import { TerrenosComponent } from './terrenos/terrenos.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { VentasComponent } from './ventas/ventas.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
   { path: '', redirectTo: 'proyectos', pathMatch: 'full'},
   { path: 'proyectos', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
-  { path: 'proyectos/:display', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
+  { path: 'proyectos/mapa', component: ProyectosMapComponent, data: { title: 'Proyectos Mapa', breadcrumb: 'proyectos-mapa' } },
 
   // Terrenos
   { path: 'terrenos', component: TerrenosComponent, data: { title: 'Terrenos', breadcrumb: 'terrenos' } },

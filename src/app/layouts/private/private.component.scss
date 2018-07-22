@@ -1,8 +1,20 @@
 @media (max-width: 1024px) {
   .content-wrapper {
-    width: 100%;
     padding-top: 50px;
-    max-height: 717px;
+    min-height: 718px;
+    position: relative;
     overflow-y: hidden !important;
+  }
+}
+
+@media (max-width: 812px) {
+  .content-wrapper {
+    min-height: 762px;
+  }
+}
+
+@media (max-width: 667px) {
+  .content-wrapper {
+    min-height: 617px;
   }
 }
