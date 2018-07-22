@@ -31,7 +31,8 @@ import {
   SvgsService,
   ToasterService,
   ProyectoService,
-  ProductoService
+  ProductoService,
+  SvgRestService,
 } from './_services';
 
 // helpers
@@ -94,6 +95,7 @@ import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-m
     ProyectoNavhelper,
     ProductoService,
     FooterMenuhelper,
+    SvgRestService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

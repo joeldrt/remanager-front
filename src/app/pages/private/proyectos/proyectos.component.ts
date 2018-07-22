@@ -24,10 +24,11 @@ export class ProyectosComponent implements OnInit {
     private proyectoNavhelper: ProyectoNavhelper,
     private productoService: ProductoService,
     private footerMenuHelper: FooterMenuhelper,
-  ) { }
+  ) {
+    this.footerButtonSetup();
+  }
 
   ngOnInit() {
-    this.footerButtonSetup();
     this.doNavigationBaby();
   }
 
