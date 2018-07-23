@@ -4,7 +4,7 @@ export class Proyecto {
   public description: string;
   public fechaCreacion: string;
   public correoCreador: string;
-  public idSeccion: number;
+  public idSeccion: string;
   public svgId: number;
   public organizacionId: number;
   public organizacionNombre: string;
