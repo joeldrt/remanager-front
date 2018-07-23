@@ -7,3 +7,4 @@ export * from './svgs.service';
 export * from './proyecto.service';
 export * from './producto.service';
 export * from './toaster.service';
+export * from './svg-rest.service';
