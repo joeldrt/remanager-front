@@ -4,7 +4,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { Proyecto, Producto } from '../../../_models';
 import { ProyectoService, ProductoService, ToasterService } from '../../../_services';
-import { ProyectoNavhelper } from '../../../_helpers';
+import { ProyectoNavhelper, FooterMenuhelper } from '../../../_helpers';
 
 @Component({
   selector: 'app-proyectos',
@@ -23,11 +23,23 @@ export class ProyectosComponent implements OnInit {
     private router: Router,
     private proyectoNavhelper: ProyectoNavhelper,
     private productoService: ProductoService,
-  ) { }
+    private footerMenuHelper: FooterMenuhelper,
+  ) {
+    this.footerButtonSetup();
+  }
 
   ngOnInit() {
     this.doNavigationBaby();
   }
+
+  private footerButtonSetup() {
+    if (this.footerMenuHelper.getMenu('/proyectos')) {
+      return;
+    }
+    this.footerMenuHelper.addButtonFromValues('/proyectos', 'mapa', 'fa  fa-map-o', '/proyectos/mapa');
+    this.footerMenuHelper.addButtonFromValues('/proyectos', 'lista', 'fa  fa-list-ul', '/proyectos');
+  }
+
   private doNavigationBaby() {
     this.clearProyectosAndProductos();
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {

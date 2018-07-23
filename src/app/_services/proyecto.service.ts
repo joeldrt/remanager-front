@@ -15,15 +15,15 @@ export class ProyectoService {
     private http: HttpClient
   ) {
     this.searchRoot = environment.API_URL + 'api/_search_root/proyectos';
-    this.searchByPadreIdUrl = environment.API_URL + 'api/_search_by_padreid/proyectos/';
+    this.searchByPadreIdUrl = environment.API_URL + 'api/_search_by_padreid/proyectos';
   }
 
   getAllRootProyects(): Observable<HttpResponse<Proyecto[]>> {
     return this.http.get<Proyecto[]>(this.searchRoot, { observe: 'response' });
   }
 
-  getProyectosByParentId(idPadre: number) {
-    return this.http.get<Proyecto[]>(this.searchByPadreIdUrl + idPadre, { observe: 'response' });
+  getProyectosByParentId(idPadre: number): Observable<HttpResponse<Proyecto[]>> {
+    return this.http.get<Proyecto[]>(this.searchByPadreIdUrl + '/' + idPadre, { observe: 'response' });
   }
 
 }
