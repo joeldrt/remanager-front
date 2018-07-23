@@ -7,8 +7,9 @@
 
   .dg-content-form{
     display: inline-block;
+    max-width: 342px;
     margin: 0 auto;
-    margin-top: 30%;
+    margin-top: 25%;
     width: 80%;
 
     .dg-content-photo{
@@ -111,11 +112,8 @@
       .dg-banderinlote{
         text-align: right;
         span{
-          background-image:url('../../../../assets/img/banderinLote.png');
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center center;
           display: inline-block;
+          font-size: 2.1em;
           height: 60px;
           width: 45px;
         }
@@ -312,7 +310,7 @@
         }
 
       }
-    }
+    }// end - .dg-content-form
   }// end - dg-page-form
 
   .dg-head-back{
@@ -356,7 +354,9 @@
     &.dg-content-listprojects{
       .dg-col-icon{
         span{
-          background-image:url('../../../../assets/img/icon-point.png');
+          i{
+            font-size: 2.7em;
+          }
         }
       }
     }
@@ -364,7 +364,9 @@
     &.dg-content-listlote{
       .dg-col-icon{
         span{
-          background-image:url('../../../../assets/img/icon-banderin-1.png');
+          i{
+            font-size: 2.7em;
+          }
         }
       }
     }
@@ -479,7 +481,10 @@
       background-image:url('../../../../assets/img/line-bartitle-1.png');
       .dg-content-icon{
         span{
-          background-image:url('../../../../assets/img/point-bartitle.png');
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
         }
       }
     }
@@ -489,7 +494,10 @@
       padding-bottom: 9px;
       .dg-content-icon{
         span{
-          background-image:url('../../../../assets/img/bandera-bartitle.png');
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
         }
       }
       .dg-content-cuadro{
