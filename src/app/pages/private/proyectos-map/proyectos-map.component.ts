@@ -117,7 +117,9 @@ export class ProyectosMapComponent implements OnInit {
 
   addSettingsZoom() {
     this.idSvgTag = svgPanZoom('#svgTag', {
-      zoomEnabled: true
+      zoomEnabled: true,
+      preventMouseEventsDefault: false,
+      dblClickZoomEnabled: false
     });
     this.should_svg_visible = true;
   }
