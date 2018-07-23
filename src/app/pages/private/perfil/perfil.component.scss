@@ -2,4 +2,75 @@
   overflow-y: auto !important;
   min-height: 78vh !important;
   max-height: 78vh !important;
-}
+
+  .dg-content-box{
+    margin: 0 auto;
+    width: 90%;
+
+    .profile-username,
+    .text-muted{
+      overflow: hidden;
+    }
+
+
+  }
+
+  .dg-content-form{
+    padding: 1.5em 1.5em;
+    input{
+      background-color: #EEEEEF;
+      border: none;
+      border-radius: 15px;
+      display: block;
+      padding: 1em 1.5em;
+      width: 100%;
+
+      &[ng-reflect-is-disabled="true"]{
+        background-color: transparent;
+        border: none;
+        border-bottom: solid 2px #3c8dbc;
+        color: rgba(0,0,0,0.8);
+        padding-bottom: 0px;
+      }
+    }
+    .dg-control{
+      margin-bottom: 9px;
+
+      &.dg-control-date{
+        magin-top: 1.5em;
+        label{
+          color: #818181;
+          display: block;
+          font-weight: normal;
+          margin-top: 1em;
+          margin-left: 1em;
+        }
+        input{
+          color: #6E6E6E;
+          display: inline-block;
+          width: 50%;
+        }
+        i{
+          display: inline-block;
+          font-size: 2em;
+          margin-left: 0.81em;
+        }
+      }
+
+    }
+  }// end - .dg-content-form
+
+  .dg-content-btn{
+    text-align: center;
+
+  }
+
+  .btn-app{
+    &:hover{
+      font-weight: bold;
+      .fa-edit{
+      }
+    }
+  }
+
+}// end - .content

@@ -1,3 +1,69 @@
 <div class="content">
-  perfil works!
+
+  <!-- Profile Image -->
+  <div class="box box-primary dg-content-box">
+    <div class="box-body box-profile">
+      <img class="profile-user-img img-responsive img-circle"
+           src="../../../../assets/img/imgPhotoProfile.png"
+           alt="User profile picture">
+
+      <h3 *ngIf="user.login"
+        class="profile-username text-center">
+        {{user.login}}
+      </h3>
+      <p *ngIf="user.firstName || user.lastName"
+        class="text-muted text-center">
+        {{user.firstName}} {{user.lastName}}
+      </p>
+
+      <div class="dg-content-form">
+        <form action="">
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item dg-control">
+              <label for="nombre">
+                Nombre:
+              </label>
+              <input type="text"
+                     placeholder="Nombre"
+                     name="nombre" [(ngModel)]="user.firstName"
+                     [disabled]="!isEditing" />
+            </li>
+            <li class="list-group-item dg-control">
+              <label for="login">
+                Apellidos:
+              </label>
+              <input type="text"
+                     placeholder="Apellidos"
+                     name="apellidos" [(ngModel)]="user.lastName"
+                     [disabled]="!isEditing" />
+            </li>
+          </ul>
+        </form>
+
+        <div class="dg-content-btn dg-btn-1"
+          *ngIf="!isEditing" >
+          <button class="btn btn-app" (click)="editForm()">
+            <i class="fa fa-edit"></i>
+            Editar Información
+          </button>
+        </div>
+
+        <div class="dg-content-btn dg-btn-2"
+             *ngIf="isEditing" >
+          <button class="btn btn-app" (click)="cancelEdit()">
+            <i class="fa fa-undo"></i>
+            Cancelar
+          </button>
+          <button class="btn btn-app" (click)="saveForm()">
+            <i class="fa fa-save"></i>
+            Guardar
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
 </div>

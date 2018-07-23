@@ -146,7 +146,6 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
 
   // ---
   getProject() {
-    debugger
     this._svgsService.getProyecto('1').subscribe(
       response => {
         console.log(response);
