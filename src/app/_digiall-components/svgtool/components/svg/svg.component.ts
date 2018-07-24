@@ -1,4 +1,6 @@
 declare var svgPanZoom: any;
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+
 import {Component, OnInit, Input, Renderer2, ElementRef, ViewChild, OnDestroy, AfterViewInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +12,7 @@ import { Image } from '../../models/image.model';
 
 // Services
 import { SvgToolService } from '../../services/svgtool.service';
-import { SvgsService } from '../../../../_services';
+import { SvgsService, ToasterService } from '../../../../_services';
 
 @Component({
   selector: 'app-svg',
@@ -52,7 +54,9 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
     private renderer: Renderer2,
     private el: ElementRef,
     private svgToolService: SvgToolService,
-    private _svgsService: SvgsService) {
+    private _svgsService: SvgsService,
+    private toaster: ToasterService,
+  ) {
 
     this.isDrawing = false;
     this.pX = '';
@@ -103,7 +107,7 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
       dblClickZoomEnabled: false,
       center: true
     });
-    // 
+    //
     this.svgTag.nativeElement.childNodes[0].setAttribute('transform', 'matrix(0 0 0 0 0 0)');
     this.svgTag.nativeElement.childNodes[0].setAttribute('style', 'transform: matrix(0, 0, 0, 0, 0, 0)');
   }
@@ -262,20 +266,27 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
             case 'new':
               this._svgsService.create(objSvg)
                 .subscribe(
-                  code => {
-                    console.log('Test - ' + code);
+                  (response: HttpResponse<any>) => {
+                    console.log('Save - ' + response.status + ' ' + response.body);
+                    this.toaster.info('Save - ' + response.status + ' ' + response.body);
                     this.isSaveSvg = true;
-                    this.stringStatusControls = 'Se ha guardado el Svg ' + Date.now();
-                  }, error => {
-                    console.log('Test - ' + error);
+                    if (response.body) {
+                      this.stringStatusControls = 'Se ha guardado el Svg ' + Date.now();
+                    }
+                  },
+                  (error: HttpErrorResponse) => {
+                    console.log('Test - ' + error.message);
+                    this.toaster.error(error.message);
                   });
               break;
             case 'edit':
               this._svgsService.update(objSvg)
-                .subscribe( response => {
-                  console.log('Edit : ' + response);
-                }, error => {
+                .subscribe( (response: HttpResponse<any>) => {
+                  console.log('Edit :' + response.status + ' ' + response.body);
+                  this.toaster.info('Edit - ' + response.status + ' ' + response.body);
+                }, (error: HttpErrorResponse) => {
                   console.log(error);
+                  this.toaster.error(error.message);
                 });
               break;
           } // end - switch
