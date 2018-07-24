@@ -83,7 +83,7 @@ export class ProyectosMapComponent implements OnInit {
         this.svg = value.body;
         setTimeout(() => {
           // this.addSettingsZoom();
-          addSVGZoomingCapabilities('#svgTag');
+          addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
         this.recuperarInformacionDeProyectosYProductos();
       },
