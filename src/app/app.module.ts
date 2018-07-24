@@ -33,6 +33,7 @@ import {
   ProyectoService,
   ProductoService,
   SvgRestService,
+  ClientService,
 } from './_services';
 
 // helpers
@@ -54,6 +55,7 @@ import { ClientesComponent } from './pages/private/clientes/clientes.component';
 import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
+import { AddClientComponent } from './components/clients/add-client/add-client.component';
 
 
 @NgModule({
@@ -75,6 +77,7 @@ import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-m
     VentasComponent,
     ProyectosComponent,
     ProyectosMapComponent,
+    AddClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +99,7 @@ import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-m
     ProductoService,
     FooterMenuhelper,
     SvgRestService,
+    ClientService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
