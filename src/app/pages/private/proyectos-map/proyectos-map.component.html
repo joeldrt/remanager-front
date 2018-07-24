@@ -21,12 +21,11 @@
 
     <svg #svgTag id="svgTag"
          [attr.width]="workingAreaSpace.clientWidth - 30"
-         [attr.height]="workingAreaSpace.clientHeight">
+         [attr.height]="workingAreaSpace.clientHeight" style="background-color: white;">
 
       <svg:image [attr.width]="svg.width" [attr.height]="svg.height" [attr.xlink:href]="svgImage()" />
       <svg:polygon *ngFor="let poligono of svg.poligonos" [attr.points]="poligono.puntos" fill="#0000FF99"
-      (click)="navigateToItem(poligono.genUid)"
-      (tap)="navigateToItem(poligono.genUid)"/>
+      (click)="navigateToItem(poligono.genUid)" />
 
     </svg>
 

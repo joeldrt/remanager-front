@@ -8,6 +8,8 @@ import { TerrenosComponent } from './terrenos/terrenos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
+import {ProductosComponent} from './productos/productos.component';
+import {ProductoDetalleComponent} from './productos-detalle/producto-detalle.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -15,8 +17,9 @@ export const PRIVATE_ROUTES: Routes = [
   { path: 'proyectos', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
   { path: 'proyectos/mapa', component: ProyectosMapComponent, data: { title: 'Proyectos Mapa', breadcrumb: 'proyectos-mapa' } },
 
-  // Terrenos
-  { path: 'terrenos', component: TerrenosComponent, data: { title: 'Terrenos', breadcrumb: 'terrenos' } },
+  // Productos
+  { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
+  { path: 'productos/:id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },

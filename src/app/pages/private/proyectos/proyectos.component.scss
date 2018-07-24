@@ -1,11 +1,71 @@
+@media (max-height: 1024px) {
+  .content {
+    min-height: 82vh;
+    max-height: 82vh;
+  }
+}
+
+@media (min-height: 960px) {
+  .content {
+    min-height: 79vh;
+    max-height: 79vh;
+  }
+}
+
+@media (max-height: 812px) {
+  .content {
+    min-height: 76vh;
+    max-height: 76vh;
+  }
+}
+
+@media (max-height: 736px) {
+  .content {
+    min-height: 75vh;
+    max-height: 75vh;
+  }
+}
+
+@media (max-height: 667px) {
+  .content {
+    min-height: 72vh;
+    max-height: 72vh;
+  }
+}
+
+@media (max-height: 414px) {
+  .content {
+    min-height: 53vh;
+    max-height: 53vh;
+  }
+}
+
+@media (max-height: 375px) {
+  .content {
+    min-height: 51vh;
+    max-height: 51vh;
+  }
+}
+
 @media (max-width: 1024px) {
   .content {
-    height: 80%;
     width: 100%;
-    position: absolute;
+    // position: absolute;
     left: 0;
     top: 0;
-    margin-top: 150px;
+    margin-top: 50px;
+    overflow-y: auto !important;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin-top: 50px;
     overflow-y: auto !important;
     padding-top: 0;
     padding-bottom: 0;
