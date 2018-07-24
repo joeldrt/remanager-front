@@ -20,7 +20,7 @@ import { SvgsService } from '../../../../_services';
 export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('svgTag') private svgTag: ElementRef;
   @Input('imageSvg') public imageSvg: Image;
-  @Input()
+  @Input('controls') public haveControls: boolean;
 
   public subscriptionSvg: Subscription;
   private objSvg: Svg;

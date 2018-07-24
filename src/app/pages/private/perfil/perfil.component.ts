@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../../_services';
+import { AccountService, ToasterService } from '../../../_services';
 import { User } from '../../../_models';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-// Services
-import { UserService } from '../../../_services';
 
 @Component({
   selector: 'app-perfil',
@@ -16,23 +15,13 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private _userService: UserService
+    private toasterService: ToasterService
   ) {
 
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('account'));
-    if(!this.user) {
-      this.accountService.getAccount()
-        .subscribe(
-          user => {
-            this.user = user;
-          },
-          error => {
-            console.log(error);
-          });
-    }// end if
+    this.getAccount();
   }// end - ngOnInit
 
   // --- Functions
@@ -47,17 +36,30 @@ export class PerfilComponent implements OnInit {
   }
 
   saveForm(){
-    this._userService.update(this.user).subscribe(
-      success => {
-        //debugger
-        this.user = <User> success.body;
-        localStorage.setItem('account', JSON.stringify(success.body));
-        console.log('Se actualizo la información --- ' + success);
+    this.accountService.updateAccount(this.user).subscribe(
+      (success: HttpResponse<any>) => {
+        if(success.status === 200) {
+          this.getAccount();
+          this.toasterService.success('Información actualizada');
+        }
+        else{
+          this.toasterService.error('Error: ' + success.statusText);
+        }
       },
-      error => {
-        console.log(error);
+      (error: HttpErrorResponse) => {
+        this.toasterService.error('Error: ' + error.message);
       }
     );
   }// end - saveForm
+
+  getAccount(){
+    this.accountService.getAccount().subscribe(
+      (response: HttpResponse<User>) => {
+        this.user = response.body;
+      },
+      (error: HttpErrorResponse) => {
+        this.toasterService.error(error.message)
+      });
+  }
 
 }

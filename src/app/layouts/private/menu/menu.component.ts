@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../_services/index';
 import { AccountService } from '../../../_services';
 import { User } from '../../../_models';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-menu',
@@ -20,17 +21,7 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('account'));
-    if (!this.user) {
-      this.accountService.getAccount()
-        .subscribe(
-          user => {
-            this.user = user;
-          },
-          error => {
-            console.log(error);
-          });
-    }
+    this.getAccount();
     this.isNavbarCollapsed = true;
   }
 
@@ -42,4 +33,15 @@ export class MenuComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
+
+  getAccount(){
+    this.accountService.getAccount().subscribe(
+      (response: HttpResponse<User>) => {
+        this.user = response.body;
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error: ' + error.message);
+      });
+  }
+
 }

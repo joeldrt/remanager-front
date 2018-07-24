@@ -12,6 +12,7 @@ import { createRequestOption } from '../_helpers/request-util';
 export class UserService {
 
   private resourceUrl;
+  private resourceUrlUserApi;
 
   constructor(
     private http: HttpClient

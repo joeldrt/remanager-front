@@ -1,5 +1,126 @@
 .content {
+  background-color: #FFF;
   overflow-y: auto !important;
   min-height: 78vh !important;
   max-height: 78vh !important;
+
+  .dg-content-page{
+
+    .dg-content-list{
+      &.dg-content-listapersonas{
+        .dg-col-icon{
+          span{
+            i{
+              color: #3E436B;
+              font-size: 2.4em;
+            }
+          }
+        }
+      }
+
+      .dg-col-icon{
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      .row{
+        padding: 1em 0.9em;
+        border-bottom: 1px solid #E3E3E3;
+        .dg-col-icon{
+          text-align: center;
+          span{
+            background-color: transparent;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+          }
+        }
+        .dg-col-name{
+          p{
+            margin-bottom: 0;
+            font-size:1.32em;
+          }
+          span{
+            font-size: 0.9em;
+          }
+        }
+
+        .dg-icon-arrow{
+          font-size: 1.5em;
+        }
+
+      }// end - row
+
+    }// end - .dg-content-list
+
+    .dg-head-back{
+      padding: 1em;
+      span{
+        i{
+          color: #325DC0;
+          font-size: 2.1em;
+        }
+      }
+    }// end - dg-head-back
+
+    // bar - input search
+    .dg-content-inputsearch{
+      border-bottom: solid 1px #E0E0E0;
+      padding-bottom:18px;
+      margin-bottom: 12px;
+    }
+
+    .dg-content-inputsearch{
+      .dg-content{
+        background-color: #E3E3E5;
+        border-radius: 9px;
+        border: none;
+        display: block;
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 6px 15px;
+
+        & > *{
+          display: inline-block;
+        }
+        i{
+          color: #959595;
+        }
+        input{
+          background-color: transparent;
+          border: none;
+          color: #7F7F7F;
+          margin-left: 9px;
+          width: 90%;
+        }
+      }
+    }// end - dg-content-inputsearch
+
+    .dg-section-search{
+
+      & > div{
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .dg-content-inputsearch{
+        max-width: 72%;
+        min-width: 72%;
+      }
+      .dg-content-buttons{
+        max-width: 27%;
+        min-width: 27%;
+        vertical-align: top;
+
+        span{
+          display: inline-block;
+          margin: 0 0.6em;
+        }
+      }
+    }// end - .dg-section-search
+
+  }// end - dg-content-page
+
 }
