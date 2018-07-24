@@ -112,6 +112,7 @@ export class ProyectosMapComponent implements OnInit {
         return;
       }
     }
+    this.toasterService.warning(getUid);
   }
 
   recuperarInformacionDeProyectosYProductos() {
@@ -189,7 +190,7 @@ export class ProyectosMapComponent implements OnInit {
   }
 
   detalleDeProducto(producto: Producto) {
-
+    this.router.navigate(['/productos', producto.id]);
   }
 
 }

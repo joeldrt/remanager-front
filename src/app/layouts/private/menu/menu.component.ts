@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  getAccount(){
+  getAccount() {
     this.accountService.getAccount().subscribe(
       (response: HttpResponse<User>) => {
         this.user = response.body;

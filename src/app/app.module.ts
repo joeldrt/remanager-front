@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SlideshowModule } from 'ng-simple-slideshow';
 
 import { AppComponent } from './app.component';
 
@@ -56,6 +57,8 @@ import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
 import { AddClientComponent } from './components/clients/add-client/add-client.component';
+import { ProductosComponent } from './pages/private/productos/productos.component';
+import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
 
 
 @NgModule({
@@ -78,12 +81,15 @@ import { AddClientComponent } from './components/clients/add-client/add-client.c
     ProyectosComponent,
     ProyectosMapComponent,
     AddClientComponent,
+    ProductosComponent,
+    ProductoDetalleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SlideshowModule,
   ],
   providers: [
     AuthGuard,

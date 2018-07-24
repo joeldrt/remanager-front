@@ -1,0 +1,13 @@
+<div class="content" #content *ngIf="producto">
+  <slideshow [height]="'200px'"
+             [minHeight]="'200px'"
+             [autoPlay]="true"
+             [showArrows]="true"
+             [imageUrls]="images"
+             [lazyLoad]="images?.length > 1"
+             [autoPlayWaitForLazyLoad]="true">
+  </slideshow>
+  <div class="row">
+
+  </div>
+</div>
