@@ -1,35 +1,35 @@
 @media (max-height: 1024px) {
   .content {
-    min-height: 82vh;
-    max-height: 82vh;
+    min-height: 81vh;
+    max-height: 81vh;
   }
 }
 
-@media (min-height: 960px) {
+@media (max-height: 960px) {
   .content {
-    min-height: 79vh;
-    max-height: 79vh;
+    min-height: 78vh;
+    max-height: 78vh;
   }
 }
 
 @media (max-height: 812px) {
-  .content {
-    min-height: 76vh;
-    max-height: 76vh;
-  }
-}
-
-@media (max-height: 736px) {
   .content {
     min-height: 75vh;
     max-height: 75vh;
   }
 }
 
-@media (max-height: 667px) {
+@media (max-height: 736px) {
   .content {
     min-height: 72vh;
     max-height: 72vh;
+  }
+}
+
+@media (max-height: 667px) {
+  .content {
+    min-height: 69vh;
+    max-height: 69vh;
   }
 }
 
