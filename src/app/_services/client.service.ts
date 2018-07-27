@@ -16,11 +16,15 @@ import { createRequestOption } from '../_helpers/request-util';
 export class ClientService {
 
   private resourceUrl;
+  private resourceSearchUrl;
+  private resourceSearchByCv;
 
   constructor(
     private http: HttpClient
   ){
     this.resourceUrl = environment.API_URL + 'api/clientes';
+    this.resourceSearchUrl = environment.API_URL + 'api/_search/clientes';
+    this.resourceSearchByCv = environment.API_URL + 'api/_search_by_cv/clientes/';
   }
 
   create(client: Client): Observable<HttpResponse<Client>> {
@@ -38,6 +42,15 @@ export class ClientService {
   query(req?: any): Observable<HttpResponse<Client[]>> {
     const options = createRequestOption(req);
     return this.http.get<Client[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  search(req?: any): Observable<HttpResponse<Client[]>>{
+    const options = createRequestOption(req);
+    return this.http.get<Client[]>(this.resourceSearchUrl, { params: options, observe: 'response'});
+  }
+
+  searchByCv(req?: any): Observable<HttpResponse<Client[]>>{
+    return this.http.get<Client[]>(this.resourceSearchByCv + req, { observe: 'response'});
   }
 
   getClients(): Observable<HttpResponse<Client[]>>{

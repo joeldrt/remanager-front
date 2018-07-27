@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { User } from '../_models';
 import { environment } from '../../environments/environment';
+import {Organizacion} from '../_models/organizacion';
 
 @Injectable()
 export class AccountService {
@@ -29,6 +30,10 @@ export class AccountService {
 
   updateAccount(user:  User): Observable<HttpResponse<any>> {
     return this.http.post<any>(this.API_URL + 'api/account', user, { observe: 'response' });
+  }
+
+  getAccountOrganization(): Observable<HttpResponse<Organizacion>> {
+    return this.http.get<Organizacion>(this.API_URL + 'api/account_organizacion', { observe: 'response' });
   }
 
 }
