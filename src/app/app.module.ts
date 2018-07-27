@@ -56,7 +56,7 @@ import { ClientesComponent } from './pages/private/clientes/clientes.component';
 import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
-import { AddClientComponent } from './components/clients/add-client/add-client.component';
+import { AddClientComponent } from './pages/private/clientes/add-client.component';
 import { ProductosComponent } from './pages/private/productos/productos.component';
 import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
 

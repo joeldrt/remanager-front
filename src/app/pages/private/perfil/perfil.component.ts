@@ -58,8 +58,8 @@ export class PerfilComponent implements OnInit {
         this.user = response.body;
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error(error.message)
+        this.toasterService.error(error.message);
       });
-  }
+  }// end - getAccount
 
 }

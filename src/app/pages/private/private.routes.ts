@@ -10,6 +10,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
 import {ProductosComponent} from './productos/productos.component';
 import {ProductoDetalleComponent} from './productos-detalle/producto-detalle.component';
+import {AddClientComponent} from './clientes/add-client.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -23,6 +24,7 @@ export const PRIVATE_ROUTES: Routes = [
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
+  { path: 'clientes/add/:route', component: AddClientComponent, data: { title: 'Add Clientes', breadcrumb: 'clientes' } },
 
   // Perfil
   { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil', breadcrumb: 'perfil' } },
