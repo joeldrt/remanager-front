@@ -24,7 +24,7 @@ export const PRIVATE_ROUTES: Routes = [
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
-  { path: 'clientes/add/:route', component: AddClientComponent, data: { title: 'Add Clientes', breadcrumb: 'clientes' } },
+  { path: 'clientes/add', component: AddClientComponent, data: { title: 'Add Clientes', breadcrumb: 'clientes' } },
 
   // Perfil
   { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil', breadcrumb: 'perfil' } },
