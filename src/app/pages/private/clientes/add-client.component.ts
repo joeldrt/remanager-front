@@ -8,17 +8,16 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AddClientComponent implements OnInit {
 
-  public returnPath: string;
+  public returnTo: string;
 
   constructor(
     private route: ActivatedRoute
   ) {
-    this.route.params.subscribe(params => {
-      this.returnPath = params.route;
-    });
   }
 
   ngOnInit() {
+    debugger
+    this.returnTo = this.route.snapshot.queryParams['returnTo'];
   }
 
 }
