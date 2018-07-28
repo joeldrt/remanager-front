@@ -1,8 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import { ProductoService, ToasterService } from '../../../_services';
-import { Producto } from '../../../_models';
+
+import {
+  ProductoService,
+  ToasterService,
+  TipoProductoService,
+  ValorCampoProductoService
+} from '../../../_services';
+
+import {
+  Producto,
+  TipoProducto,
+  CampoDeProducto,
+  ValorCampoProducto
+} from '../../../_models';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -12,6 +24,11 @@ import { Producto } from '../../../_models';
 export class ProductoDetalleComponent implements OnInit {
 
   producto: Producto;
+  tipoDeProducto: TipoProducto;
+  valoresCamposProducto: Map<number, any>;
+
+  routeToReturn: string;
+
   images = ['./assets/img/producto_mock/casa1.jpeg',
     './assets/img/producto_mock/casa2.jpg',
     './assets/img/producto_mock/casa3.jpeg',
@@ -20,7 +37,10 @@ export class ProductoDetalleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productoService: ProductoService,
+    private tipoProductoService: TipoProductoService,
+    private valorCampoProductoService: ValorCampoProductoService,
     private toaster: ToasterService,
   ) { }
 
@@ -28,10 +48,15 @@ export class ProductoDetalleComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.id) {
         this.getProducto(params.id);
+        this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
         return;
       }
       this.toaster.error('Error: no se pudo recuperar el número del producto');
     });
+  }
+
+  navegarAnterior() {
+    this.router.navigate([this.routeToReturn]);
   }
 
   getProducto(producto_id: number) {
@@ -39,6 +64,11 @@ export class ProductoDetalleComponent implements OnInit {
       (response: HttpResponse<Producto>) => {
         if (response.body) {
           this.producto = response.body;
+          if (this.producto.tipoDeProductoId) {
+            this.getCamposProducto(this.producto.tipoDeProductoId);
+          } else {
+            this.toaster.warning('El producto no tiene un tipo');
+          }
         } else {
           this.toaster.error('La respuesta del servido viene vacía');
         }
@@ -47,6 +77,42 @@ export class ProductoDetalleComponent implements OnInit {
         this.toaster.error(error.message);
       }
     );
+  }
+
+  getCamposProducto(tipoDeProductoId: number) {
+    this.tipoProductoService.find(tipoDeProductoId).subscribe(
+      (response: HttpResponse<TipoProducto>) => {
+        if (response.body) {
+          this.tipoDeProducto = response.body;
+          this.getValorCamposProducto(this.tipoDeProducto.camposDeProductos);
+        } else {
+          this.toaster.error('No se pudo recuperar los campos del tipo de producto');
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.message);
+    });
+  }
+
+  getValorCamposProducto(camposDeProductos: CampoDeProducto[]) {
+    this.valorCampoProductoService.findAllByProducto(this.producto.id).subscribe(
+      (value: HttpResponse<ValorCampoProducto[]>) => {
+        if (value.body) {
+          this.setValorCampoEnMapa(value.body);
+        } else {
+          this.toaster.error('No se pudieron recuperar los datos de los camppos para ese producto');
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.message);
+      });
+  }
+
+  setValorCampoEnMapa(valoresCamposProductoFromServer: ValorCampoProducto[]) {
+    this.valoresCamposProducto = new Map<number, any>();
+    valoresCamposProductoFromServer.forEach(value => {
+      this.valoresCamposProducto.set(value.campoId, value.valor);
+    });
   }
 
 }

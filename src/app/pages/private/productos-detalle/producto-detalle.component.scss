@@ -1,13 +1,13 @@
-@media (max-width: 1024px) {
-  .content {
-    height: 80%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-top: 150px;
-    overflow-y: auto !important;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
+@import "../component.shared.style";
+
+.dg-producto-detalle-wrapper {
+  position: relative;
+  min-height: 40vh;
+  max-height: 40vh;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}
+
+.content {
+  overflow-y: hidden !important;
 }

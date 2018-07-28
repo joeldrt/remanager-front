@@ -1,7 +1,6 @@
-declare var svgPanZoom: any;
 declare var addSVGZoomingCapabilities: any;
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
@@ -21,7 +20,6 @@ export class ProyectosMapComponent implements OnInit {
   productos: Producto[];
   svg: Svg;
 
-  idSvgTag: any;
   should_svg_visible = false;
 
   constructor(
@@ -82,7 +80,6 @@ export class ProyectosMapComponent implements OnInit {
       (value: HttpResponse<Svg>) => {
         this.svg = value.body;
         setTimeout(() => {
-          // this.addSettingsZoom();
           addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
         this.recuperarInformacionDeProyectosYProductos();
@@ -190,7 +187,7 @@ export class ProyectosMapComponent implements OnInit {
   }
 
   detalleDeProducto(producto: Producto) {
-    this.router.navigate(['/productos', producto.id]);
+    this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/proyectos/mapa'}});
   }
 
 }

@@ -1,11 +1,10 @@
-@media (max-width: 1024px) {
-  .main-footer {
-    min-height: 50px;
-    padding: 5px;
-  }
+.dg-powered-label {
+  margin-top: 10px;
+  margin-right: 10px;
+}
 
-  .dg-powered-label {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
+.main-footer {
+  min-height: 50px;
+  max-height: 50px;
+  padding: 5px;
 }

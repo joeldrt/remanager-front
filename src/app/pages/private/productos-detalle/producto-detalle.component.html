@@ -1,13 +1,50 @@
+<div>
+  <div class="dg-producto-detalle-navbar">
+    <button class="btn btn-default pull-left" *ngIf="this.routeToReturn" (click)="navegarAnterior()">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+    </button>
+  </div>
+</div>
 <div class="content" #content *ngIf="producto">
-  <slideshow [height]="'200px'"
-             [minHeight]="'200px'"
+  <slideshow [height]="(content.clientHeight / 2) + 'px'"
+             [minHeight]="(content.clientHeight / 2) + 'px'"
              [autoPlay]="true"
              [showArrows]="true"
              [imageUrls]="images"
              [lazyLoad]="images?.length > 1"
              [autoPlayWaitForLazyLoad]="true">
   </slideshow>
-  <div class="row">
+  <div class="dg-producto-detalle-wrapper">
+    <div class="row" *ngIf="producto && producto.nombre">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="info-box">
+          <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">{{producto.nombre}}</span>
+            <span class="info-box-text">{{producto.descripcion}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="tipoDeProducto && tipoDeProducto.camposDeProductos">
+      <div *ngFor="let campo of tipoDeProducto.camposDeProductos">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="info-box">
+          <span class="info-box-icon" style="background-color: white !important;">
+            <img [src]="'data:' + campo.iconoContentType + ';base64,' + campo.icono" style="max-width: 45px;" alt="campoDeProducto image"/>
+          </span>
 
+            <div class="info-box-content">
+              <span class="info-box-text">{{campo.nombre}}</span>
+              <span class="info-box-text"*ngIf="valoresCamposProducto && valoresCamposProducto.size > 0">
+              {{valoresCamposProducto.get(campo.id)}}
+            </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+    </div>
   </div>
 </div>

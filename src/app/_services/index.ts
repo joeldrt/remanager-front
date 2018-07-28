@@ -9,3 +9,5 @@ export * from './producto.service';
 export * from './toaster.service';
 export * from './svg-rest.service';
 export * from './client.service';
+export * from './tipo-producto.service';
+export * from './valor.campo.producto.service';

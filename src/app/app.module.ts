@@ -35,6 +35,8 @@ import {
   ProductoService,
   SvgRestService,
   ClientService,
+  TipoProductoService,
+  ValorCampoProductoService,
 } from './_services';
 
 // helpers
@@ -106,6 +108,8 @@ import { ProductoDetalleComponent } from './pages/private/productos-detalle/prod
     FooterMenuhelper,
     SvgRestService,
     ClientService,
+    TipoProductoService,
+    ValorCampoProductoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
