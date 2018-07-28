@@ -121,7 +121,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   detalleDeProducto(producto: Producto) {
-    this.router.navigate(['/productos', producto.id]);
+    this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/proyectos'}});
   }
 
 }
