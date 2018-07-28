@@ -12,39 +12,27 @@
         <div class="dg-content">
             <i class="fa fa-search"></i>
             <input type="text"
-                   placeholder="Buscar" />
+                   placeholder="Buscar"
+                   id="inputSearch"
+                   name="inputSearch"
+                   [(ngModel)]="inputSearch"/>
         </div>
       </div>
       <div class="dg-content-buttons">
         <span>
-          <a class="dg-text-link">
+          <button routerLink="add" [queryParams]="{returnTo: '/clientes'}" class="dg-text-link">
             Agregar
-          </a>
+          </button>
         </span>
       </div>
     </div><!-- end - dg-section-search -->
 
-    <div class="dg-content-list dg-content-listapersonas">
-      <div class="row">
-        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
-          <div class="dg-col-icon">
-          <span>
-            <i class="fa fa-user"></i>
-          </span>
-          </div>
-        </div>
-        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
-          <div class="dg-col-name">
-            <p>
-              Abelardo Peña
-            </p>
-            <span>
-          </span>
-          </div>
-        </div>
-      </div>
+    <div class="dg-content-list dg-content-listapersonas"
+      *ngIf="clients !== null" >
 
-      <div class="row">
+      <div class="row"
+        *ngFor="let client of clients;"
+        (click)="clickOnClient(client)" >
         <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
           <div class="dg-col-icon">
           <span>
@@ -55,45 +43,7 @@
         <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
           <div class="dg-col-name">
             <p>
-              Andrea Gómez
-            </p>
-            <span>
-          </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
-          <div class="dg-col-icon">
-          <span>
-            <i class="fa fa-user"></i>
-          </span>
-          </div>
-        </div>
-        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
-          <div class="dg-col-name">
-            <p>
-              Bernardo Garcia
-            </p>
-            <span>
-          </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
-          <div class="dg-col-icon">
-          <span>
-            <i class="fa fa-user"></i>
-          </span>
-          </div>
-        </div>
-        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
-          <div class="dg-col-name">
-            <p>
-              Carlos Cuéllar
+              {{client.nombre}} {{client.apellidos}}
             </p>
             <span>
           </span>
@@ -101,10 +51,14 @@
         </div>
       </div>
     </div><!-- end - dg-content-list -->
+
+    <div *ngIf="clients === null"
+      class="dg-content-msj">
+      <div class="container">
+        <p class="dg-msj">
+          No hay información de clientes...
+        </p>
+      </div>
+    </div>
   </div><!-- end - dg-page-listapersonas -->
-
-  <div>
-    <app-add-client></app-add-client>
-  </div><!-- end - content-formAddClient -->
-
 </div><!-- end - content -->

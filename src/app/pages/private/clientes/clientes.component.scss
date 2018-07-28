@@ -25,8 +25,10 @@
       }
 
       .row{
-        padding: 1em 0.9em;
         border-bottom: 1px solid #E3E3E3;
+        cursor: pointer;
+        padding: 1em 0.9em;
+
         .dg-col-icon{
           text-align: center;
           span{
@@ -123,4 +125,25 @@
 
   }// end - dg-content-page
 
+}// end - .content
+
+
+.dg-content-msj{
+  margin-top: 2.7em;
+  text-align: center;
+
+  .dg-msj{
+    color: #CCC;
+    font-size: 1.23em;
+  }
 }
+
+.dg-text-link{
+  background-color: transparent;
+  border: none;
+  color: #3c8dbc;
+
+  &:hover{
+    border-bottom: solid 1px #3c8dbc;
+  }
+}// end - .dg-text-link
