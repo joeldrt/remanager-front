@@ -39,32 +39,30 @@
                      [disabled]="!isEditing" />
             </li>
           </ul>
+
+          <div class="dg-content-btn dg-btn-1"
+            *ngIf="!isEditing" >
+            <button class="btn btn-app" (click)="editForm()">
+              <i class="fa fa-edit"></i>
+              Editar Información
+            </button>
+          </div>
+
+          <div class="dg-content-btn dg-btn-2"
+               *ngIf="isEditing" >
+            <button class="btn btn-app" (click)="cancelEdit()">
+              <i class="fa fa-undo"></i>
+              Cancelar
+            </button>
+            <button class="btn btn-app" (click)="saveForm()">
+              <i class="fa fa-save"></i>
+              Guardar
+            </button>
+          </div>
         </form>
-
-        <div class="dg-content-btn dg-btn-1"
-          *ngIf="!isEditing" >
-          <button class="btn btn-app" (click)="editForm()">
-            <i class="fa fa-edit"></i>
-            Editar Información
-          </button>
-        </div>
-
-        <div class="dg-content-btn dg-btn-2"
-             *ngIf="isEditing" >
-          <button class="btn btn-app" (click)="cancelEdit()">
-            <i class="fa fa-undo"></i>
-            Cancelar
-          </button>
-          <button class="btn btn-app" (click)="saveForm()">
-            <i class="fa fa-save"></i>
-            Guardar
-          </button>
-        </div>
-
       </div>
     </div>
     <!-- /.box-body -->
   </div>
   <!-- /.box -->
-
 </div>

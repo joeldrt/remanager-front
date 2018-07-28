@@ -36,6 +36,7 @@ import {
   SvgRestService,
   ClientService,
 } from './_services';
+import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 
 // helpers
 import {
@@ -59,6 +60,7 @@ import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-m
 import { AddClientComponent } from './pages/private/clientes/add-client.component';
 import { ProductosComponent } from './pages/private/productos/productos.component';
 import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
+import { InfoClientComponent } from './pages/private/clientes/info-client.component';
 
 
 @NgModule({
@@ -83,6 +85,7 @@ import { ProductoDetalleComponent } from './pages/private/productos-detalle/prod
     AddClientComponent,
     ProductosComponent,
     ProductoDetalleComponent,
+    InfoClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,6 +114,7 @@ import { ProductoDetalleComponent } from './pages/private/productos-detalle/prod
       useClass: JwtInterceptor,
       multi: true
     },
+    DigiallDateUtils
   ],
   bootstrap: [AppComponent]
 })

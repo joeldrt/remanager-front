@@ -8,8 +8,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 // Models
 import { Client } from '../../../_models/client';
 import { User } from '../../../_models/user';
-import {Organizacion} from '../../../_models/organizacion';
-
+import { Organizacion } from '../../../_models/organizacion';
 
 @Component({
   selector: 'app-clientes',
@@ -27,22 +26,20 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     private clientService: ClientService,
     private toasterService: ToasterService
   ) {
-    this.user = null;
+    this.user = new User();
     this.clients = null;
-    this.organization = null;
+    this.organization = new Organizacion();
     this.inputSearch = '';
   }
 
   ngOnInit() {
     this.getAccount();
-    this.getOrganization();
   }
 
   ngAfterViewInit(){
   }
 
   clickOnClient(client: Client){
-    console.log('En la función: ' + client.id);
   }// end - clickOnClient(event)
 
   getAccount(){
@@ -50,6 +47,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
       (response: HttpResponse<User>) => {
         this.user = response.body;
         this.loadAll();
+        this.getOrganization();
       },
       (error: HttpErrorResponse) => {
         this.toasterService.error(error.message);
@@ -89,12 +87,11 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     this.accountService.getAccountOrganization()
       .subscribe((res: HttpResponse<Organizacion>) => {
         this.organization = res.body;
-        console.log('Organizacion :: ' + this.organization);
       },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
         }
       );
-  }
+  } // end - getOrganization()
 
 }

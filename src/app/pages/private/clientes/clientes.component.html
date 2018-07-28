@@ -20,7 +20,7 @@
       </div>
       <div class="dg-content-buttons">
         <span>
-          <button routerLink="add" [queryParams]="{returnTo: '/clientes'}" class="dg-text-link">
+          <button routerLink="add" [queryParams]="{returnTo: '/clientes', correoVendedor: user.email, organizationId: organization.id}" class="dg-text-link">
             Agregar
           </button>
         </span>
@@ -31,8 +31,9 @@
       *ngIf="clients !== null" >
 
       <div class="row"
-        *ngFor="let client of clients;"
-        (click)="clickOnClient(client)" >
+           *ngFor="let client of clients;"
+           (click)="clickOnClient(client)"
+           routerLink="info" [queryParams]="{returnTo: '/clientes', id: client.id}" >
         <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
           <div class="dg-col-icon">
           <span>

@@ -6,44 +6,86 @@
       </span>
     </div>
 
-    <div class="dg-content-btns">
-      <div class="dg-content-btnlink">
-        <span>
-          <a class="dg-text-link">
-            Cancelar
-          </a>
-        </span>
-      </div>
-      <div class="dg-content-btnlink">
-        <span>
-          <a class="dg-text-link">
-            Guardar
-          </a>
-        </span>
-      </div>
-    </div>
-
     <div class="dg-content-form">
-      <form action="">
+      <form name="form"
+            #f="ngForm"
+            (ngSubmit)="f.form.valid && saveClient(f)" >
+
+        <div class="dg-content-btns">
+          <div class="dg-content-btnlink">
+            <span>
+              <button class="dg-text-link"
+                      [routerLink]="returnTo">
+                Cancelar
+              </button>
+            </span>
+          </div>
+          <div class="dg-content-btnlink">
+            <span>
+              <button type="submit" class="dg-text-link">
+                Guardar
+              </button>
+            </span>
+          </div>
+        </div>
+
         <div class="dg-control">
           <input type="text"
-                 placeholder="Nombre" />
+                 placeholder="Nombre"
+                 name="nombre"
+                 [(ngModel)]="client.nombre"
+                 #nombre="ngModel" required />
+
+          <div *ngIf="f.submitted && !nombre.valid"
+               class="help-block">
+            El campo Nombre es requerido
+          </div>
         </div>
         <div class="dg-control">
           <input type="text"
-                 placeholder="Apellidos" />
+                 placeholder="Apellidos"
+                 name="apellidos"
+                 [(ngModel)]="client.apellidos"
+                 #apellidos="ngModel" />
+
+          <!--div *ngIf="f.submitted && !apellidos.valid"
+               class="help-block">
+            Apellidos son requeridos
+          </div-->
         </div>
         <div class="dg-control">
           <input type="text"
-                 placeholder="Dirección" />
+                 placeholder="Dirección"
+                 name="direccion"
+                 [(ngModel)]="client.direccion"
+                 #direccion="ngModel" />
+
+          <!--div *ngIf="f.submitted && !direccion.valid"
+               class="help-block">
+            La dirección es requerida
+          </div-->
         </div>
         <div class="dg-control">
           <input type="number"
-                 placeholder="Teléfono" />
+                 placeholder="Teléfono"
+                 name="telefono"
+                 [(ngModel)]="client.telefono"
+                 #telefono="ngModel" required />
+          <div *ngIf="f.submitted && !telefono.valid"
+               class="help-block">
+            Teléfono es requerido
+          </div>
         </div>
         <div class="dg-control">
           <input type="email"
-                 placeholder="Email" />
+                 placeholder="Email"
+                 name="email"
+                 [(ngModel)]="client.email"
+                 #email="ngModel" required />
+          <div *ngIf="f.submitted && !email.valid"
+               class="help-block">
+            Email requerido
+          </div>
         </div>
         <div class="dg-control dg-control-date">
           <label >
@@ -51,12 +93,19 @@
           </label>
           <span>
             <input type="date"
-                   placeholder="Nombre" />
+                   placeholder="Nombre"
+                   name="fechaNacimiento"
+                   [(ngModel)]="client.fechaNacimiento"
+                   #fechaNacimiento="ngModel" />
             <i class="fa fa-calendar">
             </i>
+            <!--div *ngIf="f.submitted && !email.valid"
+                 class="help-block">
+              Fecha de nacimiento obligatoria
+            </div-->
           </span>
         </div>
       </form>
-    </div>
+    </div><!-- end - dg-content-form -->
   </div><!-- end - dg-page-form -->
-</div>
+</div><!-- end - content -->
