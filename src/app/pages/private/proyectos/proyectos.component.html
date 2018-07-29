@@ -1,5 +1,5 @@
 <div>
-  <div class="dg-proyectos-navbar">
+  <div class="dg-page-navbar">
     <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
       <i class="glyphicon glyphicon-chevron-left"></i>
     </button>
@@ -23,8 +23,7 @@
         <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">{{proyecto.nombre}}</span>
-          <span class="info-box-number">{{proyecto.description}}</span>
-          <span class="info-box-more"><i class="glyphicon glyphicon-chevron-right"></i></span>
+          <span class="info-box-text">{{proyecto.description}}</span>
         </div>
       </div>
     </div>
@@ -36,8 +35,7 @@
         <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">{{producto.nombre}}</span>
-          <span class="info-box-number">{{producto.descripcion}}</span>
-          <span class="info-box-more"><i class="glyphicon glyphicon-chevron-right"></i></span>
+          <span class="info-box-text">{{producto.descripcion}}</span>
         </div>
       </div>
     </div>

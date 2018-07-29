@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse} from '@angular/common/http';
+
+import { FooterMenuhelper } from '../../../_helpers/footer-menuhelper';
 
 import {
   ProductoService,
   ToasterService,
   TipoProductoService,
-  ValorCampoProductoService
+  ValorCampoProductoService,
 } from '../../../_services';
 
 import {
@@ -15,14 +17,16 @@ import {
   CampoDeProducto,
   ValorCampoProducto
 } from '../../../_models';
+import {HeaderHelper} from '../../../_helpers';
 
 @Component({
   selector: 'app-producto-detalle',
   templateUrl: './producto-detalle.component.html',
   styleUrls: ['./producto-detalle.component.scss']
 })
-export class ProductoDetalleComponent implements OnInit {
+export class ProductoDetalleComponent implements OnInit, OnDestroy {
 
+  productoId: number;
   producto: Producto;
   tipoDeProducto: TipoProducto;
   valoresCamposProducto: Map<number, any>;
@@ -41,18 +45,31 @@ export class ProductoDetalleComponent implements OnInit {
     private productoService: ProductoService,
     private tipoProductoService: TipoProductoService,
     private valorCampoProductoService: ValorCampoProductoService,
+    private footerMenu: FooterMenuhelper,
     private toaster: ToasterService,
-  ) { }
+    private headerHelper: HeaderHelper,
+  ) {
+  }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      if (params.id) {
-        this.getProducto(params.id);
-        this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
-        return;
-      }
-      this.toaster.error('Error: no se pudo recuperar el número del producto');
-    });
+    this.productoId = this.route.snapshot.params['id'];
+    if (!this.productoId) {
+      this.toaster.error('No se especificó el producto');
+      this.router.navigate(['/proyectos']);
+      return;
+    }
+    this.getProducto(this.route.snapshot.params['id']);
+    this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
+    if (!this.routeToReturn) {
+      this.routeToReturn = '/proyectos';
+    }
+  }
+
+  ngOnDestroy() {
+    if (!this.producto) {
+      return;
+    }
+    this.footerMenu.clearButtons('/productos/' + this.producto.id);
   }
 
   navegarAnterior() {
@@ -64,6 +81,8 @@ export class ProductoDetalleComponent implements OnInit {
       (response: HttpResponse<Producto>) => {
         if (response.body) {
           this.producto = response.body;
+          this.headerHelper.sendHeaderTitleRequest(this.producto.nombre);
+          this.setFooterMenu(this.producto);
           if (this.producto.tipoDeProductoId) {
             this.getCamposProducto(this.producto.tipoDeProductoId);
           } else {
@@ -77,6 +96,17 @@ export class ProductoDetalleComponent implements OnInit {
         this.toaster.error(error.message);
       }
     );
+  }
+
+  setFooterMenu(producto: Producto) {
+    this.footerMenu.clearButtons('/productos/' + producto.id);
+    this.footerMenu.addButtonFromValues(
+      '/productos/' + producto.id,
+      'Adquirir producto',
+      'fa fa-shopping-cart',
+      '/clientes'
+    );
+    this.footerMenu.sendMenuRequest('/productos/' + producto.id);
   }
 
   getCamposProducto(tipoDeProductoId: number) {

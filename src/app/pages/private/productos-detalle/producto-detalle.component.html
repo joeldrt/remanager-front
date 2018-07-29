@@ -1,5 +1,5 @@
 <div>
-  <div class="dg-producto-detalle-navbar">
+  <div class="dg-page-navbar">
     <button class="btn btn-default pull-left" *ngIf="this.routeToReturn" (click)="navegarAnterior()">
       <i class="glyphicon glyphicon-chevron-left"></i>
     </button>
@@ -22,6 +22,7 @@
           <div class="info-box-content">
             <span class="info-box-text">{{producto.nombre}}</span>
             <span class="info-box-text">{{producto.descripcion}}</span>
+            <span class="info-box-more">{{producto.precio | currency:'MXN' }}</span>
           </div>
         </div>
       </div>

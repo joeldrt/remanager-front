@@ -1,58 +1,63 @@
 @media (max-height: 1024px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 960px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 812px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 736px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 667px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 414px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 @media (max-height: 375px) {
   .content {
-    min-height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
   }
 }
 
 .content {
+  position: relative;
   width: 100%;
   left: 0;
   top: 0;
-  margin-top: 50px;
   overflow-y: auto !important;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.dg-page-navbar {
+  min-height: 50px;
+  max-height: 50px;
 }

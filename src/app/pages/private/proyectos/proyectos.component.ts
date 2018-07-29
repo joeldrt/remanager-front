@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { Proyecto, Producto } from '../../../_models';
 import { ProyectoService, ProductoService, ToasterService } from '../../../_services';
-import { ProyectoNavhelper, FooterMenuhelper } from '../../../_helpers';
+import {ProyectoNavhelper, FooterMenuhelper, HeaderHelper} from '../../../_helpers';
 
 @Component({
   selector: 'app-proyectos',
   templateUrl: './proyectos.component.html',
   styleUrls: ['./proyectos.component.scss']
 })
-export class ProyectosComponent implements OnInit {
+export class ProyectosComponent implements OnInit, OnDestroy {
 
   proyectos: Proyecto[];
   productos: Producto[];
@@ -23,24 +23,30 @@ export class ProyectosComponent implements OnInit {
     private router: Router,
     private proyectoNavhelper: ProyectoNavhelper,
     private productoService: ProductoService,
-    private footerMenuHelper: FooterMenuhelper,
+    private footerMenu: FooterMenuhelper,
+    private headerHelper: HeaderHelper,
   ) {
-    this.footerButtonSetup();
   }
 
   ngOnInit() {
     this.doNavigationBaby();
+    this.headerHelper.sendHeaderTitleRequest('Proyectos');
+  }
+
+  ngOnDestroy() {
+    this.footerMenu.clearButtons('/proyectos');
   }
 
   private footerButtonSetup() {
-    if (this.footerMenuHelper.getMenu('/proyectos')) {
-      return;
+    if (!this.footerMenu.getMenu('/proyectos')) {
+      this.footerMenu.addButtonFromValues('/proyectos', 'plano', 'fa  fa-map-o', '/proyectos/mapa');
+      this.footerMenu.addButtonFromValues('/proyectos', 'lista', 'fa  fa-list-ul', '/proyectos');
     }
-    this.footerMenuHelper.addButtonFromValues('/proyectos', 'mapa', 'fa  fa-map-o', '/proyectos/mapa');
-    this.footerMenuHelper.addButtonFromValues('/proyectos', 'lista', 'fa  fa-list-ul', '/proyectos');
+    this.footerMenu.sendMenuRequest('/proyectos');
   }
 
   private doNavigationBaby() {
+    this.footerButtonSetup();
     this.clearProyectosAndProductos();
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.proyectoService.getAllRootProyects().subscribe(
