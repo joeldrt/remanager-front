@@ -18,6 +18,7 @@ import { Organizacion } from '../../../_models/organizacion';
 export class ClientesComponent implements OnInit, AfterViewInit {
   public user: User;
   public clients: Client[];
+  public listClientsService: Client[];
   public organization: Organizacion;
   public inputSearch: string;
 
@@ -28,6 +29,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   ) {
     this.user = new User();
     this.clients = null;
+    this.listClientsService = null;
     this.organization = new Organizacion();
     this.inputSearch = '';
   }
@@ -55,25 +57,12 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   }// end - getAccount
 
   loadAll() {
-    if (this.inputSearch) {
-      this.clientService.search({
-        query: this.inputSearch,
-      }).subscribe(
-        (res: HttpResponse<Client[]>) => {
-          this.clients = res.body
-        },
-        (res: HttpErrorResponse) => {
-          console.log('Error: ' + res);
-        }
-      );
-      return;
-    } // end - if (this.inputSearch)
-
     if(this.user) {
       this.clientService.searchByCv(this.user.email)
         .subscribe(
         (res: HttpResponse<Client[]>) => {
           this.clients = res.body;
+          this.listClientsService = res.body;
           this.inputSearch = '';
         },
         (res: HttpErrorResponse) => {
@@ -93,5 +82,17 @@ export class ClientesComponent implements OnInit, AfterViewInit {
         }
       );
   } // end - getOrganization()
+
+  inputTextSearch(value){
+    this.clients = new Array();
+    this.listClientsService.forEach(item => {
+      let showItem = true;
+      if(item.nombre.toLowerCase().includes(value.toLowerCase())
+        || item.apellidos.toLowerCase().includes(value.toLowerCase())
+        || item.email.toLowerCase().includes(value.toLowerCase)) {
+        this.clients.push(item);
+      }
+    });
+  }// end - inputTextSearch
 
 }
