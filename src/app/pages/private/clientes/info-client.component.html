@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="dg-head-back">
+        <span [routerLink]="returnTo">
+          <i class="fa fa-angle-left"></i>
+        </span>
+  </div>
+
+  <div class="dg-info-client">
+
+    <div class="row">
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <label>
+          Nombre:
+        </label>
+      </div>
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.nombre }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <label>
+          Dirección:
+        </label>
+      </div>
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.direccion }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <label>
+          Teléfono:
+        </label>
+      </div>
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.telefono }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <label>
+          Correo:
+        </label>
+      </div>
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.email }}
+        </span>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

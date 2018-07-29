@@ -1,0 +1,31 @@
+.container{
+  background-color: #FFF;
+}
+
+.dg-info-client{
+  padding: 2em 0;
+  background-color: #FFF;
+
+  .row{
+    padding: 0 2.1em;
+    label{
+      color: #76828A;
+      font-size: 1.2em;
+    }
+    span{
+      color: #919AA0;
+      font-size: 1.2em;
+    }
+  }
+
+}
+
+.dg-head-back{
+  padding: 1em;
+  span{
+    i{
+      color: #325DC0;
+      font-size: 2.1em;
+    }
+  }
+}// end - .dg-head-back
