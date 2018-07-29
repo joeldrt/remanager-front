@@ -13,6 +13,7 @@ import {ProyectoNavhelper, FooterMenuhelper, HeaderHelper} from '../../../_helpe
 })
 export class ProyectosComponent implements OnInit, OnDestroy {
 
+  showing_project: Proyecto;
   proyectos: Proyecto[];
   productos: Producto[];
 
@@ -30,7 +31,6 @@ export class ProyectosComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.doNavigationBaby();
-    this.headerHelper.sendHeaderTitleRequest('Proyectos');
   }
 
   ngOnDestroy() {
@@ -45,8 +45,20 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     this.footerMenu.sendMenuRequest('/proyectos');
   }
 
+  private setCurrentViewInfo() {
+    if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
+      this.showing_project = new Proyecto();
+      this.showing_project.nombre = 'Inicio';
+      this.headerHelper.sendHeaderTitleRequest('Bienvendio');
+      return;
+    }
+    this.showing_project = this.proyectoNavhelper.ultimoProyectoApilado();
+    this.headerHelper.sendHeaderTitleRequest(this.showing_project.nombre);
+  }
+
   private doNavigationBaby() {
     this.footerButtonSetup();
+    this.setCurrentViewInfo();
     this.clearProyectosAndProductos();
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.proyectoService.getAllRootProyects().subscribe(
