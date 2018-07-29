@@ -5,7 +5,9 @@
 .dg-content-page{
   &.dg-page-form{
     .dg-content-btns{
+      margin: 1em 0 2.1em 0;
       text-align: center;
+
       .dg-content-btnlink{
         display: inline-block;
         width: 36%;
@@ -69,3 +71,22 @@
   }// end - .dg-head-back
 
 }// end - .dg-content-page
+
+//---
+.dg-text-link{
+  background-color: transparent;
+  border: none;
+  color: #3c8dbc;
+
+  &:hover{
+    border-bottom: solid 1px #3c8dbc;
+  }
+}// end - .dg-text-link
+
+.help-block{
+  color: red;
+  font-size: 0.81em;
+  margin-top: 0.5em;
+  margin-bottom: 2em;
+  margin-left: 1.2em;
+}

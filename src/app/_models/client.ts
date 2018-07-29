@@ -11,6 +11,8 @@ export class Client {
   public id?: number;
   public nombre?: string;
   public organizacionId?: number;
+  public telefono?: number;
+  public email?: string;
   public historicoProductos?: HistoricoEstatusProducto[];
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];

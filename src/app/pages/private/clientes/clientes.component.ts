@@ -8,8 +8,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 // Models
 import { Client } from '../../../_models/client';
 import { User } from '../../../_models/user';
-import {Organizacion} from '../../../_models/organizacion';
-
+import { Organizacion } from '../../../_models/organizacion';
 
 @Component({
   selector: 'app-clientes',
@@ -19,6 +18,7 @@ import {Organizacion} from '../../../_models/organizacion';
 export class ClientesComponent implements OnInit, AfterViewInit {
   public user: User;
   public clients: Client[];
+  public listClientsService: Client[];
   public organization: Organizacion;
   public inputSearch: string;
 
@@ -27,22 +27,21 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     private clientService: ClientService,
     private toasterService: ToasterService
   ) {
-    this.user = null;
+    this.user = new User();
     this.clients = null;
-    this.organization = null;
+    this.listClientsService = null;
+    this.organization = new Organizacion();
     this.inputSearch = '';
   }
 
   ngOnInit() {
     this.getAccount();
-    this.getOrganization();
   }
 
   ngAfterViewInit(){
   }
 
   clickOnClient(client: Client){
-    console.log('En la función: ' + client.id);
   }// end - clickOnClient(event)
 
   getAccount(){
@@ -50,6 +49,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
       (response: HttpResponse<User>) => {
         this.user = response.body;
         this.loadAll();
+        this.getOrganization();
       },
       (error: HttpErrorResponse) => {
         this.toasterService.error(error.message);
@@ -57,25 +57,12 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   }// end - getAccount
 
   loadAll() {
-    if (this.inputSearch) {
-      this.clientService.search({
-        query: this.inputSearch,
-      }).subscribe(
-        (res: HttpResponse<Client[]>) => {
-          this.clients = res.body
-        },
-        (res: HttpErrorResponse) => {
-          console.log('Error: ' + res);
-        }
-      );
-      return;
-    } // end - if (this.inputSearch)
-
     if(this.user) {
       this.clientService.searchByCv(this.user.email)
         .subscribe(
         (res: HttpResponse<Client[]>) => {
           this.clients = res.body;
+          this.listClientsService = res.body;
           this.inputSearch = '';
         },
         (res: HttpErrorResponse) => {
@@ -89,12 +76,23 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     this.accountService.getAccountOrganization()
       .subscribe((res: HttpResponse<Organizacion>) => {
         this.organization = res.body;
-        console.log('Organizacion :: ' + this.organization);
       },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
         }
       );
-  }
+  } // end - getOrganization()
+
+  inputTextSearch(value){
+    this.clients = new Array();
+    this.listClientsService.forEach(item => {
+      let showItem = true;
+      if(item.nombre.toLowerCase().includes(value.toLowerCase())
+        || item.apellidos.toLowerCase().includes(value.toLowerCase())
+        || item.email.toLowerCase().includes(value.toLowerCase)) {
+        this.clients.push(item);
+      }
+    });
+  }// end - inputTextSearch
 
 }

@@ -1,3 +1,4 @@
+import { Producto } from './producto';
 
 export const enum EstatusDeProducto {
   'DISPONIBLE',
@@ -21,6 +22,7 @@ export class HistoricoEstatusProducto {
     public tiempoDeVidaDias?: number,
     public clienteId?: number,
     public productoId?: number,
+    public producto?: Producto,
   ) {
   }
 }

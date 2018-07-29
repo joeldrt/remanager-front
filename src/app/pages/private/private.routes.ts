@@ -8,9 +8,10 @@ import { TerrenosComponent } from './terrenos/terrenos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
-import {ProductosComponent} from './productos/productos.component';
-import {ProductoDetalleComponent} from './productos-detalle/producto-detalle.component';
-import {AddClientComponent} from './clientes/add-client.component';
+import { ProductosComponent } from './productos/productos.component';
+import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
+import { AddClientComponent } from './clientes/add-client.component';
+import { InfoClientComponent } from './clientes/info-client.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -24,7 +25,8 @@ export const PRIVATE_ROUTES: Routes = [
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
-  { path: 'clientes/add', component: AddClientComponent, data: { title: 'Add Clientes', breadcrumb: 'clientes' } },
+  { path: 'clientes/add', component: AddClientComponent, data: { title: 'Agregar Cliente', breadcrumb: 'agregar-cliente' } },
+  { path: 'clientes/info', component: InfoClientComponent, data: { title: 'Información del Cliente', breadcrumb: 'informacion-cliente' } },
 
   // Perfil
   { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil', breadcrumb: 'perfil' } },
