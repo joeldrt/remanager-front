@@ -39,6 +39,7 @@ export class PerfilComponent implements OnInit {
     this.accountService.updateAccount(this.user).subscribe(
       (success: HttpResponse<any>) => {
         if(success.status === 200) {
+          this.isEditing = false;
           this.getAccount();
           this.toasterService.success('Información actualizada');
         }

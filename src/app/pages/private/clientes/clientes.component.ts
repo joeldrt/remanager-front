@@ -87,10 +87,12 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     this.clients = new Array();
     this.listClientsService.forEach(item => {
       let showItem = true;
-      if(item.nombre.toLowerCase().includes(value.toLowerCase())
-        || item.apellidos.toLowerCase().includes(value.toLowerCase())
-        || item.email.toLowerCase().includes(value.toLowerCase)) {
-        this.clients.push(item);
+      if(item.nombre && item.apellidos) {
+        if(item.nombre.toLowerCase().includes(value.toLowerCase())
+          || item.apellidos.toLowerCase().includes(value.toLowerCase())
+          || item.email.toLowerCase().includes(value.toLowerCase())) {
+          this.clients.push(item);
+        }
       }
     });
   }// end - inputTextSearch

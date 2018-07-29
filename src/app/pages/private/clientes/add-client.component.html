@@ -46,12 +46,12 @@
                  placeholder="Apellidos"
                  name="apellidos"
                  [(ngModel)]="client.apellidos"
-                 #apellidos="ngModel" />
+                 #apellidos="ngModel" required />
 
-          <!--div *ngIf="f.submitted && !apellidos.valid"
+          <div *ngIf="f.submitted && !apellidos.valid"
                class="help-block">
             Apellidos son requeridos
-          </div-->
+          </div>
         </div>
         <div class="dg-control">
           <input type="text"
