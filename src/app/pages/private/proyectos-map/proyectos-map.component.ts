@@ -1,12 +1,12 @@
 declare var addSVGZoomingCapabilities: any;
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { Proyecto, Producto, Svg } from '../../../_models';
 import { SvgRestService, ProyectoService, ProductoService, ToasterService } from '../../../_services';
-import { ProyectoNavhelper, FooterMenuhelper } from '../../../_helpers';
+import {ProyectoNavhelper, FooterMenuhelper, HeaderHelper} from '../../../_helpers';
 import { SvgToolService } from '../../../_digiall-components/svgtool/services/svgtool.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { SvgToolService } from '../../../_digiall-components/svgtool/services/sv
   templateUrl: './proyectos-map.component.html',
   styleUrls: ['./proyectos-map.component.scss']
 })
-export class ProyectosMapComponent implements OnInit {
+export class ProyectosMapComponent implements OnInit, OnDestroy {
 
   proyectos: Proyecto[];
   productos: Producto[];
@@ -29,23 +29,29 @@ export class ProyectosMapComponent implements OnInit {
     private router: Router,
     private proyectoNavhelper: ProyectoNavhelper,
     private productoService: ProductoService,
-    private footerMenuHelper: FooterMenuhelper,
+    private footerMenu: FooterMenuhelper,
     private svgService: SvgRestService,
     private svgToolService: SvgToolService,
+    private headerHelper: HeaderHelper,
   ) {
-    this.footerButtonSetup();
   }
 
   ngOnInit() {
+    this.footerButtonSetup();
     this.doNavigationBaby();
+    this.headerHelper.sendHeaderTitleRequest('Proyectos Planos');
+  }
+
+  ngOnDestroy() {
+    this.footerMenu.clearButtons('/proyectos/mapa');
   }
 
   private footerButtonSetup() {
-    if (this.footerMenuHelper.getMenu('/proyectos/mapa')) {
-      return;
+    if (!this.footerMenu.getMenu('/proyectos/mapa')) {
+      this.footerMenu.addButtonFromValues('/proyectos/mapa', 'plano', 'fa  fa-map-o', '/proyectos/mapa');
+      this.footerMenu.addButtonFromValues('/proyectos/mapa', 'lista', 'fa  fa-list-ul', '/proyectos');
     }
-    this.footerMenuHelper.addButtonFromValues('/proyectos/mapa', 'mapa', 'fa  fa-map-o', '/proyectos/mapa');
-    this.footerMenuHelper.addButtonFromValues('/proyectos/mapa', 'lista', 'fa  fa-list-ul', '/proyectos');
+    this.footerMenu.sendMenuRequest('/proyectos/mapa');
   }
 
 

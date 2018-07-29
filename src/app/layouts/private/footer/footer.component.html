@@ -6,7 +6,7 @@
     <strong>Powered by <a href="#">Digiall</a>.</strong>
   </div>
   <div class="row" *ngIf="buttons && buttons.length > 0">
-    <div class="col-xs-6 col-sm-6 col-md-6 text-center" *ngFor="let button of buttons">
+    <div [class]="obtainClassForButtons()" *ngFor="let button of buttons">
       <a style="vertical-align: middle" routerLink="{{button.target_url}}" routerLinkActive="active">
         <i [class]="button.button_icon"></i>
         {{button.button_name}}

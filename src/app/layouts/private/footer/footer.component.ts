@@ -16,19 +16,27 @@ export class FooterComponent implements OnInit {
     private router: Router,
     private menuHelper: FooterMenuhelper,
   ) {
-    router.events.subscribe(
+    /*router.events.subscribe(
       value => {
         if (value instanceof NavigationEnd) {
           this.refreshCurrentButtons();
         }
       }
-    );
+    );*/
+    this.menuHelper.getMenuRequest().subscribe(message => {
+      this.buttons = this.menuHelper.getMenu(message.route_asked);
+    });
   }
 
   ngOnInit() {
   }
 
   private refreshCurrentButtons() {
-    this.buttons = this.menuHelper.getMenu(this.router.url);
+    this.buttons = this.menuHelper.getMenu(this.router.url.split('?', 2)[0]);
+  }
+
+  obtainClassForButtons(): string {
+    const columSpace = (12 / this.buttons.length);
+    return 'col-xs-' + columSpace + ' col-sm-' + columSpace + ' col-md-' + columSpace + ' text-center';
   }
 }

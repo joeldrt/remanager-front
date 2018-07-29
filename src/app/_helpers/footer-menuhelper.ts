@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class FooterMenuhelper {
+
+  private subject = new Subject<any>();
 
   public map_buttons: Map<string, FooterButton[]>;
 
@@ -10,7 +13,8 @@ export class FooterMenuhelper {
   }
 
   public clearButtons(route: string) {
-    this.map_buttons.set(route, new Array<FooterButton>());
+    this.map_buttons.set(route, null);
+    this.sendMenuRequest(route);
   }
 
   public addButton(route: string, footer_button: FooterButton) {
@@ -50,6 +54,14 @@ export class FooterMenuhelper {
 
   public getMenu(route: string): FooterButton[] {
     return this.map_buttons.get(route);
+  }
+
+  public getMenuRequest() {
+    return this.subject.asObservable();
+  }
+
+  public sendMenuRequest(route_asked: string) {
+    this.subject.next({ route_asked: route_asked });
   }
 }
 

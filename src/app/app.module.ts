@@ -45,6 +45,7 @@ import {
   JwtInterceptor,
   ProyectoNavhelper,
   FooterMenuhelper,
+  HeaderHelper,
 } from './_helpers';
 
 // Digiall SVG Tool
@@ -113,6 +114,7 @@ import { InfoClientComponent } from './pages/private/clientes/info-client.compon
     ClientService,
     TipoProductoService,
     ValorCampoProductoService,
+    HeaderHelper,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
