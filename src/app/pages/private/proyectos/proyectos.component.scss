@@ -1,1 +1,13 @@
 @import "../component.shared.style";
+
+.dg-project-detail {
+  .info-box {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+.content {
+  min-height: calc(100vh - 250px);
+  max-height: calc(100vh - 250px);
+}

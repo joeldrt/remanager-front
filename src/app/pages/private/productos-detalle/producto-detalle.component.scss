@@ -1,13 +1,20 @@
 @import "../component.shared.style";
 
+.dg-project-detail {
+  .info-box {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
 .dg-producto-detalle-wrapper {
   position: relative;
-  min-height: 40vh;
-  max-height: 40vh;
   overflow-x: hidden;
   overflow-y: auto !important;
 }
 
 .content {
+  min-height: calc(100vh - 250px);
+  max-height: calc(100vh - 250px);
   overflow-y: hidden !important;
 }

@@ -16,6 +16,7 @@ import { SvgToolService } from '../../../_digiall-components/svgtool/services/sv
 })
 export class ProyectosMapComponent implements OnInit, OnDestroy {
 
+  showing_project: Proyecto;
   proyectos: Proyecto[];
   productos: Producto[];
   svg: Svg;
@@ -37,9 +38,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.footerButtonSetup();
     this.doNavigationBaby();
-    this.headerHelper.sendHeaderTitleRequest('Proyectos Planos');
   }
 
   ngOnDestroy() {
@@ -54,9 +53,20 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     this.footerMenu.sendMenuRequest('/proyectos/mapa');
   }
 
-
+  private setCurrentViewInfo() {
+    if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
+      this.showing_project = new Proyecto();
+      this.showing_project.nombre = 'Inicio';
+      this.headerHelper.sendHeaderTitleRequest('Bienvendio');
+      return;
+    }
+    this.showing_project = this.proyectoNavhelper.ultimoProyectoApilado();
+    this.headerHelper.sendHeaderTitleRequest(this.showing_project.nombre);
+  }
 
   private doNavigationBaby() {
+    this.footerButtonSetup();
+    this.setCurrentViewInfo();
     this.clearProyectosAndProductosAndSvg();
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.proyectoService.getAllRootProyects().subscribe(

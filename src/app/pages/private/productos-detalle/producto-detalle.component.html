@@ -5,6 +5,17 @@
     </button>
   </div>
 </div>
+<div>
+  <div class="dg-project-detail" *ngIf="producto">
+    <div class="info-box" style="width: 100%" *ngIf="producto && producto.nombre">
+      <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+      <div class="info-box-content">
+        <div>{{producto.nombre}}</div>
+        <div>{{producto.precio | currency:'MXN' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="content" #content *ngIf="producto">
   <slideshow [height]="(content.clientHeight / 2) + 'px'"
              [minHeight]="(content.clientHeight / 2) + 'px'"
@@ -14,19 +25,7 @@
              [lazyLoad]="images?.length > 1"
              [autoPlayWaitForLazyLoad]="true">
   </slideshow>
-  <div class="dg-producto-detalle-wrapper">
-    <div class="row" *ngIf="producto && producto.nombre">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="info-box">
-          <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">{{producto.nombre}}</span>
-            <span class="info-box-text">{{producto.descripcion}}</span>
-            <span class="info-box-more">{{producto.precio | currency:'MXN' }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="dg-producto-detalle-wrapper" [style.height]="(content.clientHeight / 2) + 'px'">
     <div class="row" *ngIf="tipoDeProducto && tipoDeProducto.camposDeProductos">
       <div *ngFor="let campo of tipoDeProducto.camposDeProductos">
         <div class="col-md-6 col-sm-6 col-xs-12">

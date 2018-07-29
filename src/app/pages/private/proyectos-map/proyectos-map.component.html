@@ -16,6 +16,17 @@
     </ol>
   </div>
 </div>
+<div>
+  <div class="dg-project-detail" *ngIf="showing_project">
+    <div class="info-box" style="width: 100%">
+      <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
+      <div class="info-box-content">
+        <div>{{showing_project.nombre}}</div>
+        <div>{{showing_project.description}}</div>
+      </div>
+    </div>
+  </div>
+</div>
 <div #workingAreaSpace id="workingAreaSpace" class="content">
   <div *ngIf="svg && svg.imagen">
 
