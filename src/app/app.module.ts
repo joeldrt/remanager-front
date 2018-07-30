@@ -126,7 +126,8 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
       useClass: JwtInterceptor,
       multi: true
     },
-    DigiallDateUtils
+    DigiallDateUtils,
+    HistoricoEstatusProductosService,
   ],
   bootstrap: [AppComponent]
 })
