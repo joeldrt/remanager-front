@@ -27,6 +27,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     private footerMenu: FooterMenuhelper,
     private headerHelper: HeaderHelper,
   ) {
+    this.clearProyectosAndProductos();
   }
 
   ngOnInit() {

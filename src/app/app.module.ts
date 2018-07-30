@@ -64,6 +64,7 @@ import { AddClientComponent } from './pages/private/clientes/add-client.componen
 import { ProductosComponent } from './pages/private/productos/productos.component';
 import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
 import { InfoClientComponent } from './pages/private/clientes/info-client.component';
+import { LoadingComponent } from './_digiall-components/loading/loading.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { InfoClientComponent } from './pages/private/clientes/info-client.compon
     ProductosComponent,
     ProductoDetalleComponent,
     InfoClientComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
