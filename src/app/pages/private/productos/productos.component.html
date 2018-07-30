@@ -1,3 +1,45 @@
-<p>
-  productos works!
-</p>
+<div class="dg-content-page dg-page-project">
+  <div class="dg-content">
+
+    <div class="dg-content-loading"
+         style="min-height: inherit;
+                max-height: inherit;"
+         *ngIf="productos.length < 1 && productos.length < 1">
+      <app-loading
+        style="min-height: inherit;
+              max-height: inherit;">
+      </app-loading>
+    </div>
+
+    <div *ngIf="productos.length >= 1 || productos.length >= 1">
+      <div class="dg-content-list dg-content-listlote">
+        <div class="row" *ngFor="let producto of productos" (click)="detalleDeProducto(producto)">
+
+          <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+            <div class="dg-col-icon">
+              <span>
+                <i class="fa fa-flag"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+            <div class="dg-col-name">
+              <p>
+                {{producto.nombre}}
+              </p>
+              <span>
+                {{producto.descripcion}}
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+            <span class="dg-icon-arrow">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </div>
+        </div><!-- end - row -->
+      </div><!-- end - dg-content-list dg-content-listlote -->
+    </div>
+
+  </div>
+</div>
