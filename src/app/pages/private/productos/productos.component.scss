@@ -1,1 +1,72 @@
 @import "../component.shared.style";
+
+.dg-project-detail {
+  .info-box {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+.dg-content {
+  background-color: #FFF;
+  min-height: calc(100vh - 250px);
+  max-height: calc(100vh - 250px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+/*---*/
+.dg-content-page{
+
+  .dg-content-list {
+    &.dg-content-listprojects,
+    &.dg-content-listlote{
+      .dg-col-icon {
+        span {
+          i {
+            font-size: 2.7em;
+          }
+        }
+      }
+    }// end - dg-content-listprojects
+
+    .dg-col-icon{
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .row{
+      padding: 1em 0.9em;
+      border-bottom: 1px solid #E3E3E3;
+      margin-left: 0;
+      margin-right: 0;
+
+      .dg-col-icon{
+        text-align: center;
+        span{
+          background-color: transparent;
+          display: inline-block;
+          height: 30px;
+          width: 30px;
+        }
+      }
+      .dg-col-name{
+        p{
+          margin-bottom: 0;
+          font-size:1.32em;
+        }
+        span{
+          font-size: 0.9em;
+        }
+      }
+
+      .dg-icon-arrow{
+        font-size: 1.5em;
+      }
+    }// end - row
+
+  }// end - dg-content-list
+
+}// end - .dg-content-page

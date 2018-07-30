@@ -48,7 +48,7 @@
     <div class="dg-content-loading"
          style="min-height: inherit;
                 max-height: inherit;"
-         *ngIf="proyectos.length < 1 && productos.length < 1">
+         *ngIf="(!svg || !svg.imagen) && (!root_view)">
       <app-loading
         style="min-height: inherit;
               max-height: inherit;">

@@ -26,4 +26,7 @@ export class ProductoService {
     return this.http.get<Producto>(this.productoResourceUrl + producto_id, { observe: 'response' });
   }
 
+  findAllByOrganizacion(organizacionId: number): Observable<HttpResponse<Producto[]>> {
+    return this.http.get<Producto[]>(this.productoResourceUrl, { observe: 'response' });
+  }
 }
