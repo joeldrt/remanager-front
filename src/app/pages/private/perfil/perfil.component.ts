@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AccountService, ToasterService } from '../../../_services';
 import { User } from '../../../_models';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {ProfileHelper} from '../../../_helpers';
 
 
 @Component({
@@ -10,12 +11,13 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  public user: User
+  public user: User;
   public isEditing: boolean;
 
   constructor(
     private accountService: AccountService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private profileHelper: ProfileHelper
   ) {
 
   }
@@ -26,24 +28,24 @@ export class PerfilComponent implements OnInit {
 
   // --- Functions
 
-  editForm(){
+  editForm() {
     this.isEditing = true;
   }
 
-  cancelEdit(){
+  cancelEdit() {
     this.isEditing = false;
     this.user = JSON.parse(localStorage.getItem('account'));
   }
 
-  saveForm(){
+  saveForm() {
     this.accountService.updateAccount(this.user).subscribe(
       (success: HttpResponse<any>) => {
-        if(success.status === 200) {
+        if (success.status === 200) {
           this.isEditing = false;
           this.getAccount();
           this.toasterService.success('Información actualizada');
-        }
-        else{
+          this.profileHelper.sendProfileChangeRequest(this.user.id);
+        } else {
           this.toasterService.error('Error: ' + success.statusText);
         }
       },
@@ -53,7 +55,7 @@ export class PerfilComponent implements OnInit {
     );
   }// end - saveForm
 
-  getAccount(){
+  getAccount() {
     this.accountService.getAccount().subscribe(
       (response: HttpResponse<User>) => {
         this.user = response.body;

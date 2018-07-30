@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image" *ngIf="user">
-        <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <img src="assets/img/user-default-image.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info" *ngIf="user">
         <p>{{user.firstName}}</p>
@@ -28,10 +28,12 @@
       </li>
       <li routerLink="/proyectos" routerLinkActive="active">
         <a class="navbar-link" routerLink="/proyectos" routerLinkActive="active">
-          <i class="fa fa-files-o"></i><span>Proyectos</span>
-          <!-- <span class="pull-right-container">
-            <span class="label label-primary pull-right">4</span>
-          </span> -->
+          <i class="fa fa-map-marker"></i><span>Proyectos</span>
+        </a>
+      </li>
+      <li routerLink="/productos" routerLinkActive="active">
+        <a class="navbar-link" routerLink="/productos" routerLinkActive="active">
+          <i class="fa fa-flag"></i><span>Lotes/Casas</span>
         </a>
       </li>
       <li routerLink="/ventas" routerLinkActive="active">
@@ -43,9 +45,6 @@
       <li>
         <a class="navbar-btn" (click)="logout()">
           <i class="fa fa-power-off"></i><span>Salir</span>
-          <!-- <span class="pull-right-container">
-            <span class="label label-primary pull-right">4</span>
-          </span> -->
         </a>
       </li>
     </ul>

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../_services/index';
 import { AccountService } from '../../../_services';
 import { User } from '../../../_models';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ProfileHelper } from '../../../_helpers';
 
 @Component({
   selector: 'app-menu',
@@ -18,9 +19,13 @@ export class MenuComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private accountService: AccountService,
+    private profileHelper: ProfileHelper,
   ) { }
 
   ngOnInit() {
+    this.profileHelper.getProfileRequest().subscribe(userId => {
+      this.getAccount();
+    });
     this.getAccount();
     this.isNavbarCollapsed = true;
   }

@@ -2,3 +2,4 @@
 export * from './proyecto-navhelper';
 export * from './footer-menuhelper';
 export * from './header.helper';
+export * from './profile.helper';

@@ -46,6 +46,7 @@ import {
   ProyectoNavhelper,
   FooterMenuhelper,
   HeaderHelper,
+  ProfileHelper,
 } from './_helpers';
 
 // Digiall SVG Tool
@@ -65,7 +66,6 @@ import { ProductosComponent } from './pages/private/productos/productos.componen
 import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
 import { InfoClientComponent } from './pages/private/clientes/info-client.component';
 import { LoadingComponent } from './_digiall-components/loading/loading.component';
-
 
 @NgModule({
   declarations: [
@@ -117,6 +117,7 @@ import { LoadingComponent } from './_digiall-components/loading/loading.componen
     TipoProductoService,
     ValorCampoProductoService,
     HeaderHelper,
+    ProfileHelper,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
