@@ -20,7 +20,7 @@ export class ClientService {
   constructor(
     private http: HttpClient,
     private dateUtils: DigiallDateUtils
-  ){
+  ) {
     this.resourceUrl = environment.API_URL + 'api/clientes';
     this.resourceSearchUrl = environment.API_URL + 'api/_search/clientes';
     this.resourceSearchByCv = environment.API_URL + 'api/_search_by_cv/clientes/';
@@ -44,16 +44,16 @@ export class ClientService {
     return this.http.get<Client[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  search(req?: any): Observable<HttpResponse<Client[]>>{
+  search(req?: any): Observable<HttpResponse<Client[]>> {
     const options = createRequestOption(req);
     return this.http.get<Client[]>(this.resourceSearchUrl, { params: options, observe: 'response'});
   }
 
-  searchByCv(req?: any): Observable<HttpResponse<Client[]>>{
+  searchByCv(req?: any): Observable<HttpResponse<Client[]>> {
     return this.http.get<Client[]>(this.resourceSearchByCv + req, { observe: 'response'});
   }
 
-  getClients(): Observable<HttpResponse<Client[]>>{
+  getClients(): Observable<HttpResponse<Client[]>> {
     return this.http.get<Client[]>(this.resourceUrl, { observe: 'response' });
   }
 
@@ -66,10 +66,10 @@ export class ClientService {
   */
   private convert(cliente: Client): Client {
     const copy: Client = Object.assign({}, cliente);
-    if(cliente.fechaAlta) {
+    if (cliente.fechaAlta) {
       copy.fechaAlta = this.dateUtils.toDate(cliente.fechaAlta);
     }
-    if(cliente.fechaNacimiento) {
+    if (cliente.fechaNacimiento) {
       copy.fechaNacimiento = this.dateUtils.toDate(cliente.fechaNacimiento);
     }
     return copy;
