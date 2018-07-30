@@ -1,13 +1,14 @@
 declare var addSVGZoomingCapabilities: any;
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-import { Proyecto, Producto, Svg } from '../../../_models';
+import { Proyecto, Producto, Svg, EstatusDeProducto } from '../../../_models';
 import { SvgRestService, ProyectoService, ProductoService, ToasterService } from '../../../_services';
-import {ProyectoNavhelper, FooterMenuhelper, HeaderHelper} from '../../../_helpers';
+import { ProyectoNavhelper, FooterMenuhelper, HeaderHelper } from '../../../_helpers';
 import { SvgToolService } from '../../../_digiall-components/svgtool/services/svgtool.service';
+
 
 @Component({
   selector: 'app-proyectos-map',
@@ -20,8 +21,10 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   proyectos: Proyecto[];
   productos: Producto[];
   svg: Svg;
+  polygon_fill_color_map: Map<string, string>;
 
   should_svg_visible = false;
+  root_view = false;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -57,6 +60,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.showing_project = new Proyecto();
       this.showing_project.nombre = 'Inicio';
+      this.root_view = true;
       this.headerHelper.sendHeaderTitleRequest('Bienvendio');
       return;
     }
@@ -65,6 +69,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   private doNavigationBaby() {
+    this.root_view = false;
     this.footerButtonSetup();
     this.setCurrentViewInfo();
     this.clearProyectosAndProductosAndSvg();
@@ -92,13 +97,58 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.recuperarInformacionDeProyectosYProductos();
+  }
+
+  svgImage(): string {
+    return 'data:' + this.svg.imagenContentType + ';base64,' + this.svg.imagen;
+  }
+
+  fillPolygonFillColorMap() {
+
+    function colorByStatus(status: string): string {
+      let color_to_return = 'white';
+      switch (status) {
+        case 'DISPONIBLE': {
+          color_to_return = 'green'; // verde
+          break;
+        }
+        case 'APARTADO': {
+          color_to_return = 'yellow'; // amarillo
+          break;
+        }
+        case 'BLOQUEADO': {
+          color_to_return = 'red'; // rojo
+          break;
+        }
+        case 'VENDIDO': {
+          color_to_return = 'black'; // negro
+          break;
+        }
+      }
+      return color_to_return;
+    }
+
+    this.polygon_fill_color_map = new Map<string, string>();
+    for (const proyecto of this.proyectos) {
+      this.polygon_fill_color_map.set(proyecto.idSeccion, 'blue');
+    }
+    for (const producto of this.productos) {
+      this.polygon_fill_color_map.set(producto.idSeccion, colorByStatus(producto.estatus.toString()));
+    }
+  }
+
+  getPolygonFillColor(uid: string) {
+    return this.polygon_fill_color_map.get(String(uid)) ? this.polygon_fill_color_map.get(String(uid)) : 'white';
+  }
+
+  retrieveSvg(svgIdToFind: number) {
     this.svgService.getSvgById(svgIdToFind).subscribe(
       (value: HttpResponse<Svg>) => {
         this.svg = value.body;
         setTimeout(() => {
           addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
-        this.recuperarInformacionDeProyectosYProductos();
       },
       (error: HttpErrorResponse) => {
         // redirigimos a la vista de lista, tal vez ellos puedan mostrar lo requerido, porque svg no trae
@@ -106,10 +156,6 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         this.toasterService.warning('Sin Mapa que mostrar');
         this.router.navigate(['/proyectos']);
       });
-  }
-
-  svgImage(): string {
-    return 'data:' + this.svg.imagenContentType + ';base64,' + this.svg.imagen;
   }
 
   navigateToItem(getUid: string) {
@@ -149,6 +195,8 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         (value: HttpResponse<Producto[]>) => {
           if (value && value.body) {
             this.productos = value.body;
+            this.fillPolygonFillColorMap();
+            this.retrieveSvg(this.proyectoNavhelper.ultimoProyectoApilado().svgId);
           }
         },
         (error: HttpErrorResponse) => {
