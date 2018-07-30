@@ -37,6 +37,7 @@ import {
   ClientService,
   TipoProductoService,
   ValorCampoProductoService,
+  HistoricoEstatusProductosService,
 } from './_services';
 import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 
@@ -123,7 +124,8 @@ import { LoadingComponent } from './_digiall-components/loading/loading.componen
       useClass: JwtInterceptor,
       multi: true
     },
-    DigiallDateUtils
+    DigiallDateUtils,
+    HistoricoEstatusProductosService,
   ],
   bootstrap: [AppComponent]
 })
