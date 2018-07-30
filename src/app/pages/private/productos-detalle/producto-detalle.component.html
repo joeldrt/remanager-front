@@ -35,7 +35,9 @@
   </div><!-- dg-content-bartitle -->
 </div><!-- end - dg-content-page -->
 
-<div class="content" #content *ngIf="producto">
+<div class="dg-content"
+     #content
+     *ngIf="producto">
   <slideshow [height]="(content.clientHeight / 2) + 'px'"
              [minHeight]="(content.clientHeight / 2) + 'px'"
              [autoPlay]="true"

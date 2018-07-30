@@ -7,15 +7,13 @@
   }
 }
 
-.content {
+.dg-content {
   background-color: #FFF;
   min-height: calc(100vh - 250px);
   max-height: calc(100vh - 250px);
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding: 0;
-}
-
-.content-wrapper{
-  background-color: #FFF !important;
 }
 
 /*---*/
