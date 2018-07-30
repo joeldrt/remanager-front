@@ -23,9 +23,8 @@ export class HistoricoEstatusProductosService {
     if (req) {
       req = 'clienteId=' + req.toString();
     }
-    url =  url + '_search/historico-estatus-productos';
-    const options = createRequestOption(req);
-    return this.http.get<HistoricoEstatusProducto[]>(url, {params: options, observe: 'response'});
+    url =  url + 'api/_search/historico-estatus-productos?query=';
+    return this.http.get<HistoricoEstatusProducto[]>(url, {params: req, observe: 'response'});
   }// end - searchByIdClient
 
 } // end - HistoricoEstatusProductosService

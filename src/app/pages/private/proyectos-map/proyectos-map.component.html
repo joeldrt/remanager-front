@@ -1,58 +1,103 @@
-<div>
-  <div class="dg-page-navbar">
-    <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
-      <i class="glyphicon glyphicon-chevron-left"></i>
-    </button>
-    <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">
-      <li (click)="navegarAlInicio()" class="breadcrumb-item">
-        Inicio
-      </li>
-      <li *ngFor="let project of obtenerPiladeProyectos()"
-          class="breadcrumb-item">
-        <a (click)="navegarEspecifico(project)">
-          {{ project.nombre }}
-        </a>
-      </li>
-    </ol>
-  </div>
-</div>
-<div>
-  <div class="dg-project-detail" *ngIf="showing_project">
-    <div class="info-box" style="width: 100%">
-      <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
-      <div class="info-box-content">
-        <div>{{showing_project.nombre}}</div>
-        <div>{{showing_project.description}}</div>
-      </div>
+<div class="dg-content-page">
+  <div class="dg-content-backbreadcrumb">
+    <div class="dg-page-navbar">
+      <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+      <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">
+        <li (click)="navegarAlInicio()" class="breadcrumb-item">
+          Inicio
+        </li>
+        <li *ngFor="let project of obtenerPiladeProyectos()"
+            class="breadcrumb-item">
+          <a (click)="navegarEspecifico(project)">
+            {{ project.nombre }}
+          </a>
+        </li>
+      </ol>
     </div>
   </div>
-</div>
-<div #workingAreaSpace id="workingAreaSpace" class="content">
-  <div *ngIf="svg && svg.imagen">
 
-    <svg #svgTag id="svgTag"
-         [attr.width]="workingAreaSpace.clientWidth - 30"
-         [attr.height]="workingAreaSpace.clientHeight" style="background-color: white;">
-
-      <svg:image [attr.width]="svg.width" [attr.height]="svg.height" [attr.xlink:href]="svgImage()" />
-      <svg:polygon *ngFor="let poligono of svg.poligonos" [attr.points]="poligono.puntos" [attr.fill]="getPolygonFillColor(poligono.genUid)"
-                   fill-opacity="0.8" (click)="navigateToItem(poligono.genUid)" />
-
-    </svg>
-
-  </div>
-
-  <div *ngIf="root_view">
-    <div class="row" *ngFor="let proyecto of proyectos" (click)="entrarAProyecto(proyecto)">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="info-box">
-          <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">{{proyecto.nombre}}</span>
-            <span class="info-box-text">{{proyecto.description}}</span>
+  <div class="dg-content-bartitle dg-bartitle-1 dg-project-detail"
+       *ngIf="showing_project">
+    <div class="">
+      <div class="row" style="width: 100%">
+        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+          <div class="dg-content-icon">
+              <span>
+                <i class="fa fa-map-marker"></i>
+              </span>
           </div>
         </div>
-      </div>
+        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+          <div class="dg-content-info">
+            <p class="dg-row-text1">
+              {{showing_project.nombre}}
+            </p>
+            <p class="dg-row-text2">
+              {{showing_project.description}}
+            </p>
+          </div>
+        </div>
+      </div><!-- end - row -->
     </div>
-  </div>
+  </div><!-- end - dg-content-bartitle dg-bartitle-1 dg-project-detail -->
+
+  <div #workingAreaSpace id="workingAreaSpace" class="content">
+
+    <div class="dg-content-loading"
+         style="min-height: inherit;
+                max-height: inherit;"
+         *ngIf="proyectos.length < 1 && productos.length < 1">
+      <app-loading
+        style="min-height: inherit;
+              max-height: inherit;">
+      </app-loading>
+    </div><!-- end - dg-content-loading -->
+
+    <div *ngIf="(svg && svg.imagen) || (root_view)">
+
+      <div *ngIf="svg && svg.imagen">
+        <svg #svgTag id="svgTag"
+             [attr.width]="workingAreaSpace.clientWidth - 30"
+             [attr.height]="workingAreaSpace.clientHeight" style="background-color: white;">
+
+          <svg:image [attr.width]="svg.width"
+                     [attr.height]="svg.height"
+                     [attr.xlink:href]="svgImage()" />
+          <svg:polygon *ngFor="let poligono of svg.poligonos"
+                       [attr.points]="poligono.puntos"
+                       [attr.fill]="getPolygonFillColor(poligono.genUid)"
+                       fill-opacity="0.8" (click)="navigateToItem(poligono.genUid)" />
+        </svg>
+      </div>
+
+      <div *ngIf="root_view">
+        <div class="dg-content-list dg-content-listprojects">
+          <div class="row"
+               *ngFor="let proyecto of proyectos"
+               (click)="entrarAProyecto(proyecto)">
+            <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+              <div class="dg-col-icon">
+                <span>
+                  <i class="fa fa-map-marker"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+              <div class="dg-col-name">
+                <p>
+                  {{proyecto.nombre}}
+                </p>
+                <span>
+                  {{proyecto.description}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div><!-- end - dg-content-list dg-content-listprojects -->
+      </div><!-- end - ngIf='root_view' -->
+    </div><!-- end ngIf -->
+
+  </div><!-- end - #workingAreaSpace -->
 </div>

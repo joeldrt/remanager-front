@@ -1,11 +1,13 @@
 .content {
   background-color: #FFF;
-  overflow-y: auto !important;
-  min-height: 78vh !important;
-  max-height: 78vh !important;
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
 
   .dg-content-page{
-
+    margin-top: 2.1em;
     .dg-content-list{
       &.dg-content-listapersonas{
         .dg-col-icon{
