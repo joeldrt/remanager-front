@@ -8,6 +8,118 @@
 }
 
 .content {
+  background-color: #FFF;
   min-height: calc(100vh - 250px);
   max-height: calc(100vh - 250px);
+  padding: 0;
 }
+
+.content-wrapper{
+  background-color: #FFF !important;
+}
+
+/*---*/
+.dg-content-page{
+  .dg-content-bartitle{
+    backgrond-size:contain;
+    background-repeat: repeat-x;
+    padding: 18px 0 30px 0;
+    min-height: 100px;
+    max-height: 100px;
+
+    &.dg-bartitle-1{
+      background-image:url('../../../../assets/img/line-bartitle-1.png');
+      .dg-content-icon{
+        span{
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
+        }
+      }
+    }// end - &.dg-bartitle-1
+
+    .dg-content-icon{
+      text-align: right;
+      span{
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+      }
+    }// end - .dg-content-icon
+
+    .dg-content-info{
+      color: #FFF;
+
+      p{
+        margin-bottom: 0px;
+      }
+
+      .dg-row-text1{
+        font-size: 1.26em;
+        font-weight: bolder;
+        text-transform: uppercase;
+      }
+      .dg-row-text2{
+        font-size: 0.9em;
+      }
+      .dg-row-text3{
+        font-size: 0.9em
+      }
+    }// end - .dg-content-info
+
+  }// end - dg-content-bartitle
+
+  .dg-content-list {
+    &.dg-content-listprojects,
+    &.dg-content-listlote{
+      .dg-col-icon {
+        span {
+          i {
+            font-size: 2.7em;
+          }
+        }
+      }
+    }// end - dg-content-listprojects
+
+    .dg-col-icon{
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .row{
+      padding: 1em 0.9em;
+      border-bottom: 1px solid #E3E3E3;
+      margin-left: 0;
+      margin-right: 0;
+
+      .dg-col-icon{
+        text-align: center;
+        span{
+          background-color: transparent;
+          display: inline-block;
+          height: 30px;
+          width: 30px;
+        }
+      }
+      .dg-col-name{
+        p{
+          margin-bottom: 0;
+          font-size:1.32em;
+        }
+        span{
+          font-size: 0.9em;
+        }
+      }
+
+      .dg-icon-arrow{
+        font-size: 1.5em;
+      }
+    }// end - row
+
+  }// end - dg-content-list
+
+}// end - .dg-content-page

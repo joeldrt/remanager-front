@@ -6,15 +6,120 @@
     margin-bottom: 0;
   }
 }
-
 .dg-producto-detalle-wrapper {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto !important;
 }
-
 .content {
   min-height: calc(100vh - 250px);
   max-height: calc(100vh - 250px);
   overflow-y: hidden !important;
 }
+.content-wrapper{
+  background-color: #FFF !important;
+}
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.dg-content-page{
+  &.dg-page-priceslote{
+    .dg-content-barclient{
+    }
+
+    .dg-content-lineprice{
+      margin-top: 25%;
+    }
+
+    .dg-content-btnlink{
+      margin-top: 2.5em;
+      max-width: 50%;
+      text-align: right;
+
+      span{
+        display: inline-block;
+        margin-right: 2.7em;
+      }
+    }
+
+    .dg-content-btns{
+      margin-top: 1.5em;
+
+      .dg-content-button{
+        text-align: center;
+        .dg-btn{
+          display: inline-block;
+
+          &:nth-of-type(1){
+            margin-rigth: 0.81em;
+          }
+          &:nth-of-type(2){
+            margin-left: 0.81em;
+          }
+        }
+      }
+    }
+  }// end - dg-page-priceslote
+
+  .dg-content-bartitle{
+    backgrond-size:contain;
+    background-repeat: repeat-x;
+    padding: 18px 0 30px 0;
+    min-height: 100px;
+    max-height: 100px;
+
+    &.dg-bartitle-2{
+      background-image:url('../../../../assets/img/line-bartitle-2.png');
+      padding-bottom: 9px;
+      .dg-content-icon{
+        span{
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
+        }
+      }
+      .dg-content-cuadro{
+        background-color: #EEEEEF;
+        display: inline-block;
+        min-height: 63px;
+        min-width: 63px;
+      }
+    }// end - &.dg-bartitle-2
+
+    .dg-content-icon{
+      text-align: right;
+      span{
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+      }
+    }// end - .dg-content-icon
+
+    .dg-content-info{
+      color: #FFF;
+
+      p{
+        margin-bottom: 0px;
+      }
+
+      .dg-row-text1{
+        font-size: 1.26em;
+        font-weight: bolder;
+        text-transform: uppercase;
+      }
+      .dg-row-text2{
+        font-size: 0.9em;
+      }
+      .dg-row-text3{
+        font-size: 0.9em
+      }
+    }// end - .dg-content-info
+
+  }// end - dg-content-bartitle
+
+}// end - .dg-content-page

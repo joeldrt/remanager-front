@@ -1,4 +1,5 @@
-<div>
+<div class="content dg-content-page dg-page-project">
+
   <div class="dg-page-navbar">
     <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
       <i class="glyphicon glyphicon-chevron-left"></i>
@@ -14,41 +15,82 @@
         </a>
       </li>
     </ol>
-  </div>
-</div>
-<div>
-  <div class="dg-project-detail" *ngIf="showing_project">
-    <div class="info-box" style="width: 100%">
-      <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
-      <div class="info-box-content">
-        <div>{{showing_project.nombre}}</div>
-        <div>{{showing_project.description}}</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="content">
-  <div class="row" *ngFor="let proyecto of proyectos" (click)="entrarAProyecto(proyecto)">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="info-box">
-        <span class="info-box-icon"><i class="glyphicon glyphicon-map-marker"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">{{proyecto.nombre}}</span>
-          <span class="info-box-text">{{proyecto.description}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  </div><!-- end - dg-page-navbar -->
 
-  <div class="row" *ngFor="let producto of productos" (click)="detalleDeProducto(producto)">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="info-box">
-        <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">{{producto.nombre}}</span>
-          <span class="info-box-text">{{producto.descripcion}}</span>
+  <div class="dg-content-bartitle dg-bartitle-1 dg-project-detail" *ngIf="showing_project">
+    <div class="">
+      <div class="row" style="width: 100%">
+        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+          <div class="dg-content-icon">
+            <span>
+              <i class="fa fa-map-marker"></i>
+            </span>
+          </div>
+        </div>
+        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+          <div class="dg-content-info">
+            <p class="dg-row-text1">
+              {{showing_project.nombre}}
+            </p>
+            <p class="dg-row-text2">
+              {{showing_project.description}}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div><!-- end - dg-content-bartitle dg-bartitle-1 -->
+
+
+  <div class="dg-content-list dg-content-listprojects">
+    <div class="row"
+         *ngFor="let proyecto of proyectos"
+         (click)="entrarAProyecto(proyecto)">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+            <span>
+              <i class="fa fa-map-marker"></i>
+            </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-col-name">
+          <p>
+            {{proyecto.nombre}}
+          </p>
+          <span>
+              {{proyecto.description}}
+            </span>
+        </div>
+      </div>
+    </div>
+  </div><!-- end - dg-content-list dg-content-listprojects -->
+
+  <div class="dg-content-list dg-content-listlote">
+    <div class="row" *ngFor="let producto of productos" (click)="detalleDeProducto(producto)">
+
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-col-icon">
+          <span>
+            <i class="fa fa-flag"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
+        <div class="dg-col-name">
+          <p>
+            {{producto.nombre}}
+          </p>
+          <span>
+            {{producto.descripcion}}
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+        <span class="dg-icon-arrow">
+          <i class="fa fa-angle-right"></i>
+        </span>
+      </div>
+    </div><!-- end - row -->
+  </div><!-- end - dg-content-list dg-content-listlote -->
+</div><!-- end - dg-content-page dg-page-project -->

@@ -5,17 +5,36 @@
     </button>
   </div>
 </div>
-<div>
-  <div class="dg-project-detail" *ngIf="producto">
-    <div class="info-box" style="width: 100%" *ngIf="producto && producto.nombre">
-      <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-      <div class="info-box-content">
-        <div>{{producto.nombre}}</div>
-        <div>{{producto.precio | currency:'MXN' }}</div>
+
+
+<div class="dg-content-page dg-page-priceslote">
+  <div class="dg-content-bartitle dg-bartitle-2"
+       *ngIf="producto">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+            <span>
+              <i class="fa fa-flag"></i>
+            </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9"
+           *ngIf="producto && producto.nombre">
+        <div class="dg-content-info">
+          <p class="dg-row-text1">
+            {{producto.nombre}}
+          </p>
+          <p class="dg-row-text2">
+            {{producto.precio | currency:'MXN' }}
+          </p>
+          <p class="dg-row-text3">
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div><!-- dg-content-bartitle -->
+</div><!-- end - dg-content-page -->
+
 <div class="content" #content *ngIf="producto">
   <slideshow [height]="(content.clientHeight / 2) + 'px'"
              [minHeight]="(content.clientHeight / 2) + 'px'"
