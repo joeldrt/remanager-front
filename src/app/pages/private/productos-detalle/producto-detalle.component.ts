@@ -24,12 +24,14 @@ import {
   styleUrls: ['./producto-detalle.component.scss']
 })
 export class ProductoDetalleComponent implements OnInit, OnDestroy {
-
   image_resource_url_base: string;
-  productoId: string;
+
+  productoId: number;
   producto: Producto;
+
   routeToReturn: string;
-  images = ['./assets/img/producto_mock/casa1.jpeg',
+
+  default_images = ['./assets/img/producto_mock/casa1.jpeg',
     './assets/img/producto_mock/casa2.jpg',
     './assets/img/producto_mock/casa3.jpeg',
     './assets/img/producto_mock/casa4.jpeg',
@@ -76,6 +78,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
       (response: HttpResponse<Producto>) => {
         if (response.body) {
           this.producto = response.body;
+          this.append_base_url_to_fotos();
           this.headerHelper.sendHeaderTitleRequest(this.producto.nombre);
           this.setFooterMenu(this.producto);
         } else {
@@ -98,4 +101,16 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     );
     this.footerMenu.sendMenuRequest('/productos/' + producto.id);
   }
+
+  append_base_url_to_fotos() {
+    if(!this.producto.fotos || this.producto.fotos.length <= 0) {
+      return;
+    }
+    const modify_array_fotos = new Array<string>();
+    for (let url_foto of this.producto.fotos) {
+      modify_array_fotos.push(this.image_resource_url_base + url_foto);
+    }
+    this.producto.fotos = modify_array_fotos;
+  }
+
 }
