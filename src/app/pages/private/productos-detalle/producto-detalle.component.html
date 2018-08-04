@@ -46,20 +46,21 @@
              [lazyLoad]="images?.length > 1"
              [autoPlayWaitForLazyLoad]="true">
   </slideshow>
+
+
   <div class="dg-producto-detalle-wrapper" [style.height]="(content.clientHeight / 2) + 'px'">
-    <div class="row" *ngIf="tipoDeProducto && tipoDeProducto.camposDeProductos">
-      <div *ngFor="let campo of tipoDeProducto.camposDeProductos">
+
+    <div class="row" *ngIf="producto && producto.valoresCampos && producto.valoresCampos.length > 0">
+      <div *ngFor="let valorCampo of producto.valoresCampos">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="info-box">
           <span class="info-box-icon" style="background-color: white !important;">
-            <img [src]="'data:' + campo.iconoContentType + ';base64,' + campo.icono" style="max-width: 45px;"   alt="campoDeProducto image"/>
+            <img [src]="image_resource_url_base + 'archivo/' + valorCampo.icono" style="max-width: 45px;" alt=""/>
           </span>
 
             <div class="info-box-content">
-              <span class="info-box-text">{{campo.nombre}}</span>
-              <span class="info-box-text"*ngIf="valoresCamposProducto && valoresCamposProducto.size > 0">
-              {{valoresCamposProducto.get(campo.id)}}
-            </span>
+              <span class="info-box-text">{{valorCampo.nombre}}</span>
+              <span class="info-box-text">{{valorCampo.valor}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -67,5 +68,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>

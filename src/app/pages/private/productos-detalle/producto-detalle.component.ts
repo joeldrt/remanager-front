@@ -1,23 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { FooterMenuhelper } from '../../../_helpers/footer-menuhelper';
 
+import { environment } from '../../../../environments/environment';
+
 import {
   ProductoService,
-  ToasterService,
-  TipoProductoService,
-  ValorCampoProductoService,
+  ToasterService
 } from '../../../_services';
 
 import {
-  Producto,
-  TipoProducto,
-  CampoDeProducto,
-  ValorCampoProducto
+  Producto
 } from '../../../_models';
-import {HeaderHelper} from '../../../_helpers';
+import {
+  HeaderHelper
+} from '../../../_helpers';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -25,11 +24,10 @@ import {HeaderHelper} from '../../../_helpers';
   styleUrls: ['./producto-detalle.component.scss']
 })
 export class ProductoDetalleComponent implements OnInit, OnDestroy {
+  image_resource_url_base: string;
 
   productoId: number;
   producto: Producto;
-  tipoDeProducto: TipoProducto;
-  valoresCamposProducto: Map<number, any>;
 
   routeToReturn: string;
 
@@ -43,12 +41,11 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private productoService: ProductoService,
-    private tipoProductoService: TipoProductoService,
-    private valorCampoProductoService: ValorCampoProductoService,
     private footerMenu: FooterMenuhelper,
     private toaster: ToasterService,
-    private headerHelper: HeaderHelper,
+    private headerHelper: HeaderHelper
   ) {
+    this.image_resource_url_base = environment.API_URL; 
   }
 
   ngOnInit() {
@@ -83,11 +80,6 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
           this.producto = response.body;
           this.headerHelper.sendHeaderTitleRequest(this.producto.nombre);
           this.setFooterMenu(this.producto);
-          if (this.producto.tipoDeProductoId) {
-            this.getCamposProducto(this.producto.tipoDeProductoId);
-          } else {
-            this.toaster.warning('El producto no tiene un tipo');
-          }
         } else {
           this.toaster.error('La respuesta del servido viene vacía');
         }
@@ -107,42 +99,6 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
       '/clientes'
     );
     this.footerMenu.sendMenuRequest('/productos/' + producto.id);
-  }
-
-  getCamposProducto(tipoDeProductoId: number) {
-    this.tipoProductoService.find(tipoDeProductoId).subscribe(
-      (response: HttpResponse<TipoProducto>) => {
-        if (response.body) {
-          this.tipoDeProducto = response.body;
-          this.getValorCamposProducto(this.tipoDeProducto.camposDeProductos);
-        } else {
-          this.toaster.error('No se pudo recuperar los campos del tipo de producto');
-        }
-      },
-      (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
-    });
-  }
-
-  getValorCamposProducto(camposDeProductos: CampoDeProducto[]) {
-    this.valorCampoProductoService.findAllByProducto(this.producto.id).subscribe(
-      (value: HttpResponse<ValorCampoProducto[]>) => {
-        if (value.body) {
-          this.setValorCampoEnMapa(value.body);
-        } else {
-          this.toaster.error('No se pudieron recuperar los datos de los camppos para ese producto');
-        }
-      },
-      (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
-      });
-  }
-
-  setValorCampoEnMapa(valoresCamposProductoFromServer: ValorCampoProducto[]) {
-    this.valoresCamposProducto = new Map<number, any>();
-    valoresCamposProductoFromServer.forEach(value => {
-      this.valoresCamposProducto.set(value.campoId, value.valor);
-    });
   }
 
 }

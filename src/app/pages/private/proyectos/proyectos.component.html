@@ -48,14 +48,23 @@
     <div class="dg-content-loading"
          style="min-height: inherit;
                 max-height: inherit;"
-         *ngIf="proyectos.length < 1 && productos.length < 1">
+         *ngIf="loading">
       <app-loading
         style="min-height: inherit;
               max-height: inherit;">
       </app-loading>
     </div>
 
-    <div *ngIf="proyectos.length >= 1 || productos.length >= 1">
+    <div class="dg-content-loading"
+         style="min-height: inherit;
+                max-height: inherit;"
+         *ngIf="!loading && proyectos.length == 0 && productos.length == 0">
+      <p>
+        Nada que Mostrar!!!
+      </p>
+    </div>
+
+    <div *ngIf="(proyectos && proyectos.length >= 1) || (productos && productos.length >= 1)">
       <div class="dg-content-list dg-content-listprojects">
         <div class="row"
              *ngFor="let proyecto of proyectos"
