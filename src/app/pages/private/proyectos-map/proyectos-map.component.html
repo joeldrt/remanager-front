@@ -45,10 +45,10 @@
 
   <div #workingAreaSpace id="workingAreaSpace" class="content">
 
-    <div class="dg-content-loading"
+    <div *ngIf="loading"
+         class="dg-content-loading"
          style="min-height: inherit;
-                max-height: inherit;"
-         *ngIf="(!svg || !svg.imagen) && (!root_view)">
+                max-height: inherit;">
       <app-loading
         style="min-height: inherit;
               max-height: inherit;">
@@ -57,7 +57,7 @@
 
     <div *ngIf="(svg && svg.imagen) || (root_view)">
 
-      <div *ngIf="svg && svg.imagen">
+      <div *ngIf="svg && svg.imagen && !root_view">
         <svg #svgTag id="svgTag"
              [attr.width]="workingAreaSpace.clientWidth - 30"
              [attr.height]="workingAreaSpace.clientHeight" style="background-color: white;">
@@ -97,6 +97,16 @@
           </div>
         </div><!-- end - dg-content-list dg-content-listprojects -->
       </div><!-- end - ngIf='root_view' -->
+
+      <div *ngIf="proyectos.length < 1 && productos.length < 1 && !loading"
+           class="dg-content-loading"
+           style="min-height: inherit;
+                  max-height: inherit;">
+        <p>
+          Nada que Mostrar!!!
+        </p>
+      </div>
+
     </div><!-- end ngIf -->
 
   </div><!-- end - #workingAreaSpace -->

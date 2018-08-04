@@ -16,6 +16,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
   showing_project: Proyecto;
   proyectos: Proyecto[];
   productos: Producto[];
+  loading = false;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -27,7 +28,6 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     private footerMenu: FooterMenuhelper,
     private headerHelper: HeaderHelper,
   ) {
-    this.clearProyectosAndProductos();
   }
 
   ngOnInit() {
@@ -58,6 +58,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
   }
 
   private doNavigationBaby() {
+    this.loading = true;
     this.footerButtonSetup();
     this.setCurrentViewInfo();
     this.clearProyectosAndProductos();
@@ -66,9 +67,11 @@ export class ProyectosComponent implements OnInit, OnDestroy {
         (value: HttpResponse<Proyecto[]>) => {
           if (value && value.body) {
             this.proyectos = value.body;
+            this.loading = false;
           }
         },
         (error: HttpErrorResponse) => {
+          this.loading = false;
           this.toasterService.error('Error ' + error.status + ': ' + error.message);
           this.proyectoNavhelper.limpiarNavegacion();
           this.router.navigate(['/login']);
@@ -83,6 +86,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
         }
       },
       (error: HttpErrorResponse) => {
+        this.loading = false;
         this.toasterService.error('Error ' + error.status + ': ' + error.message);
         this.proyectoNavhelper.limpiarNavegacion();
         this.router.navigate(['/login']);
@@ -95,10 +99,12 @@ export class ProyectosComponent implements OnInit, OnDestroy {
         (value: HttpResponse<Producto[]>) => {
           if (value && value.body) {
             this.productos = value.body;
+            this.loading = false;
           }
         },
         (error: HttpErrorResponse) => {
           this.toasterService.error('Error ' + error.status + ': ' + error.message);
+          this.loading = false;
         });
     }
   }

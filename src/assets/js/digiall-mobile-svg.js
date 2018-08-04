@@ -84,8 +84,8 @@ function addSVGZoomingCapabilities(element, real_image_width, real_image_height)
   window.panZoom = svgPanZoom(element, {
     zoomEnabled: true
     , controlIconsEnabled: false
-    , fit: false
-    , center: false
+    , fit: true
+    , center: true
     , beforePan: beforePan
     , customEventsHandler: eventsHandler
   });

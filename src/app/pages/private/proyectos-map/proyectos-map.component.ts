@@ -25,6 +25,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
 
   should_svg_visible = false;
   root_view = false;
+  loading = false;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -57,6 +58,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   private setCurrentViewInfo() {
+    this.root_view = false;
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.showing_project = new Proyecto();
       this.showing_project.nombre = 'Inicio';
@@ -69,7 +71,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   private doNavigationBaby() {
-    this.root_view = false;
+    this.loading = true;
     this.footerButtonSetup();
     this.setCurrentViewInfo();
     this.clearProyectosAndProductosAndSvg();
@@ -78,9 +80,11 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         (value: HttpResponse<Proyecto[]>) => {
           if (value && value.body) {
             this.proyectos = value.body;
+            this.loading = false;
           }
         },
         (error: HttpErrorResponse) => {
+          this.loading = false;
           this.toasterService.error('Error ' + error.status + ': ' + error.message);
           this.proyectoNavhelper.limpiarNavegacion();
           this.router.navigate(['/login']);
@@ -89,7 +93,8 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     }
 
     const svgIdToFind = this.proyectoNavhelper.ultimoProyectoApilado().svgId;
-    if (!svgIdToFind || isNaN(svgIdToFind)) {
+    if (!svgIdToFind) {
+      this.loading = false;
       // redirigimos a la vista de lista, tal vez ellos puedan mostrar lo requerido, porque svg no trae
       // pero mandamos una alerta a la vista por si acaso
       this.toasterService.warning('Sin Mapa que mostrar');
@@ -147,10 +152,12 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
       (value: HttpResponse<Svg>) => {
         this.svg = value.body;
         setTimeout(() => {
+          this.loading = false;
           addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
       },
       (error: HttpErrorResponse) => {
+        this.loading = false;
         // redirigimos a la vista de lista, tal vez ellos puedan mostrar lo requerido, porque svg no trae
         // pero mandamos una alerta a la vista por si acaso
         this.toasterService.warning('Sin Mapa que mostrar');
@@ -175,6 +182,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   recuperarInformacionDeProyectosYProductos() {
+    this.root_view = false;
     this.proyectoService.getProyectosByParentId(this.proyectoNavhelper.ultimoProyectoApilado().id).subscribe(
       (value: HttpResponse<Proyecto[]>) => {
         if (value && value.body) {
@@ -183,6 +191,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         }
       },
       (error: HttpErrorResponse) => {
+        this.loading = false;
         this.toasterService.error('Error ' + error.status + ': ' + error.message);
         this.proyectoNavhelper.limpiarNavegacion();
         this.router.navigate(['/login']);
@@ -200,6 +209,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
           }
         },
         (error: HttpErrorResponse) => {
+          this.loading = false;
           this.toasterService.error('Error ' + error.status + ': ' + error.message);
         });
     }
