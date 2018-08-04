@@ -8,8 +8,10 @@
 }
 
 .dg-info-client{
-  padding: 2em 0;
   background-color: #FFF;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2em 0;
 
   .row{
     padding: 0 2.1em;
@@ -22,9 +24,7 @@
       font-size: 1.2em;
     }
   }
-
 }
-
 .dg-head-back{
   padding: 1em;
   span{
@@ -34,3 +34,71 @@
     }
   }
 }// end - .dg-head-back
+
+/*---*/
+.dg-content-page{
+  .dg-content-listlotes{
+    border-top: solid 2px #C8C8C8;
+    margin-top: 2.1em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+
+    .fa-flag{
+      &.dg-flag-vendido{
+        color: #E30000;
+      }
+      &.dg-flag-disponible{
+        color: #2898E4;
+      }
+      &.dg-flag-apartado{
+        color: #FCC800;
+      }
+    }// end - fa-flag
+
+    .row{
+      border-bottom: solid 1px #CFCFCF;
+    }
+
+    .dg-title{
+      color: #727E86;
+      display: block;
+      font-size: 1.21em;
+      padding-top: 1em;
+    }
+    .dg-info{
+      color: #727E86;
+      display: block;
+      font-size: 1em;
+      padding-bottom: 1em;
+    }
+
+    .dg-col-lote{
+      & > div{
+        display: inline-block;
+        vertical-align: middle;
+        &:nth-of-type(1){
+          font-size: 2.1em;
+          width: 30%;
+        }
+        &:nth-of-type(2){
+          width: 69%;
+        }
+      }
+    }// end -dg-col-lote
+    .dg-col-status{
+      border-left: solid 1px #CFCFCF;
+      padding-left: 1.5em;
+      & > div{
+        display: inline-block;
+        vertical-align: middle;
+        &:nth-of-type(1){
+          width: 80%;
+        }
+        &:nth-of-type(2){
+          font-size: 2em;
+          width: 19%;
+        }
+      }
+    }// end - dg-col-status
+  } // end - dg-content-lotes
+} // end - dg-content-page

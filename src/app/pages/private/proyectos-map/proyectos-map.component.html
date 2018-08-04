@@ -1,7 +1,9 @@
 <div class="dg-content-page">
   <div class="dg-content-backbreadcrumb">
     <div class="dg-page-navbar">
-      <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
+      <button class="btn btn-default pull-left"
+              *ngIf="shouldShowGoBack()"
+              (click)="navegarAnterior()">
         <i class="glyphicon glyphicon-chevron-left"></i>
       </button>
       <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">

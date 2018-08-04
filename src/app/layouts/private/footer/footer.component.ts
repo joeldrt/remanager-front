@@ -39,4 +39,5 @@ export class FooterComponent implements OnInit {
     const columSpace = (12 / this.buttons.length);
     return 'col-xs-' + columSpace + ' col-sm-' + columSpace + ' col-md-' + columSpace + ' text-center';
   }
+
 }

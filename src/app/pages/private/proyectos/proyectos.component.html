@@ -1,21 +1,23 @@
 <div class="dg-content-page dg-page-project">
+  <div class="dg-content-backbreadcrumb">
+    <div class="dg-page-navbar">
+      <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+      <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">
+        <li (click)="navegarAlInicio()" class="breadcrumb-item">
+          Inicio
+        </li>
+        <li *ngFor="let project of obtenerPiladeProyectos()"
+            class="breadcrumb-item">
+          <a (click)="navegarEspecifico(project)">
+            {{ project.nombre }}
+          </a>
+        </li>
+      </ol>
+    </div><!-- end - dg-page-navbar -->
+  </div><!-- end  - dg-content-backbreadcrumb -->
 
-  <div class="dg-page-navbar">
-    <button class="btn btn-default pull-left" *ngIf="shouldShowGoBack()" (click)="navegarAnterior()">
-      <i class="glyphicon glyphicon-chevron-left"></i>
-    </button>
-    <ol class="breadcrumb pull-right" *ngIf="obtenerPiladeProyectos().length > 0">
-      <li (click)="navegarAlInicio()" class="breadcrumb-item">
-        Inicio
-      </li>
-      <li *ngFor="let project of obtenerPiladeProyectos()"
-          class="breadcrumb-item">
-        <a (click)="navegarEspecifico(project)">
-          {{ project.nombre }}
-        </a>
-      </li>
-    </ol>
-  </div><!-- end - dg-page-navbar -->
 
   <div class="dg-content-bartitle dg-bartitle-1 dg-project-detail" *ngIf="showing_project">
     <div class="">
