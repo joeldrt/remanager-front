@@ -15,6 +15,31 @@
 
 /*---*/
 .dg-content-page{
+
+  .dg-content-backbreadcrumb{
+    .dg-page-navbar{
+      background-color: #FFF;
+      padding-top: 0.6em;
+      .btn-default{
+        background-color: #FFF;
+        border: none;
+        color: #0d6aad;
+      }
+      ol{
+        background-color: #FFF;
+        li{
+          font-size: 0.72em;
+          text-transform: capitalize;
+          a{
+            font-size: 0.72em;
+            text-transform: capitalize;
+          }
+        }
+      }
+
+    }
+  } // end - dg-content-backbreadcrumb
+
   .dg-content-bartitle{
     backgrond-size:contain;
     background-repeat: repeat-x;

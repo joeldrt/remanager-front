@@ -7,7 +7,10 @@
   </div>
   <div class="row" *ngIf="buttons && buttons.length > 0">
     <div [class]="obtainClassForButtons()" *ngFor="let button of buttons">
-      <a style="vertical-align: middle" routerLink="{{button.target_url}}" routerLinkActive="active">
+      <a routerLink="{{button.target_url}}"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         class="dg-btn-button dg-button-footer" >
         <i [class]="button.button_icon"></i>
         {{button.button_name}}
       </a>
