@@ -29,7 +29,7 @@ export class AccountService {
   }
 
   updateAccount(user:  User): Observable<HttpResponse<any>> {
-    return this.http.post<any>(this.API_URL + 'api/account', user, { observe: 'response' });
+    return this.http.put<any>(this.API_URL + 'api/account', user, { observe: 'response' });
   }
 
   getAccountOrganization(): Observable<HttpResponse<Organizacion>> {
