@@ -7,4 +7,19 @@
   min-height: 50px;
   max-height: 50px;
   padding: 5px;
+
+  .dg-btn-button{
+    color: #3c8dbc;
+    vertical-align: middle;
+    text-align: center;
+    &.active{
+      color: #222d32;
+    }
+    i{
+      display: block;
+      font-size: 1.2em;
+    }
+
+  } // end - .dg-btn-button
+
 }

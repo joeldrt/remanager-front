@@ -7,10 +7,10 @@
   }
 }
 
-.dg-content {
+.dg-content-page {
   background-color: #FFF;
-  min-height: calc(100vh - 250px);
-  max-height: calc(100vh - 250px);
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0;
@@ -18,8 +18,29 @@
 
 /*---*/
 .dg-content-page{
+  position: relative;
+  .dg-content-title{
+    background-color: #222d32;
+    color: #fff;
+    padding: 0.9em 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+    text-align: center;
+
+    i{
+      display: inline-block;
+      font-size: 1.5em;
+      margin-right: 1em;
+    }
+    span{
+      font-size: 1.2em;
+    }
+  }
 
   .dg-content-list {
+    margin-top: 50px;
+
     &.dg-content-listprojects,
     &.dg-content-listlote{
       .dg-col-icon {
@@ -30,6 +51,11 @@
         }
       }
     }// end - dg-content-listprojects
+
+    .dg-content-description{
+      max-height: 42px;
+      overflow: hidden;
+    }
 
     .dg-col-icon{
       background-size: contain;
@@ -63,7 +89,9 @@
       }
 
       .dg-icon-arrow{
+        display: inline-block;
         font-size: 1.5em;
+        margin-top: 0.81em;
       }
     }// end - row
 
