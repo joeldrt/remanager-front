@@ -53,8 +53,9 @@
     }// end - dg-content-listprojects
 
     .dg-content-description{
-      max-height: 42px;
+      max-height: 20px;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .dg-col-icon{

@@ -41,10 +41,10 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
   }
 
-  clickOnClient(client: Client){
+  clickOnClient(client: Client) {
   }// end - clickOnClient(event)
 
-  getAccount(){
+  getAccount() {
     this.accountService.getAccount().subscribe(
       (response: HttpResponse<User>) => {
         this.user = response.body;
@@ -57,7 +57,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   }// end - getAccount
 
   loadAll() {
-    if(this.user) {
+    if (this.user) {
       this.clientService.searchByCv(this.user.email)
         .subscribe(
         (res: HttpResponse<Client[]>) => {
