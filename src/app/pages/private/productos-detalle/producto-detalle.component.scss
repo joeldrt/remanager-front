@@ -2,8 +2,9 @@
 
 .dg-project-detail {
   .info-box {
-    width: 100%;
+    box-shadow: none;
     margin-bottom: 0;
+    width: 100%;
   }
 }
 .dg-producto-detalle-wrapper {
@@ -36,6 +37,7 @@
   display: inline-block;
   margin-left: 15px;
   vertical-align: middle;
+  max-width: 180px;
 }
 
 /*---*/

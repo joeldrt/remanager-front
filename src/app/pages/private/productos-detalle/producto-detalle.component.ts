@@ -24,13 +24,11 @@ import {
   styleUrls: ['./producto-detalle.component.scss']
 })
 export class ProductoDetalleComponent implements OnInit, OnDestroy {
+
   image_resource_url_base: string;
-
-  productoId: number;
+  productoId: string;
   producto: Producto;
-
   routeToReturn: string;
-
   images = ['./assets/img/producto_mock/casa1.jpeg',
     './assets/img/producto_mock/casa2.jpg',
     './assets/img/producto_mock/casa3.jpeg',
@@ -45,7 +43,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     private toaster: ToasterService,
     private headerHelper: HeaderHelper
   ) {
-    this.image_resource_url_base = environment.API_URL; 
+    this.image_resource_url_base = environment.API_URL;
   }
 
   ngOnInit() {
@@ -96,9 +94,8 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
       '/productos/' + producto.id,
       'Adquirir producto',
       'fa fa-shopping-cart',
-      '/clientes'
+      '/adquirir/' + this.productoId
     );
     this.footerMenu.sendMenuRequest('/productos/' + producto.id);
   }
-
 }

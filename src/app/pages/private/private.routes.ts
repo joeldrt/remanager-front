@@ -12,6 +12,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
 import { AddClientComponent } from './clientes/add-client.component';
 import { InfoClientComponent } from './clientes/info-client.component';
+import {AdquirirProductoComponent} from './adquirir-producto/adquirir-producto.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -22,6 +23,7 @@ export const PRIVATE_ROUTES: Routes = [
   // Productos
   { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
   { path: 'productos/:id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
+  { path: 'adquirir/:id', component: AdquirirProductoComponent, data: { title: 'Adquirir Producto', breadcrumb: 'Adquirir Producto'} },
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
