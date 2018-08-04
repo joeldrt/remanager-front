@@ -1,19 +1,20 @@
 <div class="dg-content-page dg-page-project">
 
+  <div class="dg-content-loading"
+       style="min-height: inherit;
+                max-height: inherit;"
+       *ngIf="productos.length < 1 && productos.length < 1">
+    <app-loading
+      style="min-height: inherit;
+              max-height: inherit;">
+    </app-loading>
+  </div>
+
   <div class="dg-content-title">
     <i class="fa fa-flag"></i><span>Lotes/Casas</span>
   </div>
 
   <div class="">
-    <div class="dg-content-loading"
-         style="min-height: inherit;
-                max-height: inherit;"
-         *ngIf="productos.length < 1 && productos.length < 1">
-      <app-loading
-        style="min-height: inherit;
-              max-height: inherit;">
-      </app-loading>
-    </div>
 
     <div *ngIf="productos.length >= 1 || productos.length >= 1">
       <div class="dg-content-list dg-content-listlote">

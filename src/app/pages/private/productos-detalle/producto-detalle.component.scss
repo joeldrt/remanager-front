@@ -7,6 +7,7 @@
   }
 }
 .dg-producto-detalle-wrapper {
+  background-color: #FFF;
   position: relative;
   overflow-x: hidden;
   overflow-y: auto !important;
@@ -23,7 +24,21 @@
   margin-left: 0;
   margin-right: 0;
 }
+/*---*/
 
+.info-box-icon{
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}
+
+.info-box-content{
+  display: inline-block;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+/*---*/
 .dg-content-page{
   &.dg-page-priceslote{
     .dg-content-barclient{
