@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
@@ -24,16 +24,22 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private clientService: ClientService,
     private historicoService: HistoricoEstatusProductosService
   ) {
     this.client = new Client();
-    this.returnTo = '';
+    this.returnTo = null;
   }
 
   ngOnInit() {
-    this.returnTo = this.route.snapshot.queryParams['returnTo'];
-    this.client.id = this.route.snapshot.queryParams['id'];
+    debugger
+    if (this.route.snapshot.queryParams['id']) {
+      this.returnTo = this.route.snapshot.queryParams['returnTo'];
+      this.client.id = this.route.snapshot.queryParams['id'];
+    } else {
+      this.goBackPage();
+    }
   }
 
   ngAfterViewInit() {
@@ -46,17 +52,11 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
           (res: HttpErrorResponse) => {
             console.log('Error :: ' + res);
           });
-
-      this.historicoService.searchByIdClient(this.client.id)
-        .subscribe(
-          (res: HttpResponse<HistoricoEstatusProducto[]>) => {
-            this.historicoProductos = res.body;
-        },
-          (res: HttpErrorResponse) => {
-            console.log('Error: ' + res.message);
-          });
-
     }
   }// end - ngAfterViewInit()
+
+  goBackPage() {
+    this.router.navigate(['/clientes']);
+  }
 
 }

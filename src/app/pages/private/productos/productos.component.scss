@@ -2,8 +2,8 @@
 
 .dg-project-detail {
   .info-box {
-    width: 100%;
     margin-bottom: 0;
+    width: 100%;
   }
 }
 
@@ -19,24 +19,63 @@
 /*---*/
 .dg-content-page{
   position: relative;
-  .dg-content-title{
-    background-color: #222d32;
-    color: #fff;
-    padding: 0.9em 0;
-    position: fixed;
-    width: 100%;
-    z-index: 9;
-    text-align: center;
 
-    i{
-      display: inline-block;
-      font-size: 1.5em;
-      margin-right: 1em;
-    }
-    span{
-      font-size: 1.2em;
-    }
+  //Search
+  // bar - input search
+  .dg-content-inputsearch{
+    border-bottom: transparent;
+    padding-bottom:18px;
+    margin-bottom: 12px;
   }
+
+  .dg-content-inputsearch{
+    .dg-content{
+      background-color: #E3E3E5;
+      border-radius: 9px;
+      border: none;
+      display: block;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 6px 15px;
+
+      & > *{
+        display: inline-block;
+      }
+      i{
+        color: #959595;
+      }
+      input{
+        background-color: transparent;
+        border: none;
+        color: #7F7F7F;
+        margin-left: 9px;
+        width: 81%;
+      }
+    }
+  }// end - dg-content-inputsearch
+  .dg-section-search{
+    margin-top: 50px;
+    & > div{
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .dg-content-inputsearch{
+      max-width: 72%;
+      min-width: 72%;
+    }
+    .dg-content-buttons{
+      max-width: 27%;
+      min-width: 27%;
+      vertical-align: top;
+
+      span{
+        display: inline-block;
+        margin: 0 0.6em;
+      }
+    }
+  }// end - .dg-section-search
 
   .dg-content-list {
     margin-top: 50px;
@@ -65,6 +104,7 @@
     }
 
     .row{
+      cursor: pointer;
       padding: 1em 0.9em;
       border-bottom: 1px solid #E3E3E3;
       margin-left: 0;
@@ -97,5 +137,15 @@
     }// end - row
 
   }// end - dg-content-list
+
+  .dg-text-link{
+    background-color: transparent;
+    border: none;
+    color: #3c8dbc;
+
+    &:hover{
+      border-bottom: solid 1px #3c8dbc;
+    }
+  }// end - .dg-text-link
 
 }// end - .dg-content-page

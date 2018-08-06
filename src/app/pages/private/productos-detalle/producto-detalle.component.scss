@@ -1,17 +1,16 @@
 @import "../component.shared.style";
 
-.dg-project-detail {
-  .info-box {
-    box-shadow: none;
-    margin-bottom: 0;
-    width: 100%;
-  }
-}
 .dg-producto-detalle-wrapper {
   background-color: #FFF;
   position: relative;
   overflow-x: hidden;
   overflow-y: auto !important;
+
+  .info-box {
+    box-shadow: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
 }
 .dg-content {
   min-height: calc(100vh - 250px);
@@ -38,6 +37,21 @@
   margin-left: 15px;
   vertical-align: middle;
   max-width: 180px;
+}
+
+.dg-page-navbar{
+  background-color: #FFF;
+  min-height: 50px;
+  max-height: 50px;
+
+  button{
+    background-color: #FFF;
+    border: none;
+    color: #0d6aad;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
 }
 
 /*---*/

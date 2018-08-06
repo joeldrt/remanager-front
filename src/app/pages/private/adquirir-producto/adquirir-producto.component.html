@@ -4,7 +4,8 @@
       <i class="fa fa-angle-left"></i>
     </span>
   </div>
-  <div class="dg-content-bartitle dg-bartitle-2">
+  <div class="dg-content-bartitle dg-bartitle-2"
+    *ngIf="producto">
     <div class="row">
       <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
         <div class="dg-content-icon">
@@ -13,75 +14,65 @@
           </span>
         </div>
       </div>
-      <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
         <div class="dg-content-info">
-          <p class="dg-row-text1">
-            Lote 2
-          </p>
-          <p class="dg-row-text2">
-            245 m2
-          </p>
-          <p class="dg-row-text3">
-            20.00 x 37.50 = 750.00 m2
-          </p>
-        </div>
-      </div>
-      <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
-        <div class="dg-content-cuadro" >
-          <span>
-
-          </span>
+          <div class="dg-row-text1">
+            {{producto.nombre}}
+          </div>
+          <div class="dg-row-text2">
+            <div *ngFor="let valor of producto.valoresCampos">
+              <div *ngIf="valor.nombre && valor.nombre === 'M2'">
+                {{valor.valor}} <span>m2</span>
+              </div>
+            </div>
+          </div>
+          <div class="dg-row-text3">
+          </div>
         </div>
       </div>
     </div>
   </div><!-- dg-content-bartitle -->
-  <div class="dg-content-barclient">
-    <div class="row">
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <div class="dg-datos-cliente">
-          <span>
-            Datos del cliente
-          </span>
-        </div>
-      </div>
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <div class="dg-content-icons" >
-          <span class="dg-content-btn">
-            <i class="fa fa-plus"></i>
-          </span>
-          <span class="dg-content-btn">
-            <i class="fa fa-minus"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div> <!-- end - dg-content-barclient -->
-  <div class="dg-content-lineprice">
-    <div>
-      <span>
-        $
-      </span>
-      <span>
-        4,756,230.00
-      </span>
-    </div>
-  </div><!-- end - .dg-content-lineprice -->
 
-  <div class="dg-content-btnlink">
+  <div class="dg-content-infoclient">
+    <div class="dg-content-button"
+      *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+      <button class="btn btn-app"
+              routerLink="/clientes"
+              [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
+        <i class="fa fa-users"></i>
+        Asignar cliente...
+      </button>
+    </div>
+  </div><!-- end - dg-content-infoclient -->
+
+  <div class="dg-content-buttons">
+    <div class="dg-content-lineprice">
+      <div>
+      <span>
+      </span>
+        <span *ngIf="producto">
+        {{producto.precio | currency:'MXN'}}
+      </span>
+      </div>
+    </div><!-- end - .dg-content-lineprice -->
+
+    <div class="dg-content-btnlink">
     <span>
       <a class="dg-text-link">
         Bloquear
       </a>
     </span>
-  </div>
-  <div class="dg-content-btns">
-    <div class="dg-content-button">
-      <button class="dg-btn dg-btn-orange">
-        Apartar
-      </button>
-      <button class="dg-btn dg-btn-green">
-        Vender
-      </button>
     </div>
-  </div>
+    <div class="dg-content-btns">
+      <div class="dg-content-button">
+        <button class="dg-btn dg-btn-orange">
+          Apartar
+        </button>
+        <button class="dg-btn dg-btn-green">
+          Vender
+        </button>
+      </div>
+    </div>
+  </div><!-- end - dg-content-buttons -->
+
 </div><!-- end - dg-page-priceslote -->

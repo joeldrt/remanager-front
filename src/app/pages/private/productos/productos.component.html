@@ -10,12 +10,28 @@
     </app-loading>
   </div>
 
-  <div class="dg-content-title">
-    <i class="fa fa-flag"></i><span>Lotes/Casas</span>
-  </div>
+  <div class="dg-section-search">
+    <div class="dg-content-inputsearch">
+      <div class="dg-content">
+        <i class="fa fa-search"></i>
+        <input type="text"
+               placeholder="Buscar"
+               id="txtSearch"
+               #txtSearch
+               name="txtSearch"/>
+      </div>
+    </div>
+    <div class="dg-content-buttons">
+        <span>
+          <button routerLink="add"
+                  class="dg-text-link">
+            Agregar
+          </button>
+        </span>
+    </div>
+  </div><!-- end - dg-section-search -->
 
   <div class="">
-
     <div *ngIf="productos.length >= 1 || productos.length >= 1">
       <div class="dg-content-list dg-content-listlote">
         <div class="row"
