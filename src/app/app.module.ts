@@ -38,8 +38,12 @@ import {
   TipoProductoService,
   ValorCampoProductoService,
   HistoricoEstatusProductosService,
+  ContratoService,
 } from './_services';
 import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
+import {
+  FileService,
+} from './_dgtools_services';
 
 // helpers
 import {
@@ -53,6 +57,9 @@ import {
 // Digiall SVG Tool
 import { SvgToolComponent } from './_digiall-components/svgtool/svgtool.component';
 import { SvgComponent } from './_digiall-components/svgtool/components/svg/svg.component';
+
+// Digiall Misc dgtools
+import { DgtoolsComponent } from './pages/private/dgtools/dgtools.component';
 
 // pages
 import { LoginComponent } from './pages/public/login/login.component';
@@ -94,6 +101,7 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
     InfoClientComponent,
     LoadingComponent,
     AdquirirProductoComponent,
+    DgtoolsComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +129,7 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
     ValorCampoProductoService,
     HeaderHelper,
     ProfileHelper,
+    ContratoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
@@ -128,6 +137,9 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
     },
     DigiallDateUtils,
     HistoricoEstatusProductosService,
+
+    // _dgtools_services
+    FileService,
   ],
   bootstrap: [AppComponent]
 })

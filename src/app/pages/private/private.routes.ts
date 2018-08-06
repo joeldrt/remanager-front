@@ -12,7 +12,8 @@ import { ProductosComponent } from './productos/productos.component';
 import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
 import { AddClientComponent } from './clientes/add-client.component';
 import { InfoClientComponent } from './clientes/info-client.component';
-import {AdquirirProductoComponent} from './adquirir-producto/adquirir-producto.component';
+import { AdquirirProductoComponent } from './adquirir-producto/adquirir-producto.component';
+import { DgtoolsComponent } from './dgtools/dgtools.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -39,4 +40,7 @@ export const PRIVATE_ROUTES: Routes = [
   // SvgTool paths
   { path: 'svgtool', component: SvgToolComponent, data: { title: 'Digiall SVGTool', breadcrumb: 'svgtool' } },
   { path: 'svgtool/:id', component: SvgToolComponent, data: { title: 'Digiall SVGTool', breadcrumb: 'svgtool' } },
+
+  // Digiall Misc dgtools
+  { path: 'dgtools', component: DgtoolsComponent, data: { title: 'Digiall DG Tools', breadcrumb: 'dgtools' } },
 ];
