@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { environment} from '../../../../environments/environment';
+import { Observable } from 'rxjs';
 
 // Services
 import { ProductoService, ClientService, AccountService, ToasterService } from '../../../_services';
@@ -40,7 +40,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   ) {
     this.user = new User();
     this.organization = new Organizacion();
-    this.clientId = null;
   }
 
   ngOnInit() {
@@ -50,6 +49,16 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       this.router.navigate(['/proyectos']);
       return;
     }
+
+    this.route.queryParams.subscribe(params => {
+      this.clientId = params.clientId;
+      this.getClient();
+    });
+
+    /*if (this.route.queryParams) {
+      this.getClient();
+    }*/
+
     this.getProducto(this.productoId);
     this.getAccount();
   }
@@ -58,10 +67,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   ngAfterViewInit() {
-    if (this.route.snapshot.params['clientId']) {
-      this.clientId = this.route.snapshot.params['clientId'];
-      this.getClient();
-    }
   }
 
   getProducto(producto_id: string) {

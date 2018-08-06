@@ -58,12 +58,12 @@
                  placeholder="Dirección"
                  name="direccion"
                  [(ngModel)]="client.direccion"
-                 #direccion="ngModel" />
+                 #direccion="ngModel" required />
 
-          <!--div *ngIf="f.submitted && !direccion.valid"
+          <div *ngIf="f.submitted && !direccion.valid"
                class="help-block">
             La dirección es requerida
-          </div-->
+          </div>
         </div>
         <div class="dg-control">
           <input type="number"
@@ -96,13 +96,13 @@
                    placeholder="Nombre"
                    name="fechaNacimiento"
                    [(ngModel)]="client.fechaNacimiento"
-                   #fechaNacimiento="ngModel" />
+                   #fechaNacimiento="ngModel" required />
             <i class="fa fa-calendar">
             </i>
-            <!--div *ngIf="f.submitted && !email.valid"
+            <div *ngIf="f.submitted && !email.valid"
                  class="help-block">
               Fecha de nacimiento obligatoria
-            </div-->
+            </div>
           </span>
         </div>
       </form>

@@ -23,7 +23,6 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   public organization: Organizacion;
   public inputSearch: string;
   public returnTo: string;
-  public returnClientId: string;
   public productId: string;
   public loading: boolean;
 
@@ -131,10 +130,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
         {queryParams: { id: clientSelected.id, returnTo: this.returnTo}});
     } else {
       this.router.navigate(['/adquirir', this.productId],
-        {queryParams: {
-            clientId: clientSelected.id,
-            returnTo: this.returnTo
-          }});
+        {queryParams: { clientId: clientSelected.id }});
     }
   } // end - clickOnClient()
 
