@@ -173,4 +173,23 @@
     }
   }
 
+  .dg-info-client{
+    background-color: #FFF;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2em 0;
+
+    .row{
+      padding: 0 2.1em;
+      label{
+        color: #76828A;
+        font-size: 1.2em;
+      }
+      span{
+        color: #919AA0;
+        font-size: 1.2em;
+      }
+    }
+  }
+
 } // end - dg-content-page

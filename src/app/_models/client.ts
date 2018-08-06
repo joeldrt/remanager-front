@@ -8,7 +8,7 @@ export class Client {
   public direccion?: string;
   public fechaAlta?: any;
   public fechaNacimiento?: any;
-  public id?: number;
+  public id?: string;
   public nombre?: string;
   public organizacionId?: number;
   public telefono?: number;

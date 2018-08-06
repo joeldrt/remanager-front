@@ -35,7 +35,7 @@
 
   <div class="dg-content-infoclient">
     <div class="dg-content-button"
-      *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+      *ngIf="producto && producto.estatus.toString()==='DISPONIBLE' && !clientId">
       <button class="btn btn-app"
               routerLink="/clientes"
               [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
@@ -43,6 +43,63 @@
         Asignar cliente...
       </button>
     </div>
+
+    <div class="dg-content-infoclient" *ngIf="client">
+      <div class="dg-info-client">
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Nombre:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.nombre }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Dirección:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.direccion }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Teléfono:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.telefono }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Correo:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.email }}
+        </span>
+          </div>
+        </div>
+      </div><!-- end - dg-info-client -->
+    </div><!-- end - dg-content-infoclient -->
+
   </div><!-- end - dg-content-infoclient -->
 
   <div class="dg-content-buttons">

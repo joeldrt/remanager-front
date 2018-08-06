@@ -132,10 +132,10 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     } else {
       this.router.navigate(['/adquirir', this.productId],
         {queryParams: {
-            id: clientSelected.id,
+            clientId: clientSelected.id,
             returnTo: this.returnTo
           }});
     }
-  }
+  } // end - clickOnClient()
 
 }
