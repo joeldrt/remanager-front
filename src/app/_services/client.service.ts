@@ -35,7 +35,7 @@ export class ClientService {
     return this.http.put<Client>(this.resourceUrl, client, { observe: 'response' });
   }
 
-  find(id: number): Observable<HttpResponse<Client>> {
+  find(id: string): Observable<HttpResponse<Client>> {
     return this.http.get<Client>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 

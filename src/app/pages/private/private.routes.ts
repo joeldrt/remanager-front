@@ -23,7 +23,7 @@ export const PRIVATE_ROUTES: Routes = [
   // Productos
   { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
   { path: 'productos/:id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
-  { path: 'adquirir/:id', component: AdquirirProductoComponent, data: { title: 'Adquirir Producto', breadcrumb: 'Adquirir Producto'} },
+  { path: 'adquirir/:id', component: AdquirirProductoComponent, data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'} },
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
