@@ -1,5 +1,17 @@
 <div class="content dg-content">
 
+  <!-- Section Loading -->
+  <div class="dg-content-loading"
+       style="min-height: inherit;
+              max-height: inherit;"
+       *ngIf="loading">
+    <app-loading
+      style="min-height: inherit;
+            max-height: inherit;">
+    </app-loading>
+  </div>
+  <!-- end - section loading -->
+
   <div class="dg-content-page dg-page-listapersonas">
     <div class="dg-section-search">
       <div class="dg-content-inputsearch">
@@ -16,8 +28,8 @@
       <div class="dg-content-buttons">
         <span>
           <button routerLink="add"
-                  [queryParams]="{returnTo: '/clientes', correoVendedor: user.email, organizationId: organization.id}"
-                  class="dg-text-link">
+                  class="dg-text-link"
+                  (click)="agregarCliente()" >
             Agregar
           </button>
         </span>
@@ -29,8 +41,7 @@
 
       <div class="row"
            *ngFor="let client of clients;"
-           (click)="clickOnClient(client)"
-           routerLink="info" [queryParams]="{returnTo: '/clientes', id: client.id}" >
+           (click)="clickOnClient(client)">
         <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
           <div class="dg-col-icon">
           <span>

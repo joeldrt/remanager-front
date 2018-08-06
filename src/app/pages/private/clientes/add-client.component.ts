@@ -15,6 +15,7 @@ export class AddClientComponent implements OnInit {
 
   public returnTo: string;
   public client: Client;
+  public productId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,9 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit() {
     this.returnTo = this.route.snapshot.queryParams['returnTo'];
+    if (this.returnTo === '/adquirir') {
+      this.productId = this.route.snapshot.queryParams['productId'];
+    }
   }
 
   saveClient(f: NgForm) {
@@ -38,9 +42,10 @@ export class AddClientComponent implements OnInit {
       this.clientService.create(this.client).subscribe(
         (res: HttpResponse<Client>) => {
           this.client =  res.body;
-          this.toasterService.success('Cliente Agregado: ' + this.client.nombre + ' ' + this.client.apellidos);
+          this.toasterService.success(
+            'Cliente Agregado: ' + this.client.nombre + ' ' + this.client.apellidos + ' ' + 'id::' + this.client.id);
           f.reset();
-          this.router.navigate([this.returnTo]);
+          this.returnToPage();
         },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
@@ -48,4 +53,27 @@ export class AddClientComponent implements OnInit {
     }// end - if
   }// end - saveClient
 
+  returnToPage() {
+    switch (this.returnTo) {
+      case '/clientes':
+        console.log('Ir a Clientes');
+        break;
+      case '/adquirir':
+        this.router.navigate(['/adquirir', this.productId], {queryParams: {
+            clientId: this.client.id
+          }});
+        break;
+    }
+  } // end - returnToPage()
+
+  cancelAddClient() {
+    switch (this.returnTo) {
+      case '/clientes':
+        this.router.navigate(['/clientes']);
+        break;
+      case '/adquirir':
+        this.router.navigate(['/adquirir', this.productId]);
+        break;
+    }
+  } // end - cancelAddClient()
 }

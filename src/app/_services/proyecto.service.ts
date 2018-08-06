@@ -22,7 +22,7 @@ export class ProyectoService {
     return this.http.get<Proyecto[]>(this.searchRoot, { observe: 'response' });
   }
 
-  getProyectosByParentId(idPadre: number): Observable<HttpResponse<Proyecto[]>> {
+  getProyectosByParentId(idPadre: any): Observable<HttpResponse<Proyecto[]>> {
     return this.http.get<Proyecto[]>(this.searchByPadreIdUrl + '/' + idPadre, { observe: 'response' });
   }
 
