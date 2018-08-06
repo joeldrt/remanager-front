@@ -73,7 +73,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     this.router.navigate([this.routeToReturn]);
   }
 
-  getProducto(producto_id: number) {
+  getProducto(producto_id: string) {
     this.productoService.getProductosById(producto_id).subscribe(
       (response: HttpResponse<Producto>) => {
         if (response.body) {

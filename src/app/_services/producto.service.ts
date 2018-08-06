@@ -22,7 +22,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.searchByProyectoIdUrl + proyectoId, { observe: 'response' });
   }
 
-  getProductosById(producto_id: number): Observable<HttpResponse<Producto>> {
+  getProductosById(producto_id: string): Observable<HttpResponse<Producto>> {
     return this.http.get<Producto>(this.productoResourceUrl + producto_id, { observe: 'response' });
   }
 

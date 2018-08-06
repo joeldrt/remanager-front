@@ -1,39 +1,176 @@
+.dg-content-page{
 
+  background-color: #FFF;
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
 
-.dg-page-priceslote{
-  .dg-content-barclient{
-  }
+  &.dg-page-priceslote{
 
-  .dg-content-lineprice{
-    margin-top: 25%;
-  }
-
-  .dg-content-btnlink{
-    margin-top: 2.5em;
-    max-width: 50%;
-    text-align: right;
-
-    span{
-      display: inline-block;
-      margin-right: 2.7em;
+    .dg-content-infoclient{
+      min-height: calc(100vh - 441px);
+      max-height: calc(100vh - 441px);
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
-  }
 
-  .dg-content-btns{
-    margin-top: 1.5em;
+    .dg-content-lineprice{
+    }
 
-    .dg-content-button{
-      text-align: center;
-      .dg-btn{
+    .dg-content-btnlink{
+      margin-top: 2.5em;
+      max-width: 50%;
+      text-align: right;
+
+      span{
         display: inline-block;
+        margin-right: 2.7em;
+      }
+    }
 
-        &:nth-of-type(1){
-          margin-rigth: 0.81em;
-        }
-        &:nth-of-type(2){
-          margin-left: 0.81em;
+    .dg-content-btns{
+      margin-top: 1.5em;
+
+      .dg-content-button{
+        text-align: center;
+        .dg-btn{
+          display: inline-block;
+
+          &:nth-of-type(1){
+            margin-rigth: 0.81em;
+          }
+          &:nth-of-type(2){
+            margin-left: 0.81em;
+          }
         }
       }
     }
+  }// end - dg-page-priceslote
+
+  .dg-head-back{
+    min-height: 50px;
+    max-height: 50px;
+    padding: 1em;
+    span{
+      i{
+        color: #325DC0;
+        font-size: 2.1em;
+      }
+    }
   }
-}// end - dg-page-priceslote
+
+  // Botones
+  .dg-btn{
+    background-repeat: repeat-x;
+    background-size: contain;
+    border-radius: 15px;
+    border: none;
+    color: #FFF;
+    font-size: 0.9em;
+    font-weight: bolder;
+    padding: 8px 6px;
+    width: 120px;
+    text-transform: uppercase;
+  }
+  .dg-btn-orange{
+    background-color:orange;
+    background-image:url('../../../../assets/img/line-back-buttonOrange.png');
+  }
+  .dg-btn-green{
+    background-color:green;
+    background-image:url('../../../../assets/img/line-back-buttonGreen.png');
+  }
+
+  // bar - dg-content-bartitle
+  .dg-content-bartitle{
+    backgrond-size:contain;
+    background-repeat: repeat-x;
+    padding: 18px 0 30px 0;
+
+    &.dg-bartitle-2{
+      background-image:url('../../../../assets/img/line-bartitle-2.png');
+      padding-bottom: 9px;
+      min-height: 100px;
+      max-height: 100px;
+      .dg-content-icon{
+        span{
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
+        }
+      }
+      .dg-content-cuadro{
+        background-color: #EEEEEF;
+        display: inline-block;
+        min-height: 63px;
+        min-width: 63px;
+      }
+    }
+
+    .dg-content-icon{
+      text-align: right;
+      span{
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+      }
+    }// end - .dg-content-icon
+    .dg-content-info{
+      color: #FFF;
+
+      p{
+        margin-bottom: 0px;
+      }
+
+      .dg-row-text1{
+        font-size: 1.26em;
+        font-weight: bolder;
+        text-transform: uppercase;
+      }
+      .dg-row-text2{
+        font-size: 0.9em;
+      }
+      .dg-row-text3{
+        font-size: 0.9em
+      }
+    }
+  }// end - .dg-content-bartitle
+
+  .dg-content-lineprice{
+    background-color: #E2E2E2;
+    padding: 1em 0;
+    text-align: center;
+
+    span{
+      color: #222A85;
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
+
+  .dg-text-link{
+    color: #2A55BD;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    text-decoration: underline;
+  } // end - dg-text-link
+
+  .dg-content-infoclient{
+    .dg-content-button{
+      margin: 1em 0;
+      text-align: center;
+      .btn{
+        background-color: #3c8dbc;
+        color: #FFF;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+  }
+
+} // end - dg-content-page
