@@ -21,7 +21,7 @@ export class Contrato {
   public tipo?: TipoContrato;
   public clienteId?: string;
   public productoId?: string;
-  public vendedorId?: string; // No se llena, solo para lectura... llenado por el servidor
+  public vendedorId?: number; // No se llena, solo para lectura... llenado por el servidor
   public diasValidez?: number;
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];

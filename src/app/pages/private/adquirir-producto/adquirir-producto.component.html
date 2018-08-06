@@ -98,7 +98,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="producto.estatus === 'DISPONIBLE'">
+        <div class="row" *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <button class="btn btn-app dg-btn-changeclient"
                     routerLink="/clientes"
@@ -108,7 +108,6 @@
             </button>
           </div>
         </div>
-
       </div><!-- end - dg-info-client -->
     </div><!-- end - dg-content-infoclient -->
 
@@ -125,23 +124,83 @@
       </div>
     </div><!-- end - .dg-content-lineprice -->
 
-    <div class="dg-content-btnlink">
-    <span>
-      <a class="dg-text-link">
-        Bloquear
-      </a>
-    </span>
-    </div>
-    <div class="dg-content-btns">
-      <div class="dg-content-button">
-        <button class="dg-btn dg-btn-orange">
-          Apartar
+    <div *ngIf="client">
+      <div class="dg-content-btnlink">
+      <span>
+        <button data-target="#modal-block"
+                data-toggle="modal"
+                class="dg-text-link" >
+          Bloquear
         </button>
-        <button class="dg-btn dg-btn-green">
-          Vender
-        </button>
+      </span>
+      </div>
+      <div class="dg-content-btns">
+        <div class="dg-content-button">
+          <button (click)="setAsideProperty()"
+                  class="dg-btn dg-btn-orange">
+            Apartar
+          </button>
+          <button (click)="toSellProperty()"
+                  class="dg-btn dg-btn-green">
+            Vender
+          </button>
+        </div>
       </div>
     </div>
+
   </div><!-- end - dg-content-buttons -->
 
 </div><!-- end - dg-page-priceslote -->
+
+<!-- Modal - Borrar  -->
+<div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
+     class="modal fade"
+     id="modal-block" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Bloqueo de producto</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Estás a punto de bloquear el producto
+          <strong>
+            {{producto.id}} - {{producto.nombre}}
+          </strong>
+          para el cliente
+          <label>
+            {{client.nombre}} {{client.apellidos}}
+          </label>
+        </p>
+        <p>
+          Es necesario establecer el número de días:
+          <input type="number"
+                 placeholder="Min: 1 - Max: 5"
+                 min="1"
+                 max="5"
+                 maxlength="1"
+                 [(ngModel)]="diasApartado" />
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-default pull-left"
+                data-dismiss="modal">
+          Cancelar
+        </button>
+        <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
+                type="button"
+                class="btn btn-primary"
+                (click)="blockProperty()"
+                data-dismiss="modal">
+          Aceptar
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
