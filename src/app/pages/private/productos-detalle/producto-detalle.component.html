@@ -41,8 +41,8 @@
              [minHeight]="(content.clientHeight / 2) + 'px'"
              [autoPlay]="true"
              [showArrows]="true"
-             [imageUrls]="images"
-             [lazyLoad]="images?.length > 1"
+             [imageUrls]="!producto.fotos ? default_images : producto.fotos"
+             [lazyLoad]="!producto.fotos ? default_images?.length > 1 : producto.fotos.length > 1"
              [autoPlayWaitForLazyLoad]="true">
   </slideshow>
 
