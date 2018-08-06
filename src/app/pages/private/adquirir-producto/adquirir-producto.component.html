@@ -5,7 +5,7 @@
     </span>
   </div>
   <div class="dg-content-bartitle dg-bartitle-2"
-    *ngIf="producto">
+       *ngIf="producto">
     <div class="row">
       <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
         <div class="dg-content-icon">
@@ -35,7 +35,7 @@
 
   <div class="dg-content-infoclient">
     <div class="dg-content-button"
-      *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+         *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
       <button class="btn btn-app"
               routerLink="/clientes"
               [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
@@ -43,6 +43,75 @@
         Asignar cliente...
       </button>
     </div>
+
+    <div *ngIf="client">
+      <div class="dg-info-client">
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Nombre:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.nombre }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Dirección:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.direccion }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Teléfono:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <span>
+          {{ client.telefono }}
+        </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Correo:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <span>
+              {{ client.email }}
+            </span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="producto.estatus === 'DISPONIBLE'">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button class="btn btn-app dg-btn-changeclient"
+                    routerLink="/clientes"
+                    [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
+              <i class="fa fa-exchange"></i>
+              Cambiar cliente...
+            </button>
+          </div>
+        </div>
+
+      </div><!-- end - dg-info-client -->
+    </div><!-- end - dg-content-infoclient -->
+
   </div><!-- end - dg-content-infoclient -->
 
   <div class="dg-content-buttons">

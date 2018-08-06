@@ -33,7 +33,6 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    debugger
     if (this.route.snapshot.queryParams['id']) {
       this.returnTo = this.route.snapshot.queryParams['returnTo'];
       this.client.id = this.route.snapshot.queryParams['id'];
