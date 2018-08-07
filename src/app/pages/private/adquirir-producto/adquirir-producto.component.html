@@ -1,4 +1,4 @@
-<div class="dg-content-page dg-page-priceslote">
+<div class="content  dg-content-page dg-page-priceslote">
   <div class="dg-head-back">
     <span (click)="returnToPage()">
       <i class="fa fa-angle-left"></i>
@@ -151,110 +151,112 @@
 
   </div><!-- end - dg-content-buttons -->
 
+
+  <!-- Modal - Bloquear  -->
+  <div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
+       class="modal fade"
+       id="modal-block" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Bloqueo de producto</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            Estás a punto de bloquear el producto
+            <strong>
+              {{producto.id}} - {{producto.nombre}}
+            </strong>
+            para el cliente
+            <label>
+              {{client.nombre}} {{client.apellidos}}
+            </label>
+          </p>
+          <p>
+            Es necesario establecer el número de días:
+            <input type="number"
+                   placeholder="Min: 1 - Max: 5"
+                   min="1"
+                   max="5"
+                   maxlength="1"
+                   [(ngModel)]="diasApartado"
+                   class="dg-input dg-input-dias" />
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-default pull-left"
+                  data-dismiss="modal">
+            Cancelar
+          </button>
+          <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="blockProperty('BLOQUEAR')"
+                  data-dismiss="modal">
+            Aceptar
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <!-- Modal - Apartar  -->
+  <div *ngIf="producto && client && (producto.estatus.toString() === 'DISPONIBLE' || producto.estatus.toString() === 'BLOQUEADO')"
+       class="modal fade"
+       id="modal-apartar" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">
+            Apartado de producto
+          </h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            Estás a punto de apartar el producto
+            <strong>
+              {{producto.id}} - {{producto.nombre}}
+            </strong>
+            para el cliente
+            <label>
+              {{client.nombre}} {{client.apellidos}}
+            </label>
+          </p>
+          <p>
+            Es necesario definir el monto de apartado:
+            <input type="number"
+                   placeholder="$00,000.00"
+                   maxlength="9"
+                   [(ngModel)]="montoApartado" />
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-default pull-left"
+                  data-dismiss="modal">
+            Cancelar
+          </button>
+          <button [disabled]="!(montoApartado > 10000)"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="blockProperty('APARTAR')"
+                  data-dismiss="modal">
+            Aceptar
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
 </div><!-- end - dg-page-priceslote -->
-
-<!-- Modal - Bloquear  -->
-<div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
-     class="modal fade"
-     id="modal-block" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Bloqueo de producto</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Estás a punto de bloquear el producto
-          <strong>
-            {{producto.id}} - {{producto.nombre}}
-          </strong>
-          para el cliente
-          <label>
-            {{client.nombre}} {{client.apellidos}}
-          </label>
-        </p>
-        <p>
-          Es necesario establecer el número de días:
-          <input type="number"
-                 placeholder="Min: 1 - Max: 5"
-                 min="1"
-                 max="5"
-                 maxlength="1"
-                 [(ngModel)]="diasApartado" />
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button"
-                class="btn btn-default pull-left"
-                data-dismiss="modal">
-          Cancelar
-        </button>
-        <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
-                type="button"
-                class="btn btn-primary"
-                (click)="blockProperty('BLOQUEAR')"
-                data-dismiss="modal">
-          Aceptar
-        </button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- Modal - Apartar  -->
-<div *ngIf="producto && client && (producto.estatus.toString() === 'DISPONIBLE' || producto.estatus.toString() === 'BLOQUEADO')"
-     class="modal fade"
-     id="modal-apartar" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">
-          Apartado de producto
-        </h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Estás a punto de apartar el producto
-          <strong>
-            {{producto.id}} - {{producto.nombre}}
-          </strong>
-          para el cliente
-          <label>
-            {{client.nombre}} {{client.apellidos}}
-          </label>
-        </p>
-        <p>
-          Es necesario definir el monto de apartado:
-          <input type="number"
-                 placeholder="$00,000.00"
-                 maxlength="9"
-                 [(ngModel)]="montoApartado" />
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button"
-                class="btn btn-default pull-left"
-                data-dismiss="modal">
-          Cancelar
-        </button>
-        <button [disabled]="!(montoApartado > 10000)"
-                type="button"
-                class="btn btn-primary"
-                (click)="blockProperty('APARTAR')"
-                data-dismiss="modal">
-          Aceptar
-        </button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

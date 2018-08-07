@@ -39,7 +39,7 @@
           display: inline-block;
 
           &:nth-of-type(1){
-            margin-rigth: 0.81em;
+            margin-right: 0.81em;
           }
           &:nth-of-type(2){
             margin-left: 0.81em;
@@ -85,7 +85,7 @@
 
   // bar - dg-content-bartitle
   .dg-content-bartitle{
-    backgrond-size:contain;
+    background-size:contain;
     background-repeat: repeat-x;
     padding: 18px 0 30px 0;
 
@@ -124,7 +124,7 @@
       color: #FFF;
 
       p{
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       .dg-row-text1{
@@ -179,12 +179,11 @@
     background-color: #FFF;
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 15%;
     padding: 2em 0;
 
     .row{
-      padding: 0 2.1em;
-      margin-bottom: 1.5em;
+      padding: 0 1.2em;
+      margin-bottom: 1em;
 
       & > div {
         &:nth-of-type(1){
@@ -219,3 +218,11 @@
   }// end - dg-info-client
 
 } // end - dg-content-page
+
+.dg-input-dias{
+  padding: 0.5em 1.5em;
+}
+
+.modal-backdrop {
+  z-index: 100 !important;
+}
