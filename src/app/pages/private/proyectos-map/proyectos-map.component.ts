@@ -127,7 +127,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
           break;
         }
         case 'VENDIDO': {
-          color_to_return = 'black'; // negro
+          color_to_return = 'gray'; // gris
           break;
         }
       }

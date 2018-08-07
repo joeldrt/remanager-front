@@ -19,7 +19,7 @@ export class FileService {
 
   uploadFiles(folder: string, files: FileEnvelope[]): Observable<HttpResponse<string[]>> {
     const sending_object = { 'folder': folder, 'files': files };
-    return this.http.put<string[]>(this.addFileResourceUrl, sending_object, { observe: 'response'});
+    return this.http.post<string[]>(this.addFileResourceUrl, sending_object, { observe: 'response'});
   }
 
 }
