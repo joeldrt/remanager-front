@@ -18,7 +18,7 @@ export class ContratoService {
 
   constructor(
     private http: HttpClient,
-  ){
+  ) {
     this.addUrl = environment.API_URL + 'api/contratos';
     this.findAllUrl = environment.API_URL + 'api/contratos/all/';
     this.getLastForProductoIdUrl = environment.API_URL + 'api/contratos/_by_producto_id/recent/';
