@@ -1,6 +1,6 @@
 <div class="dg-content-page dg-page-priceslote">
   <div class="dg-head-back">
-    <span>
+    <span (click)="returnToPage()">
       <i class="fa fa-angle-left"></i>
     </span>
   </div>
@@ -38,7 +38,7 @@
          *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
       <button class="btn btn-app"
               routerLink="/clientes"
-              [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
+              [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn }">
         <i class="fa fa-users"></i>
         Asignar cliente...
       </button>
@@ -102,7 +102,7 @@
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <button class="btn btn-app dg-btn-changeclient"
                     routerLink="/clientes"
-                    [queryParams]="{returnTo: '/adquirir', productoId: productoId}">
+                    [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
               <i class="fa fa-exchange"></i>
               Cambiar cliente...
             </button>
@@ -136,11 +136,12 @@
       </div>
       <div class="dg-content-btns">
         <div class="dg-content-button">
-          <button (click)="setAsideProperty()"
+          <button data-target="#modal-apartar"
+                  data-toggle="modal"
                   class="dg-btn dg-btn-orange">
             Apartar
           </button>
-          <button (click)="toSellProperty()"
+          <button
                   class="dg-btn dg-btn-green">
             Vender
           </button>

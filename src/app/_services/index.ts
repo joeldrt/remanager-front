@@ -11,5 +11,4 @@ export * from './svg-rest.service';
 export * from './client.service';
 export * from './tipo-producto.service';
 export * from './valor.campo.producto.service';
-export * from './historico.estatus.productos.service';
 export * from './contrato.service';

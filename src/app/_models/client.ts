@@ -1,7 +1,3 @@
-import { HistoricoEstatusProducto } from './historico.estatus.producto';
-import { PagoProgramado } from './pago.programado';
-import { PagoReal } from './pago.real';
-
 export class Client {
   public apellidos?: string;
   public correoVendedor?: string;
@@ -13,9 +9,6 @@ export class Client {
   public organizacionId?: number;
   public telefono?: number;
   public email?: string;
-  public historicoProductos?: HistoricoEstatusProducto[];
-  public pagosProgramados?: PagoProgramado[];
-  public pagosReales?: PagoReal[];
 }
 
 

@@ -37,13 +37,15 @@ import {
   ClientService,
   TipoProductoService,
   ValorCampoProductoService,
-  HistoricoEstatusProductosService,
   ContratoService,
 } from './_services';
 import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 import {
   FileService,
 } from './_dgtools_services';
+
+// utils
+import {ProductUtils} from './_utils/product.utils';
 
 // helpers
 import {
@@ -136,10 +138,9 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
       multi: true
     },
     DigiallDateUtils,
-    HistoricoEstatusProductosService,
-
     // _dgtools_services
     FileService,
+    ProductUtils
   ],
   bootstrap: [AppComponent]
 })

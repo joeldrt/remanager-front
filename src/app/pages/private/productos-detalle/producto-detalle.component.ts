@@ -12,7 +12,8 @@ import {
 } from '../../../_services';
 
 import {
-  Producto
+  EstatusDeProducto,
+  Producto, TipoContrato
 } from '../../../_models';
 import {
   HeaderHelper
@@ -95,12 +96,23 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
   }
 
   setFooterMenu(producto: Producto) {
+    if (producto.estatus === EstatusDeProducto.DISPONIBLE) {
+      this.footerMenu.clearButtons('/productos/' + producto.id);
+      this.footerMenu.addButtonFromValues(
+        '/productos/' + producto.id,
+        'Adquirir producto',
+        'fa fa-shopping-cart',
+        '/adquirir/' + this.productoId,
+        {'routeToReturn': this.routeToReturn}
+      );
+      this.footerMenu.sendMenuRequest('/productos/' + producto.id);
+      return;
+    }
     this.footerMenu.clearButtons('/productos/' + producto.id);
     this.footerMenu.addButtonFromValues(
       '/productos/' + producto.id,
-      'Adquirir producto',
-      'fa fa-shopping-cart',
-      '/adquirir/' + this.productoId
+      'Producto ' + producto.estatus.toString().toLowerCase(),
+      'fa fa-lock'
     );
     this.footerMenu.sendMenuRequest('/productos/' + producto.id);
   }
@@ -110,7 +122,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
       return;
     }
     const modify_array_fotos = new Array<string>();
-    for (let url_foto of this.producto.fotos) {
+    for (const url_foto of this.producto.fotos) {
       modify_array_fotos.push(this.image_resource_url_base + url_foto);
     }
     this.producto.fotos = modify_array_fotos;

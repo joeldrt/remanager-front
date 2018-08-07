@@ -5,11 +5,9 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 // Services
 import {ClientService} from '../../../_services';
-import {HistoricoEstatusProductosService} from '../../../_services';
 
 // Models
 import {Client} from '../../../_models/client';
-import {HistoricoEstatusProducto} from '../../../_models/historico.estatus.producto';
 
 @Component({
   selector: 'app-info-client',
@@ -20,13 +18,11 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
 
   public returnTo: string;
   public client: Client;
-  public historicoProductos: HistoricoEstatusProducto[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clientService: ClientService,
-    private historicoService: HistoricoEstatusProductosService
+    private clientService: ClientService
   ) {
     this.client = new Client();
     this.returnTo = null;

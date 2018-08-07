@@ -16,6 +16,7 @@ export class AddClientComponent implements OnInit {
   public returnTo: string;
   public client: Client;
   public productId: string;
+  public routeToReturn: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit() {
     this.returnTo = this.route.snapshot.queryParams['returnTo'];
+    this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
     if (this.returnTo === '/adquirir') {
       this.productId = this.route.snapshot.queryParams['productId'];
     }
@@ -58,8 +60,9 @@ export class AddClientComponent implements OnInit {
         console.log('Ir a Clientes');
         break;
       case '/adquirir':
-        this.router.navigate(['/adquirir', this.productId], {queryParams: {
-            clientId: this.client.id
+        this.router.navigate(['/adquirir', this.productId], { queryParams: {
+            clientId: this.client.id,
+            routeToReturn: this.routeToReturn
           }});
         break;
     }
@@ -71,7 +74,9 @@ export class AddClientComponent implements OnInit {
         this.router.navigate(['/clientes']);
         break;
       case '/adquirir':
-        this.router.navigate(['/adquirir', this.productId]);
+        this.router.navigate(['/adquirir', this.productId],{ queryParams: {
+          routeToReturn: this.routeToReturn
+          }});
         break;
     }
   } // end - cancelAddClient()

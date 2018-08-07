@@ -25,6 +25,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   public returnTo: string;
   public productId: string;
   public loading: boolean;
+  public routeToReturn: string;
 
   constructor(
     private accountService: AccountService,
@@ -47,6 +48,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     if (this.route.snapshot.queryParams['returnTo']) {
       this.returnTo = this.route.snapshot.queryParams['returnTo'];
       this.productId = this.route.snapshot.queryParams['productoId'];
+      this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
     }
     this.getAccount();
   }
@@ -113,7 +115,8 @@ export class ClientesComponent implements OnInit, AfterViewInit {
             returnTo: this.returnTo,
             productId: this.productId,
             correoVendedor: this.user.email,
-            organizationId: this.organization.id}});
+            organizationId: this.organization.id,
+            routeToReturn: this.routeToReturn }});
     } else {
       this.returnTo = '/clientes';
       this.router.navigate(['/clientes/add'],
@@ -130,7 +133,10 @@ export class ClientesComponent implements OnInit, AfterViewInit {
         {queryParams: { id: clientSelected.id, returnTo: this.returnTo}});
     } else {
       this.router.navigate(['/adquirir', this.productId],
-        {queryParams: { clientId: clientSelected.id }});
+        {queryParams: {
+            clientId: clientSelected.id,
+            routeToReturn: this.routeToReturn
+          }});
     }
   } // end - clickOnClient()
 
