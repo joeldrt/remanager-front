@@ -56,6 +56,12 @@
 
 /*---*/
 .dg-content-page{
+  background-color: #FFF;
+  min-height: calc(100vh - 200px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+
   &.dg-page-priceslote{
     .dg-content-barclient{
     }

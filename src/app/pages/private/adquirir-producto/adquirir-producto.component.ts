@@ -4,13 +4,14 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Services
-import { ProductoService, ClientService, AccountService, ToasterService } from '../../../_services';
+import {ProductoService, ClientService, AccountService, ToasterService, ContratoService} from '../../../_services';
 
 // Models
 import { Producto } from '../../../_models';
 import { User } from '../../../_models';
 import { Organizacion } from '../../../_models/organizacion';
 import { Client } from '../../../_models/client';
+import { Contrato, TipoContrato, PagoReal, PagoProgramado } from '../../../_models';
 
 // Helpers
 import { HeaderHelper } from '../../../_helpers';
@@ -26,8 +27,11 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   public client: Client;
   public organization: Organizacion;
   public producto: Producto;
+  public contrato: Contrato;
   public productoId: string;
   public clientId: string;
+  public diasApartado: number;
+  public montoApartado: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +40,8 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     private clientService: ClientService,
     private toasterService: ToasterService,
     private headerHelper: HeaderHelper,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private contratoService: ContratoService,
   ) {
     this.user = new User();
     this.organization = new Organizacion();
@@ -119,5 +124,32 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       });
     }
   } // end - getClient
+
+  blockProperty(typeAction: string) {
+    this.contrato = new Contrato();
+    this.contrato.clienteId = this.client.id;
+    this.contrato.productoId = this.producto.id;
+
+    switch (typeAction) {
+      case 'BLOQUEAR':
+        this.contrato.tipo = TipoContrato.BLOQUEO;
+        this.contrato.diasValidez = this.diasApartado;
+        break;
+      case 'APARTAR':
+        this.contrato.tipo = TipoContrato.APARTADO;
+        break;
+      case 'VENDER':
+        this.contrato.tipo = TipoContrato.VENTA;
+        break;
+    }
+
+    this.contratoService.create(this.contrato)
+      .subscribe((res: HttpResponse<Contrato>) => {
+        this.toasterService.success('Producto Apartado');
+        this.router.navigate(['/productos', this.productoId]);
+      }, (res: HttpErrorResponse) => {
+        this.toasterService.error('Error: ' + res.message);
+      });
+  }
 
 }

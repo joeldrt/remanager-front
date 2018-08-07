@@ -1,5 +1,15 @@
 <div class="content">
 
+  <div class="dg-content-loading"
+       style="min-height: inherit;
+                max-height: inherit;"
+       *ngIf="loading">
+    <app-loading
+      style="min-height: inherit;
+              max-height: inherit;">
+    </app-loading>
+  </div>
+
   <!-- Profile Image -->
   <div class="box box-primary dg-content-box"
     *ngIf="user">
@@ -21,7 +31,7 @@
         <form action="">
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item dg-control">
-              <label for="nombre">
+              <label>
                 Nombre:
               </label>
               <input type="text"
@@ -30,7 +40,7 @@
                      [disabled]="!isEditing" />
             </li>
             <li class="list-group-item dg-control">
-              <label for="login">
+              <label>
                 Apellidos:
               </label>
               <input type="text"
