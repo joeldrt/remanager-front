@@ -1,7 +1,9 @@
 .content {
-  overflow-y: auto !important;
-  min-height: 78vh !important;
-  max-height: 78vh !important;
+  background-color: #FFF;
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   .dg-content-box{
     margin: 0 auto;
@@ -11,9 +13,14 @@
     .text-muted{
       overflow: hidden;
     }
-
-
   }
+
+  .box{
+    box-shadow: none;
+    &.box-primary{
+      border-top-color: transparent;
+    }
+  }// end - box
 
   .dg-content-form{
     padding: 1.5em 1.5em;
@@ -21,14 +28,13 @@
       background-color: #EEEEEF;
       border: none;
       border-radius: 15px;
-      display: block;
+      display: inline-block;
       padding: 1em 1.5em;
-      width: 100%;
+      width: 80%;
 
       &[ng-reflect-is-disabled="true"]{
         background-color: transparent;
         border: none;
-        border-bottom: solid 2px #3c8dbc;
         color: rgba(0,0,0,0.8);
         padding-bottom: 0px;
       }
@@ -40,10 +46,11 @@
         magin-top: 1.5em;
         label{
           color: #818181;
-          display: block;
+          display: inline-block;
           font-weight: normal;
           margin-top: 1em;
           margin-left: 1em;
+          max-width: 19%;
         }
         input{
           color: #6E6E6E;

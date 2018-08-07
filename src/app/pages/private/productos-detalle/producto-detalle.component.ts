@@ -24,10 +24,11 @@ import {
   styleUrls: ['./producto-detalle.component.scss']
 })
 export class ProductoDetalleComponent implements OnInit, OnDestroy {
-  image_resource_url_base: string;
 
+  image_resource_url_base: string;
   productoId: number;
   producto: Producto;
+  loading: boolean;
 
   routeToReturn: string;
 
@@ -46,6 +47,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     private headerHelper: HeaderHelper
   ) {
     this.image_resource_url_base = environment.API_URL;
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -81,6 +83,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
           this.append_base_url_to_fotos();
           this.headerHelper.sendHeaderTitleRequest(this.producto.nombre);
           this.setFooterMenu(this.producto);
+          this.loading = false;
         } else {
           this.toaster.error('La respuesta del servido viene vacía');
         }

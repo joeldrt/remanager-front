@@ -1,3 +1,6 @@
+import {PagoReal} from './pago.real';
+import {PagoProgramado} from './pago.programado';
+
 export const enum EstatusDeProducto {
     'DISPONIBLE',
     'APARTADO',
@@ -36,8 +39,8 @@ export class Producto {
         public valoresCampos?: ValorCampo[], // cambiar al tipo de entidad necesaria
         public fotos?: string[],
         public archivos?: string[], // cambiar al tipo de entidad necesaria
-        public pagosProgramados?: any[], // cambiar al tipo de entidad necesaria
-        public pagosReales?: any[], // cambiar al tipo de entidad necesaria
+        public pagosProgramados?: PagoProgramado[], // cambiar al tipo de entidad necesaria
+        public pagosReales?: PagoReal[], // cambiar al tipo de entidad necesaria
     ) {
     }
 }

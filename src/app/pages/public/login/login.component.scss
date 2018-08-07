@@ -28,7 +28,14 @@
         border-bottom: 1px solid #1D3446;
         margin: 0 auto;
         margin-bottom: 18px;
+        position: relative;
         width: 84%;
+
+        .help-block{
+          font-size: 0.81em;
+          position: absolute;
+          right: 0;
+        }
 
         .dg-row-input{
           & > *{
@@ -91,6 +98,14 @@
   }// end - dg-content-form
 
 } // end - .dg-content-login
+
+@media (min-width: 991px) {
+  .dg-content-login{
+    .dg-content-form{
+      margin-top: 15%;
+    }
+  }
+}
 
 // ---
 .dg-line-temp{

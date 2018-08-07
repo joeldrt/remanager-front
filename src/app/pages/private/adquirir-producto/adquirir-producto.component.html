@@ -152,7 +152,7 @@
 
 </div><!-- end - dg-page-priceslote -->
 
-<!-- Modal - Borrar  -->
+<!-- Modal - Bloquear  -->
 <div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
      class="modal fade"
      id="modal-block" >
@@ -193,7 +193,60 @@
         <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
                 type="button"
                 class="btn btn-primary"
-                (click)="blockProperty()"
+                (click)="blockProperty('BLOQUEAR')"
+                data-dismiss="modal">
+          Aceptar
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal - Apartar  -->
+<div *ngIf="producto && client && (producto.estatus.toString() === 'DISPONIBLE' || producto.estatus.toString() === 'BLOQUEADO')"
+     class="modal fade"
+     id="modal-apartar" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+          Apartado de producto
+        </h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Estás a punto de apartar el producto
+          <strong>
+            {{producto.id}} - {{producto.nombre}}
+          </strong>
+          para el cliente
+          <label>
+            {{client.nombre}} {{client.apellidos}}
+          </label>
+        </p>
+        <p>
+          Es necesario definir el monto de apartado:
+          <input type="number"
+                 placeholder="$00,000.00"
+                 maxlength="9"
+                 [(ngModel)]="montoApartado" />
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-default pull-left"
+                data-dismiss="modal">
+          Cancelar
+        </button>
+        <button [disabled]="!(montoApartado > 10000)"
+                type="button"
+                class="btn btn-primary"
+                (click)="blockProperty('APARTAR')"
                 data-dismiss="modal">
           Aceptar
         </button>

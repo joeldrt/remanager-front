@@ -36,7 +36,6 @@ export class AddClientComponent implements OnInit {
   saveClient(f: NgForm) {
     this.client.correoVendedor = this.route.snapshot.queryParams['correoVendedor'];
     this.client.organizacionId = this.route.snapshot.queryParams['organizationId'];
-    this.client.fechaAlta = new Date(Date.now());
 
     if (this.client.correoVendedor) {
       this.clientService.create(this.client).subscribe(

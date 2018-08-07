@@ -31,6 +31,7 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   public productoId: string;
   public clientId: string;
   public diasApartado: number;
+  public montoApartado: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -124,12 +125,23 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     }
   } // end - getClient
 
-  blockProperty() {
+  blockProperty(typeAction: string) {
     this.contrato = new Contrato();
-    this.contrato.tipo = TipoContrato.BLOQUEO;
     this.contrato.clienteId = this.client.id;
-    this.contrato.diasValidez = this.diasApartado;
     this.contrato.productoId = this.producto.id;
+
+    switch (typeAction) {
+      case 'BLOQUEAR':
+        this.contrato.tipo = TipoContrato.BLOQUEO;
+        this.contrato.diasValidez = this.diasApartado;
+        break;
+      case 'APARTAR':
+        this.contrato.tipo = TipoContrato.APARTADO;
+        break;
+      case 'VENDER':
+        this.contrato.tipo = TipoContrato.VENTA;
+        break;
+    }
 
     this.contratoService.create(this.contrato)
       .subscribe((res: HttpResponse<Contrato>) => {
@@ -138,14 +150,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       }, (res: HttpErrorResponse) => {
         this.toasterService.error('Error: ' + res.message);
       });
-  }
-
-  setAsideProperty() {
-
-  }
-
-  toSellProperty() {
-
   }
 
 }

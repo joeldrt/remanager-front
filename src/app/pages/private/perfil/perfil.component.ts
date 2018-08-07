@@ -13,13 +13,14 @@ import {ProfileHelper} from '../../../_helpers';
 export class PerfilComponent implements OnInit {
   public user: User;
   public isEditing: boolean;
+  public loading: boolean;
 
   constructor(
     private accountService: AccountService,
     private toasterService: ToasterService,
     private profileHelper: ProfileHelper
   ) {
-
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -59,6 +60,7 @@ export class PerfilComponent implements OnInit {
     this.accountService.getAccount().subscribe(
       (response: HttpResponse<User>) => {
         this.user = response.body;
+        this.loading = false;
       },
       (error: HttpErrorResponse) => {
         this.toasterService.error(error.message);
