@@ -1,3 +1,5 @@
+import {ProductUtils} from '../../../_utils/product.utils';
+
 declare var addSVGZoomingCapabilities: any;
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -38,6 +40,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     private svgService: SvgRestService,
     private svgToolService: SvgToolService,
     private headerHelper: HeaderHelper,
+    private productUtils: ProductUtils
   ) {
   }
 
@@ -110,36 +113,12 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   fillPolygonFillColorMap() {
-
-    function colorByStatus(status: string): string {
-      let color_to_return = 'white';
-      switch (status) {
-        case 'DISPONIBLE': {
-          color_to_return = 'green'; // verde
-          break;
-        }
-        case 'APARTADO': {
-          color_to_return = 'yellow'; // amarillo
-          break;
-        }
-        case 'BLOQUEADO': {
-          color_to_return = 'red'; // rojo
-          break;
-        }
-        case 'VENDIDO': {
-          color_to_return = 'gray'; // gris
-          break;
-        }
-      }
-      return color_to_return;
-    }
-
     this.polygon_fill_color_map = new Map<string, string>();
     for (const proyecto of this.proyectos) {
       this.polygon_fill_color_map.set(proyecto.idSeccion, 'blue');
     }
     for (const producto of this.productos) {
-      this.polygon_fill_color_map.set(producto.idSeccion, colorByStatus(producto.estatus.toString()));
+      this.polygon_fill_color_map.set(producto.idSeccion, this.productUtils.colorByStatus(producto.estatus.toString()));
     }
   }
 

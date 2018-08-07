@@ -32,6 +32,7 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   public clientId: string;
   public diasApartado: number;
   public montoApartado: number;
+  public routeToReturn: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,15 +55,11 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       this.router.navigate(['/proyectos']);
       return;
     }
-
+    this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
     this.route.queryParams.subscribe(params => {
       this.clientId = params.clientId;
       this.getClient();
     });
-
-    /*if (this.route.queryParams) {
-      this.getClient();
-    }*/
 
     this.getProducto(this.productoId);
     this.getAccount();
@@ -137,19 +134,29 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
         break;
       case 'APARTAR':
         this.contrato.tipo = TipoContrato.APARTADO;
+        const pagoReal = new PagoReal();
+        pagoReal.monto = this.montoApartado;
+        this.contrato.pagosReales = new Array<PagoReal>();
+        this.contrato.pagosReales.push(pagoReal);
         break;
       case 'VENDER':
-        this.contrato.tipo = TipoContrato.VENTA;
+        // redirect page ventas
         break;
     }
 
     this.contratoService.create(this.contrato)
       .subscribe((res: HttpResponse<Contrato>) => {
         this.toasterService.success('Producto Apartado');
-        this.router.navigate(['/productos', this.productoId]);
+        this.returnToPage();
       }, (res: HttpErrorResponse) => {
         this.toasterService.error('Error: ' + res.message);
       });
   }
+
+  returnToPage() {
+    this.router.navigate(['/productos', this.productoId], {queryParams: {
+        routeToReturn: this.routeToReturn
+      }});
+  } // end - returnToPage()
 
 }

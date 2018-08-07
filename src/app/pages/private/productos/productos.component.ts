@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Producto } from '../../../_models';
 import {AccountService, ProductoService, ToasterService} from '../../../_services';
 import {Organizacion} from '../../../_models/organizacion';
+import {ProductUtils} from '../../../_utils/product.utils';
 
 @Component({
   selector: 'app-productos',
@@ -20,6 +21,7 @@ export class ProductosComponent implements OnInit {
     private productoService: ProductoService,
     private toaster: ToasterService,
     private accountService: AccountService,
+    private productUtils: ProductUtils,
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,10 @@ export class ProductosComponent implements OnInit {
 
   detalleDeProducto(producto: Producto) {
     this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/productos'}});
+  }
+
+  colorByStatus(status: string): string {
+    return this.productUtils.colorByStatus(status);
   }
 
 }

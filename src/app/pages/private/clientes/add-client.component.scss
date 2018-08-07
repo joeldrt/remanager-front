@@ -3,6 +3,12 @@
 }
 
 .dg-content-page{
+  background-color: #FFF;
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+
   &.dg-page-form{
     .dg-content-btns{
       margin: 1em 0 2.1em 0;

@@ -7,6 +7,16 @@
     </div>
   </div>
 
+  <div class="dg-content-loading"
+       style="min-height: inherit;
+                max-height: inherit;"
+       *ngIf="loading">
+    <app-loading
+      style="min-height: inherit;
+              max-height: inherit;">
+    </app-loading>
+  </div>
+
   <div class="">
     <div class="dg-content-bartitle dg-bartitle-2"
          *ngIf="producto">

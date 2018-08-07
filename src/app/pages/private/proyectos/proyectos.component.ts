@@ -5,6 +5,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Proyecto, Producto } from '../../../_models';
 import { ProyectoService, ProductoService, ToasterService } from '../../../_services';
 import {ProyectoNavhelper, FooterMenuhelper, HeaderHelper} from '../../../_helpers';
+import {ProductUtils} from '../../../_utils/product.utils';
 
 @Component({
   selector: 'app-proyectos',
@@ -27,6 +28,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     private productoService: ProductoService,
     private footerMenu: FooterMenuhelper,
     private headerHelper: HeaderHelper,
+    private productUtils: ProductUtils,
   ) {
   }
 
@@ -149,4 +151,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/proyectos'}});
   }
 
+  colorByStatus(status: string): string {
+    return this.productUtils.colorByStatus(status);
+  }
 }

@@ -26,9 +26,14 @@ export class FooterMenuhelper {
     this.map_buttons.set(route, buttons_to_change);
   }
 
-  public addButtonFromValues(route: string, button_name: string, button_icon: string, target_url: string) {
-    const footer_button = new FooterButton(button_name, button_icon, target_url);
-    this.addButton(route, footer_button);
+  public addButtonFromValues(route: string, button_name: string, button_icon: string, target_url?: string, query_params?: any) {
+    if (!query_params) {
+      const footer_button = new FooterButton(button_name, button_icon, target_url);
+      this.addButton(route, footer_button);
+    } else {
+      const footer_button = new FooterButton(button_name, button_icon, target_url, query_params);
+      this.addButton(route, footer_button);
+    }
   }
 
   public removeButton(route: string, footer_button: FooterButton) {
@@ -69,6 +74,9 @@ export class FooterButton {
   constructor(
     public button_name: string,
     public button_icon: string,
-    public target_url: string
-  ) { }
+    public target_url?: string,
+    public query_params?: any
+  ) {
+
+  }
 }
