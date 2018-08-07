@@ -4,7 +4,9 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FileEnvelope } from '../../../_dgtools_models';
 import { FileService } from '../../../_dgtools_services';
 
-import { ToasterService } from '../../../_services';
+import { Contrato, PagoProgramado, PagoReal, TipoContrato } from '../../../_models';
+
+import { ToasterService, ContratoService } from '../../../_services';
 
 @Component({
   selector: 'app-dgtools',
@@ -13,7 +15,7 @@ import { ToasterService } from '../../../_services';
 })
 export class DgtoolsComponent implements OnInit {
 
-  @ViewChild('uploadfile_field') image_input_field: ElementRef;
+  @ViewChild('uploadfileField') upload_file_field: ElementRef;
 
   file_folder: string;
   file_envelopes: Array<FileEnvelope>;
@@ -23,6 +25,7 @@ export class DgtoolsComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private toaster: ToasterService,
+    private contratoService: ContratoService,
   ) { }
 
   ngOnInit() {
@@ -49,7 +52,7 @@ export class DgtoolsComponent implements OnInit {
 
   uploadFiles() {
     if (!this.file_folder || this.file_folder === '') {
-
+      return;
     }
     if (!this.file_envelopes || this.file_envelopes.length <=0) {
       return;
@@ -57,15 +60,52 @@ export class DgtoolsComponent implements OnInit {
     this.is_uploading_in_process = true;
     this.fileService.uploadFiles(this.file_folder, this.file_envelopes).subscribe(
       (response: HttpResponse<string[]>) => {
+        this.is_uploading_in_process = false;
         if (response && response.body) {
+          this.clearUploadForm();
           this.uploaded_files = response.body;
-          for (let url in this.uploaded_files) {
+          for (const url of this.uploaded_files) {
             this.toaster.success(url);
           }
         }
       },
       (error: HttpErrorResponse) => {
+        this.clearUploadForm();
+        this.is_uploading_in_process = false;
         this.toaster.error('status' + error.status + ' message: ' + error.message);
+      }
+    );
+  }
+
+  clearUploadForm() {
+    this.upload_file_field.nativeElement.value = '';
+    this.file_folder = '';
+  }
+
+  testContratoPagoReal() {
+    const contrato = new Contrato();
+    contrato.tipo = TipoContrato.BLOQUEO;
+    contrato.clienteId = '5b6158e0878c8b2034f678a8';
+    contrato.productoId = '5b64aed775916f6fdd8f2ee2';
+    contrato.diasValidez = 15;
+    contrato.pagosReales = new Array<PagoReal>();
+    contrato.pagosProgramados = new Array<PagoProgramado>();
+
+    const pago_real = new PagoReal();
+    pago_real.monto = 150000;
+    contrato.pagosReales.push(pago_real);
+
+    const pago_programado = new PagoProgramado();
+    pago_programado.monto = 350000
+    pago_programado.fechaCompromisoPago = '2019-01-17T00:00:00.00Z';
+    contrato.pagosProgramados.push(pago_programado);
+
+    this.contratoService.create(contrato).subscribe(
+      (response: HttpResponse<Contrato>) => {
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.message);
       }
     );
   }

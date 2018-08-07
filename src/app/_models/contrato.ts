@@ -13,7 +13,10 @@ export class PagoProgramado {
 }
 
 export enum TipoContrato {
-  BLOQUEO, APARTADO, VENTA, DEVOLUCION
+  BLOQUEO='BLOQUEO',
+  APARTADO='APARTADO',
+  VENTA='VENTA',
+  DEVOLUCION='DEVOLUCION',
 }
 
 export class Contrato {
