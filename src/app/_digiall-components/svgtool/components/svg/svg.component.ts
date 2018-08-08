@@ -43,12 +43,12 @@ export class SvgComponent implements OnInit, OnDestroy, AfterViewInit {
   public showModalDelete: boolean;
   public isSelectedPolygon: boolean;
 
-  private isDrawing: boolean;
-  private pX: string;
-  private pY: string;
-  private idSvg: number;
-  private isZoom: boolean;
-  private countZoom: number;
+  isDrawing: boolean;
+  pX: string;
+  pY: string;
+  idSvg: number;
+  isZoom: boolean;
+  countZoom: number;
 
   constructor(
     private renderer: Renderer2,
