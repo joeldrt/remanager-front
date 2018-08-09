@@ -83,6 +83,11 @@
     background-image:url('../../../../assets/img/line-back-buttonGreen.png');
   }
 
+  .dg-btn-blue{
+    background-color:blue;
+    background-image:url('../../../../assets/img/line-back-buttonBlue.png');
+  }
+
   // bar - dg-content-bartitle
   .dg-content-bartitle{
     background-size:contain;
@@ -219,11 +224,47 @@
 
 } // end - dg-content-page
 
-.dg-input-dias{
+.dg-input{
+  background-color: #E2E2E2;
+  border: none;
+  color: #232a85;
+  font-weight: bold;
   padding: 0.5em 1.5em;
-  min-width: 150px;
 }
+
+.dg-input-dias{
+  min-width: 156px;
+  max-width: 156px;
+}// end - .dg-input-dias
+.dg-input-monto{
+  min-width: 159px;
+  max-width: 159px;
+}
+
 
 .modal-backdrop {
   z-index: 100 !important;
-}
+}// end - .modal-backdrop
+
+.dg-modal-msg{
+  .modal-dialog{
+    .modal-content{
+      border-radius: 21px;
+      max-width: 480px;
+      margin: 0 auto;
+
+      .modal-body{
+        padding: 0.5em 1em;
+      }
+
+      .modal-footer{
+        .dg-content-btns{
+          min-width: 250px;
+          max-width: 250px;
+          margin: 0 auto;
+        }
+      }
+
+    }// end - .modal-content
+  }// end - .modal-dialog
+}// end - .dg-modal-msg

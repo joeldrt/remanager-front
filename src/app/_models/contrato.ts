@@ -28,4 +28,5 @@ export class Contrato {
   public diasValidez?: number;
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];
+  public activo?: boolean;
 }

@@ -53,5 +53,4 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
   goBackPage() {
     this.router.navigate(['/clientes']);
   }
-
 }
