@@ -126,13 +126,15 @@
 
     <div *ngIf="client">
       <div class="dg-content-btnlink">
-      <span>
         <button data-target="#modal-block"
                 data-toggle="modal"
                 class="dg-text-link" >
           Bloquear
         </button>
-      </span>
+        <button (click)="blockProperty('CORRIDA')"
+                class="dg-text-link">
+          Generar Corrida
+        </button>
       </div>
       <div class="dg-content-btns">
         <div class="dg-content-button">
@@ -141,7 +143,7 @@
                   class="dg-btn dg-btn-orange">
             Apartar
           </button>
-          <button
+          <button (click)="blockProperty('VENDER')"
                   class="dg-btn dg-btn-green">
             Vender
           </button>
@@ -225,7 +227,7 @@
           <p>
             Estás a punto de apartar el producto
             <strong>
-              {{producto.id}} - {{producto.nombre}}
+              {{producto.nombre}}
             </strong>
             para el cliente
             <label>

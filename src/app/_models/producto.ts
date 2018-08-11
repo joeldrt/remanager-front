@@ -3,20 +3,19 @@ export const enum EstatusDeProducto {
     DISPONIBLE = 'DISPONIBLE',
     APARTADO = 'APARTADO',
     BLOQUEADO = 'BLOQUEADO',
-    VENDIDO = 'VENDIDO'
+    VENDIDO = 'VENDIDO',
 }
 
 export class ValorCampo {
     constructor(
         public fechaCreacion?: any,
-
         public nombre?: string,
         public valor?: string,
         public icono?: string,
         public tipoCampo?: string,
-    ){
+    ) {
     }
-}
+}// - end - ValorCampo
 
 export class Producto {
     constructor(

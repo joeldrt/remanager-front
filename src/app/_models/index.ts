@@ -6,3 +6,4 @@ export * from './campo.de.producto';
 export * from './tipo.producto';
 export * from './valor.campo.producto';
 export * from './contrato';
+export * from './client';

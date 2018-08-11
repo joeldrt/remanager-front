@@ -77,6 +77,8 @@ import { ProductoDetalleComponent } from './pages/private/productos-detalle/prod
 import { InfoClientComponent } from './pages/private/clientes/info-client.component';
 import { LoadingComponent } from './_digiall-components/loading/loading.component';
 import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adquirir-producto.component';
+import { ProductoPagosComponent } from './pages/private/producto-pagos/producto-pagos.component';
+import { ProductoCorridaComponent } from './pages/private/producto-corrida/producto-corrida.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adq
     LoadingComponent,
     AdquirirProductoComponent,
     DgtoolsComponent,
+    ProductoPagosComponent,
+    ProductoCorridaComponent,
   ],
   imports: [
     BrowserModule,
