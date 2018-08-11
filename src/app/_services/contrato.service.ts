@@ -16,6 +16,7 @@ export class ContratoService {
   private addPagoRealUrl;
   private addPagoProgramadoUrl;
   private findAllForClienteIdUrl;
+  private getContractForIdUrl;
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,9 @@ export class ContratoService {
     this.findAllForProductoIdUrl = environment.API_URL + 'api/contratos/_by_producto_id/all/';
     this.addPagoRealUrl = environment.API_URL + 'api/contratos/_add_pago_real/';
     this.addPagoProgramadoUrl = environment.API_URL + 'api/contrato/_add_pago_programado/';
-    this.findAllForClienteIdUrl = environment.API_URL + 'api/contratos/_by_cliente_id/'
+    this.findAllForClienteIdUrl = environment.API_URL + 'api/contratos/_by_cliente_id/';
+    this.getContractForIdUrl = environment.API_URL + 'api/contratos/_by_contrato_id/';
+
   }
 
   create(contrato: Contrato): Observable<HttpResponse<Contrato>> {
@@ -56,6 +59,10 @@ export class ContratoService {
 
   findAllForClienteId(clienteId: string): Observable<HttpResponse<Contrato[]>> {
     return this.http.get<Contrato[]>(this.findAllForClienteIdUrl + clienteId, { observe: 'response' });
+  }
+
+  getContractForClientId(contractId: string): Observable<HttpResponse<Contrato>> {
+    return this.http.get<Contrato>(this.getContractForIdUrl + contractId, {observe: 'response'});
   }
 
 }

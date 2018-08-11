@@ -126,13 +126,15 @@
 
     <div *ngIf="client">
       <div class="dg-content-btnlink">
-      <span>
         <button data-target="#modal-block"
                 data-toggle="modal"
                 class="dg-text-link" >
           Bloquear
         </button>
-      </span>
+        <button (click)="blockProperty('CORRIDA')"
+                class="dg-text-link">
+          Generar Corrida
+        </button>
       </div>
       <div class="dg-content-btns">
         <div class="dg-content-button">
@@ -141,7 +143,7 @@
                   class="dg-btn dg-btn-orange">
             Apartar
           </button>
-          <button
+          <button (click)="blockProperty('VENDER')"
                   class="dg-btn dg-btn-green">
             Vender
           </button>
@@ -154,7 +156,7 @@
 
   <!-- Modal - Bloquear  -->
   <div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
-       class="modal fade"
+       class="modal fade dg-modal-msg"
        id="modal-block" >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -165,9 +167,9 @@
         </div>
         <div class="modal-body">
           <p>
-            Estás a punto de bloquear el producto
+            Estás a punto de bloquear el producto:
             <strong>
-              {{producto.id}} - {{producto.nombre}}
+              {{producto.nombre}}
             </strong>
             para el cliente
             <label>
@@ -177,7 +179,7 @@
           <p>
             Es necesario establecer el número de días:
             <input type="number"
-                   placeholder="Min: 1 - Max: 5"
+                   placeholder="1 - 5 días"
                    min="1"
                    max="5"
                    maxlength="2"
@@ -186,18 +188,20 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button"
-                  class="btn btn-default pull-left"
-                  data-dismiss="modal">
-            Cancelar
-          </button>
-          <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="blockProperty('BLOQUEAR')"
-                  data-dismiss="modal">
-            Aceptar
-          </button>
+          <div class="dg-content-btns">
+            <button type="button"
+                    class="btn btn-default pull-left dg-text-link"
+                    data-dismiss="modal">
+              Cancelar
+            </button>
+            <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
+                    type="button"
+                    class="btn btn-primary dg-btn dg-btn-blue"
+                    (click)="blockProperty('BLOQUEAR')"
+                    data-dismiss="modal">
+              Aceptar
+            </button>
+          </div>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -208,7 +212,7 @@
 
   <!-- Modal - Apartar  -->
   <div *ngIf="producto && client && (producto.estatus.toString() === 'DISPONIBLE' || producto.estatus.toString() === 'BLOQUEADO')"
-       class="modal fade"
+       class="modal fade dg-modal-msg"
        id="modal-apartar" >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -223,7 +227,7 @@
           <p>
             Estás a punto de apartar el producto
             <strong>
-              {{producto.id}} - {{producto.nombre}}
+              {{producto.nombre}}
             </strong>
             para el cliente
             <label>
@@ -233,24 +237,27 @@
           <p>
             Es necesario definir el monto de apartado:
             <input type="number"
-                   placeholder="$00,000.00"
+                   placeholder="monto > 10mil"
                    maxlength="9"
-                   [(ngModel)]="montoApartado" />
+                   [(ngModel)]="montoApartado"
+                   class="dg-input dg-input-monto"/>
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button"
-                  class="btn btn-default pull-left"
-                  data-dismiss="modal">
-            Cancelar
-          </button>
-          <button [disabled]="!(montoApartado > 10000)"
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="blockProperty('APARTAR')"
-                  data-dismiss="modal">
-            Aceptar
-          </button>
+          <div class="dg-content-btns">
+            <button type="button"
+                    class="btn btn-default pull-left dg-text-link"
+                    data-dismiss="modal">
+              Cancelar
+            </button>
+            <button [disabled]="!(montoApartado > 10000)"
+                    type="button"
+                    class="btn btn-primary dg-btn dg-btn-blue"
+                    (click)="blockProperty('APARTAR')"
+                    data-dismiss="modal">
+              Aceptar
+            </button>
+          </div>
         </div>
       </div>
       <!-- /.modal-content -->

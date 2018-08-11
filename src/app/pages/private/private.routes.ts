@@ -14,6 +14,8 @@ import { AddClientComponent } from './clientes/add-client.component';
 import { InfoClientComponent } from './clientes/info-client.component';
 import { AdquirirProductoComponent } from './adquirir-producto/adquirir-producto.component';
 import { DgtoolsComponent } from './dgtools/dgtools.component';
+import {ProductoPagosComponent} from './producto-pagos/producto-pagos.component';
+import {ProductoCorridaComponent} from './producto-corrida/producto-corrida.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -25,6 +27,10 @@ export const PRIVATE_ROUTES: Routes = [
   { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
   { path: 'productos/:id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
   { path: 'adquirir/:id', component: AdquirirProductoComponent, data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'} },
+  { path: 'productocorrida', component: ProductoCorridaComponent, data: { title: 'Producto Corrida', breadcrumb: 'producto corrida'} },
+
+  // Pagos
+  { path: 'pagosproducto', component: ProductoPagosComponent, data: { title: 'Pagos de Producto', breadcrumb: 'pagos producto'} },
 
   // Clientes
   { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },

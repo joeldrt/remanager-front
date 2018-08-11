@@ -32,6 +32,8 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   public clientId: string;
   public diasApartado: number;
   public montoApartado: number;
+  public montoVenta: number;
+  public montoCorrida: number;
   public routeToReturn: string;
 
   constructor(
@@ -126,7 +128,7 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     this.contrato = new Contrato();
     this.contrato.clienteId = this.client.id;
     this.contrato.productoId = this.producto.id;
-
+    let pagoReal: PagoReal;
     switch (typeAction) {
       case 'BLOQUEAR':
         this.contrato.tipo = TipoContrato.BLOQUEO;
@@ -134,24 +136,31 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
         break;
       case 'APARTAR':
         this.contrato.tipo = TipoContrato.APARTADO;
-        const pagoReal = new PagoReal();
+        pagoReal = new PagoReal();
         pagoReal.monto = this.montoApartado;
         this.contrato.pagosReales = new Array<PagoReal>();
         this.contrato.pagosReales.push(pagoReal);
         break;
       case 'VENDER':
-        // redirect page ventas
+        this.contrato.tipo = TipoContrato.VENTA;
+        break;
+      case 'CORRIDA':
+        this.contrato.tipo = TipoContrato.CORRIDA;
         break;
     }
-
     this.contratoService.create(this.contrato)
       .subscribe((res: HttpResponse<Contrato>) => {
-        this.toasterService.success('Producto Apartado');
-        this.returnToPage();
+        this.contrato = res.body;
+        if (this.contrato.tipo === 'VENTA' || this.contrato.tipo || 'CORRIDA') {
+          this.goPaymentsProduct(this.contrato.id);
+        } else {
+          this.returnToPage();
+        }
+        this.toasterService.success('El producto a cambiado al estatus: ' + this.contrato.tipo);
       }, (res: HttpErrorResponse) => {
         this.toasterService.error('Error: ' + res.message);
       });
-  }
+  }// end - blockProperty(typeAction: string)
 
   returnToPage() {
     this.router.navigate(['/productos', this.productoId], {queryParams: {
@@ -159,4 +168,13 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       }});
   } // end - returnToPage()
 
-}
+  goPaymentsProduct(contratoId: string) {
+    this.router.navigate(['/pagosproducto'], {queryParams : {
+      idClient: this.client.id,
+      idProduct: this.producto.id,
+      idContract: contratoId,
+      routeToReturn: '/adquirir'
+    }});
+  }// end - goPaymentsProduct
+
+}// end - AdquirirProductoComponent - class

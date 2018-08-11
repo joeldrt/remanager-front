@@ -58,6 +58,7 @@
 
     .row{
       border-bottom: solid 1px #CFCFCF;
+      cursor: pointer;
     }
 
     .dg-title{
@@ -103,3 +104,17 @@
     }// end - dg-col-status
   } // end - dg-content-lotes
 } // end - dg-content-page
+
+.dg-content-loading{
+  padding: 2.7em 0;
+}
+
+.dg-content-msg {
+  color: #919AA0;
+  margin-top: 20%;
+  text-align: center;
+  p {
+    display: inline-block;
+    max-width: 300px;
+  }
+} // end - .dg-content-msg

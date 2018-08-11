@@ -17,9 +17,11 @@ export enum TipoContrato {
   APARTADO='APARTADO',
   VENTA='VENTA',
   DEVOLUCION='DEVOLUCION',
+  CORRIDA='CORRIDA',
 }
 
 export class Contrato {
+  public id?: string;
   public fechaCreacion?: any; // No se llena, solo para lectura... llenado por el servidor
   public tipo?: TipoContrato;
   public clienteId?: string;
@@ -28,4 +30,5 @@ export class Contrato {
   public diasValidez?: number;
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];
+  public activo?: boolean;
 }

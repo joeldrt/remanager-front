@@ -22,6 +22,10 @@ export class ProductUtils {
         color_to_return = 'gray'; // gris
         break;
       }
+      case 'CORRIDA': {
+        color_to_return = '#ffa100'; // naranja
+        break;
+      }
     }
     return color_to_return;
   }
