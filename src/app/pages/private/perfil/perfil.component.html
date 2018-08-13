@@ -36,13 +36,13 @@
       <div class="dg-circle-img dg-image-circle">
         <img *ngIf="isEditing"
              class="dg-profile-picture"
-             [src]="api_url + getProfileImage()"
+             [src]="getProfileImage()"
              alt="User profile picture"
              data-toggle="modal" data-target="#modal-foto-manager">
 
        <img *ngIf="!isEditing"
             class="dg-profile-picture"
-            [src]="api_url + getProfileImage()"
+            [src]="getProfileImage()"
             alt="User profile picture">
      </div>
 
