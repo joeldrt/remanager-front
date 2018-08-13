@@ -38,6 +38,7 @@ import {
   TipoProductoService,
   ValorCampoProductoService,
   ContratoService,
+  UserExtraService,
 } from './_services';
 import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 import {
@@ -144,6 +145,7 @@ import { ContratoApartadoComponent } from './pages/private/producto-contratos/co
     HeaderHelper,
     ProfileHelper,
     ContratoService,
+    UserExtraService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
