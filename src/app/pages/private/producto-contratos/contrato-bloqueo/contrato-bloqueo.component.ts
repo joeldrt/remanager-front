@@ -49,11 +49,8 @@ export class ContratoBloqueoComponent implements OnInit {
         this.contract.id = this.route.snapshot.queryParams['idContract'];
         this.getContract();
       }
-
       this.getClient();
       this.getProduct();
-
-
     } else {
       this.router.navigate(['/productos']);
     }
@@ -94,6 +91,7 @@ export class ContratoBloqueoComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<Contrato>) => {
           this.contract = res.body;
+          this.getInfoDate();
         },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
@@ -126,35 +124,51 @@ export class ContratoBloqueoComponent implements OnInit {
     console.log('Get Date Format : ' + this.getDateFormat(new Date('2018-08-13T02:56:35.943998')));
   }
 
-  addDays(date, days): any {
+  addDays(date: Date, days): Date {
     date.setDate(date.getDate() + days);
     return date;
   }
 
-  getDaysBetweenDates(dateStart: any, dateEnd: any): any {
+  getDaysBetweenDates(dateStart: Date, dateEnd: Date): number {
     const daysDiff =  Math.round((dateEnd.getTime() - dateStart.getTime()) / (1000 * 60  * 60 * 24));
     return daysDiff;
   }
 
-  getDateFormat(theDate: any): any {
-    let dd = theDate.getDate();
-    let mm = theDate.getMonth() + 1;
-    let yyyy = theDate.getFullYear();
-
-    if (dd < 10) {
+  getDateFormat(theDate: Date): string {
+    let dd = theDate.getDate().toString();
+    let mm = (theDate.getMonth() + 1).toString();
+    let yyyy = theDate.getFullYear().toString();
+    if (dd.length < 2) {
       dd = '0' + dd;
     }
-    if (mm < 10) {
+    if (mm.length < 2) {
       mm = '0' + mm;
     }
-
-    return theDate = dd + '/' + mm + '/' + yyyy;
+    return dd + '/' + mm + '/' + yyyy;
   }
 
   getInfoDate() {
-    this.fechaBloqueo = this.getDateFormat(this.contract.fechaCreacion);
-    this.fechaLimite = this.addDays(this.contract.fechaCreacion, this.contract.diasValidez);
-    this.diasRestantes = this.getDaysBetweenDates(new Date(), this.fechaLimite);
+    let replaceFecha = '';
+    this.fechaBloqueo = this.getDateFormat(new Date(this.contract.fechaCreacion));
+    this.fechaLimite = this.getDateFormat(this.addDays(new Date(this.contract.fechaCreacion), this.contract.diasValidez));
+    replaceFecha = this.fechaLimite.replace('/', '-');
+    this.diasRestantes = this.getDaysBetweenDates(new Date(), new Date(replaceFecha));
+  }
+
+  returnToPage() {
+    switch (this.routeToReturn) {
+      case '/clientes/info': {
+        this.router.navigate([this.routeToReturn], { queryParams:
+            {
+              id: this.client.id
+            }});
+        break;
+      }
+      case '/adquirir': {
+        this.router.navigate([this.routeToReturn, this.product.id]);
+        break;
+      }
+    }
   }
 
 }

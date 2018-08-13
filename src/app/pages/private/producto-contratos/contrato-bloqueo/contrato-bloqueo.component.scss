@@ -80,7 +80,7 @@
       .dg-row-text3{
         font-size: 0.9em;
       }
-    }
+    }// end - .dg-content-info
 
     &.dg-bartitle-2{
       background-image:url('../../../../../assets/img/line-bartitle-2.png');
@@ -110,6 +110,12 @@
     }
   }// end - .dg-content-bartitle
 
+  .dg-info-bloqueo{
+    font-size: 1.21em;
+    margin: 1.5em 0;
+    text-align: center;
+  }// end - .dg-info-bloqueo
+
   .dg-modal-msg{
     .modal-dialog{
       .modal-content{
@@ -136,6 +142,7 @@
   .dg-head-back{
     padding: 1em;
     span{
+      cursor: pointer;
       i{
         color: #325DC0;
         font-size: 2.1em;
@@ -193,5 +200,13 @@
     min-width: 90px;
     max-width: 90px;
   }// end - .dg-input-dias
+
+  .dg-dupla{
+    text-align: center;
+    .dg-lbl{
+    }
+    .dg-value{
+    }
+  }// end - .dg-dupla
 
 }// end - content-page
