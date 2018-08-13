@@ -189,11 +189,15 @@
     background-color: #FFF;
     max-width: 600px;
     margin: 0 auto;
-    padding: 2em 0;
+    padding: 0 0;
 
     .row{
-      padding: 0 1.2em;
-      margin-bottom: 1em;
+      padding: 0;
+      margin-bottom: 0;
+
+      label{
+        margin-bottom: 0;
+      }
 
       & > div {
         &:nth-of-type(1){
@@ -204,8 +208,9 @@
         }
       }
 
-      &:last-child{
-        margin-top: 3%;
+      &:first-child{
+        margin-top: 1.5em;
+        margin-bottom: 1.8em;
         & > div {
           text-align: center;
         }

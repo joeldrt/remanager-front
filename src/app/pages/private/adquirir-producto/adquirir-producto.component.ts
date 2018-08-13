@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 // Services
 import {ProductoService, ClientService, AccountService, ToasterService, ContratoService} from '../../../_services';
@@ -11,7 +10,7 @@ import { Producto } from '../../../_models';
 import { User } from '../../../_models';
 import { Organizacion } from '../../../_models/organizacion';
 import { Client } from '../../../_models/client';
-import { Contrato, TipoContrato, PagoReal, PagoProgramado } from '../../../_models';
+import { TipoContrato } from '../../../_models';
 
 // Helpers
 import { HeaderHelper } from '../../../_helpers';
@@ -27,14 +26,10 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   public client: Client;
   public organization: Organizacion;
   public producto: Producto;
-  public contrato: Contrato;
   public productoId: string;
   public clientId: string;
-  public diasApartado: number;
-  public montoApartado: number;
-  public montoVenta: number;
-  public montoCorrida: number;
   public routeToReturn: string;
+  public typeAction: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +39,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     private toasterService: ToasterService,
     private headerHelper: HeaderHelper,
     private accountService: AccountService,
-    private contratoService: ContratoService,
   ) {
     this.user = new User();
     this.organization = new Organizacion();
@@ -62,7 +56,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       this.clientId = params.clientId;
       this.getClient();
     });
-
     this.getProducto(this.productoId);
     this.getAccount();
   }
@@ -124,57 +117,36 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     }
   } // end - getClient
 
-  blockProperty(typeAction: string) {
-    this.contrato = new Contrato();
-    this.contrato.clienteId = this.client.id;
-    this.contrato.productoId = this.producto.id;
-    let pagoReal: PagoReal;
-    switch (typeAction) {
-      case 'BLOQUEAR':
-        this.contrato.tipo = TipoContrato.BLOQUEO;
-        this.contrato.diasValidez = this.diasApartado;
-        break;
-      case 'APARTAR':
-        this.contrato.tipo = TipoContrato.APARTADO;
-        pagoReal = new PagoReal();
-        pagoReal.monto = this.montoApartado;
-        this.contrato.pagosReales = new Array<PagoReal>();
-        this.contrato.pagosReales.push(pagoReal);
-        break;
-      case 'VENDER':
-        this.contrato.tipo = TipoContrato.VENTA;
-        break;
-      case 'CORRIDA':
-        this.contrato.tipo = TipoContrato.CORRIDA;
-        break;
-    }
-    this.contratoService.create(this.contrato)
-      .subscribe((res: HttpResponse<Contrato>) => {
-        this.contrato = res.body;
-        if (this.contrato.tipo === 'VENTA' || this.contrato.tipo || 'CORRIDA') {
-          this.goPaymentsProduct(this.contrato.id);
-        } else {
-          this.returnToPage();
-        }
-        this.toasterService.success('El producto a cambiado al estatus: ' + this.contrato.tipo);
-      }, (res: HttpErrorResponse) => {
-        this.toasterService.error('Error: ' + res.message);
-      });
-  }// end - blockProperty(typeAction: string)
-
   returnToPage() {
     this.router.navigate(['/productos', this.productoId], {queryParams: {
         routeToReturn: this.routeToReturn
       }});
   } // end - returnToPage()
 
-  goPaymentsProduct(contratoId: string) {
-    this.router.navigate(['/pagosproducto'], {queryParams : {
+  setTypeAction(actionSelected: string) {
+    this.typeAction = actionSelected;
+  }// end  - setTypeAction()
+
+  goPaymentsProduct(actionSelected: string) {
+    let nameRoute = '';
+    switch (actionSelected) {
+      case 'bloquear': {
+        nameRoute = '/bloqueo';
+        break;
+      }
+      case 'corrida': {
+        nameRoute = '/corrida';
+        break;
+      }
+      case 'apartar': {
+        nameRoute = '/apartado';
+        break;
+      }
+    }
+    this.router.navigate([nameRoute], {queryParams : {
       idClient: this.client.id,
       idProduct: this.producto.id,
-      idContract: contratoId,
-      routeToReturn: '/adquirir'
+      routeToReturn: '/adquirir',
     }});
   }// end - goPaymentsProduct
-
 }// end - AdquirirProductoComponent - class

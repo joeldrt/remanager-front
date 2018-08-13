@@ -79,7 +79,11 @@ import { InfoClientComponent } from './pages/private/clientes/info-client.compon
 import { LoadingComponent } from './_digiall-components/loading/loading.component';
 import { AdquirirProductoComponent } from './pages/private/adquirir-producto/adquirir-producto.component';
 import { ProductoPagosComponent } from './pages/private/producto-pagos/producto-pagos.component';
-import { ProductoCorridaComponent } from './pages/private/producto-corrida/producto-corrida.component';
+import { ContratoBloqueoComponent } from './pages/private/producto-contratos/contrato-bloqueo/contrato-bloqueo.component';
+import { ContratoVentaComponent } from './pages/private/producto-contratos/contrato-venta/contrato-venta.component';
+import { ContratoCorridaComponent } from './pages/private/producto-contratos/contrato-corrida/contrato-corrida.component';
+import { ContratoDevolucionComponent } from './pages/private/producto-contratos/contrato-devolucion/contrato-devolucion.component';
+import { ContratoApartadoComponent } from './pages/private/producto-contratos/contrato-apartado/contrato-apartado.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +112,11 @@ import { ProductoCorridaComponent } from './pages/private/producto-corrida/produ
     AdquirirProductoComponent,
     DgtoolsComponent,
     ProductoPagosComponent,
-    ProductoCorridaComponent,
+    ContratoBloqueoComponent,
+    ContratoVentaComponent,
+    ContratoCorridaComponent,
+    ContratoDevolucionComponent,
+    ContratoApartadoComponent,
   ],
   imports: [
     BrowserModule,

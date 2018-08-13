@@ -1,0 +1,254 @@
+<div class="dg-content-page dg-page-valores">
+
+  <div class="dg-head-back">
+    <span (click)="returnToPage()">
+      <i class="fa fa-angle-left"></i>
+    </span>
+  </div>
+
+  <div *ngIf="product" class="dg-content-bartitle dg-bartitle-2">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span>
+            <i class="fa fa-flag"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <div class="dg-row-text1">
+            <label>
+              Producto
+            </label>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Nombre:
+            </label>
+            <span>{{product.nombre}}</span>
+          </div>
+
+          <div class="dg-row-text2"
+             *ngFor="let valor of product.valoresCampos">
+
+            <div *ngIf="valor.nombre && valor.nombre === 'M2'">
+              <label>
+                Total de metros:
+              </label>
+              <span>
+                {{valor.valor}} m2
+              </span>
+            </div>
+
+            <div *ngIf="valor.nombre && valor.nombre === 'Precio M2'">
+              <label>
+                Precio por m2:
+              </label>
+              <span>
+                {{valor.valor | currency:'MXN'}}
+              </span>
+            </div>
+          </div><!-- end - dg-row-text2 -->
+
+          <div class="dg-row-text2">
+            <div>
+              <label>
+                Precio Total:
+              </label>
+              <span>
+                {{product.precio | currency:'MXN'}}
+              </span>
+            </div>
+            <div>
+              <label>
+                Estatus del producto:
+              </label>
+              <span>
+              {{product.estatus}}
+            </span>
+            </div>
+          </div><!-- dg-row-text3 -->
+        </div>
+      </div>
+    </div>
+  </div><!-- dg-content-bartitle -->
+
+  <div *ngIf="client" class="dg-content-bartitle dg-bartitle-client">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <div class="dg-row-text1">
+            <label>
+              Cliente
+            </label>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Nombre:
+            </label>
+            <span>{{client.nombre}}</span>
+            <span>{{client.apellidos}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Dirección:
+            </label>
+            <span>{{client.direccion}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Teléfono:
+            </label>
+            <span>{{client.telefono}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Correo:
+            </label>
+            <span>{{client.email}}</span>
+          </div>
+
+        </div> <!-- dg-content-info -->
+      </div>
+    </div>
+  </div><!-- dg-content-bartitle - client -->
+
+  <div *ngIf="product && product.estatus === 'DISPONIBLE'"
+       class="dg-content-btn">
+    <button data-target="#modal"
+            data-toggle="modal"
+            class="dg-btn dg-btn-blue">
+      Bloquear
+    </button>
+  </div><!-- end - dg-content-btn -->
+
+  <div *ngIf="contract.diasValidez"
+       class="dg-content-info dg-info-bloqueo">
+    <div class="row dg-row-text2">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dg-dupla">
+          <label class="dg-lbl">
+            Días de bloqueo:
+          </label>
+          <span class="dg-value">
+            {{contract.diasValidez}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div>
+          Fecha del bloqueo:
+        </div>
+        <div>
+          {{fechaBloqueo}}
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div>
+          Fecha límite:
+        </div>
+        <div>
+          {{fechaLimite}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <label>Días restantes:</label>
+        <span>
+          {{diasRestantes}}
+        </span>
+      </div>
+    </div>
+  </div> <!-- end - contract.diasValidez -->
+
+  <div *ngIf="product && product.estatus === 'BLOQUEADO'"
+       class="dg-content-btns">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-green">
+          Vender
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Corrida
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Apartar
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Devolución
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal - Bloquear  -->
+  <div *ngIf="product"
+       class="modal fade dg-modal-msg"
+       id="modal" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button-->
+          <h4 class="modal-title">Bloqueo de producto</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            ¿Cuantos días se bloqueara el producto {{product.nombre}}?
+            <input type="number"
+                   placeholder="1-5"
+                   min="1"
+                   max="5"
+                   maxlength="2"
+                   [(ngModel)]="diasApartado"
+                   class="dg-input dg-input-dias" />
+          </p>
+        </div>
+        <div class="modal-footer">
+          <div class="dg-content-btns">
+            <button type="button"
+                    class="btn btn-default pull-left dg-text-link"
+                    data-dismiss="modal">
+              Cancelar
+            </button>
+            <button [disabled]="!diasApartado"
+                    type="button"
+                    class="btn btn-primary dg-btn dg-btn-blue"
+                    data-dismiss="modal"
+                    (click)="blockProperty()">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+</div><!-- end - dg-page-valores -->

@@ -61,7 +61,7 @@ export class ContratoService {
     return this.http.get<Contrato[]>(this.findAllForClienteIdUrl + clienteId, { observe: 'response' });
   }
 
-  getContractForClientId(contractId: string): Observable<HttpResponse<Contrato>> {
+  getContractForId(contractId: string): Observable<HttpResponse<Contrato>> {
     return this.http.get<Contrato>(this.getContractForIdUrl + contractId, {observe: 'response'});
   }
 
