@@ -1,0 +1,142 @@
+.dg-content-page {
+  background-color: #FFF;
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
+
+  &.dg-page-valores {
+    .dg-content-values {
+      margin-top: 1.5em;
+      .dg-row {
+        margin-bottom: 1em;
+
+        & > span {
+          display: block;
+          text-align: center;
+        }
+
+        .dg-lbl {
+          color: #666666;
+          font-size: 1.12em;
+        }
+
+        .dg-value {
+          color: #232a85;
+          font-size: 1.41em;
+          font-weight: bold;
+        }
+      }
+    } // end - dg-content-values
+  }
+
+  // bar - dg-content-bartitle
+  .dg-content-bartitle{
+    backgrond-size:contain;
+    background-repeat: repeat-x;
+    padding: 18px 0 30px 0;
+
+    .row{
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .dg-content-icon{
+      text-align: right;
+      span{
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+      }
+    }// end - .dg-content-icon
+    .dg-content-info{
+      p{
+        margin-bottom: 0px;
+      }
+
+      .dg-row-text1{
+        font-size: 1.11em;
+        font-weight: bolder;
+        text-transform: uppercase;
+      }
+      .dg-row-text2{
+        font-size: 0.9em;
+
+        label{
+          display: inline-block;
+          max-width: 140px;
+          min-width: 140px;
+        }
+
+      }
+      .dg-row-text3{
+        font-size: 0.9em;
+      }
+    }
+
+    &.dg-bartitle-2{
+      background-image:url('../../../../../assets/img/line-bartitle-2.png');
+      padding-bottom: 9px;
+
+      .dg-content-info{
+        color: #FFF;
+      }
+
+      .dg-content-icon{
+        span{
+          i{
+            color: #FFF;
+            font-size: 2.1em;
+          }
+        }
+      }
+    }// dg-bartitle2
+
+    &.dg-bartitle-client{
+      border-bottom: solid 1px #76828A;
+      .dg-content-info{
+        color: #76828A;
+      }
+      i{
+        color: #222d32;
+        font-size: 2.1em;
+      }
+    }
+
+  }// end - .dg-content-bartitle
+
+  .dg-head-back{
+    padding: 1em;
+    span{
+      i{
+        color: #325DC0;
+        font-size: 2.1em;
+      }
+    }
+  }
+
+  .dg-content-btn{
+    text-align: center;
+    padding: 2em 0;
+  }
+
+  .dg-btn{
+    background-repeat: repeat-x;
+    background-size: contain;
+    border-radius: 15px;
+    border: none;
+    color: #FFF;
+    font-size: 0.9em;
+    font-weight: bolder;
+    padding: 8px 6px;
+    width: 120px;
+    text-transform: uppercase;
+  }
+  .dg-btn-blue{
+    background-color:blue;
+    background-image:url('../../../../../assets/img/line-back-buttonBlue.png');
+  }
+}// end - content-page

@@ -36,16 +36,26 @@
   <div class="dg-content-infoclient">
     <div class="dg-content-button"
          *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
-      <button class="btn btn-app"
+      <button class="dg-text-link"
               routerLink="/clientes"
               [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn }">
-        <i class="fa fa-users"></i>
         Asignar cliente...
       </button>
     </div>
 
     <div *ngIf="client">
       <div class="dg-info-client">
+
+        <div class="row" *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button class="dg-text-link dg-btn-changeclient"
+                    routerLink="/clientes"
+                    [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
+              Cambiar cliente...
+            </button>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
             <label>
@@ -97,17 +107,6 @@
             </span>
           </div>
         </div>
-
-        <div class="row" *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button class="btn btn-app dg-btn-changeclient"
-                    routerLink="/clientes"
-                    [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
-              <i class="fa fa-exchange"></i>
-              Cambiar cliente...
-            </button>
-          </div>
-        </div>
       </div><!-- end - dg-info-client -->
     </div><!-- end - dg-content-infoclient -->
 
@@ -126,65 +125,78 @@
 
     <div *ngIf="client">
       <div class="dg-content-btnlink">
-        <button data-target="#modal-block"
+        <button data-target="#modal"
                 data-toggle="modal"
-                class="dg-text-link" >
+                class="dg-text-link"
+                (click)="setTypeAction('bloquear')" >
           Bloquear
         </button>
-        <button (click)="blockProperty('CORRIDA')"
-                class="dg-text-link">
+        <button data-target="#modal"
+                data-toggle="modal"
+                class="dg-text-link"
+                (click)="setTypeAction('corrida')" >
           Generar Corrida
         </button>
       </div>
       <div class="dg-content-btns">
         <div class="dg-content-button">
-          <button data-target="#modal-apartar"
+          <button data-target="#modal"
                   data-toggle="modal"
-                  class="dg-btn dg-btn-orange">
+                  class="dg-btn dg-btn-orange"
+                  (click)="setTypeAction('apartar')" >
             Apartar
           </button>
-          <button (click)="blockProperty('VENDER')"
-                  class="dg-btn dg-btn-green">
-            Vender
+
+          <button data-target="#modal"
+                  data-toggle="modal"
+                  class="dg-btn dg-btn-orange"
+                  (click)="setTypeAction('test')" >
+            Test
           </button>
+
         </div>
       </div>
     </div>
-
   </div><!-- end - dg-content-buttons -->
-
 
   <!-- Modal - Bloquear  -->
   <div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
        class="modal fade dg-modal-msg"
-       id="modal-block" >
+       id="modal" >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Bloqueo de producto</h4>
+          <h4 class="modal-title">Bloqueo de producto</h4-->
         </div>
         <div class="modal-body">
           <p>
-            Estás a punto de bloquear el producto:
-            <strong>
-              {{producto.nombre}}
+            Estás a punto de
+            <span *ngIf="typeAction === 'corrida'">
+              <strong>
+                generar una corrida
+              </strong>
+              para
+            </span>
+            <strong *ngIf="typeAction !== 'corrida'">
+              {{typeAction}}
             </strong>
-            para el cliente
-            <label>
-              {{client.nombre}} {{client.apellidos}}
-            </label>
+            el producto
+            <span style="font-style: italic;">
+              {{producto.nombre}}
+            </span>
+            .
           </p>
           <p>
-            Es necesario establecer el número de días:
-            <input type="number"
-                   placeholder="1 - 5 días"
-                   min="1"
-                   max="5"
-                   maxlength="2"
-                   [(ngModel)]="diasApartado"
-                   class="dg-input dg-input-dias" />
+            El cliente es:
+            <span style="font-style: italic;">
+              {{client.nombre}} {{client.apellidos}}
+            </span>
+            .
+          </p>
+          <p>
+            ¡Confirme la acción para continuar!
           </p>
         </div>
         <div class="modal-footer">
@@ -194,67 +206,10 @@
                     data-dismiss="modal">
               Cancelar
             </button>
-            <button [disabled]="!(diasApartado > 0 && diasApartado < 6)"
-                    type="button"
-                    class="btn btn-primary dg-btn dg-btn-blue"
-                    (click)="blockProperty('BLOQUEAR')"
-                    data-dismiss="modal">
-              Aceptar
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
-
-  <!-- Modal - Apartar  -->
-  <div *ngIf="producto && client && (producto.estatus.toString() === 'DISPONIBLE' || producto.estatus.toString() === 'BLOQUEADO')"
-       class="modal fade dg-modal-msg"
-       id="modal-apartar" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">
-            Apartado de producto
-          </h4>
-        </div>
-        <div class="modal-body">
-          <p>
-            Estás a punto de apartar el producto
-            <strong>
-              {{producto.nombre}}
-            </strong>
-            para el cliente
-            <label>
-              {{client.nombre}} {{client.apellidos}}
-            </label>
-          </p>
-          <p>
-            Es necesario definir el monto de apartado:
-            <input type="number"
-                   placeholder="monto > 10mil"
-                   maxlength="9"
-                   [(ngModel)]="montoApartado"
-                   class="dg-input dg-input-monto"/>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <div class="dg-content-btns">
             <button type="button"
-                    class="btn btn-default pull-left dg-text-link"
-                    data-dismiss="modal">
-              Cancelar
-            </button>
-            <button [disabled]="!(montoApartado > 10000)"
-                    type="button"
                     class="btn btn-primary dg-btn dg-btn-blue"
-                    (click)="blockProperty('APARTAR')"
-                    data-dismiss="modal">
+                    data-dismiss="modal"
+                    (click)="goPaymentsProduct(typeAction)">
               Aceptar
             </button>
           </div>
