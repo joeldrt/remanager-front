@@ -7,7 +7,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ClientService, ContratoService, ProductoService, ToasterService} from '../../../_services';
 
 // Models
-import {Client, Contrato, Producto} from '../../../_models';
+import {Client, Contrato, EstatusDeProducto, Producto, TipoContrato} from '../../../_models';
 import {ProductUtils} from '../../../_utils/product.utils';
 
 @Component({
@@ -78,7 +78,6 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
             this.existContracts = true;
             this.getListProducts();
           }
-          this.loading = false;
         },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
@@ -93,6 +92,7 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
             (res: HttpResponse<Producto>) => {
               const prod = res.body;
               this.listProductos.push(prod);
+              this.loading = false;
             },
             (res: HttpErrorResponse) => {
               console.log('Error: ' + res.message);
@@ -106,17 +106,34 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
     return this.productUtils.colorByStatus(status);
   }
 
-  goPaymentsProduct(idProducto: string) {
+  goPaymentsProduct(productSelect: Producto) {
     let idContrato = '';
+    let nameRoute = '';
     this.listContratos.forEach(contrato => {
-      if (contrato.productoId === idProducto) {
+      if (contrato.productoId === productSelect.id) {
         idContrato = contrato.id;
       }
     });
-    this.router.navigate(['/pagosproducto'],
+
+    switch (productSelect.estatus) {
+      case EstatusDeProducto.BLOQUEADO: {
+        nameRoute = '/bloqueo';
+        break;
+      }
+      case EstatusDeProducto.DISPONIBLE: {
+        nameRoute = '/corrida';
+        break;
+      }
+      case EstatusDeProducto.APARTADO: {
+        nameRoute = '/apartado';
+        break;
+      }
+    }
+
+    this.router.navigate([nameRoute],
       {queryParams : {
         idClient: this.client.id,
-        idProduct: idProducto,
+        idProduct: productSelect.id,
         idContract: idContrato,
         routeToReturn: '/clientes/info',
       }});

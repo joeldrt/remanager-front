@@ -88,7 +88,7 @@
           border: none;
           color: #7F7F7F;
           margin-left: 9px;
-          width: 81%;
+          width: 86%;
         }
       }
     }// end - dg-content-inputsearch
@@ -107,13 +107,14 @@
       }
 
       .dg-content-inputsearch{
-        max-width: 72%;
-        min-width: 72%;
+        max-width: 63%;
+        min-width: 63%;
       }
       .dg-content-buttons{
         max-width: 27%;
         min-width: 27%;
-        vertical-align: top;
+        text-align: left;
+        vertical-align: middle;
 
         span{
           display: inline-block;

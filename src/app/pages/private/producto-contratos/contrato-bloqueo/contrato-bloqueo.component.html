@@ -126,10 +126,127 @@
     </div>
   </div><!-- dg-content-bartitle - client -->
 
-  <div *ngIf="product && product.estatus === 'DISPONIBLE'" class="dg-content-btn">
-    <button class="dg-btn dg-btn-blue">
+  <div *ngIf="product && product.estatus === 'DISPONIBLE'"
+       class="dg-content-btn">
+    <button data-target="#modal"
+            data-toggle="modal"
+            class="dg-btn dg-btn-blue">
       Bloquear
     </button>
+  </div><!-- end - dg-content-btn -->
+
+  <div *ngIf="contract.diasValidez"
+       class="dg-content-info dg-bloqueo">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <label>
+          Días de bloqueo:
+        </label>
+        <span>
+          {{contract.diasValidez}}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div>
+          Fecha del bloqueo:
+        </div>
+        <div>
+
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div>
+          Fecha límite:
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <label>Días restantes:</label>
+        <span>
+
+        </span>
+      </div>
+    </div>
+  </div> <!-- end - contract.diasValidez -->
+
+  <div *ngIf="product && product.estatus === 'BLOQUEADO'"
+       class="dg-content-btns">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-green">
+          Vender
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Corrida
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Apartar
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="dg-btn dg-btn-orange">
+          Devolución
+        </button>
+      </div>
+    </div>
   </div>
+
+  <!-- Modal - Bloquear  -->
+  <div *ngIf="product"
+       class="modal fade dg-modal-msg"
+       id="modal" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button-->
+          <h4 class="modal-title">Bloqueo de producto</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            ¿Cuantos días se bloqueara el producto {{product.nombre}}?
+            <input type="number"
+                   placeholder="1-5"
+                   min="1"
+                   max="5"
+                   maxlength="2"
+                   [(ngModel)]="diasApartado"
+                   class="dg-input dg-input-dias" />
+          </p>
+        </div>
+        <div class="modal-footer">
+          <div class="dg-content-btns">
+            <button type="button"
+                    class="btn btn-default pull-left dg-text-link"
+                    data-dismiss="modal">
+              Cancelar
+            </button>
+            <button [disabled]="!diasApartado"
+                    type="button"
+                    class="btn btn-primary dg-btn dg-btn-blue"
+                    data-dismiss="modal"
+                    (click)="blockProperty()">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 </div><!-- end - dg-page-valores -->

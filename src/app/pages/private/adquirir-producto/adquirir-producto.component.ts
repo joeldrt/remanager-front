@@ -131,33 +131,22 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     let nameRoute = '';
     switch (actionSelected) {
       case 'bloquear': {
-        actionSelected = TipoContrato.BLOQUEO;
         nameRoute = '/bloqueo';
         break;
       }
       case 'corrida': {
-        actionSelected = TipoContrato.CORRIDA;
         nameRoute = '/corrida';
         break;
       }
       case 'apartar': {
-        actionSelected = TipoContrato.APARTADO;
         nameRoute = '/apartado';
         break;
       }
-
-      case 'test': {
-        actionSelected = TipoContrato.VENTA;
-        nameRoute = '/pagosproducto';
-        break;
-      }
-
     }
     this.router.navigate([nameRoute], {queryParams : {
       idClient: this.client.id,
       idProduct: this.producto.id,
-      actionToChoose: actionSelected,
-      routeToReturn: '/adquirir'
+      routeToReturn: '/adquirir',
     }});
   }// end - goPaymentsProduct
 }// end - AdquirirProductoComponent - class

@@ -75,7 +75,7 @@ export class ProductoPagosComponent implements OnInit {
   }// end -getProduct
 
   getContract() {
-    this.contratoService.getContractForClientId(this.contract.id)
+    this.contratoService.getContractForId(this.contract.id)
       .subscribe(
         (res: HttpResponse<Contrato>) => {
           this.contract = res.body;

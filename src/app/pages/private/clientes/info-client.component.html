@@ -1,127 +1,129 @@
 <div class="dg-content dg-content-page">
 
-  <div class="dg-head-back">
-        <span (click)="goBackPage()" >
-          <i class="fa fa-angle-left"></i>
-        </span>
-  </div>
+  <div *ngIf="!loading">
+    <div class="dg-head-back">
+          <span (click)="goBackPage()" >
+            <i class="fa fa-angle-left"></i>
+          </span>
+    </div>
 
-  <div class="dg-info-client">
-    <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <label>
-          Nombre:
-        </label>
+    <div class="dg-info-client">
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Nombre:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{ client.nombre }}
+          </span>
+        </div>
       </div>
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.nombre }}
-        </span>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Dirección:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{ client.direccion }}
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <label>
-          Dirección:
-        </label>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Teléfono:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{ client.telefono }}
+          </span>
+        </div>
       </div>
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.direccion }}
-        </span>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Correo:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{ client.email }}
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <label>
-          Teléfono:
-        </label>
-      </div>
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.telefono }}
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <label>
-          Correo:
-        </label>
-      </div>
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.email }}
-        </span>
-      </div>
-    </div>
-  </div><!-- end - dg-info-client -->
+    </div><!-- end - dg-info-client -->
 
-  <div class="dg-content-listproducts">
-    <div *ngIf="!loading">
-      <div *ngIf="!existContracts"
-           class="dg-content-msg">
-        <p>
-          ¡No existen productos relacionados con el cliente!
-        </p>
-      </div>
-      <div *ngIf="existContracts && listProductos"
-           class="dg-content-listlotes">
+    <div class="dg-content-listproducts">
+      <div>
+        <div *ngIf="!existContracts"
+             class="dg-content-msg">
+          <p>
+            ¡No existen productos relacionados con el cliente!
+          </p>
+        </div>
+        <div *ngIf="existContracts && listProductos"
+             class="dg-content-listlotes">
 
-        <div *ngFor="let producto of listProductos"
-             class="row" (click)="goPaymentsProduct(producto.id)" >
-          <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
-            <div class="dg-col-lote">
-              <div>
-                <span>
-                  <i class="fa fa-flag"
-                     [style.color]="colorByStatus(producto.estatus)" ></i>
-                </span>
-              </div>
-              <div>
-                <strong class="dg-title" >
-                  {{ producto.nombre }}
-                </strong>
-                <div *ngFor="let valor of producto.valoresCampos">
-                  <span *ngIf="valor && valor.nombre === 'M2'"
-                        class="dg-info">
-                    {{valor.valor}} m2
+          <div *ngFor="let producto of listProductos"
+               class="row" (click)="goPaymentsProduct(producto)" >
+            <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
+              <div class="dg-col-lote">
+                <div>
+                  <span>
+                    <i class="fa fa-flag"
+                       [style.color]="colorByStatus(producto.estatus)" ></i>
                   </span>
+                </div>
+                <div>
+                  <strong class="dg-title" >
+                    {{ producto.nombre }}
+                  </strong>
+                  <div *ngFor="let valor of producto.valoresCampos">
+                    <span *ngIf="valor && valor.nombre === 'M2'"
+                          class="dg-info">
+                      {{valor.valor}} m2
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
-            <div class="dg-col-status">
-              <div>
-                <strong class="dg-title">
-                  {{ producto.estatus }}
-                </strong>
-                <span class="dg-info">
-                  {{ producto.precio | currency:'MXN'}}
-                </span>
-              </div>
-              <div>
-            <span class="dg-content-row">
-              <i class="fa fa-angle-right"></i>
-            </span>
+            <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
+              <div class="dg-col-status">
+                <div>
+                  <strong class="dg-title">
+                    {{ producto.estatus }}
+                  </strong>
+                  <span class="dg-info">
+                    {{ producto.precio | currency:'MXN'}}
+                  </span>
+                </div>
+                <div>
+              <span class="dg-content-row">
+                <i class="fa fa-angle-right"></i>
+              </span>
+                </div>
               </div>
             </div>
-          </div>
-        </div><!-- end - row -->
+          </div><!-- end - row -->
 
-      </div><!-- end - dg-content-listlotes -->
-    </div> <!-- end - ! loadingClient -->
-    <div *ngIf="loading">
-      <div class="dg-content-loading"
-           style="min-height: inherit;
-                max-height: inherit;"
-           *ngIf="loading">
-        <app-loading
-          style="min-height: inherit;
-              max-height: inherit;">
-        </app-loading>
-      </div>
-    </div>
-  </div><!-- end - dg-content-listproducts -->
+        </div><!-- end - dg-content-listlotes -->
+      </div> <!-- end - ! loadingClient -->
+    </div><!-- end - dg-content-listproducts -->
+  </div>
+
+  <div class="dg-content-loading"
+       style="min-height: inherit;
+              max-height: inherit;"
+       *ngIf="loading">
+    <app-loading
+      style="min-height: inherit;
+            max-height: inherit;">
+    </app-loading>
+  </div>
+
 </div>
