@@ -12,3 +12,4 @@ export * from './client.service';
 export * from './tipo-producto.service';
 export * from './valor.campo.producto.service';
 export * from './contrato.service';
+export * from './user_extra.service';

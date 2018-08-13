@@ -8,7 +8,7 @@
 
         <div class="dg-photo">
           <span>
-            <img src="../../../../assets/img/imgPhotoProfile.png"
+            <img src="assets/img/imgPhotoProfile.png"
               alt="Foto perfil"/>
           </span>
         </div>
@@ -17,9 +17,10 @@
              [ngClass]="{ 'has-error': f.submitted && !username.valid }">
 
           <div class="dg-row-input">
-            <i class="fa fa-envelope"></i>
-            <input type="text" class="form-control"
-                   placeholder="Mail"
+            <i class="fa fa-user"></i>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Usuario"
                    name="username"
                    [(ngModel)]="model.username"
                    #username="ngModel" required />

@@ -1,10 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../_services/index';
-import { AccountService } from '../../../_services';
-import { User } from '../../../_models';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { ProfileHelper } from '../../../_helpers';
+import { Router } from '@angular/router';
+
+// API_URL
+import { environment } from '../../../../environments/environment';
+
+// servicios
+import {
+  AuthenticationService,
+  AccountService,
+  UserExtraService,
+} from '../../../_services';
+
+// modelos
+import {
+  User,
+  UserExtra,
+} from '../../../_models';
+
+// helpers
+import {
+  ProfileHelper,
+} from '../../../_helpers';
 
 @Component({
   selector: 'app-menu',
@@ -15,18 +32,25 @@ export class MenuComponent implements OnInit {
   user: User;
   isNavbarCollapsed: boolean;
 
+  public userExtra: UserExtra;
+
+  public api_url = environment.API_URL;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private accountService: AccountService,
     private profileHelper: ProfileHelper,
+    private userExtraService: UserExtraService,
   ) { }
 
   ngOnInit() {
     this.profileHelper.getProfileRequest().subscribe(userId => {
       this.getAccount();
+      this.getUserExtra();
     });
     this.getAccount();
+    this.getUserExtra();
     this.isNavbarCollapsed = true;
   }
 
@@ -47,6 +71,25 @@ export class MenuComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('Error: ' + error.message);
       });
+  }
+
+  getUserExtra() {
+    this.userExtraService.getUserExtra().subscribe(
+      (response: HttpResponse<UserExtra>) => {
+        if (response && response.body) {
+          this.userExtra = response.body;
+        }
+      },
+      (error: HttpErrorResponse) => {}
+    );
+  }
+
+  getProfileImage() {
+    if (!this.userExtra || !this.userExtra.profilePictureUrl
+      || this.userExtra.profilePictureUrl === 'None') {
+      return 'assets/img/imgPhotoProfile.png';
+    }
+    return this.userExtra.profilePictureUrl;
   }
 
 }
