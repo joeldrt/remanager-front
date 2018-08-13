@@ -4,7 +4,10 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left dg-circle-img dg-image-circle" *ngIf="user">
-        <img [src]="api_url + getProfileImage()" class="dg-profile-picture" alt="User Image">
+        <img *ngIf="userExtra && userExtra.profilePictureUrl && userExtra.profilePictureUrl != 'None'"
+          [src]="api_url + userExtra.profilePictureUrl" class="dg-profile-picture" alt="User Image">
+        <img *ngIf="!userExtra || !userExtra.profilePictureUrl || userExtra.profilePictureUrl == 'None'"
+          src="assets/img/imgPhotoProfile.png" class="dg-profile-picture" alt="User Image">
       </div>
       <div class="pull-left info" *ngIf="user">
         <p>{{user.firstName}}</p>

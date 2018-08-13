@@ -70,7 +70,8 @@
           <svg:polygon *ngFor="let poligono of svg.poligonos"
                        [attr.points]="poligono.puntos"
                        [attr.fill]="getPolygonFillColor(poligono.genUid)"
-                       fill-opacity="0.8" (click)="navigateToItem(poligono.genUid)" />
+                       [attr.fill-opacity]="getPolygonFillOpacity(poligono.genUid)"
+                       (click)="navigateToItem(poligono.genUid)" />
         </svg>
       </div>
 

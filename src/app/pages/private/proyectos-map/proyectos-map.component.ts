@@ -24,6 +24,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   productos: Producto[];
   svg: Svg;
   polygon_fill_color_map: Map<string, string>;
+  polygon_fill_opacity: Map<string, string>;
 
   should_svg_visible = false;
   root_view = false;
@@ -114,16 +115,23 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
 
   fillPolygonFillColorMap() {
     this.polygon_fill_color_map = new Map<string, string>();
+    this.polygon_fill_opacity = new Map<string, string>();
     for (const proyecto of this.proyectos) {
       this.polygon_fill_color_map.set(proyecto.idSeccion, 'blue');
+      this.polygon_fill_opacity.set(proyecto.idSeccion, '0.0')
     }
     for (const producto of this.productos) {
       this.polygon_fill_color_map.set(producto.idSeccion, this.productUtils.colorByStatus(producto.estatus.toString()));
+      this.polygon_fill_opacity.set(producto.idSeccion, '0.8')
     }
   }
 
   getPolygonFillColor(uid: string) {
     return this.polygon_fill_color_map.get(String(uid)) ? this.polygon_fill_color_map.get(String(uid)) : 'white';
+  }
+
+  getPolygonFillOpacity(uid: string) {
+    return this.polygon_fill_opacity.get(String(uid)) ? this.polygon_fill_opacity.get(String(uid)) : '0.0';
   }
 
   retrieveSvg(svgIdToFind: number) {

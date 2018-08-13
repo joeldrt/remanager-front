@@ -119,12 +119,12 @@ export class PerfilComponent implements OnInit {
         } else {
           this.toasterService.error('No se pudo cargar la información extra del usuario');
         }
-        this.lastProfilePicBeforeChange = this.getProfileImage();
+        this.lastProfilePicBeforeChange = this.userExtra.profilePictureUrl;
         this.loading = false;
       },
       (error: HttpErrorResponse) => {
         this.toasterService.error(error.message);
-        this.lastProfilePicBeforeChange = this.getProfileImage();
+        this.lastProfilePicBeforeChange = this.userExtra.profilePictureUrl;
         this.loading = false;
       }
     );
@@ -135,7 +135,7 @@ export class PerfilComponent implements OnInit {
       || this.userExtra.profilePictureUrl === 'None') {
       return 'assets/img/imgPhotoProfile.png';
     }
-    return this.userExtra.profilePictureUrl;
+    return this.api_url + this.userExtra.profilePictureUrl;
   }
 
   onFileChange(event: any) {

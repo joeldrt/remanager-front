@@ -84,12 +84,4 @@ export class MenuComponent implements OnInit {
     );
   }
 
-  getProfileImage() {
-    if (!this.userExtra || !this.userExtra.profilePictureUrl
-      || this.userExtra.profilePictureUrl === 'None') {
-      return 'assets/img/imgPhotoProfile.png';
-    }
-    return this.userExtra.profilePictureUrl;
-  }
-
 }
