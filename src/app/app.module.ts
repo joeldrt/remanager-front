@@ -38,6 +38,7 @@ import {
   TipoProductoService,
   ValorCampoProductoService,
   ContratoService,
+  UserExtraService,
 } from './_services';
 import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 import {
@@ -136,6 +137,7 @@ import { ProductoCorridaComponent } from './pages/private/producto-corrida/produ
     HeaderHelper,
     ProfileHelper,
     ContratoService,
+    UserExtraService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

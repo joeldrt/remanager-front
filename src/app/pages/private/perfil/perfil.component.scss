@@ -6,8 +6,8 @@
   overflow-y: scroll;
 
   .dg-content-box{
-    margin: 0 auto;
-    width: 90%;
+    /* margin: 0 auto;
+    width: 90%; */
 
     .profile-username,
     .text-muted{
@@ -23,13 +23,13 @@
   }// end - box
 
   .dg-content-form{
-    padding: 1.5em 1.5em;
+    /* padding: 1.5em 1.5em; */
     input{
       background-color: #EEEEEF;
       border: none;
       border-radius: 15px;
       display: inline-block;
-      padding: 1em 1.5em;
+      /* padding: 1em 1.5em; */
       width: 80%;
 
       &[ng-reflect-is-disabled="true"]{
@@ -67,9 +67,12 @@
     }
   }// end - .dg-content-form
 
+  .dg-profile-form-label {
+    width: 70px;
+  }
+
   .dg-content-btn{
     text-align: center;
-
   }
 
   .btn-app{
@@ -78,6 +81,35 @@
       .fa-edit{
       }
     }
+  }
+
+  .dg-profile-navigation-bar {
+    min-height: 50px;
+    max-height: 50px;
+    width: inherit;
+    position: relative;
+  }
+
+  .list-group-item {
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dg-circle-img {
+    margin: 0 auto;
+    width: 100px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .dg-image-circle {
+    border-radius: 50%;
+  }
+
+  .dg-profile-picture {
+    max-height: 100px;
+    transform: translateX(-50%);
+    margin-left: 50%;
   }
 
 }// end - .content

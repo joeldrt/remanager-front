@@ -7,3 +7,5 @@ export * from './tipo.producto';
 export * from './valor.campo.producto';
 export * from './contrato';
 export * from './client';
+export * from './user_extra';
+export * from './image.envelope';

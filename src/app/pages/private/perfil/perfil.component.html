@@ -11,12 +11,40 @@
   </div>
 
   <!-- Profile Image -->
-  <div class="box box-primary dg-content-box"
-    *ngIf="user">
+  <div *ngIf="user">
+
+    <div class="dg-profile-navigation-bar">
+      <div class="pull-right" *ngIf="!isEditing" >
+        <a (click)="editForm()">
+          Editar
+        </a>
+      </div>
+
+      <div class="pull-left" *ngIf="isEditing" >
+         <a (click)="cancelEdit()">
+           Cancelar
+         </a>
+      </div>
+      <div class="pull-right"*ngIf="isEditing" >
+         <a (click)="saveForm()">
+           Guardar
+         </a>
+      </div>
+    </div>
+
     <div class="box-body box-profile">
-      <img class="profile-user-img img-responsive img-circle"
-           src="assets/img/imgPhotoProfile.png"
-           alt="User profile picture">
+      <div class="dg-circle-img dg-image-circle">
+        <img *ngIf="isEditing"
+             class="dg-profile-picture"
+             [src]="api_url + getProfileImage()"
+             alt="User profile picture"
+             data-toggle="modal" data-target="#modal-foto-manager">
+
+       <img *ngIf="!isEditing"
+            class="dg-profile-picture"
+            [src]="api_url + getProfileImage()"
+            alt="User profile picture">
+     </div>
 
       <h3 *ngIf="user.login"
         class="profile-username text-center">
@@ -31,7 +59,7 @@
         <form action="">
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item dg-control">
-              <label>
+              <label class="dg-profile-form-label">
                 Nombre:
               </label>
               <input type="text"
@@ -40,7 +68,7 @@
                      [disabled]="!isEditing" />
             </li>
             <li class="list-group-item dg-control">
-              <label>
+              <label class="dg-profile-form-label">
                 Apellidos:
               </label>
               <input type="text"
@@ -49,30 +77,64 @@
                      [disabled]="!isEditing" />
             </li>
           </ul>
-
-          <div class="dg-content-btn dg-btn-1"
-            *ngIf="!isEditing" >
-            <button class="btn btn-app" (click)="editForm()">
-              <i class="fa fa-edit"></i>
-              Editar Información
-            </button>
-          </div>
-
-          <div class="dg-content-btn dg-btn-2"
-               *ngIf="isEditing" >
-            <button class="btn btn-app" (click)="cancelEdit()">
-              <i class="fa fa-undo"></i>
-              Cancelar
-            </button>
-            <button class="btn btn-app" (click)="saveForm()">
-              <i class="fa fa-save"></i>
-              Guardar
-            </button>
-          </div>
         </form>
       </div>
     </div>
     <!-- /.box-body -->
   </div>
   <!-- /.box -->
+</div>
+
+<div class="modal fade" id="modal-foto-manager" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Fotos:</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="file" id="imagenasubir" (change)="onFileChange($event)" #image_input_field multiple>
+          <div class="btn-group" style="margin-top: 10px">
+            <button type="button" class="btn btn-sm btn-default" (click)="image_input_field.value=''">Limpiar</button>
+            <button type="button" class="btn btn-sm btn-primary" [disabled]="!image_input_field.value" (click)="uploadImages()">Cargar Imagenes</button>
+            <img *ngIf="uploading_images" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </div>
+
+          <div *ngIf="userExtra && userExtra.picturesUrls" class="row">
+            <div class="col-md-4" *ngFor="let source_url of userExtra.picturesUrls; let pos = index;" >
+              <div class="box box-success">
+                <div class="box-header with-border">
+                  <div class="box-tools pull-right">
+                    <!-- <button type="button" class="btn btn-box-tool">
+                      <i class="fa fa-times"></i>
+                    </button> -->
+                  </div>
+                  <div class="box-body" style="height: 150px; overflow: hidden; text-align: center">
+                    <img [src]="api_url + source_url"
+                         style="height: 100%; display: inline-block;" [alt]="source_url">
+                  </div>
+                  <div class="box-footer" style="text-align: center;">
+                    <button type="button" class="btn btn-primary btn-sm"
+                            data-dismiss="modal"
+                            (click)="changeProfilePic(source_url)">seleccionar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
 </div>
