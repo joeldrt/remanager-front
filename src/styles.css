@@ -28,3 +28,22 @@ input[type=text]:focus, textarea:focus {
 .dg-content-list > .row{
   cursor: pointer;
 }
+
+.dg-text-link:focus,
+.btn:focus{
+  outline:0px !important;
+}
+.dg-text-link{
+  color: #3c8dbc !important;
+  text-decoration: none !important;
+}
+.dg-text-link:hover{
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.pull-left a,
+.pull-right a
+{
+  cursor: pointer;
+}

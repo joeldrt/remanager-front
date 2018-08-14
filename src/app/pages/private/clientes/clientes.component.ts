@@ -100,8 +100,8 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     this.clients = new Array();
     this.listClientsService.forEach(item => {
       if (item.nombre && item.apellidos) {
-        if (item.nombre.toLowerCase().includes(value.toLowerCase())
-          || item.apellidos.toLowerCase().includes(value.toLowerCase())) {
+        const nombreApellido = item.nombre.toLowerCase() + ' ' + item.apellidos.toLowerCase();
+        if (nombreApellido.includes(value.toLowerCase())) {
           this.clients.push(item);
         }
       }

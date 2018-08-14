@@ -78,6 +78,7 @@ export class InfoClientComponent implements OnInit, AfterViewInit {
             this.existContracts = true;
             this.getListProducts();
           }
+          this.loading = false;
         },
         (res: HttpErrorResponse) => {
           this.toasterService.error('Error: ' + res.message);
