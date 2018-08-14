@@ -57,13 +57,19 @@
   .dg-head-back{
     min-height: 50px;
     max-height: 50px;
-    padding: 1em;
+    padding: 0.72em 1em;
     span{
       i{
         color: #325DC0;
         font-size: 2.1em;
       }
     }
+
+    .dg-content-button{
+      float: right;
+      margin-top: 0.5em;
+    }
+
   }
 
   // Botones
@@ -168,13 +174,13 @@
     border: none;
     color: #2A55BD;
     font-size: 0.9em;
-    text-transform: uppercase;
+    text-transform: capitalize;
     text-decoration: underline;
   } // end - dg-text-link
 
   .dg-content-infoclient{
     .dg-content-button{
-      margin: 1em 0;
+      margin: 1.5em 0;
       text-align: center;
       .btn{
         background-color: #3c8dbc;
@@ -189,7 +195,7 @@
     background-color: #FFF;
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 0;
+    padding: 1.5em 0;
 
     .row{
       padding: 0;
@@ -205,14 +211,6 @@
         }
         &:nth-of-type(2){
           text-align: left;
-        }
-      }
-
-      &:first-child{
-        margin-top: 1.5em;
-        margin-bottom: 1.8em;
-        & > div {
-          text-align: center;
         }
       }
 

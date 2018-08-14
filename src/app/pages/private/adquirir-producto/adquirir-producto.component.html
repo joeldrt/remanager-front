@@ -3,6 +3,24 @@
     <span (click)="returnToPage()">
       <i class="fa fa-angle-left"></i>
     </span>
+
+    <div class="dg-content-button"
+         *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
+      <button class="dg-text-link"
+              routerLink="/clientes"
+              [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn }">
+        Asignar cliente
+      </button>
+    </div>
+    <div class="dg-content-button"
+         *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+        <button class="dg-text-link dg-btn-changeclient"
+                routerLink="/clientes"
+                [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
+          Cambiar cliente
+        </button>
+    </div>
+
   </div>
   <div class="dg-content-bartitle dg-bartitle-2"
        *ngIf="producto">
@@ -34,28 +52,8 @@
   </div><!-- dg-content-bartitle -->
 
   <div class="dg-content-infoclient">
-    <div class="dg-content-button"
-         *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
-      <button class="dg-text-link"
-              routerLink="/clientes"
-              [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn }">
-        Asignar cliente...
-      </button>
-    </div>
-
     <div *ngIf="client">
       <div class="dg-info-client">
-
-        <div class="row" *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button class="dg-text-link dg-btn-changeclient"
-                    routerLink="/clientes"
-                    [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
-              Cambiar cliente...
-            </button>
-          </div>
-        </div>
-
         <div class="row">
           <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
             <label>

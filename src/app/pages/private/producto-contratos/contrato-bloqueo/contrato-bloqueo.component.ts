@@ -107,7 +107,7 @@ export class ContratoBloqueoComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<Contrato>) => {
           this.contract = res.body;
-          this.toasterService.success('¡Contrato generado!');
+          this.toasterService.success('¡Bloqueado!');
 
           this.getProduct();
           this.getInfoDate();
@@ -147,11 +147,17 @@ export class ContratoBloqueoComponent implements OnInit {
     return dd + '/' + mm + '/' + yyyy;
   }
 
+  getStringDateFormat(dateString: string): string {
+    let arrayTemp = dateString.split('/');
+    return arrayTemp[2] + '-' + arrayTemp[1] + '-' + arrayTemp[0];
+  }
+
   getInfoDate() {
+    debugger
     let replaceFecha = '';
     this.fechaBloqueo = this.getDateFormat(new Date(this.contract.fechaCreacion));
     this.fechaLimite = this.getDateFormat(this.addDays(new Date(this.contract.fechaCreacion), this.contract.diasValidez));
-    replaceFecha = this.fechaLimite.replace('/', '-');
+    replaceFecha = this.getStringDateFormat(this.fechaLimite);
     this.diasRestantes = this.getDaysBetweenDates(new Date(), new Date(replaceFecha));
   }
 
