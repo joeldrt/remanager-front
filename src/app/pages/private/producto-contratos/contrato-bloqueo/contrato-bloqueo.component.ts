@@ -153,7 +153,6 @@ export class ContratoBloqueoComponent implements OnInit {
   }
 
   getInfoDate() {
-    debugger
     let replaceFecha = '';
     this.fechaBloqueo = this.getDateFormat(new Date(this.contract.fechaCreacion));
     this.fechaLimite = this.getDateFormat(this.addDays(new Date(this.contract.fechaCreacion), this.contract.diasValidez));
