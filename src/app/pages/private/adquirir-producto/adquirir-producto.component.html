@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="dg-content-button"
-         *ngIf="producto && producto.estatus.toString()==='DISPONIBLE'">
+         *ngIf="client && producto && producto.estatus.toString()==='DISPONIBLE'">
         <button class="dg-text-link dg-btn-changeclient"
                 routerLink="/clientes"
                 [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
