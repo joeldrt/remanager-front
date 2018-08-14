@@ -41,3 +41,9 @@ input[type=text]:focus, textarea:focus {
   text-decoration: none !important;
   border-bottom: none !important;
 }
+
+.pull-left a,
+.pull-right a
+{
+  cursor: pointer;
+}

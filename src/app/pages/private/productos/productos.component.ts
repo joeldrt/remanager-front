@@ -13,8 +13,10 @@ import {ProductUtils} from '../../../_utils/product.utils';
 })
 export class ProductosComponent implements OnInit {
 
-  organizacionId: number;
-  productos: Producto[];
+  public organizacionId: number;
+  public productos: Producto[];
+  public listProductsService: Producto[];
+  public inputSearch: string;
 
   constructor(
     private router: Router,
@@ -22,7 +24,10 @@ export class ProductosComponent implements OnInit {
     private toaster: ToasterService,
     private accountService: AccountService,
     private productUtils: ProductUtils,
-  ) { }
+  ) {
+    this.inputSearch = '';
+    this.listProductsService = null;
+  }
 
   ngOnInit() {
     this.clearProductosArray();
@@ -49,12 +54,13 @@ export class ProductosComponent implements OnInit {
       (value: HttpResponse<Producto[]>) => {
         if (value && value.body) {
           this.productos = value.body;
+          this.listProductsService = value.body;
         }
       },
       (error: HttpErrorResponse) => {
         this.toaster.error('Error ' + error.status + ': ' + error.message);
       });
-  }
+  }// end - findAllProducts
 
   detalleDeProducto(producto: Producto) {
     this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/productos'}});
@@ -63,5 +69,17 @@ export class ProductosComponent implements OnInit {
   colorByStatus(status: string): string {
     return this.productUtils.colorByStatus(status);
   }
+
+  inputTextSearch(value) {
+    this.productos = new Array();
+    this.listProductsService.forEach(item => {
+      if (item.nombre && item.descripcion) {
+        const valueSearch = item.nombre.toLowerCase() + ' ' + item.estatus + ' ' + item.precio;
+        if (valueSearch.includes(value.toLowerCase())) {
+          this.productos.push(item);
+        }
+      }
+    });
+  }// end - inputTextSearch
 
 }
