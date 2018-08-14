@@ -17,6 +17,7 @@ export class ProductosComponent implements OnInit {
   public productos: Producto[];
   public listProductsService: Producto[];
   public inputSearch: string;
+  public loading: boolean;
 
   constructor(
     private router: Router,
@@ -27,6 +28,7 @@ export class ProductosComponent implements OnInit {
   ) {
     this.inputSearch = '';
     this.listProductsService = null;
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -55,6 +57,7 @@ export class ProductosComponent implements OnInit {
         if (value && value.body) {
           this.productos = value.body;
           this.listProductsService = value.body;
+          this.loading = false;
         }
       },
       (error: HttpErrorResponse) => {
@@ -78,8 +81,11 @@ export class ProductosComponent implements OnInit {
         if (valueSearch.includes(value.toLowerCase())) {
           this.productos.push(item);
         }
+      } else {
+
       }
     });
+    this.loading = false;
   }// end - inputTextSearch
 
 }

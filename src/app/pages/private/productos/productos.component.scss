@@ -54,7 +54,11 @@
     }
   }// end - dg-content-inputsearch
   .dg-section-search{
-    margin-top: 50px;
+    background-color: #FFF;
+    padding-top: 50px;
+    position: fixed;
+    width: 99%;
+    z-index: 9;
     & > div{
       display: inline-block;
       vertical-align: middle;
@@ -62,8 +66,8 @@
     }
 
     .dg-content-inputsearch{
-      max-width: 99%;
-      min-width: 99%;
+      max-width: 72%;
+      min-width: 72%;
     }
     .dg-content-buttons{
       max-width: 27%;
@@ -78,7 +82,7 @@
   }// end - .dg-section-search
 
   .dg-content-list {
-    margin-top: 18px;
+    margin-top: 120px;
 
     &.dg-content-listprojects,
     &.dg-content-listlote{
@@ -157,3 +161,14 @@
   }// end - .dg-text-link
 
 }// end - .dg-content-page
+
+.dg-content-msj{
+  margin-top: 40%;
+  text-align: center;
+  width: 100%;
+
+  .dg-msj{
+    color: #CCC;
+    font-size: 1.23em;
+  }
+}

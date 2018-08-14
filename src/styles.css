@@ -30,7 +30,8 @@ input[type=text]:focus, textarea:focus {
 }
 
 .dg-text-link:focus,
-.btn:focus{
+.btn:focus,
+.dg-btn:focus{
   outline:0px !important;
 }
 .dg-text-link{

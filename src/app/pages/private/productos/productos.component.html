@@ -13,7 +13,7 @@
     </div>
   </div><!-- end - dg-section-search -->
 
-  <div class="">
+  <div *ngIf="!loading">
     <div *ngIf="productos.length >= 1 || productos.length >= 1">
       <div class="dg-content-list dg-content-listlote">
         <div class="row"
@@ -62,12 +62,22 @@
         </div><!-- end - row -->
       </div><!-- end - dg-content-list dg-content-listlote -->
     </div>
+
+    <div *ngIf="productos.length === 0"
+         class="dg-content-msj">
+      <div>
+        <p class="dg-msj">
+          No hay información de Lotes/Casas...
+        </p>
+      </div>
+    </div>
+
   </div>
 
   <div class="dg-content-loading"
        style="min-height: inherit;
                 max-height: inherit;"
-       *ngIf="productos.length < 1 && productos.length < 1">
+       *ngIf="loading">
     <app-loading
       style="min-height: inherit;
               max-height: inherit;">
