@@ -7,7 +7,6 @@ import { ProductoService, ClientService, ContratoService, ToasterService } from 
 
 // Models
 import { Client, Contrato, Producto, TipoContrato } from '../../../../_models';
-import {C} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-contrato-bloqueo',
@@ -54,7 +53,7 @@ export class ContratoBloqueoComponent implements OnInit {
     } else {
       this.router.navigate(['/productos']);
     }
-  }
+  } // end - ngOnInit
 
   getClient() {
     if (this.client.id) {
@@ -174,6 +173,10 @@ export class ContratoBloqueoComponent implements OnInit {
         break;
       }
     }
+  }
+
+  goToPage(page: string) {
+
   }
 
 }

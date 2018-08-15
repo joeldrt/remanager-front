@@ -48,3 +48,7 @@ input[type=text]:focus, textarea:focus {
 {
   cursor: pointer;
 }
+
+.dg-text-link{
+  text-transform: uppercase !important;
+}

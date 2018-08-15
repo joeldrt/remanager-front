@@ -4,6 +4,9 @@
     <span (click)="returnToPage()">
       <i class="fa fa-angle-left"></i>
     </span>
+    <label class="dg-title-section">
+      Bloqueo de producto
+    </label>
   </div>
 
   <div *ngIf="product" class="dg-content-bartitle dg-bartitle-2">
@@ -96,8 +99,7 @@
             <label>
               Nombre:
             </label>
-            <span>{{client.nombre}}</span>
-            <span>{{client.apellidos}}</span>
+            <span>{{client.nombre}}</span> <span>{{client.apellidos}}</span>
           </div>
 
           <div class="dg-row-text2">
@@ -181,25 +183,28 @@
        class="dg-content-btns">
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="dg-btn dg-btn-green">
-          Vender
+        <button class="dg-text-link"
+                (click)="goToPage('/corrida')" >
+          Generar corrida
         </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="dg-btn dg-btn-orange">
-          Corrida
+        <button class="dg-text-link" >
+          Desbloquear
         </button>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="dg-btn dg-btn-orange">
+        <button class="dg-btn dg-btn-orange"
+                (click)="goToPage('/apartado')">
           Apartar
         </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="dg-btn dg-btn-orange">
-          Devolución
+        <button class="dg-btn dg-btn-green"
+                (click)="goToPage('/venta')">
+          Vender
         </button>
       </div>
     </div>
