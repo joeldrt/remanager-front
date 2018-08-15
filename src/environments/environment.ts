@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   // API_URL: 'http://localhost:8080/',
   API_URL: 'http://devdigiall.tk:8080/',
-  // API_URL: 'http://4519ea28.ngrok.io/',
 };
 
 /*
