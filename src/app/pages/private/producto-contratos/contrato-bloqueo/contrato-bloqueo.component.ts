@@ -176,7 +176,26 @@ export class ContratoBloqueoComponent implements OnInit {
   }
 
   goToPage(page: string) {
-
-  }
-
+    let nameRoute = '';
+    switch (page) {
+      case '/venta': {
+        nameRoute = page;
+        break;
+      }
+      case '/corrida': {
+        nameRoute = page;
+        break;
+      }
+      case '/apartado': {
+        nameRoute = page;
+        break;
+      }
+    }
+    this.router.navigate([nameRoute], {queryParams : {
+        idClient: this.client.id,
+        idProduct: this.product.id,
+        idContract: this.contract.id,
+        routeToReturn: '/bloqueo',
+      }});
+  }// end - goToPage
 }
