@@ -1,11 +1,14 @@
 <div class="dg-content-page dg-page-valores">
   <div class="dg-head-back">
-    <span>
+    <span (click)="returnToPage()">
       <i class="fa fa-angle-left"></i>
     </span>
+    <label class="dg-title-section">
+      Apartado de producto
+    </label>
   </div>
 
-  <div class="dg-content-bartitle dg-bartitle-2">
+  <div *ngIf="product" class="dg-content-bartitle dg-bartitle-2">
     <div class="row">
       <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
         <div class="dg-content-icon">
@@ -16,90 +19,111 @@
       </div>
       <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
         <div class="dg-content-info">
-          <p class="dg-row-text1">
-            Lote 2
-          </p>
-          <p class="dg-row-text2">
-            245 m2
-          </p>
-          <p class="dg-row-text3">
-            20.00 x 37.50 = 750.00 m2
-          </p>
+          <div class="dg-row-text1">
+            <label>
+              Producto
+            </label>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Nombre:
+            </label>
+            <span>{{product.nombre}}</span>
+          </div>
+
+          <div class="dg-row-text2"
+               *ngFor="let valor of product.valoresCampos">
+
+            <div *ngIf="valor.nombre && valor.nombre === 'M2'">
+              <label>
+                Total de metros:
+              </label>
+              <span>
+                {{valor.valor}} m2
+              </span>
+            </div>
+
+            <div *ngIf="valor.nombre && valor.nombre === 'Precio M2'">
+              <label>
+                Precio por m2:
+              </label>
+              <span>
+                {{valor.valor | currency:'MXN'}}
+              </span>
+            </div>
+          </div><!-- end - dg-row-text2 -->
+
+          <div class="dg-row-text2">
+            <div>
+              <label>
+                Precio Total:
+              </label>
+              <span>
+                {{product.precio | currency:'MXN'}}
+              </span>
+            </div>
+            <div>
+              <label>
+                Estatus del producto:
+              </label>
+              <span>
+              {{product.estatus}}
+            </span>
+            </div>
+          </div><!-- dg-row-text3 -->
         </div>
       </div>
     </div>
   </div><!-- dg-content-bartitle -->
 
-  <div class="dg-content-infoclient">
-    <div class="dg-info-client">
-      <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-          <label>
-            Nombre:
-          </label>
-        </div>
-        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-
-        </span>
+  <div *ngIf="client" class="dg-content-bartitle dg-bartitle-client">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+        <div class="dg-content-icon">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-          <label>
-            Dirección:
-          </label>
-        </div>
-        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
+      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+        <div class="dg-content-info">
+          <div class="dg-row-text1">
+            <label>
+              Cliente
+            </label>
+          </div>
 
-        </span>
-        </div>
+          <div class="dg-row-text2">
+            <label>
+              Nombre:
+            </label>
+            <span>{{client.nombre}}</span> <span> {{client.apellidos}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Dirección:
+            </label>
+            <span>{{client.direccion}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Teléfono:
+            </label>
+            <span>{{client.telefono}}</span>
+          </div>
+
+          <div class="dg-row-text2">
+            <label>
+              Correo:
+            </label>
+            <span>{{client.email}}</span>
+          </div>
+
+        </div> <!-- dg-content-info -->
       </div>
-      <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-          <label>
-            Teléfono:
-          </label>
-        </div>
-        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-
-        </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-          <label>
-            Correo:
-          </label>
-        </div>
-        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-
-        </span>
-        </div>
-      </div>
-    </div><!-- end - dg-info-client -->
-  </div>
-
-  <div class="dg-content-values">
-    <div class="dg-row">
-      <span class="dg-lbl">
-        Valor total del producto
-      </span>
-      <span class="dg-value">
-        $1,500,000.00
-      </span>
     </div>
-    <div class="dg-row">
-      <span class="dg-lbl">
-        Valor restante a pagar
-      </span>
-      <span class="dg-value">
-        $1,500,000.00
-      </span>
-    </div>
-  </div><!-- end - dg-content-values -->
-
-</div><!-- end - dg-page-valores -->
+  </div><!-- dg-content-bartitle - client -->
+</div><!-- end - dg-content-page -->
