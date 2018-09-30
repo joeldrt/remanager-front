@@ -118,7 +118,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
   }
 
   append_base_url_to_fotos() {
-    if(!this.producto.fotos || this.producto.fotos.length <= 0) {
+    if (!this.producto.fotos || this.producto.fotos.length <= 0) {
       return;
     }
     const modify_array_fotos = new Array<string>();

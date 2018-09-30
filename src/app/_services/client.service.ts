@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Client } from '../_models/client';
@@ -20,12 +21,11 @@ export class ClientService {
   ) {
     this.resourceUrl = environment.API_URL + 'api/clientes';
     this.resourceSearchUrl = environment.API_URL + 'api/_search/clientes';
-    this.resourceSearchByCv = environment.API_URL + 'api/_search_by_cv/clientes/';
+    this.resourceSearchByCv = environment.API_URL + 'api/_search_by_cv/clientes';
   }
 
   create(client: Client): Observable<HttpResponse<Client>> {
-    const copy = this.convert(client);
-    return this.http.post<Client>(this.resourceUrl, copy, { observe: 'response' });
+    return this.http.post<Client>(this.resourceUrl, client, { observe: 'response' });
   }
 
   update(client: Client): Observable<HttpResponse<Client>> {
@@ -47,7 +47,7 @@ export class ClientService {
   }
 
   searchByCv(req?: any): Observable<HttpResponse<Client[]>> {
-    return this.http.get<Client[]>(this.resourceSearchByCv + req, { observe: 'response'});
+    return this.http.get<Client[]>(this.resourceSearchByCv, { observe: 'response'});
   }
 
   getClients(): Observable<HttpResponse<Client[]>> {
@@ -58,18 +58,15 @@ export class ClientService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  /*
-  * **
-  */
-  private convert(cliente: Client): Client {
-    const copy: Client = Object.assign({}, cliente);
-    if (cliente.fechaAlta) {
-      copy.fechaAlta = this.dateUtils.toDate(cliente.fechaAlta);
-    }
-    if (cliente.fechaNacimiento) {
-      copy.fechaNacimiento = this.dateUtils.toDate(cliente.fechaNacimiento);
-    }
-    return copy;
+  editar(cliente: Client): Observable<HttpResponse<Client>> {
+    return this.http.put<Client>(this.resourceUrl + '/' + cliente.id, cliente, {observe: 'response'}).pipe(
+      map(data => {
+        if (data.body.fechaNacimiento) {
+          data.body.fechaNacimiento = data.body.fechaNacimiento.split('T')[0];
+        }
+        return data;
+      })
+    );
   }
 
 }

@@ -69,6 +69,7 @@ import { LoginComponent } from './pages/public/login/login.component';
 import { TerrenosComponent } from './pages/private/terrenos/terrenos.component';
 import { PerfilComponent } from './pages/private/perfil/perfil.component';
 import { ClientesComponent } from './pages/private/clientes/clientes.component';
+import { ClienteDetalleComponent } from './pages/private/clientes/cliente-detalle.component';
 import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
@@ -101,6 +102,7 @@ import { ContratoApartadoComponent } from './pages/private/producto-contratos/co
     TerrenosComponent,
     PerfilComponent,
     ClientesComponent,
+    ClienteDetalleComponent,
     VentasComponent,
     ProyectosComponent,
     ProyectosMapComponent,

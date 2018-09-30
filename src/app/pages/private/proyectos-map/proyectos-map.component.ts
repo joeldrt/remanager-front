@@ -118,11 +118,11 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     this.polygon_fill_opacity = new Map<string, string>();
     for (const proyecto of this.proyectos) {
       this.polygon_fill_color_map.set(proyecto.idSeccion, 'blue');
-      this.polygon_fill_opacity.set(proyecto.idSeccion, '0.0')
+      this.polygon_fill_opacity.set(proyecto.idSeccion, '0.0');
     }
     for (const producto of this.productos) {
       this.polygon_fill_color_map.set(producto.idSeccion, this.productUtils.colorByStatus(producto.estatus.toString()));
-      this.polygon_fill_opacity.set(producto.idSeccion, '0.8')
+      this.polygon_fill_opacity.set(producto.idSeccion, '0.8');
     }
   }
 

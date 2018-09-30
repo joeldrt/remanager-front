@@ -146,10 +146,11 @@ export class PerfilComponent implements OnInit {
         const file = event.target.files[index];
         reader.readAsDataURL(file);
         reader.onload = () => {
+          const dataAsString = String(reader.result);
           const image_envelope = new ImageEnvelope(
             file.name,
             file.type,
-            reader.result.split(',')[1]
+            dataAsString.split(',')[1]
           );
           this.image_envelopes.push(image_envelope);
         };
