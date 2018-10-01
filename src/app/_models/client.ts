@@ -1,3 +1,5 @@
+import { ResumenContrato } from './contrato';
+
 export class Client {
   public id?: string;
   public fechaAlta?: string;
@@ -9,6 +11,11 @@ export class Client {
   public fechaNacimiento?: string;
   public direccion?: string;
   public telefono?: number;
+}
+
+export class ResumenContratosPorCliente {
+  public cliente?: Client;
+  public resumen_contrato?:  ResumenContrato;
 }
 
 

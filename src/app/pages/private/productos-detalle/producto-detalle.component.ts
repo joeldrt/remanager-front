@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-
-import { FooterMenuhelper } from '../../../_helpers/footer-menuhelper';
 
 import { environment } from '../../../../environments/environment';
 
@@ -15,23 +13,17 @@ import {
   EstatusDeProducto,
   Producto, TipoContrato
 } from '../../../_models';
-import {
-  HeaderHelper
-} from '../../../_helpers';
 
 @Component({
   selector: 'app-producto-detalle',
   templateUrl: './producto-detalle.component.html',
   styleUrls: ['./producto-detalle.component.scss']
 })
-export class ProductoDetalleComponent implements OnInit, OnDestroy {
+export class ProductoDetalleComponent implements OnInit {
 
   image_resource_url_base: string;
-  productoId: number;
+  producto_id: string;
   producto: Producto;
-  loading: boolean;
-
-  routeToReturn: string;
 
   default_images = ['./assets/img/producto_mock/casa1.jpeg',
     './assets/img/producto_mock/casa2.jpg',
@@ -43,48 +35,27 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private productoService: ProductoService,
-    private footerMenu: FooterMenuhelper,
-    private toaster: ToasterService,
-    private headerHelper: HeaderHelper
+    private toaster: ToasterService
   ) {
     this.image_resource_url_base = environment.API_URL;
-    this.loading = true;
   }
 
   ngOnInit() {
-    this.productoId = this.route.snapshot.params['id'];
-    if (!this.productoId) {
-      this.toaster.error('No se especificó el producto');
-      this.router.navigate(['/proyectos']);
+    this.producto_id = this.route.snapshot.params['producto_id'];
+    if (!this.producto_id) {
+      this.toaster.error('No se especificó el id del producto');
+      this.router.navigate(['../']);
       return;
     }
-    this.getProducto(this.route.snapshot.params['id']);
-    this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
-    if (!this.routeToReturn) {
-      this.routeToReturn = '/proyectos';
-    }
+    this.getProducto();
   }
 
-  ngOnDestroy() {
-    if (!this.producto) {
-      return;
-    }
-    this.footerMenu.clearButtons('/productos/' + this.producto.id);
-  }
-
-  navegarAnterior() {
-    this.router.navigate([this.routeToReturn]);
-  }
-
-  getProducto(producto_id: string) {
-    this.productoService.getProductosById(producto_id).subscribe(
+  getProducto() {
+    this.productoService.getProductosById(this.producto_id).subscribe(
       (response: HttpResponse<Producto>) => {
         if (response.body) {
           this.producto = response.body;
           this.append_base_url_to_fotos();
-          this.headerHelper.sendHeaderTitleRequest(this.producto.nombre);
-          this.setFooterMenu(this.producto);
-          this.loading = false;
         } else {
           this.toaster.error('La respuesta del servido viene vacía');
         }
@@ -93,28 +64,6 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
         this.toaster.error(error.message);
       }
     );
-  }
-
-  setFooterMenu(producto: Producto) {
-    if (producto.estatus === EstatusDeProducto.DISPONIBLE) {
-      this.footerMenu.clearButtons('/productos/' + producto.id);
-      this.footerMenu.addButtonFromValues(
-        '/productos/' + producto.id,
-        'Adquirir producto',
-        'fa fa-shopping-cart',
-        '/adquirir/' + this.productoId,
-        {'routeToReturn': this.routeToReturn}
-      );
-      this.footerMenu.sendMenuRequest('/productos/' + producto.id);
-      return;
-    }
-    this.footerMenu.clearButtons('/productos/' + producto.id);
-    this.footerMenu.addButtonFromValues(
-      '/productos/' + producto.id,
-      'Producto ' + producto.estatus.toString().toLowerCase(),
-      'fa fa-lock'
-    );
-    this.footerMenu.sendMenuRequest('/productos/' + producto.id);
   }
 
   append_base_url_to_fotos() {

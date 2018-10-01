@@ -1,214 +1,140 @@
-<div class="content  dg-content-page dg-page-priceslote">
-  <div class="dg-head-back">
-    <span (click)="returnToPage()">
-      <i class="fa fa-angle-left"></i>
-    </span>
+<div class="content">
 
-    <div class="dg-content-button"
-         *ngIf="!clientId && producto && producto.estatus.toString()==='DISPONIBLE'">
-      <button class="dg-text-link"
-              routerLink="/clientes"
-              [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn }">
-        Asignar cliente
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+      <button class="btn btn-link pull-left" routerLink="../" *ngIf="!cliente_id">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+      <button class="btn btn-link pull-left" routerLink="../../" *ngIf="cliente_id">
+        <i class="glyphicon glyphicon-chevron-left"></i>
       </button>
     </div>
-    <div class="dg-content-button"
-         *ngIf="client && producto && producto.estatus.toString()==='DISPONIBLE'">
-        <button class="dg-text-link dg-btn-changeclient"
-                routerLink="/clientes"
-                [queryParams]="{returnTo: '/adquirir', productoId: productoId, routeToReturn: routeToReturn}">
-          Cambiar cliente
-        </button>
+    <div class="nav-bar-center">
     </div>
-
+    <div class="nav-bar-right">
+      <button class="btn btn-link pull-right" *ngIf="!cliente_id" data-toggle="modal" data-target="#asignarClienteModal">
+        asignar cliente
+      </button>
+      <button class="btn btn-link pull-right" *ngIf="cliente_id" data-toggle="modal" data-target="#asignarClienteModal">
+        modificar cliente
+      </button>
+    </div>
   </div>
-  <div class="dg-content-bartitle dg-bartitle-2"
-       *ngIf="producto">
-    <div class="row">
-      <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
-        <div class="dg-content-icon">
-          <span>
-            <i class="fa fa-flag"></i>
-          </span>
+
+  <!-- animación de loaging-->
+  <div class="dg-content-loading" style="min-height: inherit; max-height: inherit;" *ngIf="!producto">
+    <app-loading style="min-height: inherit; max-height: inherit;">
+    </app-loading>
+  </div>
+
+  <div class="adquirir-producto-container" *ngIf="producto">
+
+    <div class="producto-bartitle">
+      <div class="row">
+        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+          <div style="width: 100%">
+              <span><i class="fa fa-flag pull-right" style="color: #FFF; font-size: 2.1em;"></i></span>
+          </div>
+        </div>
+        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9" *ngIf="producto.nombre">
+          <div class="producto-bartitle-info">
+            <div class="dg-row-text1">
+              {{producto.nombre}}
+            </div>
+            <div class="dg-row-text2">
+                <div *ngFor="let valor of producto.valoresCampos">
+                  <div *ngIf="valor.nombre && valor.nombre === 'M2'">
+                    {{valor.valor}} <span>m2</span>
+                  </div>
+                </div>
+            </div>
+            <div class="dg-row-text3">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
-        <div class="dg-content-info">
-          <div class="dg-row-text1">
-            {{producto.nombre}}
-          </div>
-          <div class="dg-row-text2">
-            <div *ngFor="let valor of producto.valoresCampos">
-              <div *ngIf="valor.nombre && valor.nombre === 'M2'">
-                {{valor.valor}} <span>m2</span>
+    </div><!-- end producto-bartitle -->
+
+
+    <div class="adquirir-producto-cliente-asignado">
+
+    </div><!-- end adquirir-producto-cliente-asignado-->
+
+
+    <div class="producto-bar-precio">
+      <span>
+        {{producto.precio | currency:'MXN'}}
+      </span>
+    </div><!-- end producto bar precio-->
+
+    <!-- mensaje cuando no hay cliente asignado-->
+    <div class="adquirir-producto-botones" *ngIf="!cliente_id">
+      <div style="width: 100%; margin-top: 20px; text-align: center">
+        <h5>Debes asignar un cliente</h5>
+      </div>
+    </div>
+    <!-- mensaje cuando no hay cliente asignado-->
+
+    <div class="adquirir-producto-botones" *ngIf="cliente_id">
+      <div class="container">
+        <div class="dg-rows-wrapper">
+          <div class="row" style="margin-bottom: 10px;">
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div style="text-align: center">
+                <button type="button" class="btn btn-link">
+                  bloquear
+                </button>
+              </div>
+            </div>
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div style="text-align: center">
+                <button type="button" class="btn btn-link">
+                  corrida
+                </button>
               </div>
             </div>
           </div>
-          <div class="dg-row-text3">
+          <div class="row">
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div style="text-align: center">
+                <button type="button" class="dg-btn dg-btn-orange">
+                  apartar
+                </button>
+              </div>
+            </div>
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div style="text-align: center">
+                <button type="button" class="dg-btn dg-btn-green">
+                  vender
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div><!-- dg-content-bartitle -->
+    </div><!-- end adquirir-producto-botones-->
 
-  <div class="dg-content-infoclient">
-    <div *ngIf="client">
-      <div class="dg-info-client">
-        <div class="row">
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <label>
-              Nombre:
-            </label>
-          </div>
-          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.nombre }}
-        </span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <label>
-              Dirección:
-            </label>
-          </div>
-          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.direccion }}
-        </span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <label>
-              Teléfono:
-            </label>
-          </div>
-          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <span>
-          {{ client.telefono }}
-        </span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <label>
-              Correo:
-            </label>
-          </div>
-          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-            <span>
-              {{ client.email }}
-            </span>
-          </div>
-        </div>
-      </div><!-- end - dg-info-client -->
-    </div><!-- end - dg-content-infoclient -->
-
-  </div><!-- end - dg-content-infoclient -->
-
-  <div class="dg-content-buttons">
-    <div class="dg-content-lineprice">
-      <div>
-      <span>
-      </span>
-        <span *ngIf="producto">
-        {{producto.precio | currency:'MXN'}}
-      </span>
-      </div>
-    </div><!-- end - .dg-content-lineprice -->
-
-    <div *ngIf="client">
-      <div class="dg-content-btnlink">
-        <button data-target="#modal"
-                data-toggle="modal"
-                class="dg-text-link"
-                (click)="setTypeAction('bloquear')" >
-          Bloquear
-        </button>
-        <button data-target="#modal"
-                data-toggle="modal"
-                class="dg-text-link"
-                (click)="setTypeAction('corrida')" >
-          Generar Corrida
-        </button>
-      </div>
-      <div class="dg-content-btns">
-        <div class="dg-content-button">
-          <button data-target="#modal"
-                  data-toggle="modal"
-                  class="dg-btn dg-btn-orange"
-                  (click)="setTypeAction('apartar')" >
-            Apartar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div><!-- end - dg-content-buttons -->
-
-  <!-- Modal - Bloquear  -->
-  <div *ngIf="producto && client && producto.estatus.toString() === 'DISPONIBLE'"
-       class="modal fade dg-modal-msg"
-       id="modal" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Bloqueo de producto</h4-->
-        </div>
-        <div class="modal-body">
-          <p>
-            Estás a punto de
-            <span *ngIf="typeAction === 'corrida'">
-              <strong>
-                generar una corrida
-              </strong>
-              para
-            </span>
-            <strong *ngIf="typeAction !== 'corrida'">
-              {{typeAction}}
-            </strong>
-            el producto
-            <span style="font-style: italic;">
-              {{producto.nombre}}
-            </span>
-            .
-          </p>
-          <p>
-            El cliente es:
-            <span style="font-style: italic;">
-              {{client.nombre}} {{client.apellidos}}
-            </span>
-            .
-          </p>
-          <p>
-            ¡Confirme la acción para continuar!
-          </p>
-        </div>
-        <div class="modal-footer">
-          <div class="dg-content-btns">
-            <button type="button"
-                    class="btn btn-default pull-left dg-text-link"
-                    data-dismiss="modal">
-              Cancelar
-            </button>
-            <button type="button"
-                    class="btn btn-primary dg-btn dg-btn-blue"
-                    data-dismiss="modal"
-                    (click)="goPaymentsProduct(typeAction)">
-              Aceptar
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+  </div><!-- end adquirir-producto-container-->
 
 </div><!-- end - dg-page-priceslote -->
+
+<!-- Asignar cliente Modal -->
+<div class="modal fade" id="asignarClienteModal" tabindex="-1" role="dialog" aria-labelledby="asignarClienteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

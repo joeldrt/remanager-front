@@ -43,7 +43,7 @@ export class ClienteDetalleComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['../']);
       }
     );
   }
@@ -57,6 +57,19 @@ export class ClienteDetalleComponent implements OnInit {
       (response: HttpResponse<Client>) => {
         this.cliente = response.body;
         this.editing_mode = false;
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+      }
+    );
+  }
+
+  borrarCliente() {
+    this.clienteService.borrar(this.cliente.id).subscribe(
+      (response: HttpResponse<any>) => {
+        this.toaster.success('cliente borrado');
+        this.editing_mode = false;
+        this.router.navigate(['/clientes']);
       },
       (error: HttpErrorResponse) => {
         this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);

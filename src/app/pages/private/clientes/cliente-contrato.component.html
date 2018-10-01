@@ -1,0 +1,157 @@
+<div class="content">
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+      <button class="btn btn-link pull-left" routerLink="/clientes">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+    </div>
+    <div class="nav-bar-center">
+      <h4 *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.cliente">
+        {{resumen_contratos_por_cliente.cliente.nombre}} {{resumen_contratos_por_cliente.cliente.apellidos}}
+      </h4>
+    </div>
+    <div class="nav-bar-right">
+    </div>
+  </div>
+
+  <!-- animación de carga -->
+  <div class="dg-content-loading" style="min-height: inherit; max-height: inherit;" *ngIf="!resumen_contratos_por_cliente">
+    <app-loading style="min-height: inherit; max-height: inherit;">
+    </app-loading>
+  </div>
+  <!-- end - animación de carga -->
+
+  <div class="cliente-contrato-container">
+    <div class="dg-info-client" *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.cliente">
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Nombre:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.nombre}} {{resumen_contratos_por_cliente.cliente.apellidos}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Dirección:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.direccion}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Teléfono:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.telefono}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Correo:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.email}}
+          </span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-link" routerLink="/clientes/{{cliente_id}}/contratos/editarcliente">
+        detalle del cliente
+      </button>
+    </div><!-- end - dg-info-client -->
+
+    <div class="dg-info-contrato" >
+      <h4>Contratos, apartados y bloqueos</h4>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Venta</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+          <!-- /.info-box -->
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Corrida</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Apartado</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="info-box">
+            <span class="info-box-icon bg-gray"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Bloqueo</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Devolución</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

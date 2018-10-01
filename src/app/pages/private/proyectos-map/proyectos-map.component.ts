@@ -248,7 +248,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   detalleDeProducto(producto: Producto) {
-    this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/proyectos/mapa'}});
+    this.router.navigate(['/proyectos/mapa/producto', producto.id]);
   }
 
 }

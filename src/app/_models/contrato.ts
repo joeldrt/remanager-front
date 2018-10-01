@@ -1,3 +1,4 @@
+import { Producto } from './producto';
 
 export class PagoReal {
   public fechaCreacion?: any; // No se llena, solo para lectura... llenado por el servidor
@@ -13,11 +14,11 @@ export class PagoProgramado {
 }
 
 export enum TipoContrato {
-  BLOQUEO = 'BLOQUEO',
-  APARTADO = 'APARTADO',
-  VENTA = 'VENTA',
-  DEVOLUCION = 'DEVOLUCION',
-  CORRIDA = 'CORRIDA',
+  BLOQUEO = 'BLOQUEO', // gris
+  APARTADO = 'APARTADO', // amarilo
+  VENTA = 'VENTA', // verde
+  DEVOLUCION = 'DEVOLUCION', // negro
+  CORRIDA = 'CORRIDA', // azul
 }
 
 export class Contrato {
@@ -31,4 +32,9 @@ export class Contrato {
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];
   public activo?: boolean;
+}
+
+export class ResumenContrato {
+  public contrato?: Contrato;
+  public producto?: Producto;
 }

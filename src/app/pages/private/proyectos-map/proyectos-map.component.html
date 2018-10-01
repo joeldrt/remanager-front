@@ -62,7 +62,7 @@
       <div *ngIf="svg && svg.imagen && !root_view">
         <svg #svgTag id="svgTag"
              [attr.width]="workingAreaSpace.clientWidth - 30"
-             [attr.height]="workingAreaSpace.clientHeight" style="background-color: white;">
+             [attr.height]="workingAreaSpace.clientHeight - 30" style="background-color: white;">
 
           <svg:image [attr.width]="svg.width"
                      [attr.height]="svg.height"

@@ -3,14 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 // Services
-import {ProductoService, ClientService, AccountService, ToasterService, ContratoService} from '../../../_services';
+import { ProductoService, ClientService, ToasterService } from '../../../_services';
 
 // Models
 import { Producto } from '../../../_models';
-import { User } from '../../../_models';
-import { Organizacion } from '../../../_models/organizacion';
 import { Client } from '../../../_models/client';
-import { TipoContrato } from '../../../_models';
 
 // Helpers
 import { HeaderHelper } from '../../../_helpers';
@@ -22,13 +19,12 @@ import { HeaderHelper } from '../../../_helpers';
 })
 export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public user: User;
-  public client: Client;
-  public organization: Organizacion;
+  public producto_id: string;
   public producto: Producto;
-  public productoId: string;
-  public clientId: string;
-  public routeToReturn: string;
+
+  public cliente_id: string;
+  public cliente: Client;
+
   public typeAction: string;
 
   constructor(
@@ -37,27 +33,24 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
     private productoService: ProductoService,
     private clientService: ClientService,
     private toasterService: ToasterService,
-    private headerHelper: HeaderHelper,
-    private accountService: AccountService,
+    private headerHelper: HeaderHelper
   ) {
-    this.user = new User();
-    this.organization = new Organizacion();
   }
 
   ngOnInit() {
-    this.productoId = this.route.snapshot.params['id'];
-    if (!this.productoId) {
+    this.producto_id = this.route.snapshot.params['producto_id'];
+    if (!this.producto_id) {
       this.toasterService.error('No se especificó el producto');
-      this.router.navigate(['/proyectos']);
+      this.router.navigate(['../']);
       return;
     }
-    this.routeToReturn = this.route.snapshot.queryParams['routeToReturn'];
     this.route.queryParams.subscribe(params => {
-      this.clientId = params.clientId;
-      this.getClient();
+      this.cliente_id = params.cliente_id;
+      if (this.cliente_id) {
+        this.getCliente();
+      }
     });
-    this.getProducto(this.productoId);
-    this.getAccount();
+    this.getProducto();
   }
 
   ngOnDestroy() {
@@ -66,8 +59,8 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
   ngAfterViewInit() {
   }
 
-  getProducto(producto_id: string) {
-    this.productoService.getProductosById(producto_id).subscribe(
+  getProducto() {
+    this.productoService.getProductosById(this.producto_id).subscribe(
       (response: HttpResponse<Producto>) => {
         if (response.body) {
           this.producto = response.body;
@@ -78,75 +71,21 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy, AfterViewIn
       },
       (error: HttpErrorResponse) => {
         this.toasterService.error(error.message);
+        this.router.navigate(['../']);
       }
     );
   } // end - getProducto
 
-  getAccount() {
-    this.accountService.getAccount().subscribe(
-      (response: HttpResponse<User>) => {
-        this.user = response.body;
-        this.getOrganization();
+  getCliente() {
+    this.clientService.find(this.cliente_id).subscribe(
+      (res: HttpResponse<Client>) => {
+        this.cliente = res.body;
       },
-      (error: HttpErrorResponse) => {
-        this.toasterService.error(error.message);
-      });
-  }// end - getAccount
-
-  getOrganization() {
-    this.accountService.getAccountOrganization()
-      .subscribe((res: HttpResponse<Organizacion>) => {
-          this.organization = res.body;
-        },
-        (res: HttpErrorResponse) => {
-          this.toasterService.error('Error: ' + res.message);
-        }
-      );
-  } // end - getOrganization()
-
-  getClient() {
-    if (this.clientId) {
-      this.clientService.find(this.clientId)
-        .subscribe((res: HttpResponse<Client>) => {
-          this.client = res.body;
-        },
-          (res: HttpErrorResponse) => {
-          console.log('Error : ' + res.message);
-          this.toasterService.error(res.message);
-      });
-    }
+      (res: HttpErrorResponse) => {
+        console.log('Error : ' + res.message);
+        this.toasterService.error(res.message);
+      }
+    );
   } // end - getClient
 
-  returnToPage() {
-    this.router.navigate(['/productos', this.productoId], {queryParams: {
-        routeToReturn: this.routeToReturn
-      }});
-  } // end - returnToPage()
-
-  setTypeAction(actionSelected: string) {
-    this.typeAction = actionSelected;
-  }// end  - setTypeAction()
-
-  goPaymentsProduct(actionSelected: string) {
-    let nameRoute = '';
-    switch (actionSelected) {
-      case 'bloquear': {
-        nameRoute = '/bloqueo';
-        break;
-      }
-      case 'corrida': {
-        nameRoute = '/corrida';
-        break;
-      }
-      case 'apartar': {
-        nameRoute = '/apartado';
-        break;
-      }
-    }
-    this.router.navigate([nameRoute], {queryParams : {
-      idClient: this.client.id,
-      idProduct: this.producto.id,
-      routeToReturn: '/adquirir',
-    }});
-  }// end - goPaymentsProduct
 }// end - AdquirirProductoComponent - class

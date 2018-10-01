@@ -1,36 +1,41 @@
-<div class="dg-content-page dg-page-priceslote">
-  <div>
-    <div class="dg-page-navbar">
-      <button class="btn btn-default pull-left" *ngIf="this.routeToReturn" (click)="navegarAnterior()">
+<div class="content">
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+      <button class="btn btn-link pull-left" routerLink="../../">
         <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+    </div>
+    <div class="nav-bar-center">
+    </div>
+    <div class="nav-bar-right">
+      <button class="btn btn-link pull-right" *ngIf="producto && (producto.estatus === 'DISPONIBLE')" routerLink="adquirir">
+        <i class="fa fa-shopping-cart"></i>
+        adquirir
+      </button>
+      <button class="btn btn-link pull-right" *ngIf="producto && (producto.estatus !== 'DISPONIBLE')">
+        <i class="fa fa-lock"></i>
       </button>
     </div>
   </div>
 
-  <div class="dg-content-loading"
-       style="min-height: inherit;
-                max-height: inherit;"
-       *ngIf="loading">
-    <app-loading
-      style="min-height: inherit;
-              max-height: inherit;">
+  <!-- animación de loaging-->
+  <div class="dg-content-loading" style="min-height: inherit; max-height: inherit;" *ngIf="!producto">
+    <app-loading style="min-height: inherit; max-height: inherit;">
     </app-loading>
   </div>
 
-  <div class="">
-    <div class="dg-content-bartitle dg-bartitle-2"
-         *ngIf="producto">
+
+  <div class="producto-container" *ngIf="producto">
+
+    <div class="producto-bartitle">
       <div class="row">
         <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
-          <div class="dg-content-icon">
-              <span>
-                <i class="fa fa-flag"></i>
-              </span>
+          <div style="width: 100%">
+              <span><i class="fa fa-flag pull-right" style="color: #FFF; font-size: 2.1em;"></i></span>
           </div>
         </div>
-        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9"
-             *ngIf="producto && producto.nombre">
-          <div class="dg-content-info">
+        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9" *ngIf="producto.nombre">
+          <div class="producto-bartitle-info">
             <p class="dg-row-text1">
               {{producto.nombre}}
             </p>
@@ -43,42 +48,41 @@
         </div>
       </div>
     </div><!-- dg-content-bartitle -->
-  </div><!-- end - dg-content-page -->
 
-  <div class="dg-content"
-       #content
-       *ngIf="producto">
+    <div class="producto-body">
 
-    <slideshow [height]="(content.clientHeight / 2) + 'px'"
-               [minHeight]="(content.clientHeight / 2) + 'px'"
-               [autoPlay]="true"
-               [showArrows]="true"
-               [imageUrls]="!producto.fotos ? default_images : producto.fotos"
-               [lazyLoad]="!producto.fotos ? default_images?.length > 1 : producto.fotos.length > 1"
-               [autoPlayWaitForLazyLoad]="true">
-    </slideshow>
+      <div class="slideshow-holder" #content>
+          <slideshow [height]="(content.clientHeight) + 'px'"
+                    [minHeight]="(content.clientHeight) + 'px'"
+                    [autoPlay]="true"
+                    [showArrows]="true"
+                    [imageUrls]="!producto.fotos ? default_images : producto.fotos"
+                    [lazyLoad]="!producto.fotos ? default_images?.length > 1 : producto.fotos.length > 1"
+                    [autoPlayWaitForLazyLoad]="true">
+          </slideshow>
+      </div>
 
-    <div class="dg-producto-detalle-wrapper" [style.height]="(content.clientHeight / 2) + 'px'">
+      <div class="descripcion-producto">
+        <div class="row" *ngIf="producto.valoresCampos && producto.valoresCampos.length > 0">
+          <div *ngFor="let valorCampo of producto.valoresCampos">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="info-box">
+              <span class="info-box-icon" style="background-color: white !important;">
+                <img [src]="image_resource_url_base + 'archivo/' + valorCampo.icono" style="max-width: 45px;" alt=""/>
+              </span>
 
-      <div class="row" *ngIf="producto && producto.valoresCampos && producto.valoresCampos.length > 0">
-        <div *ngFor="let valorCampo of producto.valoresCampos">
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box">
-            <span class="info-box-icon" style="background-color: white !important;">
-              <img [src]="image_resource_url_base + 'archivo/' + valorCampo.icono" style="max-width: 45px;" alt=""/>
-            </span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">{{valorCampo.nombre}}</span>
-                <span class="info-box-text">{{valorCampo.valor}}</span>
+                <div class="info-box-content">
+                  <span class="info-box-text">{{valorCampo.nombre}}</span>
+                  <span class="info-box-text">{{valorCampo.valor}}</span>
+                </div>
+                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box-content -->
+              <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</div><!-- end - dg-content-page dg-page-priceslote -->
+    </div><!-- end -producto body -->
+  </div><!-- end - producto container -->
+</div><!-- end - content -->
