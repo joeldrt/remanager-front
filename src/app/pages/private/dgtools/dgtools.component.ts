@@ -6,6 +6,8 @@ import { FileService } from '../../../_dgtools_services';
 
 import { Contrato, PagoProgramado, PagoReal, TipoContrato } from '../../../_models';
 
+import { DigiallDateUtils } from '../../../_utils';
+
 import { ToasterService, ContratoService } from '../../../_services';
 
 @Component({
@@ -26,6 +28,7 @@ export class DgtoolsComponent implements OnInit {
     private fileService: FileService,
     private toaster: ToasterService,
     private contratoService: ContratoService,
+    private dateUtils: DigiallDateUtils
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,7 @@ export class DgtoolsComponent implements OnInit {
           const file_envelope = new FileEnvelope(
             file.name,
             file.type,
-            reader.result.split(',')[1]
+            (reader.result as string).split(',')[1]
           );
           this.file_envelopes.push(file_envelope);
         };
@@ -54,7 +57,7 @@ export class DgtoolsComponent implements OnInit {
     if (!this.file_folder || this.file_folder === '') {
       return;
     }
-    if (!this.file_envelopes || this.file_envelopes.length <=0) {
+    if (!this.file_envelopes || this.file_envelopes.length <= 0) {
       return;
     }
     this.is_uploading_in_process = true;
@@ -96,8 +99,8 @@ export class DgtoolsComponent implements OnInit {
     contrato.pagosReales.push(pago_real);
 
     const pago_programado = new PagoProgramado();
-    pago_programado.monto = 350000
-    pago_programado.fechaCompromisoPago = '2019-01-17T00:00:00.00Z';
+    pago_programado.monto = 350000;
+    pago_programado.fechaCompromisoPago = this.dateUtils.toDate('2019-01-17T00:00:00.00Z');
     contrato.pagosProgramados.push(pago_programado);
 
     this.contratoService.create(contrato).subscribe(

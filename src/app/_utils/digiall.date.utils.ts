@@ -9,7 +9,7 @@ export class DigiallDateUtils {
 
   //
   toDate(date: any): Date {
-    if(date === undefined || date === null) {
+    if (date === undefined || date === null) {
       return null;
     }
 
@@ -38,23 +38,23 @@ export class DigiallDateUtils {
 
       /*let dateString = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0] + 'T' + dateParts[3]
         + ':' + dateParts[4] + ':' + dateParts[5] + '-05:00';*/
-      let dateString = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+      const dateString = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
 
       return new Date(dateString);
     }
 
     if (dateParts.length === 3) {
-      if(dateParts[0].lenght === 1){
+      if (dateParts[0].lenght === 1) {
         dateParts[0] = '0' + dateParts[0];
       }
-      if(dateParts[1].lenght === 1){
+      if (dateParts[1].lenght === 1) {
         dateParts[1] = '0' + dateParts[1];
       }
-      if(dateParts[2].length === 1) {
+      if (dateParts[2].length === 1) {
         dateParts[2] = '0' + dateParts[2];
       }
 
-      let dateString = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2];
+      const dateString = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2];
 
       return new Date(dateString);
     }

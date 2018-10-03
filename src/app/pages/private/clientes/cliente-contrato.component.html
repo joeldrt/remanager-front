@@ -1,0 +1,126 @@
+<div class="content">
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+      <button class="btn btn-link pull-left" routerLink="/clientes">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+    </div>
+    <div class="nav-bar-center">
+      <h4 *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.cliente">
+        {{resumen_contratos_por_cliente.cliente.nombre}} {{resumen_contratos_por_cliente.cliente.apellidos}}
+      </h4>
+    </div>
+    <div class="nav-bar-right">
+    </div>
+  </div>
+
+  <!-- animación de carga -->
+  <div class="dg-content-loading" style="min-height: inherit; max-height: inherit;" *ngIf="!resumen_contratos_por_cliente">
+    <app-loading style="min-height: inherit; max-height: inherit;">
+    </app-loading>
+  </div>
+  <!-- end - animación de carga -->
+
+  <div class="cliente-contrato-container">
+    <div class="dg-info-client" *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.cliente">
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Nombre:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.nombre}} {{resumen_contratos_por_cliente.cliente.apellidos}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Dirección:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.direccion}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Teléfono:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.telefono}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <label>
+            Correo:
+          </label>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <span>
+            {{resumen_contratos_por_cliente.cliente.email}}
+          </span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-link" routerLink="/clientes/{{cliente_id}}/contratos/editarcliente">
+        detalle del cliente
+      </button>
+    </div><!-- end - dg-info-client -->
+
+    <div class="dg-info-contrato" >
+      <div style="margin-bottom: 27px;">
+        <h4>Ventas, apartados, bloqueos y corridas</h4>
+      </div>
+
+      <div *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.resumen_contratos && resumen_contratos_por_cliente.resumen_contratos.length <= 0">
+        <h4>No cuenta con ningún registro hasta el momento</h4>
+      </div>
+
+      <div *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.resumen_contratos && resumen_contratos_por_cliente.resumen_contratos.length > 0">
+        <div class="dg-rows-wrapper">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let resumen_contrato of resumen_contratos_por_cliente.resumen_contratos">
+              <div class="info-box">
+                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)"><i class="fa fa-flag-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">
+                    <label>
+                      {{resumen_contrato.contrato.tipo}}
+                    </label>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Fecha Creación:</label>
+                    <p>{{resumen_contrato.contrato.fechaCreacion | date: 'MMMM dd yyyy HH:mm'}}</p>
+                  </span>
+                  <span class="info-box-text" *ngIf="resumen_contrato.contrato.tipo === 'APARTADO' || resumen_contrato.contrato.tipo === 'BLOQUEO'">
+                    <label>Fecha Vencimiento:</label>
+                    <p>{{calcularFechaVencimiento(resumen_contrato.contrato) | date: 'MMMM dd yyyy HH:mm'}}</p>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Nombre del producto:</label>
+                    <p>{{resumen_contrato.producto.nombre}}</p>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Descripción del producto:</label>
+                    <p>{{resumen_contrato.producto.descripcion}}</p>
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

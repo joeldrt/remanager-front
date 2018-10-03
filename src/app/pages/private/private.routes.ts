@@ -3,15 +3,15 @@ import { Routes } from '@angular/router';
 import { SvgToolComponent } from '../../_digiall-components/svgtool/svgtool.component';
 
 import { ProyectosComponent } from './proyectos/proyectos.component';
-import { ProyectosMapComponent} from './proyectos-map/proyectos-map.component';
+import { ProyectosMapComponent } from './proyectos-map/proyectos-map.component';
 import { TerrenosComponent } from './terrenos/terrenos.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { ClienteDetalleComponent } from './clientes/cliente-detalle.component';
+import { ClienteContratoComponent } from './clientes/cliente-contrato.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
-import { AddClientComponent } from './clientes/add-client.component';
-import { InfoClientComponent } from './clientes/info-client.component';
 import { AdquirirProductoComponent } from './adquirir-producto/adquirir-producto.component';
 import { DgtoolsComponent } from './dgtools/dgtools.component';
 import {ProductoPagosComponent} from './producto-pagos/producto-pagos.component';
@@ -23,27 +23,87 @@ import {ContratoApartadoComponent} from './producto-contratos/contrato-apartado/
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
-  { path: '', redirectTo: 'proyectos', pathMatch: 'full'},
-  { path: 'proyectos', component: ProyectosComponent, data: { title: 'Proyectos', breadcrumb: 'proyectos' } },
-  { path: 'proyectos/mapa', component: ProyectosMapComponent, data: { title: 'Proyectos Mapa', breadcrumb: 'proyectos-mapa' } },
+  {path: '', redirectTo: 'proyectos', pathMatch: 'full'},
+  {path: 'proyectos', component: ProyectosComponent, data: {title: 'Proyectos', breadcrumb: 'proyectos'}},
+  {
+    path: 'proyectos/producto/:producto_id',
+    component: ProductoDetalleComponent,
+    data: {title: 'Detalle de producto', breadcrumb: 'detalle de producto'}
+  },
+  {
+    path: 'proyectos/producto/:producto_id/adquirir',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
+
+  {
+    path: 'proyectos/mapa',
+    component: ProyectosMapComponent,
+    data: { title: 'Proyectos', breadcrumb: 'proyectos'}
+  },
+  {
+    path: 'proyectos/mapa/producto/:producto_id',
+    component: ProductoDetalleComponent,
+    data: { title: 'Detalle de producto', breadcrumb: 'detalle de producto'}
+  },
+  {
+    path: 'proyectos/mapa/producto/:producto_id/adquirir',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'proyectos/mapa/producto/:producto_id/adquirir/:cliente_id',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
 
   // Productos
   { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
-  { path: 'productos/:id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
-  { path: 'adquirir/:id', component: AdquirirProductoComponent, data: { title: 'Adquirir Producto', breadcrumb: 'adquirir-producto'} },
+  { path: 'productos/producto/:producto_id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
+  {
+    path: 'productos/producto/:producto_id/adquirir',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'productos/producto/:producto_id/adquirir/:cliente_id',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
+  },
 
   // Contrato
   { path: 'pagosproducto', component: ProductoPagosComponent, data: { title: 'Pagos de Producto', breadcrumb: 'pagos-producto' }},
   { path: 'bloqueo', component: ContratoBloqueoComponent, data: {title: 'Bloqueo de Producto', breadcrumb: 'bloqueo-producto' }},
   { path: 'corrida', component: ContratoCorridaComponent, data: { title: 'Corrida de Precios', breadcrumb: 'corrida-producto' }},
-  { path: 'devolucion', component: ContratoDevolucionComponent, data: {title: 'Devolución de Producto', breadcrumb: 'devolucion-producto' }},
+  {
+    path: 'devolucion',
+    component: ContratoDevolucionComponent,
+    data: {
+      title: 'Devolución de Producto',
+      breadcrumb: 'devolucion-producto'
+    }
+  },
   { path: 'venta', component: ContratoVentaComponent, data: {title: 'Venta de Producto', breadcrumb: 'venta-producto' }},
   { path: 'apartado', component: ContratoApartadoComponent, data: {title: 'Apartado de Producto', breadcrumb: 'apartado-producto' }},
 
   // Clientes
-  { path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes' } },
-  { path: 'clientes/add', component: AddClientComponent, data: { title: 'Agregar Cliente', breadcrumb: 'agregar-cliente' } },
-  { path: 'clientes/info', component: InfoClientComponent, data: { title: 'Información del Cliente', breadcrumb: 'informacion-cliente' } },
+  {path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes'}},
+  {path: 'clientes/:cliente_id', component: ClienteDetalleComponent, data: {title: 'Detalle del Cliente', breadcrumb: 'detalle-cliente'}},
+  {
+    path: 'clientes/:cliente_id/contratos',
+    component: ClienteContratoComponent,
+    data: {title: 'Contratos por cliente', breadcrumb: 'detalle-cliente'}
+  },
+  {
+    path: 'clientes/:cliente_id/contratos/editarcliente',
+    component: ClienteDetalleComponent,
+    data: {title: 'Detalle del Cliente', breadcrumb: 'detalle-cliente'}
+  },
 
   // Perfil
   { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil', breadcrumb: 'perfil' } },

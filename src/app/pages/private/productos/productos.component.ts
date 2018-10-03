@@ -65,10 +65,6 @@ export class ProductosComponent implements OnInit {
       });
   }// end - findAllProducts
 
-  detalleDeProducto(producto: Producto) {
-    this.router.navigate(['/productos', producto.id], { queryParams: { routeToReturn: '/productos'}});
-  }
-
   colorByStatus(status: string): string {
     return this.productUtils.colorByStatus(status);
   }

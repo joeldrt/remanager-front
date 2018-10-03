@@ -1,3 +1,175 @@
+@import "../component.shared.style";
+
+.adquirir-producto-container {
+  min-height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.producto-bartitle {
+  padding: 15px;
+  background-size:contain;
+  background-repeat: repeat-x;
+  padding: 18px 0 30px 0;
+  min-height: 100px;
+  max-height: 100px;
+  background-image:url('../../../../assets/img/line-bartitle-2.png');
+
+  .producto-bartitle-info {
+    color: #FFF;
+
+    p {
+      margin-bottom: 0px;
+    }
+
+    .dg-row-text1 {
+      font-size: 1.26em;
+      font-weight: bolder;
+      text-transform: uppercase;
+    }
+    .dg-row-text2 {
+      font-size: 0.9em;
+    }
+    .dg-row-text3 {
+      font-size: 0.9em
+    }
+  }
+}
+
+.adquirir-producto-cliente-asignado {
+  min-height: calc(100vh - 450px);
+  max-height: calc(100vh - 450px);
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.producto-bar-precio {
+  min-height: 70px;
+  max-height: 70px;
+  background-color: #E2E2E2;
+  padding: 1em 0;
+  text-align: center;
+
+  span{
+    color: #222A85;
+    font-weight: bold;
+    font-size: 2em;
+  }
+}
+
+.adquirir-producto-botones {
+  min-height: 100px;
+  max-height: 100px;
+  padding-top: 10px;
+}
+
+.dg-btn{
+  background-repeat: repeat-x;
+  background-size: contain;
+  border-radius: 15px;
+  border: none;
+  color: #FFF;
+  font-size: 0.9em;
+  font-weight: bolder;
+  padding: 8px 6px;
+  width: 120px;
+  text-transform: uppercase;
+}
+.dg-btn-orange{
+  background-color:orange;
+  background-image:url('../../../../assets/img/line-back-buttonOrange.png');
+}
+.dg-btn-green{
+  background-color:green;
+  background-image:url('../../../../assets/img/line-back-buttonGreen.png');
+}
+.dg-btn-blue{
+  background-color:blue;
+  background-image:url('../../../../assets/img/line-back-buttonBlue.png');
+}
+
+// Datos del clietne
+.dg-info-client {
+  background-color: #FFF;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+
+// Estilos para la ventana para seleccionar al cliente
+.dg-content-list{
+  padding-left: 15px;
+  padding-right: 15px;
+
+  &.dg-content-listapersonas{
+    .dg-col-icon{
+      span{
+        i{
+          color: #3E436B;
+          font-size: 2.4em;
+        }
+      }
+    }
+  }
+
+  .dg-col-icon{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .row{
+    border-bottom: 1px solid #E3E3E3;
+    cursor: pointer;
+    padding: 1em 0.9em;
+
+    .dg-col-icon{
+      text-align: center;
+      span{
+        background-color: transparent;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+      }
+    }
+    .dg-col-name{
+      p{
+        margin-bottom: 0;
+        font-size:1.32em;
+      }
+      span{
+        font-size: 0.9em;
+      }
+    }
+
+    .dg-icon-arrow{
+      font-size: 1.5em;
+    }
+  }// end - row
+}// end - .dg-content-list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .dg-content-page{
 
   background-color: #FFF;
@@ -93,7 +265,6 @@
     background-color:green;
     background-image:url('../../../../assets/img/line-back-buttonGreen.png');
   }
-
   .dg-btn-blue{
     background-color:blue;
     background-image:url('../../../../assets/img/line-back-buttonBlue.png');

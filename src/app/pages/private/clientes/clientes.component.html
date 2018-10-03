@@ -1,47 +1,50 @@
-<div class="content dg-content">
+<div class="content">
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+    </div>
+    <div class="nav-bar-center">
+      <div class="dg-content-inputsearch">
+        <div class="dg-content">
+            <i class="fa fa-search"></i>
+            <input type="text"
+                    placeholder="Buscar"
+                    id="txtSearch"
+                    #txtSearch
+                    name="txtSearch"
+                    (keyup)="buscar(txtSearch.value)"/>
+        </div>
+      </div>
+    </div>
+    <div class="nav-bar-right">
+      <button class="btn btn-link pull-right" data-toggle="modal" data-target="#agregarClienteModal">
+        agregar
+      </button>
+    </div>
+  </div>
 
-  <!-- Section Loading -->
+  <!-- animación de carga -->
   <div class="dg-content-loading"
        style="min-height: inherit;
               max-height: inherit;"
-       *ngIf="loading">
+       *ngIf="!lista_completa_clientes">
     <app-loading
       style="min-height: inherit;
             max-height: inherit;">
     </app-loading>
   </div>
-  <!-- end - section loading -->
+  <!-- end - animación de carga -->
 
-  <div class="dg-content-page dg-page-listapersonas">
-    <div class="dg-section-search">
-      <div class="dg-content-inputsearch">
-        <div class="dg-content">
-            <i class="fa fa-search"></i>
-            <input type="text"
-                   placeholder="Buscar"
-                   id="txtSearch"
-                   #txtSearch
-                   name="txtSearch"
-                   [(ngModel)]="inputSearch" (keyup)="inputTextSearch(txtSearch.value)" />
-        </div>
-      </div>
-      <div class="dg-content-buttons">
-        <span>
-          <button routerLink="add"
-                  class="dg-text-link"
-                  (click)="agregarCliente()" >
-            Agregar
-          </button>
-        </span>
-      </div>
-    </div><!-- end - dg-section-search -->
+  <!-- mensaje de cartera de clientes vacío-->
+  <div class="clientes_container" *ngIf="lista_completa_clientes && lista_completa_clientes.length == 0">
+    <div style="margin-top: 20px; text-align: center">
+      No cuenta con clientes registrados
+    </div>
+  </div>
+  <!-- mensaje de cartera de clientes vacío-->
 
-    <div class="dg-content-list dg-content-listapersonas"
-      *ngIf="clients !== null" >
-
-      <div class="row"
-           *ngFor="let client of clients;"
-           (click)="clickOnClient(client)">
+  <div class="clientes_container" *ngIf="lista_completa_clientes && lista_completa_clientes.length > 0">
+    <div class="dg-content-list dg-content-listapersonas">
+      <div class="row" *ngFor="let cliente of clientes;" routerLink="/clientes/{{cliente.id}}/contratos">
         <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
           <div class="dg-col-icon">
           <span>
@@ -52,22 +55,53 @@
         <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
           <div class="dg-col-name">
             <p>
-              {{client.nombre}} {{client.apellidos}}
+              {{cliente.nombre}} {{cliente.apellidos}}
             </p>
             <span>
           </span>
           </div>
         </div>
       </div>
-    </div><!-- end - dg-content-list -->
+    </div>
+  </div>
+</div>
 
-    <div *ngIf="clients === null"
-      class="dg-content-msj">
-      <div class="container">
-        <p class="dg-msj">
-          No hay información de clientes...
-        </p>
+<!-- Ventana modal para agregar un complejo-->
+<div class="modal fade" tabindex="-1" role="dialog" id="agregarClienteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="cliente_nuevo">
+        <form>
+          <div class="form-group">
+            <label for="nombreCliente1">Nombre</label>
+            <input class="form-control" id="nombreCliente1" placeholder="Nombre del cliente"name="nombre_cliente"
+            [(ngModel)]="cliente_nuevo.nombre"/>
+          </div>
+          <div class="form-group">
+            <label for="telefonoCliente1">Telefono</label>
+            <input type="number" class="form-control" id="telefonoCliente1" placeholder="Telefono" name="telefono_cliente"
+            [(ngModel)]="cliente_nuevo.telefono"/>
+          </div>
+          <div class="form-group">
+            <label for="emailCliente1">Email</label>
+            <input type="email" class="form-control" id="emailCliente1" placeholder="Email" name="email_cliente"
+            [(ngModel)]="cliente_nuevo.email"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!cliente_nuevo.nombre || !cliente_nuevo.telefono || !cliente_nuevo.email"
+          (click)="agregarCliente()">Agregar</button>
       </div>
     </div>
-  </div><!-- end - dg-page-listapersonas -->
-</div><!-- end - content -->
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un cliente-->

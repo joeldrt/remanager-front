@@ -1,0 +1,7 @@
+@import "../component.shared.style";
+
+.cliente_container {
+  min-height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+}

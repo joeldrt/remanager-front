@@ -1,14 +1,21 @@
+import { ResumenContrato } from './contrato';
+
 export class Client {
-  public apellidos?: string;
-  public correoVendedor?: string;
-  public direccion?: string;
-  public fechaAlta?: any;
-  public fechaNacimiento?: any;
   public id?: string;
-  public nombre?: string;
+  public fechaAlta?: Date;
+  public correoVendedor?: string;
   public organizacionId?: number;
-  public telefono?: number;
   public email?: string;
+  public nombre?: string;
+  public apellidos?: string;
+  public fechaNacimiento?: Date;
+  public direccion?: string;
+  public telefono?: number;
+}
+
+export class ResumenContratosPorCliente {
+  public cliente?: Client;
+  public resumen_contratos?: ResumenContrato[];
 }
 
 

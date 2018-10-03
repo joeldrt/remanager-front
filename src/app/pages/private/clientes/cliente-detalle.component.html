@@ -1,0 +1,91 @@
+<div class="content">
+  <div class="dg-page-nav-bar">
+    <div class="nav-bar-left">
+      <button class="btn btn-link pull-left" routerLink="../">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </button>
+    </div>
+    <div class="nav-bar-center">
+      <h4 *ngIf="cliente">{{cliente.nombre}} {{cliente.apellidos}}</h4>
+    </div>
+    <div class="nav-bar-right">
+      <button class="btn btn-link pull-right" (click)="ponerModoEdicion()" *ngIf="!editing_mode">
+        editar
+      </button>
+      <button class="btn btn-link pull-right" (click)="editarCliente()" *ngIf="editing_mode">
+        guardar
+      </button>
+    </div>
+  </div>
+
+  <!-- animación de carga -->
+  <div class="dg-content-loading" style="min-height: inherit; max-height: inherit;" *ngIf="!cliente">
+    <app-loading style="min-height: inherit; max-height: inherit;">
+    </app-loading>
+  </div>
+  <!-- end - animación de carga -->
+
+  <div class="cliente_container" *ngIf="cliente">
+    <form>
+      <div class="form-group">
+        <label for="emailCliente1">Email</label>
+        <input type="email" class="form-control" id="emailCliente1" placeholder="Email" name="email_cliente" [disabled]="!editing_mode"
+        [(ngModel)]="cliente.email"/>
+      </div>
+      <div class="form-group">
+        <label for="nombreCliente1">Nombre</label>
+        <input class="form-control" id="nombreCliente1" placeholder="Nombre del cliente"name="nombre_cliente" [disabled]="!editing_mode"
+        [(ngModel)]="cliente.nombre"/>
+      </div>
+      <div class="form-group">
+        <label for="apellidosCliente1">Apellidos</label>
+        <input class="form-control" id="apellidosCliente1" placeholder="Apellidos del cliente"name="apellidos_cliente" [disabled]="!editing_mode"
+        [(ngModel)]="cliente.apellidos"/>
+      </div>
+      <div class="form-group">
+        <label for="fechaNacimientoCliente1">Fecha de Nacimiento</label>
+        <input type="date" class="form-control" id="fechaNacimientoCliente1" placeholder="Fecha de Nacimiento" name="fecha_nacimiento_cliente" [disabled]="!editing_mode"
+        [ngModel]="cliente.fechaNacimiento | date: 'yyyy-MM-dd'" (ngModelChange)="startDate = $event" />
+      </div>
+      <div class="form-group">
+        <label for="direccionCliente1">Dirección</label>
+        <textarea rows="3" class="form-control" id="direccionCliente1" placeholder="Dirección" name="direccion_cliente" [disabled]="!editing_mode"
+        [(ngModel)]="cliente.direccion">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="telefonoCliente1">Teléfono</label>
+        <input type="number" class="form-control" id="telefonoCliente1" placeholder="Telefono" name="telefono_cliente" [disabled]="!editing_mode"
+        [(ngModel)]="cliente.telefono"/>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-link" style="color: red;" data-toggle="modal" data-target="#borrarClienteModal" *ngIf="editing_mode">
+          Eliminiar Cliente
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Ventana modal para borrar un cliente-->
+<div class="modal fade" tabindex="-1" role="dialog" id="borrarClienteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="cliente">
+        Estas a punto de borrar al cliente {{cliente.nombre}} {{cliente.apellidos}}, esta acción no puede ser revertida. ¿Deseas Continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+          (click)="borrarCliente()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un cliente-->
