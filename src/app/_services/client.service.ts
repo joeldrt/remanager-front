@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Client, ResumenContratosPorCliente } from '../_models/client';
-import { DigiallDateUtils } from '../../assets/ts/digiall.date.utils';
+import { DigiallDateUtils } from '../_utils/digiall.date.utils';
 
 
 @Injectable()
@@ -22,39 +22,18 @@ export class ClientService {
   }
 
   create(client: Client): Observable<HttpResponse<Client>> {
-    return this.http.post<Client>(this.resourceUrl, client, { observe: 'response' }).pipe(
-      map(data => {
-        if (data.body.fechaNacimiento) {
-          data.body.fechaNacimiento = data.body.fechaNacimiento.split('T')[0];
-        }
-        return data;
-      })
-    );
+    return this.http.post<Client>(this.resourceUrl, client, { observe: 'response' });
   }
 
   update(client: Client): Observable<HttpResponse<Client>> {
-    return this.http.put<Client>(this.resourceUrl, client, { observe: 'response' }).pipe(
-      map(data => {
-        if (data.body.fechaNacimiento) {
-          data.body.fechaNacimiento = data.body.fechaNacimiento.split('T')[0];
-        }
-        return data;
-      })
-    );
+    return this.http.put<Client>(this.resourceUrl, client, { observe: 'response' });
   }
 
   find(cliente_id: string): Observable<HttpResponse<Client>> {
-    return this.http.get<Client>(this.resourceUrl + '/' + cliente_id, { observe: 'response' }).pipe(
-      map(data => {
-        if (data.body.fechaNacimiento) {
-          data.body.fechaNacimiento = data.body.fechaNacimiento.split('T')[0];
-        }
-        return data;
-      })
-    );
+    return this.http.get<Client>(this.resourceUrl + '/' + cliente_id, { observe: 'response' });
   }
 
-  searchByCv(req?: any): Observable<HttpResponse<Client[]>> {
+  searchByCv(): Observable<HttpResponse<Client[]>> {
     return this.http.get<Client[]>(this.resourceSearchByCv, { observe: 'response'});
   }
 
@@ -67,18 +46,21 @@ export class ClientService {
   }
 
   editar(cliente: Client): Observable<HttpResponse<Client>> {
-    return this.http.put<Client>(this.resourceUrl + '/' + cliente.id, cliente, {observe: 'response'}).pipe(
+    return this.http.put<Client>(this.resourceUrl + '/' + cliente.id, cliente, {observe: 'response'});
+  }
+
+  obtenerResumenContratosPorCliente(cliente_id: string): Observable<HttpResponse<ResumenContratosPorCliente>> {
+    return this.http.get(this.resourceUrl + '/' + cliente_id + '/contratos', {observe: 'response'});
+  }
+
+  /*.pipe(
       map(data => {
         if (data.body.fechaNacimiento) {
           data.body.fechaNacimiento = data.body.fechaNacimiento.split('T')[0];
         }
         return data;
       })
-    );
-  }
-
-  obtenerResumenContratosPorCliente(cliente_id: string): Observable<HttpResponse<ResumenContratosPorCliente>> {
-    return this.http.get(this.resourceUrl + '/' + cliente_id + '/contratos', {observe: 'response'});
-  }
+    )
+  */
 
 }

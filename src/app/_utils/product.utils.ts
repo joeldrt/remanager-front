@@ -11,19 +11,15 @@ export class ProductUtils {
         break;
       }
       case 'APARTADO': {
-        color_to_return = 'yellow'; // amarillo
+        color_to_return = '#F39C12'; // amarillo
         break;
       }
       case 'BLOQUEADO': {
-        color_to_return = 'red'; // rojo
-        break;
-      }
-      case 'VENDIDO': {
         color_to_return = 'gray'; // gris
         break;
       }
-      case 'CORRIDA': {
-        color_to_return = '#ffa100'; // naranja
+      case 'VENDIDO': {
+        color_to_return = 'white'; // gris
         break;
       }
     }

@@ -1,7 +1,7 @@
 import { Producto } from './producto';
 
 export class PagoReal {
-  public fechaCreacion?: any; // No se llena, solo para lectura... llenado por el servidor
+  public fechaCreacion?: Date; // No se llena, solo para lectura... llenado por el servidor
   public monto?: number;
   public correoQueValida?: string;
   public validado?: boolean;
@@ -9,7 +9,7 @@ export class PagoReal {
 }
 
 export class PagoProgramado {
-  public fechaCompromisoPago?: any;
+  public fechaCompromisoPago?: Date;
   public monto?: number;
 }
 
@@ -22,16 +22,16 @@ export enum TipoContrato {
 }
 
 export class Contrato {
-  public id?: string;
-  public fechaCreacion?: any; // No se llena, solo para lectura... llenado por el servidor
+  public id?: string; // NO se llena, solo para lectura... llenado por el servidor
+  public fechaCreacion?: Date; // No se llena, solo para lectura... llenado por el servidor
   public tipo?: TipoContrato;
   public clienteId?: string;
   public productoId?: string;
-  public vendedorId?: number; // No se llena, solo para lectura... llenado por el servidor
+  public correoVendedor?: string; // No se llena, solo para lectura... llenado por el servidor
   public diasValidez?: number;
   public pagosProgramados?: PagoProgramado[];
   public pagosReales?: PagoReal[];
-  public activo?: boolean;
+  public activo?: boolean; // No se llena, el servidor lo ajusta según recibe los contratos
 }
 
 export class ResumenContrato {

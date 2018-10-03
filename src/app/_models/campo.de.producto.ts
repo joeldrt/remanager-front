@@ -6,15 +6,9 @@ export const enum TipoCampo {
 }
 
 export class CampoDeProducto {
-
   public id: number;
   public tipo: TipoCampo;
   public nombre: string;
   public iconoContentType: string;
   public icono: any;
-
-  constructor(
-  ) {
-  }
-
 }

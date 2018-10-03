@@ -77,80 +77,49 @@
     </div><!-- end - dg-info-client -->
 
     <div class="dg-info-contrato" >
-      <h4>Contratos, apartados y bloqueos</h4>
-
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Venta</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-        </div>
-          <!-- /.info-box -->
+      <div style="margin-bottom: 27px;">
+        <h4>Ventas, apartados, bloqueos y corridas</h4>
       </div>
 
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-flag-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Corrida</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
+      <div *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.resumen_contratos && resumen_contratos_por_cliente.resumen_contratos.length <= 0">
+        <h4>No cuenta con ningún registro hasta el momento</h4>
       </div>
 
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-flag-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Apartado</span>
-              <span class="info-box-number">410</span>
+      <div *ngIf="resumen_contratos_por_cliente && resumen_contratos_por_cliente.resumen_contratos && resumen_contratos_por_cliente.resumen_contratos.length > 0">
+        <div class="dg-rows-wrapper">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let resumen_contrato of resumen_contratos_por_cliente.resumen_contratos">
+              <div class="info-box">
+                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)"><i class="fa fa-flag-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">
+                    <label>
+                      {{resumen_contrato.contrato.tipo}}
+                    </label>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Fecha Creación:</label>
+                    <p>{{resumen_contrato.contrato.fechaCreacion | date: 'MMMM dd yyyy HH:mm'}}</p>
+                  </span>
+                  <span class="info-box-text" *ngIf="resumen_contrato.contrato.tipo === 'APARTADO' || resumen_contrato.contrato.tipo === 'BLOQUEO'">
+                    <label>Fecha Vencimiento:</label>
+                    <p>{{calcularFechaVencimiento(resumen_contrato.contrato) | date: 'MMMM dd yyyy HH:mm'}}</p>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Nombre del producto:</label>
+                    <p>{{resumen_contrato.producto.nombre}}</p>
+                  </span>
+                  <span class="info-box-text">
+                    <label>Descripción del producto:</label>
+                    <p>{{resumen_contrato.producto.descripcion}}</p>
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
         </div>
       </div>
 
-
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="info-box">
-            <span class="info-box-icon bg-gray"><i class="fa fa-flag-o"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Bloqueo</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="info-box">
-            <span class="info-box-icon bg-black"><i class="fa fa-flag-o"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Devolución</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-      </div>
 
     </div>
   </div>

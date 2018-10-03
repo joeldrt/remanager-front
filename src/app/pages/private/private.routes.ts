@@ -12,8 +12,6 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
-import { AddClientComponent } from './clientes/add-client.component';
-import { InfoClientComponent } from './clientes/info-client.component';
 import { AdquirirProductoComponent } from './adquirir-producto/adquirir-producto.component';
 import { DgtoolsComponent } from './dgtools/dgtools.component';
 import {ProductoPagosComponent} from './producto-pagos/producto-pagos.component';
@@ -37,6 +35,11 @@ export const PRIVATE_ROUTES: Routes = [
     component: AdquirirProductoComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
   },
+  {
+    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
 
   {
     path: 'proyectos/mapa',
@@ -53,12 +56,22 @@ export const PRIVATE_ROUTES: Routes = [
     component: AdquirirProductoComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
   },
+  {
+    path: 'proyectos/mapa/producto/:producto_id/adquirir/:cliente_id',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
 
   // Productos
   { path: 'productos', component: ProductosComponent , data: { title: 'Productos', breadcrumb: 'productos' } },
   { path: 'productos/producto/:producto_id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
   {
     path: 'productos/producto/:producto_id/adquirir',
+    component: AdquirirProductoComponent,
+    data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'productos/producto/:producto_id/adquirir/:cliente_id',
     component: AdquirirProductoComponent,
     data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
   },

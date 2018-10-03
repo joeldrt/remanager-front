@@ -45,12 +45,12 @@
       <div class="form-group">
         <label for="fechaNacimientoCliente1">Fecha de Nacimiento</label>
         <input type="date" class="form-control" id="fechaNacimientoCliente1" placeholder="Fecha de Nacimiento" name="fecha_nacimiento_cliente" [disabled]="!editing_mode"
-        [(ngModel)]="cliente.fechaNacimiento"/>
+        [ngModel]="cliente.fechaNacimiento | date: 'yyyy-MM-dd'" (ngModelChange)="startDate = $event" />
       </div>
       <div class="form-group">
         <label for="direccionCliente1">Dirección</label>
         <textarea rows="3" class="form-control" id="direccionCliente1" placeholder="Dirección" name="direccion_cliente" [disabled]="!editing_mode"
-                  [(ngModel)]="cliente.direccion">
+        [(ngModel)]="cliente.direccion">
         </textarea>
       </div>
       <div class="form-group">

@@ -26,6 +26,7 @@
     <app-loading style="min-height: inherit; max-height: inherit;">
     </app-loading>
   </div>
+  <!-- end animación de loaging-->
 
   <div class="adquirir-producto-container" *ngIf="producto">
 
@@ -57,7 +58,56 @@
 
 
     <div class="adquirir-producto-cliente-asignado">
-
+      <div class="dg-info-cliente" *ngIf="cliente">
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Nombre:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <span>
+              {{cliente.nombre}} {{cliente.apellidos}}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Dirección:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <span>
+              {{cliente.direccion}}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Teléfono:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <span>
+              {{cliente.telefono}}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <label>
+              Correo:
+            </label>
+          </div>
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <span>
+              {{cliente.email}}
+            </span>
+          </div>
+        </div>
+      </div>
     </div><!-- end adquirir-producto-cliente-asignado-->
 
 
@@ -76,38 +126,36 @@
     <!-- mensaje cuando no hay cliente asignado-->
 
     <div class="adquirir-producto-botones" *ngIf="cliente_id">
-      <div class="container">
-        <div class="dg-rows-wrapper">
-          <div class="row" style="margin-bottom: 10px;">
-            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div style="text-align: center">
-                <button type="button" class="btn btn-link">
-                  bloquear
-                </button>
-              </div>
-            </div>
-            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div style="text-align: center">
-                <button type="button" class="btn btn-link">
-                  corrida
-                </button>
-              </div>
+      <div class="dg-rows-wrapper">
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div style="text-align: center">
+              <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ventanaBloquearModal">
+                bloquear
+              </button>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div style="text-align: center">
-                <button type="button" class="dg-btn dg-btn-orange">
-                  apartar
-                </button>
-              </div>
+          <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div style="text-align: center">
+              <button type="button" class="btn btn-link">
+                corrida
+              </button>
             </div>
-            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <div style="text-align: center">
-                <button type="button" class="dg-btn dg-btn-green">
-                  vender
-                </button>
-              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div style="text-align: center">
+              <button type="button" class="dg-btn dg-btn-orange" data-toggle="modal" data-target="#ventanaApartarModal">
+                apartar
+              </button>
+            </div>
+          </div>
+          <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div style="text-align: center">
+              <button type="button" class="dg-btn dg-btn-green">
+                vender
+              </button>
             </div>
           </div>
         </div>
@@ -123,17 +171,86 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="asignarClienteTitleLabel">Selecciona un cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div *ngIf="clientes">
+          <div class="dg-content-list dg-content-listapersonas">
+            <div class="row" *ngFor="let cliente of clientes;" data-dismiss="modal" (click)="asignarCliente(cliente.id)">
+              <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                <div class="dg-col-icon">
+                <span>
+                  <i class="fa fa-user"></i>
+                </span>
+                </div>
+              </div>
+              <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+                <div class="dg-col-name">
+                  <p>
+                    {{cliente.nombre}} {{cliente.apellidos}}
+                  </p>
+                  <span>
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div><!-- end - Asignar cliente Modal -->
+
+<!-- Ventana Bloquear Modal -->
+<div class="modal fade" id="ventanaBloquearModal" tabindex="-1" role="dialog" aria-labelledby="ventanaBloquearModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ventanaBloquearTitleLabel">Bloqueo de producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="producto && cliente">
+        Estas a punto de bloquear el producto {{producto.nombre}} para el cliente {{cliente.nombre}} {{cliente.apellidos}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="bloquearProducto()">Bloquear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ventana Apartar Modal -->
+<div class="modal fade" id="ventanaApartarModal" tabindex="-1" role="dialog" aria-labelledby="ventanaApartarModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Apartar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="producto && cliente">
+        Estas a punto de apartar el producto {{producto.nombre}} para el cliente {{cliente.nombre}} {{cliente.apellidos}}
+        <div class="form-group">
+            <label for="montoParaApartar1">Monto para apartar ({{MONTO_MINIMO_APARTADO}})</label>
+            <input type="number" class="form-control" id="montoParaApartar1" placeholder="monto" name="monto_apartar"
+            [(ngModel)]="monto_apartar"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!monto_apartar || monto_apartar < 10000"
+          (click)="apartarProducto()">Apartar</button>
       </div>
     </div>
   </div>

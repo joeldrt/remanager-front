@@ -4,9 +4,11 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ToasterService } from '../../../_services';
 
 import { Producto } from '../../../_models/producto';
-import { Contrato, ResumenContrato } from '../../../_models/contrato';
+import { Contrato, TipoContrato, ResumenContrato } from '../../../_models/contrato';
 import { Client, ResumenContratosPorCliente } from '../../../_models/client';
 import { ClientService } from '../../../_services';
+
+import { DigiallDateUtils } from '../../../_utils/';
 
 @Component({
   selector: 'app-cliente-contrato',
@@ -22,7 +24,8 @@ export class ClienteContratoComponent implements OnInit {
     private clienteService: ClientService,
     private toaster: ToasterService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dateUtils: DigiallDateUtils
   ) {
   }
 
@@ -47,4 +50,33 @@ export class ClienteContratoComponent implements OnInit {
       }
     );
   }
+
+  colorTarjetaPorTipoDeContrato(tipo: string) {
+    switch (tipo) {
+      case TipoContrato.BLOQUEO: {
+        return 'bg-gray';
+      }
+      case TipoContrato.APARTADO: {
+        return 'bg-yellow';
+      }
+      case TipoContrato.VENTA: {
+        return 'bg-green';
+      }
+      case TipoContrato.DEVOLUCION: {
+        return 'bg-black';
+      }
+      case TipoContrato.CORRIDA: {
+        return 'bg-aqua';
+      }
+    }
+  }
+
+  calcularFechaVencimiento(contrato: Contrato): Date {
+    const fecha_creacion = this.dateUtils.toDate(contrato.fechaCreacion);
+    const fecha_vencimiento = new Date(+fecha_creacion);
+    const nueva_fecha = fecha_vencimiento.getDate() + contrato.diasValidez;
+    fecha_vencimiento.setDate(nueva_fecha);
+    return fecha_vencimiento;
+  }
+
 }

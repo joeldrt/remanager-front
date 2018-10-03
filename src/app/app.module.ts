@@ -24,7 +24,6 @@ import {
 // services
 import { AuthGuard } from './_guard/auth.guard';
 import {
-  AlertService,
   AuthenticationService,
   UserService,
   AccountService,
@@ -40,13 +39,15 @@ import {
   ContratoService,
   UserExtraService,
 } from './_services';
-import { DigiallDateUtils } from '../assets/ts/digiall.date.utils';
 import {
   FileService,
 } from './_dgtools_services';
 
 // utils
-import {ProductUtils} from './_utils/product.utils';
+import {
+  ProductUtils,
+  DigiallDateUtils
+} from './_utils';
 
 // helpers
 import {
@@ -74,7 +75,6 @@ import { ClienteContratoComponent } from './pages/private/clientes/cliente-contr
 import { VentasComponent } from './pages/private/ventas/ventas.component';
 import { ProyectosComponent } from './pages/private/proyectos/proyectos.component';
 import { ProyectosMapComponent } from './pages/private/proyectos-map/proyectos-map.component';
-import { AddClientComponent } from './pages/private/clientes/add-client.component';
 import { ProductosComponent } from './pages/private/productos/productos.component';
 import { ProductoDetalleComponent } from './pages/private/productos-detalle/producto-detalle.component';
 import { InfoClientComponent } from './pages/private/clientes/info-client.component';
@@ -108,7 +108,6 @@ import { ContratoApartadoComponent } from './pages/private/producto-contratos/co
     VentasComponent,
     ProyectosComponent,
     ProyectosMapComponent,
-    AddClientComponent,
     ProductosComponent,
     ProductoDetalleComponent,
     InfoClientComponent,
@@ -131,7 +130,6 @@ import { ContratoApartadoComponent } from './pages/private/producto-contratos/co
   ],
   providers: [
     AuthGuard,
-    AlertService,
     AuthenticationService,
     UserService,
     AccountService,
