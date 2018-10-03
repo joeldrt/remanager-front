@@ -4,7 +4,6 @@ import { SvgToolComponent } from '../../_digiall-components/svgtool/svgtool.comp
 
 import { ProyectosComponent } from './proyectos/proyectos.component';
 import { ProyectosMapComponent } from './proyectos-map/proyectos-map.component';
-import { TerrenosComponent } from './terrenos/terrenos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteDetalleComponent } from './clientes/cliente-detalle.component';
 import { ClienteContratoComponent } from './clientes/cliente-contrato.component';
