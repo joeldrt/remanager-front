@@ -157,7 +157,6 @@ export class VenderComponent implements OnInit {
 
     const numero_de_dias = Math.ceil(diferencia_de_tiempo / (1000 * 3600 * 24));
     console.log('Numero de dias entre fechas: ' + numero_de_dias);
-    this.contrato.diasValidez = numero_de_dias;
 
     const numero_de_dias_entre_pagos = Math.floor(numero_de_dias / (this.num_parcialidades - 1));
     console.log('Numero de dias entre pagos: ' + numero_de_dias_entre_pagos);
@@ -212,12 +211,23 @@ export class VenderComponent implements OnInit {
     this.monto_de_pago = undefined;
   }
 
+  calcularDiasValidez() {
+    const primera_fecha = new Date();
+    const segunda_fecha = this.pagos[this.pagos.length - 1].fechaCompromisoPago;
+
+    const diferencia_de_tiempo = Math.abs(primera_fecha.getTime() - segunda_fecha.getTime());
+
+    const numero_de_dias = Math.ceil(diferencia_de_tiempo / (1000 * 3600 * 24));
+    this.contrato.diasValidez = numero_de_dias;
+  }
+
   cerrarVenta() {
     if (this.restante_a_pagar > 0 && this.restante_a_pagar > 1) {
       this.toaster.error('No se a cubierto el precio del producto');
       return;
     }
     this.contrato.pagosProgramados = this.pagos;
+    this.calcularDiasValidez();
     this.contratoService.create(this.contrato).subscribe(
       (response: HttpResponse<Contrato>) => {
         this.toaster.success('venta generada, información mandada al cliente y áreas correspondientes');
