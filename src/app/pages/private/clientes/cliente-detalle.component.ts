@@ -5,6 +5,9 @@ import { ClientService } from './../../../_services/client.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ToasterService } from '../../../_services';
 
+// Utils
+import { DigiallDateUtils } from '../../../_utils';
+
 @Component({
     selector: 'app-cliente-detalle',
     templateUrl: './cliente-detalle.component.html',
@@ -17,11 +20,14 @@ export class ClienteDetalleComponent implements OnInit {
   cliente_id: string;
   cliente: Client;
 
+  fecha_nacimiento: string;
+
   constructor(
     private clienteService: ClientService,
     private toaster: ToasterService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dateUtils: DigiallDateUtils
   ) {
   }
 
@@ -40,6 +46,7 @@ export class ClienteDetalleComponent implements OnInit {
     this.clienteService.find(this.cliente_id).subscribe(
       (response: HttpResponse<Client>) => {
         this.cliente = response.body;
+        this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
       },
       (error: HttpErrorResponse) => {
         this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
@@ -53,9 +60,11 @@ export class ClienteDetalleComponent implements OnInit {
   }
 
   editarCliente() {
+    this.asignarFechaNacimiento();
     this.clienteService.editar(this.cliente).subscribe(
       (response: HttpResponse<Client>) => {
         this.cliente = response.body;
+        this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
         this.editing_mode = false;
       },
       (error: HttpErrorResponse) => {
@@ -75,6 +84,14 @@ export class ClienteDetalleComponent implements OnInit {
         this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
       }
     );
+  }
+
+  asignarFechaNacimiento() {
+    const fecha_usar = this.dateUtils.toDate(this.fecha_nacimiento);
+    this.cliente.fechaNacimiento = new Date(fecha_usar.getUTCFullYear(),
+                                            fecha_usar.getUTCMonth(),
+                                            fecha_usar.getUTCDate(),
+                                            0, 0, 0, 0);
   }
 
 }
