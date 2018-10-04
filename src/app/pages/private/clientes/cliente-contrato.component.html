@@ -90,7 +90,10 @@
           <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let resumen_contrato of resumen_contratos_por_cliente.resumen_contratos">
               <div class="info-box">
-                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)"
+                routerLink="/clientes/{{cliente_id}}/contratos/{{resumen_contrato.contrato.id}}">
+                  <i class="fa fa-flag-o"></i>
+                </span>
                 <div class="info-box-content">
                   <span class="info-box-text">
                     <label>
@@ -99,11 +102,11 @@
                   </span>
                   <span class="info-box-text">
                     <label>Fecha Creación:</label>
-                    <p>{{resumen_contrato.contrato.fechaCreacion | date: 'MMMM dd yyyy HH:mm'}}</p>
+                    <p>{{resumen_contrato.contrato.fechaCreacion | date: 'MMMM dd yyyy'}}</p>
                   </span>
-                  <span class="info-box-text" *ngIf="resumen_contrato.contrato.tipo === 'APARTADO' || resumen_contrato.contrato.tipo === 'BLOQUEO'">
+                  <span class="info-box-text" *ngIf="resumen_contrato && resumen_contrato.contrato.tipo !== 'CORRIDA'">
                     <label>Fecha Vencimiento:</label>
-                    <p>{{calcularFechaVencimiento(resumen_contrato.contrato) | date: 'MMMM dd yyyy HH:mm'}}</p>
+                    <p>{{calcularFechaVencimiento(resumen_contrato.contrato) | date: 'MMMM dd yyyy'}}</p>
                   </span>
                   <span class="info-box-text">
                     <label>Nombre del producto:</label>

@@ -17,6 +17,7 @@ export class ContratoService {
   private addPagoProgramadoUrl;
   private findAllForClienteIdUrl;
   private getContractForIdUrl;
+  private DESACTIVAR_URL;
 
   constructor(
     private http: HttpClient,
@@ -29,7 +30,7 @@ export class ContratoService {
     this.addPagoProgramadoUrl = environment.API_URL + 'api/contrato/_add_pago_programado';
     this.findAllForClienteIdUrl = environment.API_URL + 'api/contratos/_by_cliente_id';
     this.getContractForIdUrl = environment.API_URL + 'api/contratos/_by_contrato_id';
-
+    this.DESACTIVAR_URL = environment.API_URL + 'api/contratos/_desactivar';
   }
 
   create(contrato: Contrato): Observable<HttpResponse<Contrato>> {
@@ -63,6 +64,10 @@ export class ContratoService {
 
   getContractForId(contractId: string): Observable<HttpResponse<Contrato>> {
     return this.http.get<Contrato>(this.getContractForIdUrl + '/' + contractId, {observe: 'response'});
+  }
+
+  desactivar(contrato_id: string): Observable<HttpResponse<Contrato>> {
+    return this.http.put<Contrato>(this.DESACTIVAR_URL + '/' + contrato_id, null, {observe: 'response'});
   }
 
 }

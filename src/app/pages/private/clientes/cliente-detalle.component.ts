@@ -46,7 +46,9 @@ export class ClienteDetalleComponent implements OnInit {
     this.clienteService.find(this.cliente_id).subscribe(
       (response: HttpResponse<Client>) => {
         this.cliente = response.body;
-        this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
+        if (this.cliente && this.cliente.fechaNacimiento) {
+          this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
+        }
       },
       (error: HttpErrorResponse) => {
         this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
@@ -64,7 +66,9 @@ export class ClienteDetalleComponent implements OnInit {
     this.clienteService.editar(this.cliente).subscribe(
       (response: HttpResponse<Client>) => {
         this.cliente = response.body;
-        this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
+        if (this.cliente && this.cliente.fechaNacimiento) {
+          this.fecha_nacimiento = this.cliente.fechaNacimiento.toLocaleString().split('T')[0];
+        }
         this.editing_mode = false;
       },
       (error: HttpErrorResponse) => {

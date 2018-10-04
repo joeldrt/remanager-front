@@ -58,13 +58,13 @@ export class VenderComponent implements OnInit {
     this.producto_id = this.route.snapshot.params['producto_id'];
     if (!this.producto_id) {
       this.toaster.error('No se especificó el producto');
-      this.router.navigate(['../']);
+      this.router.navigate(['../'], {relativeTo: this.route});
       return;
     }
     this.cliente_id = this.route.snapshot.params['cliente_id'];
     if (!this.cliente_id) {
       this.toaster.error('No se especificó el cliente');
-      this.router.navigate(['../']);
+      this.router.navigate(['../'], {relativeTo: this.route});
       return;
     }
     this.iniciarVariables();
@@ -88,12 +88,12 @@ export class VenderComponent implements OnInit {
           this.calcularRestanteAPagar();
         } else {
           this.toaster.error('La respuesta del servido viene vacía');
-          this.router.navigate(['../']);
+          this.router.navigate(['../'], {relativeTo: this.route});
         }
       },
       (error: HttpErrorResponse) => {
         this.toaster.error(error.message);
-        this.router.navigate(['../']);
+        this.router.navigate(['../'], {relativeTo: this.route});
       }
     );
   }
@@ -154,10 +154,14 @@ export class VenderComponent implements OnInit {
     const fecha_final = this.dateUtils.toDate(this.fecha_liquidacion);
 
     const diferencia_de_tiempo = Math.abs(fecha_inicio.getTime() - fecha_final.getTime());
+
     const numero_de_dias = Math.ceil(diferencia_de_tiempo / (1000 * 3600 * 24));
     console.log('Numero de dias entre fechas: ' + numero_de_dias);
+    this.contrato.diasValidez = numero_de_dias;
+
     const numero_de_dias_entre_pagos = Math.floor(numero_de_dias / (this.num_parcialidades - 1));
     console.log('Numero de dias entre pagos: ' + numero_de_dias_entre_pagos);
+
     const monto_a_pagar = this.restante_a_pagar / this.num_parcialidades;
     console.log('Monto por cada pago: ' + monto_a_pagar);
 

@@ -81,6 +81,7 @@ import { LoadingComponent } from './_digiall-components/loading/loading.componen
 import { ProductosAdquirirComponent } from './pages/private/productos-adquirir/productos-adquirir.component';
 import { CorridaComponent } from './pages/private/corrida/corrida.component';
 import { VenderComponent } from './pages/private/vender/vender.component';
+import { ContratosVisorComponent } from './pages/private/contratos-visor/contratos-visor.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { VenderComponent } from './pages/private/vender/vender.component';
     ProductosAdquirirComponent,
     DgtoolsComponent,
     CorridaComponent,
-    VenderComponent
+    VenderComponent,
+    ContratosVisorComponent
   ],
   imports: [
     BrowserModule,
