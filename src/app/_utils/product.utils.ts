@@ -15,11 +15,11 @@ export class ProductUtils {
         break;
       }
       case 'BLOQUEADO': {
-        color_to_return = 'gray'; // gris
+        color_to_return = 'black'; // negro
         break;
       }
       case 'VENDIDO': {
-        color_to_return = 'white'; // gris
+        color_to_return = 'gray'; // gris
         break;
       }
     }

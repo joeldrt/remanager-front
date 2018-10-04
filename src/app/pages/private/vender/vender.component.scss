@@ -1,0 +1,81 @@
+@import "../component.shared.style";
+
+.vender-container {
+  min-height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+// Datos del cliente
+.dg-info-cliente {
+  background-color: #FFF;
+  min-height: 30px;
+  max-height: 30px;
+}
+
+// Datos del Producto
+.dg-info-producto {
+  background-color: #FFF;
+  min-height: 30px;
+  max-height: 30px;
+}
+
+// Precio del producto y restante a pagar
+.dg-precio-producto {
+  min-height: 80px;
+  max-height: 80px;
+  background-color: #E2E2E2;
+  padding: 15px 0;
+
+  span{
+    color: #222A85;
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+// Barra para agregar pago
+.dg-agregar-pago-button-container {
+  background-color: #FFF;
+  width: 100%;
+  min-height: 50px;
+  max-height: 50px;
+  padding-top: 16px;
+}
+
+.dg-pagos-container {
+  min-height: calc(100vh - 370px);
+  max-height: calc(100vh - 370px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .row{
+    border-bottom: 1px solid #E3E3E3;
+    cursor: pointer;
+    padding: 1em 0.9em;
+
+    .dg-col-icon{
+      text-align: center;
+      span{
+        background-color: transparent;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+      }
+    }
+    .dg-col-name{
+      p{
+        margin-bottom: 0;
+        font-size:1.32em;
+      }
+      span{
+        font-size: 0.9em;
+      }
+    }
+
+    .dg-icon-arrow{
+      font-size: 1.5em;
+    }
+  }// end - row
+}
