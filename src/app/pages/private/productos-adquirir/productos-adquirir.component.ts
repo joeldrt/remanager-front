@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
@@ -14,11 +14,11 @@ import { Contrato, TipoContrato, PagoReal } from '../../../_models/contrato';
 import { HeaderHelper } from '../../../_helpers';
 
 @Component({
-  selector: 'app-adquirir-producto',
-  templateUrl: './adquirir-producto.component.html',
-  styleUrls: ['./adquirir-producto.component.scss']
+  selector: 'app-productos-adquirir',
+  templateUrl: './productos-adquirir.component.html',
+  styleUrls: ['./productos-adquirir.component.scss']
 })
-export class AdquirirProductoComponent implements OnInit, OnDestroy {
+export class ProductosAdquirirComponent implements OnInit {
 
   public DIAS_VALIDEZ = 3;
   public DIAS_VALIDEZ_APARTADO = 20;
@@ -60,9 +60,6 @@ export class AdquirirProductoComponent implements OnInit, OnDestroy {
     });
     this.getProducto();
     this.obtenerClientesPorVendedor();
-  }
-
-  ngOnDestroy() {
   }
 
   getProducto() {

@@ -52,11 +52,12 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {
       this.showing_project = new Proyecto();
       this.showing_project.nombre = 'Inicio';
-      this.headerHelper.sendHeaderTitleRequest('Bienvendio');
+      this.headerHelper.sendHeaderTitleRequest('Proyectos');
       return;
     }
     this.showing_project = this.proyectoNavhelper.ultimoProyectoApilado();
-    this.headerHelper.sendHeaderTitleRequest(this.showing_project.nombre);
+    // this.headerHelper.sendHeaderTitleRequest(this.showing_project.nombre);
+    this.headerHelper.sendHeaderTitleRequest('Proyectos');
   }
 
   private doNavigationBaby() {

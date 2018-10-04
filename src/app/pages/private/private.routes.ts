@@ -11,14 +11,10 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductoDetalleComponent } from './productos-detalle/producto-detalle.component';
-import { AdquirirProductoComponent } from './adquirir-producto/adquirir-producto.component';
+import { ProductosAdquirirComponent } from './productos-adquirir/productos-adquirir.component';
 import { DgtoolsComponent } from './dgtools/dgtools.component';
-import {ProductoPagosComponent} from './producto-pagos/producto-pagos.component';
-import {ContratoBloqueoComponent} from './producto-contratos/contrato-bloqueo/contrato-bloqueo.component';
-import {ContratoCorridaComponent} from './producto-contratos/contrato-corrida/contrato-corrida.component';
-import {ContratoDevolucionComponent} from './producto-contratos/contrato-devolucion/contrato-devolucion.component';
-import {ContratoVentaComponent} from './producto-contratos/contrato-venta/contrato-venta.component';
-import {ContratoApartadoComponent} from './producto-contratos/contrato-apartado/contrato-apartado.component';
+import { CorridaComponent } from './corrida/corrida.component';
+import { VenderComponent } from './vender/vender.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -31,13 +27,23 @@ export const PRIVATE_ROUTES: Routes = [
   },
   {
     path: 'proyectos/producto/:producto_id/adquirir',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
   },
   {
     path: 'proyectos/producto/:producto_id/adquirir/:cliente_id',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/corrida',
+    component: CorridaComponent,
+    data: { title: 'Corrida financiera producto', breadcrumb: 'corrida finanaciera producto'}
+  },
+  {
+    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/vender',
+    component: VenderComponent,
+    data: { title: 'Vender producto', breadcrumb: 'vender producto'}
   },
 
   {
@@ -52,13 +58,23 @@ export const PRIVATE_ROUTES: Routes = [
   },
   {
     path: 'proyectos/mapa/producto/:producto_id/adquirir',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
   },
   {
     path: 'proyectos/mapa/producto/:producto_id/adquirir/:cliente_id',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  },
+  {
+    path: 'proyectos/mapa/producto/:producto_id/adquirir/:cliente_id/corrida',
+    component: CorridaComponent,
+    data: { title: 'Corrida financiera de producto', breadcrumb: 'corrida financiera producto'}
+  },
+  {
+    path: 'proyectos/mapa/producto/:producto_id/adquirir/:cliente_id/vender',
+    component: VenderComponent,
+    data: { title: 'Vender producto', breadcrumb: 'vender producto'}
   },
 
   // Productos
@@ -66,29 +82,24 @@ export const PRIVATE_ROUTES: Routes = [
   { path: 'productos/producto/:producto_id', component: ProductoDetalleComponent, data: { title: 'Productos', breadcrumb: 'productos'} },
   {
     path: 'productos/producto/:producto_id/adquirir',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
   },
   {
     path: 'productos/producto/:producto_id/adquirir/:cliente_id',
-    component: AdquirirProductoComponent,
+    component: ProductosAdquirirComponent,
     data: { title: 'Adquirir Producto', breadcrumb: 'adquirir producto'}
   },
-
-  // Contrato
-  { path: 'pagosproducto', component: ProductoPagosComponent, data: { title: 'Pagos de Producto', breadcrumb: 'pagos-producto' }},
-  { path: 'bloqueo', component: ContratoBloqueoComponent, data: {title: 'Bloqueo de Producto', breadcrumb: 'bloqueo-producto' }},
-  { path: 'corrida', component: ContratoCorridaComponent, data: { title: 'Corrida de Precios', breadcrumb: 'corrida-producto' }},
   {
-    path: 'devolucion',
-    component: ContratoDevolucionComponent,
-    data: {
-      title: 'Devolución de Producto',
-      breadcrumb: 'devolucion-producto'
-    }
+    path: 'productos/producto/:producto_id/adquirir/:cliente_id/corrida',
+    component: CorridaComponent,
+    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
   },
-  { path: 'venta', component: ContratoVentaComponent, data: {title: 'Venta de Producto', breadcrumb: 'venta-producto' }},
-  { path: 'apartado', component: ContratoApartadoComponent, data: {title: 'Apartado de Producto', breadcrumb: 'apartado-producto' }},
+  {
+    path: 'productos/producto/:producto_id/adquirir/:cliente_id/vender',
+    component: VenderComponent,
+    data: { title: 'Vender producto', breadcrumb: 'vender producto'}
+  },
 
   // Clientes
   {path: 'clientes', component: ClientesComponent, data: { title: 'Clientes', breadcrumb: 'clientes'}},
