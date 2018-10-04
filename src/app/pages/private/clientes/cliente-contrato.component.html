@@ -89,9 +89,8 @@
         <div class="dg-rows-wrapper">
           <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let resumen_contrato of resumen_contratos_por_cliente.resumen_contratos">
-              <div class="info-box">
-                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)"
-                routerLink="/clientes/{{cliente_id}}/contratos/{{resumen_contrato.contrato.id}}">
+              <div class="info-box" routerLink="/clientes/{{cliente_id}}/contratos/{{resumen_contrato.contrato.id}}">
+                <span class="info-box-icon" [ngClass]="colorTarjetaPorTipoDeContrato(resumen_contrato.contrato.tipo)">
                   <i class="fa fa-flag-o"></i>
                 </span>
                 <div class="info-box-content">
