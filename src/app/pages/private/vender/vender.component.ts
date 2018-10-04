@@ -209,7 +209,7 @@ export class VenderComponent implements OnInit {
   }
 
   cerrarVenta() {
-    if (this.restante_a_pagar > 0) {
+    if (this.restante_a_pagar > 0 && this.restante_a_pagar > 1) {
       this.toaster.error('No se a cubierto el precio del producto');
       return;
     }
