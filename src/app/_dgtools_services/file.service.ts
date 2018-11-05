@@ -13,8 +13,8 @@ export class FileService {
 
   constructor(
     private http: HttpClient,
-  ){
-    this.addFileResourceUrl = environment.API_URL + 'api/file/upload';
+  ) {
+    this.addFileResourceUrl = environment.API_URL + 'api/file/upload/';
   }
 
   uploadFiles(folder: string, files: FileEnvelope[]): Observable<HttpResponse<string[]>> {

@@ -1,6 +1,7 @@
 import { Producto } from './producto';
 
 export class PagoReal {
+  public uuid: string;
   public fechaCreacion?: Date; // No se llena, solo para lectura... llenado por el servidor
   public monto?: number;
   public correoQueValida?: string;
@@ -9,6 +10,7 @@ export class PagoReal {
 }
 
 export class PagoProgramado {
+  public uuid: string;
   public fechaCompromisoPago?: Date;
   public monto?: number;
 }
