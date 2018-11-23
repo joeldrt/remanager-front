@@ -1,7 +1,7 @@
 import { Poligono } from './poligono.model';
 
 export class Svg {
-  public id?: number;
+  public id?: string;
   public nombre?: string;
   public imagenContentType?: string;
   public imagen?: any;

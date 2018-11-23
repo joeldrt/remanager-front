@@ -12,7 +12,7 @@ export class SellersService {
   constructor(
     private http: HttpClient,
   ) {
-    this.resourceUrl = environment.API_URL + 'api/users_for_org';
+    this.resourceUrl = environment.API_URL + 'api/usuarios/';
   }
 
   getAll(): Observable<HttpResponse<User[]>> {

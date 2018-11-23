@@ -9,29 +9,25 @@ import { UserExtra } from '../_models/';
 @Injectable()
 export class UserExtraService {
 
-  private userExtraResourceUrl;
-  private userExtraPicturesResourceUrl;
-  private userExtraProfilePictureResourceUrl;
+  private resourceUrl;
 
   constructor(
     private http: HttpClient,
-  ){
-    this.userExtraResourceUrl = environment.API_URL + 'api/user_extra';
-    this.userExtraPicturesResourceUrl = environment.API_URL + 'api/user_extra/pictures';
-    this.userExtraProfilePictureResourceUrl = environment.API_URL + 'api/user_extra/profile_pic';
+  ) {
+    this.resourceUrl = environment.API_URL + 'api/usuario/extra/';
   }
 
   getUserExtra(): Observable<HttpResponse<UserExtra>> {
-    return this.http.get<UserExtra>(this.userExtraResourceUrl, { observe: 'response' });
+    return this.http.get<UserExtra>(this.resourceUrl, { observe: 'response' });
   }
 
   updateUserExtraPicturesUrls(picturesUrls: string[]): Observable<HttpResponse<UserExtra>> {
-    const object = { 'picturesUrls': picturesUrls }
-    return this.http.put<UserExtra>(this.userExtraPicturesResourceUrl, object, { observe: 'response' });
+    const object = { 'picturesUrls': picturesUrls };
+    return this.http.put<UserExtra>(this.resourceUrl + 'pictures', object, { observe: 'response' });
   }
 
   changeProfilePicture(profilePictureUrl: string): Observable<HttpResponse<UserExtra>> {
-    const object = { 'profilePictureUrl': profilePictureUrl}
-    return this.http.put<UserExtra>(this.userExtraProfilePictureResourceUrl, object, { observe: 'response' });
+    const object = { 'profilePictureUrl': profilePictureUrl};
+    return this.http.put<UserExtra>(this.resourceUrl + 'profile_picture', object, { observe: 'response' });
   }
 }

@@ -7,6 +7,8 @@ import { ToasterService } from '../../../_services';
 
 // Utils
 import { DigiallDateUtils } from '../../../_utils';
+import { empty } from 'rxjs';
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'app-cliente-detalle',
@@ -91,6 +93,10 @@ export class ClienteDetalleComponent implements OnInit {
   }
 
   asignarFechaNacimiento() {
+    if (this.fecha_nacimiento === '') {
+      this.cliente.fechaNacimiento = new Date(1876, 0, 17, 0, 0, 0, 0);
+      return;
+    }
     const fecha_usar = this.dateUtils.toDate(this.fecha_nacimiento);
     this.cliente.fechaNacimiento = new Date(fecha_usar.getUTCFullYear(),
                                             fecha_usar.getUTCMonth(),

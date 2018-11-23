@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   // API_URL: 'http://localhost:8080/',
-  // API_URL: 'http://devdigiall.tk:8080/',
-  API_URL: 'http://localhost:5000/'
+  API_URL: 'http://devdigiall.tk:9633/',
+  // API_URL: 'http://localhost:5000/'
 };
 
 /*

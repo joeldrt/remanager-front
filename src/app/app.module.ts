@@ -34,8 +34,6 @@ import {
   ProductoService,
   SvgRestService,
   ClientService,
-  TipoProductoService,
-  ValorCampoProductoService,
   ContratoService,
   UserExtraService,
 } from './_services';
@@ -134,8 +132,6 @@ import { ContratosVisorComponent } from './pages/private/contratos-visor/contrat
     FooterMenuhelper,
     SvgRestService,
     ClientService,
-    TipoProductoService,
-    ValorCampoProductoService,
     HeaderHelper,
     ProfileHelper,
     ContratoService,

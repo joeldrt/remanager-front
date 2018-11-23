@@ -8,22 +8,20 @@ import { Proyecto } from '../_models';
 @Injectable()
 export class ProyectoService {
 
-  private searchRoot;
-  private searchByPadreIdUrl;
+  private resourceUrl;
 
   constructor(
     private http: HttpClient
   ) {
-    this.searchRoot = environment.API_URL + 'api/_search_root/proyectos';
-    this.searchByPadreIdUrl = environment.API_URL + 'api/_search_by_padreid/proyectos';
+    this.resourceUrl = environment.API_URL + 'api/proyectos/';
   }
 
   getAllRootProyects(): Observable<HttpResponse<Proyecto[]>> {
-    return this.http.get<Proyecto[]>(this.searchRoot, { observe: 'response' });
+    return this.http.get<Proyecto[]>(this.resourceUrl + '?proyecto_raiz=true', { observe: 'response' });
   }
 
   getProyectosByParentId(idPadre: any): Observable<HttpResponse<Proyecto[]>> {
-    return this.http.get<Proyecto[]>(this.searchByPadreIdUrl + '/' + idPadre, { observe: 'response' });
+    return this.http.get<Proyecto[]>(this.resourceUrl + '?padre_id=' + idPadre, { observe: 'response' });
   }
 
 }

@@ -52,7 +52,7 @@ export class ProductosComponent implements OnInit {
   }
 
   findAllProducts(organizacionId: number) {
-    this.productoService.findAllByOrganizacion(organizacionId).subscribe(
+    this.productoService.findAllByOrganizacion(String(organizacionId)).subscribe(
       (value: HttpResponse<Producto[]>) => {
         if (value && value.body) {
           this.productos = value.body;

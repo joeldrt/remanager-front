@@ -135,7 +135,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
   }
 
   retrieveSvg(svgIdToFind: number) {
-    this.svgService.getSvgById(svgIdToFind).subscribe(
+    this.svgService.getSvgById(String(svgIdToFind)).subscribe(
       (value: HttpResponse<Svg>) => {
         this.svg = value.body;
         setTimeout(() => {

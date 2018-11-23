@@ -8,15 +8,32 @@ import { Svg } from '../_models';
 @Injectable()
 export class SvgRestService {
 
-  private searchServiceUrl;
+  private resourceUrl;
 
   constructor(
     private http: HttpClient
   ) {
-    this.searchServiceUrl = environment.API_URL + 'api/svgs';
+    this.resourceUrl = environment.API_URL + 'api/svgs/';
   }
 
-  getSvgById(svgId: number): Observable<HttpResponse<Svg>> {
-    return this.http.get<Svg>(this.searchServiceUrl + '/' + svgId, { observe: 'response' });
+  createSvg(svg: Svg): Observable<HttpResponse<Svg>> {
+    return this.http.post<Svg>(this.resourceUrl, svg, {observe: 'response'});
   }
+
+  getAllSvgs(): Observable<HttpResponse<Svg[]>> {
+    return this.http.get<Svg[]>(this.resourceUrl, {observe: 'response'});
+  }
+
+  getSvgById(svgId: String): Observable<HttpResponse<Svg>> {
+    return this.http.get<Svg>(this.resourceUrl + svgId, {observe: 'response'});
+  }
+
+  updateSvg(svg: Svg): Observable<HttpResponse<Svg>> {
+    return this.http.put<Svg>(this.resourceUrl + svg.id, svg, {observe: 'response'});
+  }
+
+  deleteSvg(svg_id: String): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(this.resourceUrl + svg_id, {observe: 'response'});
+  }
+
 }

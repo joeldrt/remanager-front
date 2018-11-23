@@ -16,11 +16,11 @@ export class AccountService {
     private router: Router,
     private http: HttpClient,
   ) {
-    this.API_URL = environment.API_URL;
+    this.API_URL = environment.API_URL + 'api/sesion/';
   }
 
   getAccount(): Observable<HttpResponse<User>> {
-    return this.http.get<User>(this.API_URL + 'api/account', { observe: 'response' }).pipe(
+    return this.http.get<User>(this.API_URL + 'cuenta', { observe: 'response' }).pipe(
       map((response: HttpResponse<User>) => {
         localStorage.setItem('account', JSON.stringify(response.body));
         return response;
@@ -29,11 +29,11 @@ export class AccountService {
   }
 
   updateAccount(user:  User): Observable<HttpResponse<any>> {
-    return this.http.put<any>(this.API_URL + 'api/account', user, { observe: 'response' });
+    return this.http.put<any>(this.API_URL + 'cuenta', user, { observe: 'response' });
   }
 
   getAccountOrganization(): Observable<HttpResponse<Organizacion>> {
-    return this.http.get<Organizacion>(this.API_URL + 'api/account_organizacion', { observe: 'response' });
+    return this.http.get<Organizacion>(this.API_URL + 'organizacion', { observe: 'response' });
   }
 
 }
