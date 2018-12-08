@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthenticationService, ToasterService } from '../../../_services/index';
 
@@ -31,12 +32,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
-        data => {
+        (response: HttpResponse<any>) => {
           this.router.navigate([this.returnUrl]);
         },
-        error => {
-          this.toaster.error(error);
-          console.log(error);
+        (error: HttpErrorResponse) => {
+          this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
           this.loading = false;
         });
   }

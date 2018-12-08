@@ -61,7 +61,7 @@ export class ProductoDetalleComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

@@ -43,7 +43,7 @@ export class ProductosComponent implements OnInit {
         this.findAllProducts(this.organizacionId);
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error: ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       });
   }
 
@@ -61,7 +61,7 @@ export class ProductosComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ': ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       });
   }// end - findAllProducts
 

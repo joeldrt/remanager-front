@@ -73,7 +73,7 @@ export class ProductosAdquirirComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../']);
       }
     );
@@ -124,7 +124,7 @@ export class ProductosAdquirirComponent implements OnInit {
         this.router.navigate(['../../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.status + ' Error: ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }
@@ -140,7 +140,7 @@ export class ProductosAdquirirComponent implements OnInit {
         this.agregarPagoRealApartado(response.body.id);
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.status + ' Error: ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }
@@ -154,7 +154,7 @@ export class ProductosAdquirirComponent implements OnInit {
         this.router.navigate(['../../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.status + ' Error: ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

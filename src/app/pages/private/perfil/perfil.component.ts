@@ -92,7 +92,7 @@ export class PerfilComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error('Error: ' + error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         this.isEditing = false;
       }
     );
@@ -106,7 +106,7 @@ export class PerfilComponent implements OnInit {
         this.getUserExtra();
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error(error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         this.loading = false;
       });
   }// end - getAccount
@@ -123,7 +123,7 @@ export class PerfilComponent implements OnInit {
         this.loading = false;
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error(error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         this.lastProfilePicBeforeChange = this.userExtra.profilePictureUrl;
         this.loading = false;
       }
@@ -178,7 +178,7 @@ export class PerfilComponent implements OnInit {
         this.uploading_images = false;
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error(error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         this.uploading_images = false;
       }
     );
@@ -194,7 +194,7 @@ export class PerfilComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toasterService.error('UserExtra: ' + error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

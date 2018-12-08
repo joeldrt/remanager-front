@@ -1,0 +1,12 @@
+@import "../../component.shared.style.scss";
+
+.admin-tools-users-table {
+    min-height: calc(100vh - 185px);
+    max-height: calc(100vh - 185px);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.box {
+    margin-bottom: 0 !important;
+}

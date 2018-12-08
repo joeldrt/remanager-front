@@ -5,8 +5,16 @@
 export const environment = {
   production: false,
   // API_URL: 'http://localhost:8080/',
-  API_URL: 'http://devdigiall.tk:9633/',
-  // API_URL: 'http://localhost:5000/'
+  // API_URL: 'https://remanager.devdigiall.tk/',
+  API_URL: 'http://localhost:5000/',
+  firebase: {
+    apiKey: 'AIzaSyAiPiStmJkUxpWUi4p4NqaSW4NJv8CEGxA',
+    authDomain: 'remanager-a553d.firebaseapp.com',
+    databaseURL: 'https://remanager-a553d.firebaseio.com',
+    projectId: 'remanager-a553d',
+    storageBucket: 'remanager-a553d.appspot.com',
+    messagingSenderId: '413882937754'
+  }
 };
 
 /*

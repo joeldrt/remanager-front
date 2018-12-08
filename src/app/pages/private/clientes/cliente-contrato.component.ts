@@ -45,7 +45,7 @@ export class ClienteContratoComponent implements OnInit {
         this.resumen_contratos_por_cliente = response.body;
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
         this.router.navigate(['/clientes']);
       }
     );

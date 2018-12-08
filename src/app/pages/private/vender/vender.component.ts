@@ -92,7 +92,7 @@ export class VenderComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../'], {relativeTo: this.route});
       }
     );
@@ -110,7 +110,7 @@ export class VenderComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../']);
       }
     );
@@ -234,7 +234,7 @@ export class VenderComponent implements OnInit {
         this.router.navigate(['../../../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }
