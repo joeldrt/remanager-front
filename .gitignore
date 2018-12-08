@@ -48,3 +48,7 @@ Thumbs.db
 
 remanager_front.code-workspace
 launch.json
+
+# environment
+
+/src/environment/
