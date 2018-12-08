@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error: HttpErrorResponse) => {
-          this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
           this.loading = false;
+          this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         });
   }
 }
