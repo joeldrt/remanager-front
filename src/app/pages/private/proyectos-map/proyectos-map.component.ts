@@ -53,13 +53,13 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     this.footerMenu.clearButtons('/proyectos/mapa');
   }
 
-  private footerButtonSetup() {
-    if (!this.footerMenu.getMenu('/proyectos/mapa')) {
-      this.footerMenu.addButtonFromValues('/proyectos/mapa', 'plano', 'fa  fa-map-o', '/proyectos/mapa');
-      this.footerMenu.addButtonFromValues('/proyectos/mapa', 'lista', 'fa  fa-list-ul', '/proyectos');
-    }
-    this.footerMenu.sendMenuRequest('/proyectos/mapa');
-  }
+  // private footerButtonSetup() {
+  //   if (!this.footerMenu.getMenu('/proyectos/mapa')) {
+  //     this.footerMenu.addButtonFromValues('/proyectos/mapa', 'plano', 'fa  fa-map-o', '/proyectos/mapa');
+  //     this.footerMenu.addButtonFromValues('/proyectos/mapa', 'lista', 'fa  fa-list-ul', '/proyectos');
+  //   }
+  //   this.footerMenu.sendMenuRequest('/proyectos/mapa');
+  // }
 
   private setCurrentViewInfo() {
     this.root_view = false;
@@ -76,7 +76,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
 
   private doNavigationBaby() {
     this.loading = true;
-    this.footerButtonSetup();
+    // this.footerButtonSetup();
     this.setCurrentViewInfo();
     this.clearProyectosAndProductosAndSvg();
     if (!this.proyectoNavhelper.ultimoProyectoApilado()) {

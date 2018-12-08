@@ -20,34 +20,41 @@ import { AdmintoolsComponent } from './admintools/admintools.component';
 import { UsersComponent } from './admintools/users/users.component';
 
 export const PRIVATE_ROUTES: Routes = [
-  // Proyectos - es la primera pantalla que le queremos mostrar al venddor
-  {path: '', redirectTo: 'proyectos', pathMatch: 'full'},
-  {path: 'proyectos', component: ProyectosComponent, data: {title: 'Proyectos', breadcrumb: 'proyectos'}},
+
+  // Primera pantalla que le queremos mostrar
   {
-    path: 'proyectos/producto/:producto_id',
-    component: ProductoDetalleComponent,
-    data: {title: 'Detalle de producto', breadcrumb: 'detalle de producto'}
+    path: '',
+    redirectTo: 'proyectos/mapa',
+    pathMatch: 'full'
   },
-  {
-    path: 'proyectos/producto/:producto_id/adquirir',
-    component: ProductosAdquirirComponent,
-    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
-  },
-  {
-    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id',
-    component: ProductosAdquirirComponent,
-    data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
-  },
-  {
-    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/corrida',
-    component: CorridaComponent,
-    data: { title: 'Corrida financiera producto', breadcrumb: 'corrida finanaciera producto'}
-  },
-  {
-    path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/vender',
-    component: VenderComponent,
-    data: { title: 'Vender producto', breadcrumb: 'vender producto'}
-  },
+
+  // {path: 'proyectos', component: ProyectosComponent, data: {title: 'Proyectos', breadcrumb: 'proyectos'}},
+
+  // {
+  //   path: 'proyectos/producto/:producto_id',
+  //   component: ProductoDetalleComponent,
+  //   data: {title: 'Detalle de producto', breadcrumb: 'detalle de producto'}
+  // },
+  // {
+  //   path: 'proyectos/producto/:producto_id/adquirir',
+  //   component: ProductosAdquirirComponent,
+  //   data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  // },
+  // {
+  //   path: 'proyectos/producto/:producto_id/adquirir/:cliente_id',
+  //   component: ProductosAdquirirComponent,
+  //   data: { title: 'Adquirir producto', breadcrumb: 'adquirir producto'}
+  // },
+  // {
+  //   path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/corrida',
+  //   component: CorridaComponent,
+  //   data: { title: 'Corrida financiera producto', breadcrumb: 'corrida finanaciera producto'}
+  // },
+  // {
+  //   path: 'proyectos/producto/:producto_id/adquirir/:cliente_id/vender',
+  //   component: VenderComponent,
+  //   data: { title: 'Vender producto', breadcrumb: 'vender producto'}
+  // },
 
   {
     path: 'proyectos/mapa',
