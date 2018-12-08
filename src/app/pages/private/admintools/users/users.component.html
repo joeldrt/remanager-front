@@ -1,0 +1,237 @@
+<div class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Usuarios</h3>
+      <div class="pull-right">
+          <button class="btn btn-link" data-toggle="modal" data-target="#agregarUsuarioModal">
+            agregar
+          </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body admin-tools-users-table">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Login</th>
+            <th>Nombre</th>
+            <th>Activado</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{usuario.login}}</td>
+            <td>{{usuario.firstName}}</td>
+            <td>
+              <span class="badge bg-red" *ngIf="!usuario.activated"
+                (click)="modificarActivado(usuario.id, true)">
+                Desactivado
+              </span>
+              <span class="badge bg-green" *ngIf="usuario.activated"
+                (click)="modificarActivado(usuario.id, false)">
+                Activado
+              </span>
+            </td>
+            <td>{{usuario.email}}</td>
+            <td>
+              <div class="btn-group">
+                  <button class="btn btn-link" *ngIf="usuario.login != usuario_actual.login" 
+                    (click)="setUsuarioEditar(usuario)" data-toggle="modal" data-target="#editarUsuarioModal">
+                    editar
+                  </button>
+                  <button class="btn btn-link red" style="color: red;" *ngIf="usuario.login != usuario_actual.login"
+                  (click)="setUsuarioBorrar(usuario)" data-toggle="modal" data-target="#borrarUsuarioModal">
+                    borrar
+                  </button>
+              </div>
+            </td>
+          </tr>
+          <!-- <tr>
+            <td>1.</td>
+            <td>Update software</td>
+            <td>
+              <div class="progress progress-xs">
+                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+              </div>
+            </td>
+            <td><span class="badge bg-red">55%</span></td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+</div>
+
+<!-- Ventana modal para agregar un usuario-->
+<div class="modal fade" tabindex="-1" role="dialog" id="agregarUsuarioModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="usuario_nuevo">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="usuarioLogin">Login</label>
+            <input class="form-control" id="usuarioLogin" placeholder="login" name="usuario_login"
+            [(ngModel)]="usuario_nuevo.login"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioPassword">Password</label>
+            <input type="password" class="form-control" id="usuarioPassword" placeholder="password" name="usuario_password"
+            [(ngModel)]="usuario_nuevo.password"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioFirstName">Nombre</label>
+            <input class="form-control" id="usuarioFirstName" placeholder="nombre" name="usuario_firstname"
+            [(ngModel)]="usuario_nuevo.firstName"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioLastName">Apellidos</label>
+            <input class="form-control" id="usuarioLastName" placeholder="apellidos" name="usuario_lastname"
+            [(ngModel)]="usuario_nuevo.lastName"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioEmail">Email</label>
+            <input type="email" class="form-control" id="usuarioEmail" placeholder="email" name="usuario_email"
+            [(ngModel)]="usuario_nuevo.email"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioAutoridades"></label>
+            <select class="custom-select" multiple [(ngModel)]="usuario_nuevo.authorities" id="usuarioAutoridades" name="usuario_authorities">
+              <option value="ADMIN" *ngIf="usuario_actual.authorities.includes('ROOT')">ADMINISTRADOR</option>
+              <option value="USER">VENDEDOR</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!usuario_nuevo.login || !usuario_nuevo.password || !usuario_nuevo.firstName ||
+                      !usuario_nuevo.email"
+          (click)="agregarUsuario()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un usuario-->
+
+
+<!-- Ventana modal para editar un usuario-->
+<div class="modal fade" tabindex="-1" role="dialog" id="editarUsuarioModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="usuario_editar">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="usuarioLogin_editar">Login</label>
+            <input class="form-control" id="usuarioLogin_editar" placeholder="login" name="usuario_login_editar"
+            [(ngModel)]="usuario_editar.login"/>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary"
+              data-toggle="modal" data-target="#editarPasswordUsuarioModal" (click)="preparacionCambioPassword()">
+                Cambiar Password
+            </button>
+          </div>
+          <div class="form-group">
+            <label for="usuarioFirstName_editar">Nombre</label>
+            <input class="form-control" id="usuarioFirstName_editar" placeholder="nombre" name="usuario_firstname_editar"
+            [(ngModel)]="usuario_editar.firstName"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioLastName_editar">Apellidos</label>
+            <input class="form-control" id="usuarioLastName_editar" placeholder="apellidos" name="usuario_lastname_editar"
+            [(ngModel)]="usuario_editar.lastName"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioEmail_editar">Email</label>
+            <input type="email" class="form-control" id="usuarioEmail_editar" placeholder="email" name="usuario_email_editar"
+            [(ngModel)]="usuario_editar.email"/>
+          </div>
+          <div class="form-group">
+            <label for="usuarioAutoridades_editar"></label>
+            <select class="custom-select" multiple [(ngModel)]="usuario_editar.authorities" id="usuarioAutoridades_editar" name="usuario_authorities_editar">
+              <option value="ADMIN" *ngIf="usuario_actual.authorities.includes('ROOT')">ADMINISTRADOR</option>
+              <option value="USER">VENDEDOR</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!usuario_editar.login || !usuario_editar.password || !usuario_editar.firstName ||
+                      !usuario_editar.email"
+          (click)="editarUsuario()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para editar un usuario-->
+
+
+<!-- Ventana modal para editar el password del usuario-->
+<div class="modal fade" tabindex="-1" role="dialog" id="editarPasswordUsuarioModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="usuario_editar">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Password de {{usuario_editar.login}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="usuarioPassword_editar_password">Password Nuevo</label>
+            <input type="password" class="form-control" id="usuarioPassword_editar_password" placeholder="password" name="usuario_password_editar_password"
+              [(ngModel)]="password_editar"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!password_editar || !(password_editar.length > 0)"
+          (click)="editarPasswordUsuario(password_editar)">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para editar un usuario-->
+
+
+<!-- Ventana modal para borrar un usuario-->
+<div class="modal fade" tabindex="-1" role="dialog" id="borrarUsuarioModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="usuario_borrar">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrar Usuario {{usuario_borrar.login}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Estas a punto de borrar al usuario {{usuario_borrar.firstName}} {{usuario_borrar.lastName}}, esta acción no puede ser revertida. ¿Deseas Continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+          (click)="borrarUsuario()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un usuario-->

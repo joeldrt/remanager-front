@@ -53,7 +53,7 @@ export class ClienteDetalleComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
         this.router.navigate(['../']);
       }
     );
@@ -74,7 +74,7 @@ export class ClienteDetalleComponent implements OnInit {
         this.editing_mode = false;
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
       }
     );
   }
@@ -87,7 +87,7 @@ export class ClienteDetalleComponent implements OnInit {
         this.router.navigate(['/clientes']);
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
       }
     );
   }

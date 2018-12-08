@@ -89,7 +89,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         },
         (error: HttpErrorResponse) => {
           this.loading = false;
-          this.toasterService.error('Error ' + error.status + ': ' + error.message);
+          this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
           this.proyectoNavhelper.limpiarNavegacion();
           this.router.navigate(['/login']);
         });
@@ -179,7 +179,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
-        this.toasterService.error('Error ' + error.status + ': ' + error.message);
+        this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         this.proyectoNavhelper.limpiarNavegacion();
         this.router.navigate(['/login']);
       });
@@ -197,7 +197,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         },
         (error: HttpErrorResponse) => {
           this.loading = false;
-          this.toasterService.error('Error ' + error.status + ': ' + error.message);
+          this.toasterService.error('status: ' + error.status + ' message: ' + error.error.message);
         });
     }
   }

@@ -16,6 +16,8 @@ import { DgtoolsComponent } from './dgtools/dgtools.component';
 import { CorridaComponent } from './corrida/corrida.component';
 import { VenderComponent } from './vender/vender.component';
 import { ContratosVisorComponent } from './contratos-visor/contratos-visor.component';
+import { AdmintoolsComponent } from './admintools/admintools.component';
+import { UsersComponent } from './admintools/users/users.component';
 
 export const PRIVATE_ROUTES: Routes = [
   // Proyectos - es la primera pantalla que le queremos mostrar al venddor
@@ -133,4 +135,9 @@ export const PRIVATE_ROUTES: Routes = [
 
   // Digiall Misc dgtools
   { path: 'dgtools', component: DgtoolsComponent, data: { title: 'Digiall DG Tools', breadcrumb: 'dgtools' } },
+
+  // Admin Tools
+  { path: 'admintools', component: AdmintoolsComponent, data: { title: 'Admin Tools', breadcrumb: 'admin tools' } },
+  { path: 'admintools/usuarios', component: UsersComponent, data: { title: 'Admin Tools - Users', breadcrumb: 'admin tools - users' } },
+
 ];

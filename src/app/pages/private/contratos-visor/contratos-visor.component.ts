@@ -58,7 +58,7 @@ export class ContratosVisorComponent implements OnInit {
         this.headerHelper.sendHeaderTitleRequest('Visor de acción');
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../'], {relativeTo: this.route});
       }
     );
@@ -70,7 +70,7 @@ export class ContratosVisorComponent implements OnInit {
         this.cliente = response.body;
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../'], {relativeTo: this.route});
       }
     );
@@ -82,7 +82,7 @@ export class ContratosVisorComponent implements OnInit {
         this.producto = response.body;
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../'], {relativeTo: this.route});
       }
     );
@@ -107,7 +107,7 @@ export class ContratosVisorComponent implements OnInit {
         this.router.navigate(['../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

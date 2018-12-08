@@ -69,7 +69,7 @@ export class MenuComponent implements OnInit {
         this.user = response.body;
       },
       (error: HttpErrorResponse) => {
-        console.log('Error: ' + error.message);
+        console.log('status: ' + error.status + ' message: ' + error.error.message);
       });
   }
 
@@ -82,6 +82,10 @@ export class MenuComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {}
     );
+  }
+
+  hasAuthority(authority: string): boolean {
+    return this.accountService.hasAuthority(authority);
   }
 
 }

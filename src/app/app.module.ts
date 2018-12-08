@@ -4,6 +4,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SlideshowModule } from 'ng-simple-slideshow';
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireMessagingModule } from 'angularfire2/messaging';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
@@ -80,6 +84,8 @@ import { ProductosAdquirirComponent } from './pages/private/productos-adquirir/p
 import { CorridaComponent } from './pages/private/corrida/corrida.component';
 import { VenderComponent } from './pages/private/vender/vender.component';
 import { ContratosVisorComponent } from './pages/private/contratos-visor/contratos-visor.component';
+import { AdmintoolsComponent } from './pages/private/admintools/admintools.component';
+import { UsersComponent } from './pages/private/admintools/users/users.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +115,9 @@ import { ContratosVisorComponent } from './pages/private/contratos-visor/contrat
     DgtoolsComponent,
     CorridaComponent,
     VenderComponent,
-    ContratosVisorComponent
+    ContratosVisorComponent,
+    AdmintoolsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +125,8 @@ import { ContratosVisorComponent } from './pages/private/contratos-visor/contrat
     FormsModule,
     HttpClientModule,
     SlideshowModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule
   ],
   providers: [
     AuthGuard,

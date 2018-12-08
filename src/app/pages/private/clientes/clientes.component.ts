@@ -34,7 +34,7 @@ export class ClientesComponent implements OnInit {
         this.buscar(undefined);
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
       }
     );
   }
@@ -46,7 +46,7 @@ export class ClientesComponent implements OnInit {
         this.cargarClientes();
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.message);
+        this.toaster.error('Error ' + error.status + ' mensaje: ' + error.error.message);
       }
     );
   }

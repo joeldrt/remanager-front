@@ -75,7 +75,7 @@ export class DgtoolsComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.clearUploadForm();
         this.is_uploading_in_process = false;
-        this.toaster.error('status' + error.status + ' message: ' + error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }
@@ -108,7 +108,7 @@ export class DgtoolsComponent implements OnInit {
         console.log(response);
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

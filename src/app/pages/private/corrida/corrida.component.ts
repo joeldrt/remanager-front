@@ -92,7 +92,7 @@ export class CorridaComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../']);
       }
     );
@@ -110,7 +110,7 @@ export class CorridaComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
         this.router.navigate(['../']);
       }
     );
@@ -220,7 +220,7 @@ export class CorridaComponent implements OnInit {
         this.router.navigate(['../../../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.toaster.error(error.message);
+        this.toaster.error('status: ' + error.status + ' message: ' + error.error.message);
       }
     );
   }

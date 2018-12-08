@@ -36,4 +36,25 @@ export class AccountService {
     return this.http.get<Organizacion>(this.API_URL + 'organizacion', { observe: 'response' });
   }
 
+  hasAuthority(authority: string): boolean {
+    if (localStorage.getItem('account') == null) {
+      return false;
+    }
+    var user: User = JSON.parse(localStorage.getItem('account'));
+    for (const key in user.authorities) {
+      if (user.authorities[key] === authority) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getStoredAccount(): User {
+    if (localStorage.getItem('account') != null) {
+      var user: User = JSON.parse(localStorage.getItem('account'));
+      return user;
+    }
+    return null;
+  }
+
 }
