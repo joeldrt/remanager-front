@@ -24,4 +24,8 @@ export class ProyectoService {
     return this.http.get<Proyecto[]>(this.resourceUrl + '?padre_id=' + idPadre, { observe: 'response' });
   }
 
+  getProyectoById(proyecto_id: any): Observable<HttpResponse<Proyecto>> {
+    return this.http.get<Proyecto>(this.resourceUrl + proyecto_id, { observe: 'response' });
+  }
+
 }

@@ -18,11 +18,11 @@ export class ProductoService {
     this.resourceProyectosUrl = environment.API_URL + 'api/proyectos/';
   }
 
-  getProductosByProyectoId(proyectoId: number): Observable<HttpResponse<Producto[]>> {
+  getProductosByProyectoId(proyectoId: any): Observable<HttpResponse<Producto[]>> {
     return this.http.get<Producto[]>(this.resourceProyectosUrl + proyectoId + '/productos', {observe: 'response'});
   }
 
-  getProductosById(producto_id: string): Observable<HttpResponse<Producto>> {
+  getProductosById(producto_id: any): Observable<HttpResponse<Producto>> {
     return this.http.get<Producto>(this.resourceProductosUrl + producto_id, {observe: 'response'});
   }
 

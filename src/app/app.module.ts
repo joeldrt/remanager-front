@@ -86,6 +86,7 @@ import { VenderComponent } from './pages/private/vender/vender.component';
 import { ContratosVisorComponent } from './pages/private/contratos-visor/contratos-visor.component';
 import { AdmintoolsComponent } from './pages/private/admintools/admintools.component';
 import { UsersComponent } from './pages/private/admintools/users/users.component';
+import { AdminproyectosComponent } from './pages/private/admintools/adminproyectos/adminproyectos.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { UsersComponent } from './pages/private/admintools/users/users.component
     VenderComponent,
     ContratosVisorComponent,
     AdmintoolsComponent,
-    UsersComponent
+    UsersComponent,
+    AdminproyectosComponent
   ],
   imports: [
     BrowserModule,

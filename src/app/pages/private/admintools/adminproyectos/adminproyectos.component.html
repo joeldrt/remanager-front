@@ -1,0 +1,114 @@
+<div class="content">
+  <div class="box">
+    <!-- box-header -->
+    <div class="box-header with-border">
+      <h3 class="box-title">Proyectos</h3>
+      <div class="pull-right">
+          <button class="btn btn-link" data-toggle="modal" data-target="#agregarUsuarioModal">
+            agregar proyecto
+          </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <!-- box-header -->
+    <div class="box-header with-border">
+        <h3 class="box-title" *ngIf="proyecto_actual">
+          {{proyecto_actual.nombre}}
+        </h3>
+        <h3 class="box-title" *ngIf="!proyecto_actual">
+          Proyectos Raiz
+        </h3>
+        <div class="pull-right">
+          <i class="fa fa-arrow-left" 
+            (click)='navegarAlProyecto(proyecto_actual.padreId)'
+            *ngIf="proyecto_actual">
+          </i>
+        </div>
+      </div>
+      <!-- /.box-header -->
+    <!-- box-body -->
+    <div class="box-body admin-tools-projects-table">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Tipo</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Mapa propio</th>
+            <th>Ligado a Mapa</th>
+            <th>Editar</th>
+          </tr>
+          <tr *ngFor="let proyecto of subproyectos">
+            <td>
+              <span class="badge bg-grey">
+                subproyecto
+              </span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" (click)='navegarAlProyecto(proyecto.id)'>
+                {{proyecto.nombre}}
+              </button>
+            </td>
+            <td>{{proyecto.description}}</td>
+            <td>
+              <span class="badge bg-grey" *ngIf="!proyecto.svgId"
+                (click)="modificarActivado(usuario.id, true)">
+                Agregar Mapa
+              </span>
+              <span class="badge bg-green" *ngIf="proyecto.svgId"
+                (click)="modificarActivado(usuario.id, false)">
+                Editar Mapa
+              </span>
+            </td>
+            <td *ngIf="proyecto_actual">
+              <span class="badge bg-red" *ngIf="!proyecto.idSeccion">
+                Sin ligar en el mapa
+              </span>
+              <span class="badge bg-green" *ngIf="proyecto.idSeccion">
+                ligado al mapa
+              </span>
+            </td>
+            <td *ngIf="!proyecto_actual">
+              <span class="badge bg-gray" *ngIf="!proyecto.idSeccion">
+                No aplica
+              </span>
+            </td>
+            <td>
+              <i class="fa fa-edit"></i>
+            </td>
+          </tr>
+          <tr *ngFor="let producto of productos">
+            <td>
+              <span class="badge bg-orange">
+                producto
+              </span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" (click)='navegarAlProyecto(proyecto.id)'>
+                {{producto.nombre}}
+              </button>
+            </td>
+            <td>{{producto.description}}</td>
+            <td>
+              <span class="badge bg-gray">
+                No aplica
+              </span>
+            </td>
+            <td>
+              <span class="badge bg-red" *ngIf="!producto.idSeccion">
+                Sin ligar en el mapa
+              </span>
+              <span class="badge bg-green" *ngIf="producto.idSeccion">
+                ligado al mapa
+              </span>
+            </td>
+            <td>
+              <i class="fa fa-edit"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+</div>
