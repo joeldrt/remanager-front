@@ -4,8 +4,14 @@
     <div class="box-header with-border">
       <h3 class="box-title">Proyectos</h3>
       <div class="pull-right">
-          <button class="btn btn-link" data-toggle="modal" data-target="#agregarUsuarioModal">
+          <button class="btn btn-link" data-toggle="modal" data-target="#agregarProyectoModal" *ngIf="!proyecto_actual">
             agregar proyecto
+          </button>
+          <button class="btn btn-link" data-toggle="modal" data-target="#agregarProyectoModal" *ngIf="proyecto_actual">
+            agregar subproyecto
+          </button>
+          <button *ngIf="proyecto_actual" class="btn btn-link" data-toggle="modal" data-target="#agregarProductoModal">
+            agregar producto
           </button>
       </div>
     </div>
@@ -40,8 +46,11 @@
           </tr>
           <tr *ngFor="let proyecto of subproyectos">
             <td>
-              <span class="badge bg-grey">
+              <span class="badge bg-grey" *ngIf="proyecto_actual">
                 subproyecto
+              </span>
+              <span class="badge bg-grey" *ngIf="!proyecto_actual">
+                proyecto
               </span>
             </td>
             <td>
@@ -49,10 +58,10 @@
                 {{proyecto.nombre}}
               </button>
             </td>
-            <td>{{proyecto.description}}</td>
+            <td>{{proyecto.descripcion}}</td>
             <td>
               <span class="badge bg-grey" *ngIf="!proyecto.svgId"
-                (click)="modificarActivado(usuario.id, true)">
+                (click)="agregarMapaAProyecto(proyecto.id)">
                 Agregar Mapa
               </span>
               <span class="badge bg-green" *ngIf="proyecto.svgId"
@@ -74,7 +83,10 @@
               </span>
             </td>
             <td>
-              <i class="fa fa-edit"></i>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarProyectoModal"
+                (click)="asignarProyectoAEditar(proyecto)">
+                <i class="fa fa-edit"></i>
+              </button>
             </td>
           </tr>
           <tr *ngFor="let producto of productos">
@@ -112,3 +124,149 @@
     <!-- /.box-body -->
   </div>
 </div>
+
+<!-- Ventana modal para agregar un subproyecto-->
+<div class="modal fade" tabindex="-1" role="dialog" id="agregarProyectoModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="subproyectoNombre">Nombre</label>
+            <input class="form-control" id="subproyectoNombre" placeholder="nombre" name="subproyecto_nombre"
+            [(ngModel)]="subproyecto_nuevo.nombre"/>
+          </div>
+          <div class="form-group">
+            <label for="subproyectoDescripcion">Descripción</label>
+            <input class="form-control" id="subproyectoDescripcion" placeholder="descripción" name="subrpoyecto_descripcion"
+            [(ngModel)]="subproyecto_nuevo.descripcion"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!subproyecto_nuevo.nombre || !subproyecto_nuevo.descripcion"
+          (click)="agregarProyecto()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un subproyecto-->
+
+<!-- Ventana modal para editar un subproyecto-->
+<div class="modal fade" tabindex="-1" role="dialog" id="editarProyectoModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="subproyecto_a_editar">
+      <div class="modal-header">
+        <h5 class="modal-title">Edición de Proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="subproyectoNombre">Nombre</label>
+            <input class="form-control" id="subproyectoNombre" placeholder="nombre" name="subproyecto_nombre"
+            [(ngModel)]="subproyecto_a_editar.nombre"/>
+          </div>
+          <div class="form-group">
+            <label for="subproyectoDescripcion">Descripción</label>
+            <input class="form-control" id="subproyectoDescripcion" placeholder="descripción" name="subrpoyecto_descripcion"
+            [(ngModel)]="subproyecto_a_editar.descripcion"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+            data-toggle="modal" data-target="#borrarProyectoModal">Borrar</button>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          [disabled]="!subproyecto_a_editar.nombre || !subproyecto_a_editar.descripcion"
+          (click)="editarProyecto()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para editar un subproyecto-->
+
+<!-- Ventana modal confirmación borrar un proyecto y todos los proyectos relacionados-->
+<div class="modal fade" tabindex="-1" role="dialog" id="borrarProyectoModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="subproyecto_a_editar">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrar Proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Estas a punto de borrar el proyecto {{subproyecto_a_editar.nombre}}, los subproyectos y productos asociados a este proyecto también desaparecerán.
+          Esta acción no puede ser revertida y todos los datos antes mencionados serán perdidos. ¿Realmente deseas continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+          (click)="borrarProyecto()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin ventana modal para agregar un cliente-->
+
+<!-- Ventana modal para agregar un producto-->
+<div class="modal fade" tabindex="-1" role="dialog" id="agregarProductoModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" *ngIf="producto_nuevo">
+        <div class="modal-header">
+          <h5 class="modal-title">Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-Label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="productoNombre">Nombre</label>
+              <input class="form-control" id="productoNombre" placeholder="nombre" name="producto_nombre"
+              [(ngModel)]="producto_nuevo.nombre"/>
+            </div>
+            <div class="form-group">
+              <label for="productoDescripcion">Descripción</label>
+              <input class="form-control" id="productoDescripcion" placeholder="descripción" name="producto_descripcion"
+              [(ngModel)]="producto_nuevo.descripcion"/>
+            </div>
+            <div class="form-group">
+              <label for="productoPrecio">Precio</label>
+              <input type="number" class="form-control" id="productoPrecio" placeholder="precio" name="producto_precio"
+              [(ngModel)]="producto_nuevo.precio"/>
+            </div>
+            <div class="form-group">
+              <label for="productoTipoDeProducto">Tipo</label>
+              <select class="custom-select" id="productoTipoDeProducto" name="producto_tipo"
+                [(ngModel)]="producto_nuevo.tipoDeProducto">
+                <option value="Casa">Casa</option>
+                <option value="Terreno">Terreno</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+            [disabled]="!subproyecto_nuevo.nombre || !subproyecto_nuevo.descripcion"
+            (click)="agregarProyecto()">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin ventana modal para agregar un producto-->

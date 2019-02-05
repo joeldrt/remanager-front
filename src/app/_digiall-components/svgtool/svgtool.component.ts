@@ -69,7 +69,7 @@ export class SvgToolComponent implements OnInit, AfterViewInit {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.image.srcB64 = reader.result;
+        this.image.srcB64 = String(reader.result);
         this.image.name = file.name;
         this.image.size = file.size;
         this.image.type = file.type;

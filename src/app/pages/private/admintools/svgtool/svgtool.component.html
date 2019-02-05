@@ -1,0 +1,74 @@
+<div class="content">
+  <div class="box" *ngIf="proyecto">
+    <div class="box-header with-border">
+        <h3 class="box-title">Mapa de proyecto</h3>
+    </div>
+    <div class="box-body">
+      <h3 class="box-title">{{proyecto.nombre}}</h3>
+      <p>{{proyecto.descripcion}}</p>
+
+      <div class="btn-group" *ngIf="!svg">
+        <input
+          class="btn btn-outline-primary btn-sm"
+          type="file"
+          (change)="uploadImage($event);"/>
+        <button type="button" class="btn btn-default" [disabled]="!image" (click)="reiniciarCarga()">
+          cancelar
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="!image" (click)="generarSvgDesdeImagen()">
+          continuar
+        </button>
+      </div>
+
+
+      <div class="btn-group" *ngIf="svg">
+        <button type="button" class="btn btn-default" (click)="beginDraw()" [class.active]="isDrawing">
+          <i class="fa fa-pencil-square-o"></i>
+        </button>
+        <button type="button" class="btn btn-default" (click)="stopDraw()" [class.active]="!isDrawing">
+          <i class="fa fa-hand-paper-o"></i>
+        </button>
+        <button type="button" class="btn btn-default" (click)="undoPoint()">
+          <i class="fa fa-undo"></i>
+        </button>
+        <button type="button" class="btn btn-default" (click)="saveSvg()">
+          <i class="fa fa-save"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="svg_workspace" #workSpace id="workSpace">
+    <div *ngIf="image && !svg">
+      <img #imgPreview
+        src={{image.srcB64}}
+        (load)="loadImagePreview($event)"
+        alt=""/>
+    </div>
+    <svg #svgTag *ngIf="svg"
+          id="svgTag"
+          [attr.width]="workSpace.clientWidth"
+          [attr.height]="workSpace.clientHeight" style="background-color: white;"
+          (mousedown)="clickInSvg($event)">
+
+      <image 
+        [attr.width]="svg.width"
+        [attr.height]="svg.height"
+        [attr.xlink:href]="svg.imagen" />
+
+        <polygon id="polygonTagDraw"
+          [attr.points]="stringPoints"
+          [attr.fill]="'rgba(33,144,2,0.72)'"
+          [attr.stroke]="'black'"
+          [attr.stroke-width]="'1px'">
+        </polygon>
+
+        <polygon *ngFor="let poligono of svg.poligonos"
+          [attr.points]="poligono.puntos"
+          [attr.fill]="'rgba(2,134,222,0.72)'"
+          [attr.stroke]="'black'"
+          [attr.stroke-width]="'1px'"
+          (click)="poligonoSeleccionado(poligono.genUid)">
+        </polygon>
+    </svg>
+  </div>
+</div>

@@ -8,7 +8,7 @@ import { Svg } from '../_models';
 @Injectable()
 export class SvgRestService {
 
-  private resourceUrl;
+  private resourceUrl: string;
 
   constructor(
     private http: HttpClient

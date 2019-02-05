@@ -19,6 +19,7 @@ import { ContratosVisorComponent } from './contratos-visor/contratos-visor.compo
 import { AdmintoolsComponent } from './admintools/admintools.component';
 import { UsersComponent } from './admintools/users/users.component';
 import { AdminproyectosComponent } from './admintools/adminproyectos/adminproyectos.component';
+import { SvgtoolComponent } from './admintools/svgtool/svgtool.component'
 
 export const PRIVATE_ROUTES: Routes = [
 
@@ -149,5 +150,6 @@ export const PRIVATE_ROUTES: Routes = [
   { path: 'admintools/usuarios', component: UsersComponent, data: { title: 'Admin Tools - Users', breadcrumb: 'admin tools - users' } },
   { path: 'admintools/proyectos', component: AdminproyectosComponent, data: { title: 'Admin Tools - Proyectos', breadcrumb: 'admin tools - proyectos' } },
   { path: 'admintools/proyectos/:proyecto_actual_id', component: AdminproyectosComponent, data: { title: 'Admin Tools - Proyectos', breadcrumb: 'admin tools - proyectos' } },
+  { path: 'admintools/svgtool/:proyecto_id', component: SvgtoolComponent, data: { title: 'Admin Tools - SVG tool', breadcrumb: 'admin tools - svg tool' } },
 
 ];

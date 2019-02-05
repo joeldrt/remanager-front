@@ -8,7 +8,7 @@ import { Proyecto } from '../_models';
 @Injectable()
 export class ProyectoService {
 
-  private resourceUrl;
+  private resourceUrl: string;
 
   constructor(
     private http: HttpClient
@@ -26,6 +26,18 @@ export class ProyectoService {
 
   getProyectoById(proyecto_id: any): Observable<HttpResponse<Proyecto>> {
     return this.http.get<Proyecto>(this.resourceUrl + proyecto_id, { observe: 'response' });
+  }
+
+  guardarProyecto(proyecto: Proyecto): Observable<HttpResponse<Proyecto>> {
+    return this.http.post<Proyecto>(this.resourceUrl, proyecto, { observe: 'response' });
+  }
+
+  editarProyecto(proyecto: Proyecto): Observable<HttpResponse<Proyecto>> {
+    return this.http.put<Proyecto>(this.resourceUrl + proyecto.id, proyecto, { observe: 'response' });
+  }
+
+  borrarProyecto(proyecto_id: string): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(this.resourceUrl + proyecto_id, { observe: 'response' });
   }
 
 }

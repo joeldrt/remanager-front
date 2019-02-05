@@ -28,7 +28,6 @@ export class Producto {
   public idSeccion?: string;
   public precio?: number;
   public tipoDeProducto?: string;
-  public historials?: any[]; // cambiar al tipo de entidad necesaria
   public valoresCampos?: ValorCampo[]; // cambiar al tipo de entidad necesaria
   public fotos?: string[];
   public archivos?: string[]; // cambiar al tipo de entidad necesaria

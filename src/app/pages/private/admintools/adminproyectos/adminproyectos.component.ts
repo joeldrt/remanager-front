@@ -12,10 +12,13 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 export class AdminproyectosComponent implements OnInit {
 
   usuario_actual: User;
-  proyecto_actual_id: String;
+  proyecto_actual_id: string;
   proyecto_actual: Proyecto;
   subproyectos: Proyecto[];
   productos: Producto[];
+  subproyecto_nuevo: Proyecto;
+  subproyecto_a_editar: Proyecto;
+  producto_nuevo: Producto;
 
   constructor(
     private accountService: AccountService,
@@ -39,6 +42,8 @@ export class AdminproyectosComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     this.hacerCargaDeProyectos();
+    this.subproyecto_nuevo = new Proyecto();
+    this.producto_nuevo = new Producto();
   }
 
   hacerCargaDeProyectos() {
@@ -101,6 +106,63 @@ export class AdminproyectosComponent implements OnInit {
     this.productos = [];
     this.proyecto_actual = undefined;
     this.router.navigate(['/admintools/proyectos', proyecto_a_navegar_id]);
+  }
+
+  agregarProyecto() {
+    if(!this.proyecto_actual) {
+      this.subproyecto_nuevo.padreId = 'root';
+    } else {
+      this.subproyecto_nuevo.padreId = this.proyecto_actual.id;
+    }
+    this.subproyecto_nuevo.correoCreador = this.usuario_actual.email;
+    this.subproyecto_nuevo.organizacionId = this.usuario_actual.organizationId;
+    this.proyectoService.guardarProyecto(this.subproyecto_nuevo).subscribe(
+      (response: HttpResponse<Proyecto>) => {
+        this.subproyecto_nuevo = new Proyecto();
+        this.hacerCargaDeProyectos();
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.status + ' mensaje: ' + error.error.message);
+      }
+    );
+  }
+
+  asignarProyectoAEditar(proyecto: Proyecto) {
+    this.subproyecto_a_editar = proyecto;
+  }
+
+  editarProyecto() {
+    if(!this.subproyecto_a_editar) {
+      return;
+    }
+    this.proyectoService.editarProyecto(this.subproyecto_a_editar).subscribe(
+      (response: HttpResponse<Proyecto>) => {
+        this.subproyecto_a_editar = undefined;
+        this.hacerCargaDeProyectos();
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.status + ' mensaje: ' + error.error.message);
+      }
+    );
+  }
+
+  borrarProyecto() {
+    if(!this.subproyecto_a_editar) {
+      return;
+    }
+    this.proyectoService.borrarProyecto(this.subproyecto_a_editar.id).subscribe(
+      (response: HttpResponse<any>) => {
+        this.subproyecto_a_editar = undefined;
+        this.hacerCargaDeProyectos();
+      },
+      (error: HttpErrorResponse) => {
+        this.toaster.error(error.status + ' mensaje: ' + error.error.message);
+      }
+    );
+  }
+
+  agregarMapaAProyecto(proyecto_id: string) {
+    this.router.navigate(['/admintools/svgtool/', proyecto_id]);
   }
 
 }

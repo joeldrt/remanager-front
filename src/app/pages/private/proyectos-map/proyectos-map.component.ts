@@ -1,6 +1,7 @@
 import {ProductUtils} from '../../../_utils/product.utils';
 
-declare var addSVGZoomingCapabilities: any;
+// declare var addSVGZoomingCapabilities: any;
+declare var svgPanZoom: any;
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -134,13 +135,14 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     return this.polygon_fill_opacity.get(String(uid)) ? this.polygon_fill_opacity.get(String(uid)) : '0.0';
   }
 
-  retrieveSvg(svgIdToFind: number) {
+  retrieveSvg(svgIdToFind: string) {
     this.svgService.getSvgById(String(svgIdToFind)).subscribe(
       (value: HttpResponse<Svg>) => {
         this.svg = value.body;
         setTimeout(() => {
           this.loading = false;
-          addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
+          this.addSettingsZoom();
+          // addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
       },
       (error: HttpErrorResponse) => {
@@ -150,6 +152,15 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         this.toasterService.warning('Sin Mapa que mostrar');
         this.router.navigate(['/proyectos']);
       });
+  }
+
+  addSettingsZoom() {
+    svgPanZoom('#svgTag', {
+      zoomEnabled: true,
+      controlIconsEnabled: false,
+      dblClickZoomEnabled: false,
+      center: true
+    });
   }
 
   navigateToItem(getUid: string) {
