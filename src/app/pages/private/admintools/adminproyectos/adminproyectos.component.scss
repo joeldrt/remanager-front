@@ -1,0 +1,12 @@
+@import "../../component.shared.style.scss";
+
+.admin-tools-projects-table {
+    min-height: calc(100vh - 226px);
+    max-height: calc(100vh - 226px);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.box {
+    margin-bottom: 0 !important;
+}

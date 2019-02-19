@@ -1,13 +1,13 @@
 export class Proyecto {
-  public id?: number;
-  public nombre?: string;
-  public description: string;
+  public id?: string;
   public fechaCreacion: string;
+  public nombre?: string;
+  public descripcion: string;
   public correoCreador: string;
   public idSeccion: string;
-  public svgId: number;
-  public organizacionId: number;
+  public svgId: string;
+  public organizacionId: string;
   public organizacionNombre: string;
-  public padreId: number;
-  public padreNombre: number;
+  public padreId: string;
+  public padreNombre: string;
 }

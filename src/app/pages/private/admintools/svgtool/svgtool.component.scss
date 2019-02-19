@@ -1,0 +1,18 @@
+@import "../../component.shared.style.scss";
+
+.box {
+    margin-bottom: 0 !important;
+}
+
+.svg_workspace {
+    min-height: calc(100vh - 314px);
+    max-height: calc(100vh - 314px);
+    text-align: center;
+    vertical-align: middle;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.btn:focus {
+    outline: none;
+}

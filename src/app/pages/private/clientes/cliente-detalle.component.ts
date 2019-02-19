@@ -64,6 +64,7 @@ export class ClienteDetalleComponent implements OnInit {
   }
 
   editarCliente() {
+    this.asignarVariableNullas();
     this.asignarFechaNacimiento();
     this.clienteService.editar(this.cliente).subscribe(
       (response: HttpResponse<Client>) => {
@@ -92,16 +93,25 @@ export class ClienteDetalleComponent implements OnInit {
     );
   }
 
+  asignarVariableNullas() {
+    if (!this.cliente.direccion) {
+      this.cliente.direccion = '';
+    }
+    if (!this.cliente.apellidos) {
+      this.cliente.apellidos = '';
+    }
+  }
+
   asignarFechaNacimiento() {
-    if (this.fecha_nacimiento === '') {
-      this.cliente.fechaNacimiento = new Date(1876, 0, 17, 0, 0, 0, 0);
+    if (!this.fecha_nacimiento || this.fecha_nacimiento === '') {
+      this.cliente.fechaNacimiento = new Date(1876, 0, 17, 0, 0, 0, 0).toISOString();
       return;
     }
     const fecha_usar = this.dateUtils.toDate(this.fecha_nacimiento);
     this.cliente.fechaNacimiento = new Date(fecha_usar.getUTCFullYear(),
                                             fecha_usar.getUTCMonth(),
                                             fecha_usar.getUTCDate(),
-                                            0, 0, 0, 0);
+                                            0, 0, 0, 0).toISOString();
   }
 
 }

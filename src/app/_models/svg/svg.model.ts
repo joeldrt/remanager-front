@@ -10,5 +10,4 @@ export class Svg {
   public codigoContentType?: string;
   public codigo?: any;
   public poligonos?: Poligono[];
-  public proyectoId?: number;
 }

@@ -1,9 +1,9 @@
 import { Punto } from './punto.model';
 
 export class Poligono {
-  public id?: number;
+  public id?: string;
   public puntos?: string;
-  public genUid?: string;
+  public genUid?: Number;
   public arregloPuntos?: Punto[];
-  public svgId?: number;
+  public svgId?: string;
 }

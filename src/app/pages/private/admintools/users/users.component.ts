@@ -11,7 +11,7 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 export class UsersComponent implements OnInit {
 
   usuario_actual: User;
-  usuarios: User[]
+  usuarios: User[];
   usuario_nuevo = new User();
   usuario_editar: User;
   password_editar: string;

@@ -21,13 +21,13 @@ export class ProyectoNavhelper {
     return this.pila_proyectos[this.pila_proyectos.length - 1];
   }
 
-  public removerDeLaPila(): number {
+  public removerDeLaPila(): string {
     const proy = this.ultimoProyectoApilado();
     this.pila_proyectos.pop();
     if (proy) {
       return proy.padreId;
     }
-    return 0;
+    return undefined;
   }
 
   public removerDesde(proyecto: Proyecto) {
