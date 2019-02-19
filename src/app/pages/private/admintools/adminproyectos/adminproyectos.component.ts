@@ -161,7 +161,7 @@ export class AdminproyectosComponent implements OnInit {
     );
   }
 
-  agregarMapaAProyecto(proyecto_id: string) {
+  mapaAProyecto(proyecto_id: string) {
     this.router.navigate(['/admintools/svgtool/', proyecto_id]);
   }
 

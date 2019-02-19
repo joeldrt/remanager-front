@@ -10,7 +10,6 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Proyecto, Producto, Svg, EstatusDeProducto } from '../../../_models';
 import { SvgRestService, ProyectoService, ProductoService, ToasterService } from '../../../_services';
 import { ProyectoNavhelper, FooterMenuhelper, HeaderHelper } from '../../../_helpers';
-import { SvgToolService } from '../../../_digiall-components/svgtool/services/svgtool.service';
 
 
 @Component({
@@ -40,7 +39,6 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
     private productoService: ProductoService,
     private footerMenu: FooterMenuhelper,
     private svgService: SvgRestService,
-    private svgToolService: SvgToolService,
     private headerHelper: HeaderHelper,
     private productUtils: ProductUtils
   ) {

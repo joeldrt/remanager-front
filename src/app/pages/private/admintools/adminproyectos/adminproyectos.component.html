@@ -61,11 +61,11 @@
             <td>{{proyecto.descripcion}}</td>
             <td>
               <span class="badge bg-grey" *ngIf="!proyecto.svgId"
-                (click)="agregarMapaAProyecto(proyecto.id)">
+                (click)="mapaAProyecto(proyecto.id)">
                 Agregar Mapa
               </span>
               <span class="badge bg-green" *ngIf="proyecto.svgId"
-                (click)="modificarActivado(usuario.id, false)">
+                (click)="mapaAProyecto(proyecto.id)">
                 Editar Mapa
               </span>
             </td>

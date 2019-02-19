@@ -8,9 +8,9 @@ export class Client {
   public email?: string;
   public nombre?: string;
   public apellidos?: string;
-  public fechaNacimiento?: Date;
+  public fechaNacimiento?: string;
   public direccion?: string;
-  public telefono?: number;
+  public telefono?: string;
 }
 
 export class ResumenContratosPorCliente {

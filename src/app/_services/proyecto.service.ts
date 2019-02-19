@@ -23,6 +23,10 @@ export class ProyectoService {
   getProyectosByParentId(idPadre: any): Observable<HttpResponse<Proyecto[]>> {
     return this.http.get<Proyecto[]>(this.resourceUrl + '?padre_id=' + idPadre, { observe: 'response' });
   }
+  
+  getProyectosByIdSeccion(idSeccion: any): Observable<HttpResponse<Proyecto[]>> {
+    return this.http.get<Proyecto[]>(this.resourceUrl + '?id_seccion=' + idSeccion, { observe: 'response' });
+  }
 
   getProyectoById(proyecto_id: any): Observable<HttpResponse<Proyecto>> {
     return this.http.get<Proyecto>(this.resourceUrl + proyecto_id, { observe: 'response' });
