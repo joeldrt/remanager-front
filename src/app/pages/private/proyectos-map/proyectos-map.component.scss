@@ -21,18 +21,21 @@
       background-color: #FFF;
       padding-top: 0.6em;
       .btn-default{
+        margin-left: 0.6em;
         background-color: #FFF;
         border: none;
-        color: #0d6aad;
+        color: #FE6C5B;
       }
       ol{
         background-color: #FFF;
         li{
           font-size: 1em;
           text-transform: capitalize;
+          color: #DD4259 !important;
           a{
             font-size: 1em;
             text-transform: capitalize;
+            color: #FE6C5B !important;
           }
         }
       }
@@ -41,14 +44,14 @@
   } // end - dg-content-backbreadcrumb
 
   .dg-content-bartitle{
-    backgrond-size:contain;
-    background-repeat: repeat-x;
+    background-size:contain;
     padding: 18px 0 30px 0;
     min-height: 100px;
     max-height: 100px;
 
     &.dg-bartitle-1{
-      background-image:url('../../../../assets/img/line-bartitle-1.png');
+      //background-image:url('../../../../assets/img/line-bartitle-1.png');
+      background-image: linear-gradient(to right, #DD4259, #E46254);
       .dg-content-icon{
         span{
           i{

@@ -1,6 +1,9 @@
 .dg-powered-label {
   margin-top: 10px;
   margin-right: 10px;
+  a {
+    color: #FE6C5B !important;
+  }
 }
 
 .main-footer {
@@ -9,7 +12,7 @@
   padding: 5px;
 
   .dg-btn-button{
-    color: #3c8dbc;
+    color: #FE6C5B !important;
     vertical-align: middle;
     text-align: center;
     &.active{

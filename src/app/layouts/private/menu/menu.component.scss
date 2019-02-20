@@ -1,0 +1,54 @@
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: 50px;
+  }
+}
+
+.main-sidebar {
+  min-width: 65px !important;
+  background-color: #E5E5E5 !important;
+}
+
+.sidebar .sidebar-menu>li.header {
+  color: #FFFFFF !important;
+  background: #FF6A58 !important;
+}
+
+.user-panel>.info {
+  color: #FF6A58 !important;
+}
+
+.sidebar a {
+  color: #D86F6F !important;
+}
+
+.sidebar-menu>li.active>a {
+  color: #FFFFFF !important;
+  border-left-color: #FFFFFF !important;
+}
+
+.sidebar-menu>li:hover>a, .sidebar-menu>li.active>a {
+  color: #FFFFFF !important;
+  background: #FF6A58 !important;
+}
+
+.dg-circle-img {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 45px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.dg-image-circle {
+  border-radius: 50%;
+}
+
+.dg-profile-picture {
+  max-height: 45px;
+  transform: translateX(-50%);
+  margin-left: 50%;
+
+  /* transform: translateX(-50%);
+  margin-left: 50%; */
+}

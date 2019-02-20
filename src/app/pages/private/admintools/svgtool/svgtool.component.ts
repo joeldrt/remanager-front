@@ -7,6 +7,7 @@ import { Image } from '../../../../_digiall-components/svgtool/models/image.mode
 import { Md5 } from "md5-typescript";
 
 declare var svgPanZoom: any;
+declare var mobileEventsHandler: any;
 
 @Component({
   selector: 'app-svgtool',
@@ -154,7 +155,8 @@ export class SvgtoolComponent implements OnInit {
       zoomEnabled: true,
       controlIconsEnabled: false,
       dblClickZoomEnabled: false,
-      center: true
+      center: true,
+      customEventsHandler: mobileEventsHandler
     });
     //
     this.svgTag.nativeElement.childNodes[0].setAttribute('transform', 'matrix(0 0 0 0 0 0)');

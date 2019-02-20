@@ -1,7 +1,8 @@
 import {ProductUtils} from '../../../_utils/product.utils';
 
-// declare var addSVGZoomingCapabilities: any;
+declare var addSVGZoomingCapabilities: any;
 declare var svgPanZoom: any;
+declare var mobileEventsHandler: any;
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -140,7 +141,7 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.loading = false;
           this.addSettingsZoom();
-          // addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
+          //addSVGZoomingCapabilities('#svgTag', this.svg.width, this.svg.height);
         }, 1000);
       },
       (error: HttpErrorResponse) => {
@@ -157,7 +158,8 @@ export class ProyectosMapComponent implements OnInit, OnDestroy {
       zoomEnabled: true,
       controlIconsEnabled: false,
       dblClickZoomEnabled: false,
-      center: true
+      center: true,
+      customEventsHandler: mobileEventsHandler
     });
   }
 
